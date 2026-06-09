@@ -22,6 +22,34 @@
 
     <link rel="icon" type="image/png" href="logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:ital@1&family=Yatra+One&display=swap" rel="stylesheet">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://maharashtraineurope.com/#organization",
+          "name": "Maharashtra in Europe",
+          "alternateName": "महाराष्ट्र इन युरोप",
+          "url": "https://maharashtraineurope.com",
+          "logo": "https://maharashtraineurope.com/logo.png",
+          "description": "The definitive digital hub for Marathi expats across Europe.",
+          "areaServed": "Europe",
+          "knowsAbout": ["Marathi culture", "Maharashtra", "Indian expats in Europe", "Marathi community"]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://maharashtraineurope.com/#website",
+          "url": "https://maharashtraineurope.com",
+          "name": "Maharashtra in Europe",
+          "description": "The definitive digital hub for Marathi expats across Europe.",
+          "publisher": { "@id": "https://maharashtraineurope.com/#organization" }
+        }
+      ]
+    }
+    </script>
     <style>
         /* ── Reset ── */
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
