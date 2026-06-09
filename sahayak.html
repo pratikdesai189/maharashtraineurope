@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sahayak — Travel & Letter Network | Maharashtra in Europe</title>
+  <meta name="description" content="Find a Marathi travel companion or letter carrier to India. Connecting Maharashtrians across Europe." />
+
+  <!-- ─── REPLACE THIS URL with your actual published Google Sheet CSV URL ─── -->
+  <!-- How to get it: Google Sheets → File → Share → Publish to web → CSV → Copy URL -->
+  <script>
+    const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ4VhZY3eQJlzyET99mCG13Rwz41RKSOAaVDS1gfOgUl7DMDNDTf8bQz7EcnLvCUo_LZVSOTcn7D5Pd/pub?gid=1005612043&single=true&output=csv';
+  </script>
+
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --saffron:       #C4440A;
+      --saffron-hover: #A33708;
+      --saffron-light: #FDF1EB;
+      --saffron-mid:   #E07040;
+      --gold:          #C9922A;
+      --gold-light:    #FAF3E0;
+      --white:         #FFFFFF;
+      --off-white:     #FDF8F4;
+      --text:          #1A0A00;
+      --text-muted:    #7A5A40;
+      --border:        #EAD8C8;
+      --font:          system-ui, -apple-system, 'Segoe UI', sans-serif;
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--off-white);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Layout wrapper ── */
+    .wrap { max-width: 860px; margin: 0 auto; padding: 0 16px 60px; }
+
+    /* ── Nav ── */
+    .navbar {
+      background: var(--saffron);
+      padding: 13px 20px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .navbar-brand { color: #fff; font-size: 15px; font-weight: 600; line-height: 1.2; }
+    .navbar-brand span { display: block; font-size: 12px; font-weight: 400; opacity: 0.78; }
+    .navbar-links { display: flex; gap: 20px; }
+    .navbar-links a { color: rgba(255,255,255,0.72); font-size: 13px; transition: color .15s; }
+    .navbar-links a:hover, .navbar-links a.active { color: #fff; }
+
+    /* ── Hero ── */
+    .hero {
+      background: var(--saffron);
+      padding: 2.2rem 20px 2.8rem;
+      position: relative; overflow: hidden;
+      margin-bottom: 28px;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: repeating-linear-gradient(90deg, var(--gold) 0, var(--gold) 8px, transparent 8px, transparent 13px);
+      opacity: 0.65;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+      background: repeating-linear-gradient(90deg, var(--gold) 0, var(--gold) 8px, transparent 8px, transparent 13px);
+      opacity: 0.4;
+    }
+    .hero-eyebrow {
+      display: inline-block;
+      background: rgba(255,255,255,0.18);
+      border: 0.5px solid rgba(255,255,255,0.35);
+      color: #fff; font-size: 11px; font-weight: 500;
+      padding: 3px 12px; border-radius: 99px;
+      letter-spacing: 0.06em; margin-bottom: 12px;
+    }
+    .hero h1 { color: #fff; font-size: 22px; font-weight: 600; margin-bottom: 4px; }
+    .hero-sub { color: rgba(255,255,255,0.78); font-size: 13px; margin-bottom: 6px; font-style: italic; }
+    .hero-desc { color: rgba(255,255,255,0.7); font-size: 13px; line-height: 1.65; }
+    .hero-actions { margin-top: 1.3rem; display: flex; gap: 10px; flex-wrap: wrap; }
+    .btn-white {
+      background: #fff; color: var(--saffron);
+      border: none; padding: 9px 22px;
+      border-radius: 7px; font-size: 13px; font-weight: 600;
+      cursor: pointer; transition: background .15s;
+    }
+    .btn-white:hover { background: var(--gold-light); }
+    .btn-outline-white {
+      background: transparent; color: #fff;
+      border: 1px solid rgba(255,255,255,0.45);
+      padding: 9px 22px; border-radius: 7px; font-size: 13px;
+      cursor: pointer; transition: all .15s;
+    }
+    .btn-outline-white:hover { border-color: #fff; background: rgba(255,255,255,0.1); }
+
+    /* ── Stats ── */
+    .stats {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
+      margin-bottom: 20px;
+    }
+    .stat {
+      background: var(--white);
+      border: 0.5px solid var(--border);
+      border-top: 3px solid var(--gold);
+      border-radius: 8px; padding: 14px 14px 12px;
+    }
+    .stat-n { font-size: 24px; font-weight: 600; color: var(--saffron); }
+    .stat-l { font-size: 11px; color: var(--text-muted); margin-top: 3px; }
+
+    /* ── Disclaimer ── */
+    .disclaimer {
+      background: var(--gold-light);
+      border-left: 3px solid var(--gold);
+      border-radius: 0 8px 8px 0;
+      padding: 10px 14px;
+      font-size: 12px; color: #6B4A10;
+      margin-bottom: 20px; line-height: 1.6;
+    }
+
+    /* ── Filters ── */
+    .filters { display: flex; gap: 7px; flex-wrap: wrap; margin-bottom: 12px; }
+    .tab {
+      font-size: 13px; padding: 5px 16px; border-radius: 99px;
+      border: 0.5px solid var(--border);
+      background: var(--white); color: var(--text-muted);
+      cursor: pointer; transition: all .15s;
+    }
+    .tab.on { background: var(--saffron); color: #fff; border-color: var(--saffron); }
+    .tab:hover:not(.on) { border-color: var(--saffron); color: var(--saffron); }
+
+    /* ── Selects ── */
+    .selects { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+    .selects select {
+      font-size: 13px; padding: 7px 11px;
+      border-radius: 7px; border: 0.5px solid var(--border);
+      background: var(--white); color: var(--text); cursor: pointer;
+      font-family: var(--font);
+    }
+    .selects select:focus { outline: none; border-color: var(--saffron); }
+
+    /* ── Section label ── */
+    .section-label {
+      font-size: 11px; font-weight: 600; color: var(--text-muted);
+      letter-spacing: 0.08em; text-transform: uppercase;
+      margin-bottom: 12px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .section-label::after { content: ''; flex: 1; height: 0.5px; background: var(--border); }
+
+    /* ── Cards ── */
+    .card {
+      background: var(--white);
+      border: 0.5px solid var(--border);
+      border-radius: 12px; padding: 16px;
+      margin-bottom: 10px;
+      display: flex; gap: 13px; align-items: flex-start;
+      transition: border-color .15s;
+    }
+    .card:hover { border-color: var(--saffron-mid); }
+
+    .avatar {
+      width: 42px; height: 42px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 600; flex-shrink: 0;
+      border: 1.5px solid var(--gold);
+    }
+
+    .card-body { flex: 1; min-width: 0; }
+    .card-top { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 6px; }
+    .card-name { font-size: 14px; font-weight: 600; color: var(--text); }
+    .card-route { font-size: 12px; color: var(--text-muted); margin-left: auto; white-space: nowrap; }
+
+    .badge { font-size: 11px; padding: 2px 9px; border-radius: 99px; font-weight: 500; }
+    .badge-travel { background: #FDF1EB; color: #7A2A00; border: 0.5px solid #EAC0A0; }
+    .badge-letter { background: var(--gold-light); color: #6B4A10; border: 0.5px solid #E0D0A0; }
+    .badge-both   { background: var(--saffron); color: #fff; }
+
+    .card-desc { font-size: 13px; color: var(--text-muted); line-height: 1.55; margin-bottom: 8px; }
+
+    .pills { display: flex; gap: 5px; flex-wrap: wrap; }
+    .pill {
+      font-size: 11px; padding: 2px 9px; border-radius: 99px;
+      border: 0.5px solid var(--border); color: var(--text-muted); background: var(--off-white);
+    }
+
+    .btn-connect {
+      font-size: 12px; padding: 8px 15px;
+      border-radius: 7px;
+      border: 1.5px solid var(--saffron);
+      background: transparent; color: var(--saffron);
+      cursor: pointer; white-space: nowrap; flex-shrink: 0;
+      align-self: center; font-weight: 600;
+      transition: all .15s;
+    }
+    .btn-connect:hover { background: var(--saffron); color: #fff; }
+
+    /* ── States ── */
+    .loading, .empty, .error {
+      text-align: center; padding: 3rem 1rem;
+      color: var(--text-muted); font-size: 14px;
+    }
+    .loading-spinner {
+      width: 28px; height: 28px; border-radius: 50%;
+      border: 2.5px solid var(--border);
+      border-top-color: var(--saffron);
+      animation: spin .7s linear infinite;
+      margin: 0 auto 12px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Footer ── */
+    .footer {
+      text-align: center; font-size: 12px; color: var(--text-muted);
+      margin-top: 2rem; padding-top: 1.2rem;
+      border-top: 0.5px solid var(--border);
+    }
+    .footer strong { color: var(--saffron); }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .navbar-links { display: none; }
+      .card-route { display: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .loading-spinner { animation: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Navigation ── -->
+<nav class="navbar">
+  <div class="navbar-brand">
+    Maharashtra in Europe
+    <span>महाराष्ट्र इन युरोप</span>
+  </div>
+  <div class="navbar-links">
+    <a href="index.html">Home</a>
+    <a href="#">City guides</a>
+    <a href="sahayak.html" class="active">Sahayak</a>
+    <a href="#">Community</a>
+  </div>
+</nav>
+
+<!-- ── Hero ── -->
+<div class="hero">
+  <div class="wrap" style="padding-top:0;padding-bottom:0">
+    <span class="hero-eyebrow">COMMUNITY FEATURE</span>
+    <h1>Sahayak — सहायक</h1>
+    <p class="hero-sub">"Where the Sahyadri meets the Alps"</p>
+    <p class="hero-desc">
+      Find a travel companion or someone carrying letters to India.<br>
+      Connecting Maharashtrians across Europe, one journey at a time.
+    </p>
+    <div class="hero-actions">
+      <!-- ─── REPLACE href with your actual Google Form link ─── -->
+      <a href="https://forms.gle/XUH1CCBFHC5dtASq6" target="_blank" rel="noopener">
+        <button class="btn-white">+ Post your listing</button>
+      </a>
+      <button class="btn-outline-white" onclick="document.getElementById('listings-section').scrollIntoView({behavior:'smooth'})">
+        Browse listings
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- ── Stats ── -->
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-n" id="s-total">—</div>
+      <div class="stat-l">Active listings</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n" id="s-travel">—</div>
+      <div class="stat-l">Travel companions</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n" id="s-letter">—</div>
+      <div class="stat-l">Letter carriers</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n" id="s-cities">—</div>
+      <div class="stat-l">Cities active</div>
+    </div>
+  </div>
+
+  <!-- ── Disclaimer ── -->
+  <div class="disclaimer">
+    &#9432;&nbsp; Listings are posted by community members. Always verify identity before sharing documents or valuables.
+    Maharashtra in Europe is not responsible for lost or undelivered items.
+  </div>
+
+  <!-- ── Filters ── -->
+  <div class="filters">
+    <button class="tab on" onclick="setTab('all', this)">All</button>
+    <button class="tab" onclick="setTab('Travel companion', this)">Travel companion</button>
+    <button class="tab" onclick="setTab('Letter carrier', this)">Letter carrier</button>
+    <button class="tab" onclick="setTab('Both', this)">Both</button>
+  </div>
+
+  <!-- ── Dropdowns ── -->
+  <div class="selects">
+    <select id="f-from" onchange="render()">
+      <option value="">From: any city</option>
+    </select>
+    <select id="f-to" onchange="render()">
+      <option value="">To: any city in India</option>
+    </select>
+  </div>
+
+  <!-- ── Listings ── -->
+  <div id="listings-section">
+    <div class="section-label">Active listings</div>
+    <div id="listings">
+      <div class="loading">
+        <div class="loading-spinner"></div>
+        Loading listings…
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Footer ── -->
+  <div class="footer">
+    <strong>Maharashtra in Europe</strong> &nbsp;·&nbsp; महाराष्ट्र इन युरोप &nbsp;·&nbsp;
+    "Where the Sahyadri meets the Alps"<br>
+    <span style="margin-top:4px;display:block">
+      <a href="index.html" style="color:var(--saffron)">Home</a> &nbsp;·&nbsp;
+      Community feature — free to use, always
+    </span>
+  </div>
+
+</div><!-- /wrap -->
+
+<script>
+/* ─────────────────────────────────────────
+   SAHAYAK — listings engine
+   Reads from a published Google Sheet CSV.
+   Replace SHEET_CSV_URL above with your URL.
+───────────────────────────────────────── */
+
+let allData = [];
+let activeTab = 'all';
+
+/* ── Avatar colors cycling through warm saffron/gold tones ── */
+const AV_COLORS = [
+  { bg: '#FDF1EB', color: '#7A2A00' },
+  { bg: '#FAF3E0', color: '#6B4A10' },
+  { bg: '#FDF8F0', color: '#8B5010' },
+  { bg: '#FEF5EA', color: '#5A3A00' },
+  { bg: '#FDF2E5', color: '#6B3A10' },
+];
+
+function initials(name) {
+  return name.trim().split(/\s+/).map(w => w[0]).join('').toUpperCase().slice(0, 2);
+}
+
+function badgeClass(type) {
+  if (type === 'Travel companion') return 'badge-travel';
+  if (type === 'Letter carrier')   return 'badge-letter';
+  return 'badge-both';
+}
+
+/* ── Parse CSV text into array of objects ── */
+function parseCSV(text) {
+  const lines = text.trim().split('\n');
+  if (lines.length < 2) return [];
+  const headers = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g, '').toLowerCase().replace(/\s+/g, '_'));
+  return lines.slice(1).map(line => {
+    // Handle quoted fields with commas
+    const cols = [];
+    let cur = '', inQ = false;
+    for (let i = 0; i < line.length; i++) {
+      if (line[i] === '"') { inQ = !inQ; continue; }
+      if (line[i] === ',' && !inQ) { cols.push(cur.trim()); cur = ''; continue; }
+      cur += line[i];
+    }
+    cols.push(cur.trim());
+    const obj = {};
+    headers.forEach((h, i) => obj[h] = (cols[i] || '').replace(/^"|"$/g, '').trim());
+    return obj;
+  }).filter(r => r.name && r.name.length > 0); // skip empty rows
+}
+
+/* ── Populate filter dropdowns ── */
+function populateSelects() {
+  const froms = [...new Set(allData.map(r => r.city_in_europe).filter(Boolean))].sort();
+  const tos   = [...new Set(allData.map(r => r.destination_in_india).filter(Boolean))].sort();
+  const ff = document.getElementById('f-from');
+  const ft = document.getElementById('f-to');
+  // Clear existing options beyond first
+  while (ff.options.length > 1) ff.remove(1);
+  while (ft.options.length > 1) ft.remove(1);
+  froms.forEach(c => { const o = document.createElement('option'); o.value = c; o.textContent = 'From: ' + c; ff.appendChild(o); });
+  tos.forEach(c   => { const o = document.createElement('option'); o.value = c; o.textContent = 'To: '   + c; ft.appendChild(o); });
+}
+
+/* ── Update stat counters ── */
+function updateStats() {
+  document.getElementById('s-total').textContent  = allData.length;
+  document.getElementById('s-travel').textContent = allData.filter(r => r.type_of_listing === 'Travel companion' || r.type_of_listing === 'Both').length;
+  document.getElementById('s-letter').textContent = allData.filter(r => r.type_of_listing === 'Letter carrier'   || r.type_of_listing === 'Both').length;
+  document.getElementById('s-cities').textContent = new Set(allData.map(r => r.city_in_europe).filter(Boolean)).size;
+}
+
+/* ── Render filtered listing cards ── */
+function render() {
+  const fv = document.getElementById('f-from').value;
+  const tv = document.getElementById('f-to').value;
+
+  const data = allData.filter(r => {
+    if (activeTab !== 'all' && r.type_of_listing !== activeTab) return false;
+    if (fv && r.city_in_europe !== fv) return false;
+    if (tv && r.destination_in_india !== tv) return false;
+    return true;
+  });
+
+  const el = document.getElementById('listings');
+
+  if (!data.length) {
+    el.innerHTML = '<div class="empty">No listings match this filter. Try a different combination.</div>';
+    return;
+  }
+
+  el.innerHTML = data.map((r, i) => {
+    const av = AV_COLORS[i % AV_COLORS.length];
+    const waMsg = encodeURIComponent(
+      'Namaste ' + r.name + ', I found your listing on Maharashtra in Europe (maharashtraineurope.com). I would like to connect!'
+    );
+    const waLink = 'https://wa.me/' + r.whatsapp_number.replace(/\D/g, '') + '?text=' + waMsg;
+    return `
+      <div class="card">
+        <div class="avatar" style="background:${av.bg};color:${av.color}">${initials(r.name)}</div>
+        <div class="card-body">
+          <div class="card-top">
+            <span class="card-name">${escHtml(r.name)}</span>
+            <span class="badge ${badgeClass(r.type_of_listing)}">${escHtml(r.type_of_listing)}</span>
+            <span class="card-route">${escHtml(r.city_in_europe)} → ${escHtml(r.destination_in_india)}</span>
+          </div>
+          <p class="card-desc">${escHtml(r.short_description)}</p>
+          <div class="pills">
+            <span class="pill">&#128197; ${escHtml(r.travel_date)}</span>
+            <span class="pill">${escHtml(r.city_in_europe)}</span>
+            <span class="pill">Marathi-speaking</span>
+          </div>
+        </div>
+        <a href="${waLink}" target="_blank" rel="noopener">
+          <button class="btn-connect">Connect</button>
+        </a>
+      </div>
+    `;
+  }).join('');
+}
+
+function escHtml(str) {
+  return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function setTab(t, el) {
+  activeTab = t;
+  document.querySelectorAll('.tab').forEach(b => b.classList.remove('on'));
+  el.classList.add('on');
+  render();
+}
+
+/* ── Fetch from Google Sheet ── */
+async function loadListings() {
+  const el = document.getElementById('listings');
+
+  // If URL not set yet, show sample data
+  if (!SHEET_CSV_URL || SHEET_CSV_URL === 'YOUR_GOOGLE_SHEET_CSV_URL_HERE') {
+    allData = SAMPLE_DATA;
+    populateSelects();
+    updateStats();
+    render();
+    return;
+  }
+
+  try {
+    const res = await fetch(SHEET_CSV_URL);
+    if (!res.ok) throw new Error('Network error ' + res.status);
+    const text = await res.text();
+    allData = parseCSV(text);
+    if (!allData.length) throw new Error('No data');
+    populateSelects();
+    updateStats();
+    render();
+  } catch (err) {
+    el.innerHTML = `<div class="error">
+      Could not load listings. Please check your Sheet URL or try again later.<br>
+      <small style="opacity:0.6">${err.message}</small>
+    </div>`;
+  }
+}
+
+/* ── Sample data shown before Sheet is connected ── */
+const SAMPLE_DATA = [
+  { name:'Priya R.', city_in_europe:'Frankfurt', destination_in_india:'Pune', travel_date:'14 Jul 2026', type_of_listing:'Travel companion', short_description:'Travelling home for summer. Parents flying alone for first time — happy to assist elderly co-travellers on the same flight. Can also carry sealed letters.', whatsapp_number:'4917600000001' },
+  { name:'Sagar M.', city_in_europe:'Amsterdam', destination_in_india:'Mumbai', travel_date:'28 Jul 2026', type_of_listing:'Letter carrier', short_description:'Going home end of July. Can carry sealed letters and A4 documents. Based in Amsterdam — pick-up at Schiphol or nearby.', whatsapp_number:'3161000000002' },
+  { name:'Anita N.', city_in_europe:'London', destination_in_india:'Nagpur', travel_date:'3 Aug 2026', type_of_listing:'Both', short_description:'Looking for a travel companion for my mother (68) from Heathrow T2. Also happy to carry letters to Nagpur area. Via Mumbai.', whatsapp_number:'4479000000003' },
+  { name:'Rahul D.', city_in_europe:'Frankfurt', destination_in_india:'Nashik', travel_date:'22 Aug 2026', type_of_listing:'Letter carrier', short_description:'Travelling home for Ganesh festival. Can carry letters or official documents to Nashik or nearby Pune. WhatsApp preferred.', whatsapp_number:'4917600000004' },
+  { name:'Meera K.', city_in_europe:'Zurich', destination_in_india:'Mumbai', travel_date:'10 Jul 2026', type_of_listing:'Travel companion', short_description:'Looking for a female travel companion for my grandmother. Zurich to Mumbai direct on Swiss Air. Any Marathi-speaking lady on the same route?', whatsapp_number:'4179000000005' },
+  { name:'Vikram P.', city_in_europe:'Eindhoven', destination_in_india:'Pune', travel_date:'5 Sep 2026', type_of_listing:'Both', short_description:'Visiting family for Diwali. Can carry letters or small documents. Also open to accompanying elderly travellers — have done this before.', whatsapp_number:'3140000000006' },
+];
+
+/* ── Boot ── */
+loadListings();
+</script>
+
+</body>
+</html>
