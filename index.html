@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maharashtra in Europe | Coming Soon</title>
+    <link rel="icon" type="image/png" href="logo.png">
     <!-- Importing Montserrat (Body), Yatra One (Marathi Calligraphy), and Playfair Display (Tagline) -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:ital@1&family=Yatra+One&display=swap" rel="stylesheet">
     <style>
@@ -92,6 +93,26 @@
             font-size: 1.2rem;
             line-height: 1.6;
             text-shadow: 2px 2px 5px rgba(0,0,0,0.9); 
+            margin-bottom: 30px; /* Added spacing above the logo container */
+        }
+
+        /* --- LOGO CONTAINER AND EFFECTS --- */
+        .logo-container {
+            display: flex;
+            justify-content: flex-end; /* Aligns logo to the right on desktop */
+            width: 100%;
+        }
+        .brand-logo {
+            width: 220px;
+            height: auto;
+            object-fit: contain;
+            border-radius: 50%; /* <--- THIS FORCES THE IMAGE INTO A PERFECT COIN CIRCLE */
+            filter: drop-shadow(0px 8px 16px rgba(0, 0, 0, 0.6));
+            transition: transform 0.4s ease;
+}
+
+        .brand-logo:hover {
+            transform: scale(1.20); /* Slight interactive lift on hover */
         }
 
         /* =========================================
@@ -117,6 +138,15 @@
             h2 { font-size: 2.2rem; }
             .tagline { font-size: 1.2rem; }
             p { font-size: 1rem; }
+
+            /* Centers logo on mobile layout */
+            .logo-container {
+                justify-content: center;
+            }
+
+            .brand-logo {
+                width: 160px; /* Slightly smaller for mobile displays */
+            }
         }
     </style>
 </head>
@@ -129,6 +159,11 @@
             <h2>महाराष्ट्र इन युरोप</h2>
             <div class="tagline">"Where the Sahyadri meets the Alps"</div>
             <p>Building the definitive digital hub for Marathi expats across the continent. Secure your spot in the conversation.</p>
+            
+            <!-- Embedded Logo Branding Element -->
+            <div class="logo-container">
+                <img src="logo.png" alt="Maharashtra in Europe Emblem" class="brand-logo">
+            </div>
         </div>
     </div>
 
