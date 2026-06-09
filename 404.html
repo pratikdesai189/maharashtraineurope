@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Page Not Found | Maharashtra in Europe</title>
+  <link rel="icon" type="image/png" href="/logo.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Yatra+One&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --saffron: #C4440A; --saffron-hover: #A33708;
+      --gold: #C9922A; --gold-light: #FAF3E0;
+      --off-white: #FDF8F4; --text: #1A0A00; --text-muted: #7A5A40;
+      --border: #EAD8C8;
+    }
+    body {
+      font-family: 'Montserrat', system-ui, sans-serif;
+      background: var(--off-white); color: var(--text);
+      min-height: 100vh; display: flex; flex-direction: column;
+    }
+
+    /* Navbar */
+    .navbar {
+      background: var(--saffron); padding: 13px 20px;
+      display: flex; align-items: center; justify-content: space-between;
+      position: relative;
+    }
+    .navbar::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+      background: repeating-linear-gradient(90deg, var(--gold) 0, var(--gold) 8px, transparent 8px, transparent 13px);
+      opacity: 0.6;
+    }
+    .navbar-brand { color: #fff; font-size: 15px; font-weight: 700; line-height: 1.2; text-decoration: none; }
+    .navbar-brand span { display: block; font-family: 'Yatra One', cursive; font-size: 12px; font-weight: 400; opacity: 0.78; margin-top: 1px; }
+
+    /* Main */
+    .main {
+      flex: 1; display: flex; align-items: center; justify-content: center;
+      padding: 40px 20px;
+    }
+    .card {
+      background: #fff; border: 0.5px solid var(--border);
+      border-radius: 16px; padding: 48px 40px;
+      text-align: center; max-width: 460px; width: 100%;
+      box-shadow: 0 4px 24px rgba(196,68,10,0.06);
+    }
+    .error-code {
+      font-size: 80px; font-weight: 700; color: var(--saffron);
+      line-height: 1; margin-bottom: 4px;
+      font-family: 'Yatra One', cursive;
+    }
+    .error-label {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+    .divider {
+      width: 48px; height: 3px; margin: 0 auto 20px;
+      background: repeating-linear-gradient(90deg, var(--gold) 0, var(--gold) 8px, transparent 8px, transparent 13px);
+    }
+    .message {
+      font-size: 15px; font-weight: 600; color: var(--text);
+      margin-bottom: 8px;
+    }
+    .sub {
+      font-size: 13px; color: var(--text-muted); line-height: 1.6;
+      margin-bottom: 32px;
+    }
+    .btn-home {
+      display: inline-block;
+      background: var(--saffron); color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px; font-weight: 700;
+      padding: 11px 28px; border-radius: 8px;
+      text-decoration: none; border: 2px solid var(--gold);
+      transition: background .15s, transform .15s;
+      margin-bottom: 12px;
+    }
+    .btn-home:hover { background: var(--saffron-hover); transform: translateY(-2px); }
+    .quick-links {
+      display: flex; gap: 20px; justify-content: center;
+      flex-wrap: wrap; margin-top: 20px;
+    }
+    .quick-links a {
+      font-size: 13px; color: var(--saffron); font-weight: 600;
+      text-decoration: none; transition: opacity .15s;
+    }
+    .quick-links a:hover { opacity: 0.7; text-decoration: underline; }
+
+    .countdown {
+      font-size: 12px; color: var(--text-muted);
+      margin-top: 24px;
+    }
+    .countdown span { font-weight: 700; color: var(--saffron); }
+
+    @media (max-width: 500px) {
+      .card { padding: 36px 24px; }
+      .error-code { font-size: 64px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="/" class="navbar-brand">
+    Maharashtra in Europe
+    <span>महाराष्ट्र इन युरोप</span>
+  </a>
+</nav>
+
+<div class="main">
+  <div class="card">
+    <div class="error-code">404</div>
+    <div class="error-label">Page not found</div>
+    <div class="divider"></div>
+    <p class="message">वाट चुकलात का? — Lost your way?</p>
+    <p class="sub">
+      This page doesn't exist or may have moved.<br>
+      Let's get you back on the right path.
+    </p>
+    <a href="/" class="btn-home">↩ Back to Home</a>
+    <div class="quick-links">
+      <a href="/sahayak">Sahayak ✈</a>
+      <a href="/community">Community</a>
+    </div>
+    <p class="countdown">Redirecting to home in <span id="secs">10</span>s…</p>
+  </div>
+</div>
+
+<script>
+  let s = 10;
+  const el = document.getElementById('secs');
+  const t = setInterval(() => {
+    s--;
+    el.textContent = s;
+    if (s <= 0) { clearInterval(t); window.location.href = '/'; }
+  }, 1000);
+</script>
+</body>
+</html>
