@@ -22,6 +22,10 @@
   <link rel="icon" type="image/png" href="/logo.png" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Yatra+One&display=swap" rel="stylesheet" />
 
+  <!-- D3 + TopoJSON for map -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -40,15 +44,8 @@
       --font:          'Montserrat', system-ui, -apple-system, sans-serif;
     }
 
-    body {
-      font-family: var(--font);
-      background: var(--off-white);
-      color: var(--text);
-      min-height: 100vh;
-    }
-
+    body { font-family: var(--font); background: var(--off-white); color: var(--text); min-height: 100vh; }
     a { color: inherit; text-decoration: none; }
-
     .wrap { max-width: 900px; margin: 0 auto; padding: 0 16px 60px; }
 
     /* ── Navbar ── */
@@ -60,8 +57,7 @@
     }
     .navbar::after {
       content: '';
-      position: absolute;
-      bottom: 0; left: 0; right: 0; height: 3px;
+      position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
       background: repeating-linear-gradient(90deg, var(--gold) 0, var(--gold) 8px, transparent 8px, transparent 13px);
       opacity: 0.6;
     }
@@ -71,57 +67,38 @@
     .navbar-links a { color: rgba(255,255,255,0.72); font-size: 13px; transition: color .15s; }
     .navbar-links a:hover, .navbar-links a.active { color: #fff; font-weight: 700; }
     .navbar-links a.nav-sahayak {
-      background: rgba(255,255,255,0.15);
-      border: 0.5px solid rgba(255,255,255,0.35);
-      padding: 4px 13px; border-radius: 99px;
-      color: #fff; font-weight: 600;
+      background: rgba(255,255,255,0.15); border: 0.5px solid rgba(255,255,255,0.35);
+      padding: 4px 13px; border-radius: 99px; color: #fff; font-weight: 600;
     }
     .navbar-links a.nav-sahayak:hover { background: rgba(255,255,255,0.25); }
 
     /* ── Hamburger ── */
-    .hamburger {
-      display: none; flex-direction: column; gap: 5px;
-      cursor: pointer; padding: 4px; background: none; border: none;
-    }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
     .hamburger span { display: block; width: 22px; height: 2px; background: #fff; border-radius: 2px; }
-    .mobile-menu {
-      display: none; flex-direction: column;
-      background: var(--saffron);
-      border-top: 0.5px solid rgba(255,255,255,0.2);
-    }
-    .mobile-menu a {
-      padding: 13px 20px; color: rgba(255,255,255,0.85); font-size: 14px;
-      border-bottom: 0.5px solid rgba(255,255,255,0.1); transition: background .15s;
-    }
+    .mobile-menu { display: none; flex-direction: column; background: var(--saffron); border-top: 0.5px solid rgba(255,255,255,0.2); }
+    .mobile-menu a { padding: 13px 20px; color: rgba(255,255,255,0.85); font-size: 14px; border-bottom: 0.5px solid rgba(255,255,255,0.1); transition: background .15s; }
     .mobile-menu a:hover { background: rgba(255,255,255,0.1); }
     .mobile-menu a.active { color: #fff; font-weight: 700; }
     .mobile-menu.open { display: flex; }
 
     /* ── Hero ── */
     .hero {
-      background: var(--saffron);
-      padding: 2.2rem 20px 2.8rem;
-      position: relative; overflow: hidden;
-      margin-bottom: 28px;
+      background: var(--saffron); padding: 2.2rem 20px 2.8rem;
+      position: relative; overflow: hidden; margin-bottom: 28px;
     }
     .hero::before {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
       background: repeating-linear-gradient(90deg, var(--gold) 0, var(--gold) 8px, transparent 8px, transparent 13px);
       opacity: 0.65;
     }
     .hero::after {
-      content: '';
-      position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
       background: repeating-linear-gradient(90deg, var(--gold) 0, var(--gold) 8px, transparent 8px, transparent 13px);
       opacity: 0.4;
     }
     .hero-eyebrow {
-      display: inline-block;
-      background: rgba(255,255,255,0.18);
-      border: 0.5px solid rgba(255,255,255,0.35);
-      color: #fff; font-size: 11px; font-weight: 500;
-      padding: 3px 12px; border-radius: 99px;
+      display: inline-block; background: rgba(255,255,255,0.18); border: 0.5px solid rgba(255,255,255,0.35);
+      color: #fff; font-size: 11px; font-weight: 500; padding: 3px 12px; border-radius: 99px;
       letter-spacing: 0.06em; margin-bottom: 12px;
     }
     .hero h1 { color: #fff; font-size: 22px; font-weight: 700; margin-bottom: 4px; }
@@ -129,119 +106,163 @@
     .hero-desc { color: rgba(255,255,255,0.7); font-size: 13px; line-height: 1.65; max-width: 560px; }
 
     /* ── Stats ── */
-    .stats {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
-      margin-bottom: 24px;
-    }
-    .stat {
-      background: var(--white);
-      border: 0.5px solid var(--border);
-      border-top: 3px solid var(--gold);
-      border-radius: 8px; padding: 14px;
-    }
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 24px; }
+    .stat { background: var(--white); border: 0.5px solid var(--border); border-top: 3px solid var(--gold); border-radius: 8px; padding: 14px; }
     .stat-n { font-size: 26px; font-weight: 700; color: var(--saffron); }
     .stat-l { font-size: 11px; color: var(--text-muted); margin-top: 3px; }
 
-    /* ── Search & Filter ── */
-    .controls {
-      display: flex; gap: 10px; flex-wrap: wrap;
-      margin-bottom: 24px; align-items: center;
+    /* ── Interactive Map ── */
+    .map-section {
+      background: var(--white);
+      border: 0.5px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 16px 12px;
+      margin-bottom: 24px;
+      position: relative;
     }
+    .map-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 10px; flex-wrap: wrap; gap: 8px;
+    }
+    .map-label {
+      font-size: 11px; color: var(--text-muted);
+      letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600;
+    }
+    .map-hint {
+      font-size: 11px; color: var(--text-muted); font-style: italic;
+    }
+    #europe-map { width: 100%; }
+    #europe-map svg { width: 100%; height: auto; display: block; }
+
+    /* Country path styles */
+    .map-country {
+      fill: #DCDCDC; stroke: #fff; stroke-width: 0.6px;
+      cursor: default; transition: fill .15s;
+    }
+    .map-country.active {
+      fill: #FDDCC8; stroke: var(--gold); stroke-width: 0.8px;
+      cursor: pointer;
+    }
+    .map-country.active:hover {
+      fill: #F5A878;
+    }
+    .map-country.active.selected {
+      fill: var(--saffron); stroke: var(--saffron-hover); stroke-width: 1.2px;
+    }
+    .map-country.active.selected:hover {
+      fill: var(--saffron-hover);
+    }
+
+    /* Tooltip */
+    .map-tooltip {
+      position: fixed;
+      background: rgba(26,10,0,0.92);
+      color: #fff;
+      font-family: var(--font);
+      font-size: 12px; font-weight: 600;
+      padding: 7px 13px;
+      border-radius: 7px;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity .12s;
+      z-index: 9999;
+      white-space: nowrap;
+      border: 1px solid rgba(201,146,42,0.4);
+    }
+    .map-tooltip .tt-count {
+      font-weight: 400; opacity: 0.72; margin-left: 6px;
+    }
+    .map-tooltip .tt-hint {
+      display: block; font-size: 10px; font-weight: 400;
+      opacity: 0.6; margin-top: 2px;
+    }
+
+    /* Reset button */
+    .map-reset {
+      display: none; margin: 10px auto 0;
+      font-size: 12px; padding: 5px 16px; border-radius: 99px;
+      border: 1.5px solid var(--saffron); background: transparent;
+      color: var(--saffron); cursor: pointer; font-weight: 600;
+      transition: all .15s; font-family: var(--font);
+    }
+    .map-reset:hover { background: var(--saffron); color: #fff; }
+
+    /* Map legend */
+    .map-legend {
+      display: flex; gap: 16px; flex-wrap: wrap;
+      justify-content: center; margin-top: 10px;
+    }
+    .legend-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--text-muted); }
+    .legend-dot { width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; }
+
+    /* ── Search & Filter ── */
+    .controls { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 24px; align-items: center; }
     .search-input {
-      flex: 1; min-width: 200px;
-      padding: 9px 14px; font-size: 13px; font-family: var(--font);
-      border: 0.5px solid var(--border); border-radius: 8px;
-      background: var(--white); color: var(--text);
-      outline: none; transition: border-color .15s;
+      flex: 1; min-width: 200px; padding: 9px 14px; font-size: 13px; font-family: var(--font);
+      border: 0.5px solid var(--border); border-radius: 8px; background: var(--white);
+      color: var(--text); outline: none; transition: border-color .15s;
     }
     .search-input:focus { border-color: var(--saffron); }
     .search-input::placeholder { color: var(--text-muted); }
-
     .filter-select {
       padding: 9px 12px; font-size: 13px; font-family: var(--font);
-      border: 0.5px solid var(--border); border-radius: 8px;
-      background: var(--white); color: var(--text);
-      cursor: pointer; outline: none;
+      border: 0.5px solid var(--border); border-radius: 8px; background: var(--white);
+      color: var(--text); cursor: pointer; outline: none;
     }
     .filter-select:focus { border-color: var(--saffron); }
 
     /* ── Country section ── */
     .country-section { margin-bottom: 28px; }
-
-    .country-header {
-      display: flex; align-items: center; gap: 10px;
-      margin-bottom: 12px;
-    }
+    .country-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
     .country-flag { font-size: 22px; line-height: 1; }
-    .country-name {
-      font-size: 15px; font-weight: 700; color: var(--text);
-    }
+    .country-name { font-size: 15px; font-weight: 700; color: var(--text); }
     .country-count {
       font-size: 11px; color: var(--text-muted);
-      background: var(--gold-light);
-      border: 0.5px solid var(--border);
+      background: var(--gold-light); border: 0.5px solid var(--border);
       padding: 2px 8px; border-radius: 99px;
     }
     .country-line { flex: 1; height: 0.5px; background: var(--border); }
 
     /* ── Org card ── */
     .org-card {
-      background: var(--white);
-      border: 0.5px solid var(--border);
-      border-radius: 10px; padding: 14px 16px;
-      margin-bottom: 8px;
+      background: var(--white); border: 0.5px solid var(--border);
+      border-radius: 10px; padding: 14px 16px; margin-bottom: 8px;
       display: flex; align-items: center; gap: 14px;
       transition: border-color .15s, box-shadow .15s;
     }
     .org-card:hover { border-color: var(--saffron-mid); box-shadow: 0 2px 8px rgba(196,68,10,0.07); }
-
     .org-avatar {
       width: 40px; height: 40px; border-radius: 50%;
-      background: var(--saffron-light);
-      border: 1.5px solid var(--gold);
+      background: var(--saffron-light); border: 1.5px solid var(--gold);
       display: flex; align-items: center; justify-content: center;
-      font-size: 14px; font-weight: 700; color: var(--saffron);
-      flex-shrink: 0;
+      font-size: 14px; font-weight: 700; color: var(--saffron); flex-shrink: 0;
     }
-
     .org-body { flex: 1; min-width: 0; }
     .org-name { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 3px; }
     .org-meta { font-size: 12px; color: var(--text-muted); display: flex; gap: 10px; flex-wrap: wrap; }
-    .org-city { }
     .org-scope {
       font-size: 11px; padding: 1px 8px; border-radius: 99px;
-      border: 0.5px solid var(--border); color: var(--text-muted);
-      background: var(--off-white);
+      border: 0.5px solid var(--border); color: var(--text-muted); background: var(--off-white);
     }
     .org-scope.national { background: var(--gold-light); color: #6B4A10; border-color: #E0D0A0; }
-
     .btn-visit {
-      font-size: 12px; padding: 7px 14px;
-      border-radius: 7px;
-      border: 1.5px solid var(--saffron);
-      background: transparent; color: var(--saffron);
+      font-size: 12px; padding: 7px 14px; border-radius: 7px;
+      border: 1.5px solid var(--saffron); background: transparent; color: var(--saffron);
       cursor: pointer; white-space: nowrap; flex-shrink: 0;
-      font-weight: 600; transition: all .15s;
-      text-decoration: none; display: inline-block;
+      font-weight: 600; transition: all .15s; text-decoration: none; display: inline-block;
     }
     .btn-visit:hover { background: var(--saffron); color: #fff; }
-    .btn-visit.social {
-      border-color: var(--gold); color: var(--gold);
-    }
+    .btn-visit.social { border-color: var(--gold); color: var(--gold); }
     .btn-visit.social:hover { background: var(--gold); color: #fff; }
 
-    /* ── Empty state ── */
+    /* ── States ── */
     .empty { text-align: center; padding: 3rem 1rem; color: var(--text-muted); font-size: 14px; }
 
     /* ── Suggest banner ── */
     .suggest-banner {
-      background: var(--gold-light);
-      border: 0.5px solid var(--border);
-      border-left: 3px solid var(--gold);
-      border-radius: 0 8px 8px 0;
-      padding: 12px 16px;
-      font-size: 13px; color: #6B4A10;
-      margin-bottom: 28px; line-height: 1.6;
+      background: var(--gold-light); border: 0.5px solid var(--border);
+      border-left: 3px solid var(--gold); border-radius: 0 8px 8px 0;
+      padding: 12px 16px; font-size: 13px; color: #6B4A10; margin-bottom: 28px; line-height: 1.6;
     }
     .suggest-banner a { color: var(--saffron); font-weight: 600; }
     .suggest-banner a:hover { text-decoration: underline; }
@@ -249,17 +270,16 @@
     /* ── Footer ── */
     .footer {
       text-align: center; font-size: 12px; color: var(--text-muted);
-      margin-top: 2rem; padding-top: 1.2rem;
-      border-top: 0.5px solid var(--border);
+      margin-top: 2rem; padding-top: 1.2rem; border-top: 0.5px solid var(--border);
     }
     .footer strong { color: var(--saffron); }
 
     /* ── Responsive ── */
     @media (max-width: 600px) {
-      .stats { grid-template-columns: repeat(3, 1fr); }
       .navbar-links { display: none; }
       .hamburger { display: flex; }
       .org-card { flex-wrap: wrap; }
+      .map-hint { display: none; }
     }
   </style>
 </head>
@@ -306,29 +326,51 @@
   <!-- ── Stats ── -->
   <div class="stats">
     <div class="stat">
-      <div class="stat-n" id="s-orgs">24</div>
+      <div class="stat-n">23</div>
       <div class="stat-l">Organizations</div>
     </div>
     <div class="stat">
-      <div class="stat-n" id="s-countries">14</div>
+      <div class="stat-n">13</div>
       <div class="stat-l">Countries</div>
     </div>
     <div class="stat">
-      <div class="stat-n" id="s-websites">21</div>
+      <div class="stat-n">21</div>
       <div class="stat-l">With websites</div>
     </div>
   </div>
 
+  <!-- ── Interactive Europe Map ── -->
+  <div class="map-section">
+    <div class="map-header">
+      <span class="map-label">🗺 Marathi communities across Europe</span>
+      <span class="map-hint">Hover to identify · Click to filter</span>
+    </div>
+    <div id="europe-map"></div>
+    <div class="map-legend">
+      <div class="legend-item">
+        <div class="legend-dot" style="background:#FDDCC8;border:1px solid #C9922A"></div>
+        Has Marathi community
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:#C4440A"></div>
+        Selected
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:#DCDCDC"></div>
+        No listing yet
+      </div>
+    </div>
+    <button class="map-reset" id="map-reset" onclick="resetMapFilter()">✕ Clear country filter</button>
+  </div>
+  <div id="map-tooltip" class="map-tooltip"></div>
+
   <!-- ── Search & Filter ── -->
   <div class="controls">
     <input
-      class="search-input"
-      id="search"
-      type="text"
-      placeholder="Search by name or city…"
-      oninput="renderAll()"
+      class="search-input" id="search" type="text"
+      placeholder="Search by name or city…" oninput="renderAll()"
     />
-    <select class="filter-select" id="filter-country" onchange="renderAll()">
+    <select class="filter-select" id="filter-country" onchange="onDropdownChange()">
       <option value="">All countries</option>
     </select>
   </div>
@@ -339,6 +381,7 @@
   </div>
 
   <!-- ── Directory ── -->
+  <div id="listings-top"></div>
   <div id="directory"></div>
 
   <!-- ── Footer ── -->
@@ -352,51 +395,63 @@
     </span>
   </div>
 
-</div>
+</div><!-- /wrap -->
 
 <script>
-/* ── Data ── */
+/* ── Org data ── */
 const ORGS = [
-  // Germany
-  { country: 'Germany', flag: '🇩🇪', city: 'Stuttgart',              name: 'Maharashtra Mandal Stuttgart e.V.',      scope: 'city',     url: 'https://mmstuttgart.de',                   urlType: 'website' },
-  { country: 'Germany', flag: '🇩🇪', city: 'Berlin',                 name: 'Marathi Mitra Berlin',                   scope: 'city',     url: 'https://marathimitraberlin.de',            urlType: 'website' },
-  { country: 'Germany', flag: '🇩🇪', city: 'Munich',                 name: 'Maharashtra Mandal Munich',              scope: 'city',     url: 'https://mmmunich.com',                     urlType: 'website' },
-  { country: 'Germany', flag: '🇩🇪', city: 'Wolfsburg & Braunschweig', name: 'BraWo Marathi Mandal e.V.',            scope: 'city',     url: 'https://brawomarathimandal.de',            urlType: 'website' },
-  { country: 'Germany', flag: '🇩🇪', city: 'Wolfsburg',              name: 'Wolfsburg Marathi Mandal',               scope: 'city',     url: 'https://wolfsburgmarathimandal.de',        urlType: 'website' },
-  { country: 'Germany', flag: '🇩🇪', city: 'Frankfurt',              name: 'Marathi Katta Frankfurt Germany e.V.',   scope: 'city',     url: 'https://marathikattagermany.com',          urlType: 'website' },
-  { country: 'Germany', flag: '🇩🇪', city: 'National',               name: 'Marathi Mitra Mandal Deutschland e.V.',  scope: 'national', url: 'https://marathimitramandal.com',           urlType: 'website' },
-  // United Kingdom
-  { country: 'United Kingdom', flag: '🇬🇧', city: 'London',          name: 'Maharashtra Mandal London',              scope: 'city',     url: 'https://mmlondon.co.uk',                   urlType: 'website' },
-  { country: 'United Kingdom', flag: '🇬🇧', city: 'Newcastle',       name: 'Mi Marathi Newcastle',                   scope: 'city',     url: 'https://mimarathi.co.uk',                  urlType: 'website' },
-  // Netherlands
-  { country: 'Netherlands', flag: '🇳🇱', city: 'National',           name: 'Netherlands Marathi Mandal',             scope: 'national', url: 'https://netherlandsmarathimandal.org',     urlType: 'website' },
-  { country: 'Netherlands', flag: '🇳🇱', city: 'Eindhoven',          name: 'Eindhoven Marathi Mitramandal',          scope: 'city',     url: 'https://eindhoven-marathi-mitramandal.com',urlType: 'website' },
-  { country: 'Netherlands', flag: '🇳🇱', city: 'Almere',             name: 'Almere Maharashtra Mandal',              scope: 'city',     url: 'https://almeremaharashtramandal.nl',       urlType: 'website' },
-  // France
-  { country: 'France',      flag: '🇫🇷', city: 'Paris',              name: 'Maharashtra Mandal France',              scope: 'national', url: 'https://mmfr.org',                         urlType: 'website' },
-  // Switzerland
-  { country: 'Switzerland', flag: '🇨🇭', city: 'National',           name: 'Bruhan Maharashtra Mandal Switzerland',  scope: 'national', url: 'https://bruhan-mms.org',                   urlType: 'website' },
-  // Ireland
-  { country: 'Ireland',     flag: '🇮🇪', city: 'National',           name: 'Marathi Mandal Ireland',                 scope: 'national', url: 'https://irishmarathi.com',                 urlType: 'website' },
-  // Denmark
-  { country: 'Denmark',     flag: '🇩🇰', city: 'National',           name: 'Maharashtra Mandal Denmark',             scope: 'national', url: 'https://maharashtramandaldenmark.com',     urlType: 'website' },
-  // Finland
-  { country: 'Finland',     flag: '🇫🇮', city: 'National',           name: 'Maharashtra Mandal Finland Ry',          scope: 'national', url: 'https://mmfinland.com',                    urlType: 'website' },
-  // Austria
-  { country: 'Austria',     flag: '🇦🇹', city: 'Vienna',             name: 'Maharashtra Mandal Austria',             scope: 'national', url: 'https://maharashtramandalaustria.com',     urlType: 'website' },
-  // Norway
-  { country: 'Norway',      flag: '🇳🇴', city: 'National',           name: 'Maharashtra Mandal Norway',              scope: 'national', url: 'https://maharashtramandalnorway.no',       urlType: 'website' },
-  // Belgium
-  { country: 'Belgium',     flag: '🇧🇪', city: 'Brussels',           name: 'Belgium Marathi Mandal',                 scope: 'national', url: 'https://www.facebook.com/BRUSSELSMARATHIMANDAL/', urlType: 'social' },
-  // Luxembourg
-  { country: 'Luxembourg',  flag: '🇱🇺', city: 'National',           name: 'Marathi Mandal Luxembourg',              scope: 'national', url: 'https://marathimandallux.com',             urlType: 'website' },
-  // Poland
-  { country: 'Poland',      flag: '🇵🇱', city: 'National',           name: 'Maharashtra Mandal Poland',              scope: 'national', url: 'https://www.facebook.com/61566329637074',  urlType: 'social' },
-  // Global
-  { country: 'Global Network', flag: '🌍', city: 'Global',           name: 'Garje Marathi Global',                   scope: 'global',   url: 'https://garjemarathi.com',                 urlType: 'website' },
+  { country: 'Germany',        flag: '🇩🇪', city: 'Stuttgart',               name: 'Maharashtra Mandal Stuttgart e.V.',      scope: 'city',     url: 'https://mmstuttgart.de',                   urlType: 'website' },
+  { country: 'Germany',        flag: '🇩🇪', city: 'Berlin',                  name: 'Marathi Mitra Berlin',                   scope: 'city',     url: 'https://marathimitraberlin.de',            urlType: 'website' },
+  { country: 'Germany',        flag: '🇩🇪', city: 'Munich',                  name: 'Maharashtra Mandal Munich',              scope: 'city',     url: 'https://mmmunich.com',                     urlType: 'website' },
+  { country: 'Germany',        flag: '🇩🇪', city: 'Wolfsburg & Braunschweig', name: 'BraWo Marathi Mandal e.V.',             scope: 'city',     url: 'https://brawomarathimandal.de',            urlType: 'website' },
+  { country: 'Germany',        flag: '🇩🇪', city: 'Wolfsburg',               name: 'Wolfsburg Marathi Mandal',               scope: 'city',     url: 'https://wolfsburgmarathimandal.de',        urlType: 'website' },
+  { country: 'Germany',        flag: '🇩🇪', city: 'Frankfurt',               name: 'Marathi Katta Frankfurt Germany e.V.',   scope: 'city',     url: 'https://marathikattagermany.com',          urlType: 'website' },
+  { country: 'Germany',        flag: '🇩🇪', city: 'National',                name: 'Marathi Mitra Mandal Deutschland e.V.', scope: 'national', url: 'https://marathimitramandal.com',           urlType: 'website' },
+  { country: 'United Kingdom', flag: '🇬🇧', city: 'London',                  name: 'Maharashtra Mandal London',              scope: 'city',     url: 'https://mmlondon.co.uk',                   urlType: 'website' },
+  { country: 'United Kingdom', flag: '🇬🇧', city: 'Newcastle',               name: 'Mi Marathi Newcastle',                   scope: 'city',     url: 'https://mimarathi.co.uk',                  urlType: 'website' },
+  { country: 'Netherlands',    flag: '🇳🇱', city: 'National',                name: 'Netherlands Marathi Mandal',             scope: 'national', url: 'https://netherlandsmarathimandal.org',     urlType: 'website' },
+  { country: 'Netherlands',    flag: '🇳🇱', city: 'Eindhoven',               name: 'Eindhoven Marathi Mitramandal',          scope: 'city',     url: 'https://eindhoven-marathi-mitramandal.com',urlType: 'website' },
+  { country: 'Netherlands',    flag: '🇳🇱', city: 'Almere',                  name: 'Almere Maharashtra Mandal',              scope: 'city',     url: 'https://almeremaharashtramandal.nl',       urlType: 'website' },
+  { country: 'France',         flag: '🇫🇷', city: 'Paris',                   name: 'Maharashtra Mandal France',              scope: 'national', url: 'https://mmfr.org',                         urlType: 'website' },
+  { country: 'Switzerland',    flag: '🇨🇭', city: 'National',                name: 'Bruhan Maharashtra Mandal Switzerland',  scope: 'national', url: 'https://bruhan-mms.org',                   urlType: 'website' },
+  { country: 'Ireland',        flag: '🇮🇪', city: 'National',                name: 'Marathi Mandal Ireland',                 scope: 'national', url: 'https://irishmarathi.com',                 urlType: 'website' },
+  { country: 'Denmark',        flag: '🇩🇰', city: 'National',                name: 'Maharashtra Mandal Denmark',             scope: 'national', url: 'https://maharashtramandaldenmark.com',     urlType: 'website' },
+  { country: 'Finland',        flag: '🇫🇮', city: 'National',                name: 'Maharashtra Mandal Finland Ry',          scope: 'national', url: 'https://mmfinland.com',                    urlType: 'website' },
+  { country: 'Austria',        flag: '🇦🇹', city: 'Vienna',                  name: 'Maharashtra Mandal Austria',             scope: 'national', url: 'https://maharashtramandalaustria.com',     urlType: 'website' },
+  { country: 'Norway',         flag: '🇳🇴', city: 'National',                name: 'Maharashtra Mandal Norway',              scope: 'national', url: 'https://maharashtramandalnorway.no',       urlType: 'website' },
+  { country: 'Belgium',        flag: '🇧🇪', city: 'Brussels',                name: 'Belgium Marathi Mandal',                 scope: 'national', url: 'https://www.facebook.com/BRUSSELSMARATHIMANDAL/', urlType: 'social' },
+  { country: 'Luxembourg',     flag: '🇱🇺', city: 'National',                name: 'Marathi Mandal Luxembourg',              scope: 'national', url: 'https://marathimandallux.com',             urlType: 'website' },
+  { country: 'Poland',         flag: '🇵🇱', city: 'National',                name: 'Maharashtra Mandal Krakow Poland',       scope: 'city', url: 'https://mmkrakow.com/',                        urlType: 'website'  },
+  { country: 'Global Network', flag: '🌍', city: 'Global',                  name: 'Garje Marathi Global',                   scope: 'global',   url: 'https://garjemarathi.com',                 urlType: 'website' },
 ];
 
-/* ── Populate country filter ── */
+/* ── Country → ISO 3166-1 numeric mapping ── */
+const COUNTRY_ISO = {
+  'Germany':        276,
+  'United Kingdom': 826,
+  'Netherlands':    528,
+  'France':         250,
+  'Switzerland':    756,
+  'Ireland':        372,
+  'Denmark':        208,
+  'Finland':        246,
+  'Austria':        40,
+  'Norway':         578,
+  'Belgium':        56,
+  'Luxembourg':     442,
+  'Poland':         616,
+};
+const ISO_COUNTRY = Object.fromEntries(Object.entries(COUNTRY_ISO).map(([k,v]) => [String(v), k]));
+const ACTIVE_ISOS = new Set(Object.values(COUNTRY_ISO).map(String));
+
+/* ── Org counts per country ── */
+const ORG_COUNTS = {};
+ORGS.forEach(o => { if (COUNTRY_ISO[o.country]) ORG_COUNTS[o.country] = (ORG_COUNTS[o.country] || 0) + 1; });
+
+/* ── State ── */
+let selectedCountry = '';
+
+/* ── Populate country dropdown ── */
 function populateFilter() {
   const countries = [...new Set(ORGS.map(o => o.country))];
   const sel = document.getElementById('filter-country');
@@ -412,7 +467,7 @@ function initials(name) {
   return name.trim().split(/\s+/).filter(w => /^[A-Za-z]/.test(w)).slice(0, 2).map(w => w[0]).join('').toUpperCase();
 }
 
-/* ── Render ── */
+/* ── Render directory ── */
 function renderAll() {
   const q       = document.getElementById('search').value.toLowerCase().trim();
   const country = document.getElementById('filter-country').value;
@@ -424,24 +479,22 @@ function renderAll() {
   });
 
   const dir = document.getElementById('directory');
-
   if (!filtered.length) {
     dir.innerHTML = '<div class="empty">No organizations match your search.</div>';
     return;
   }
 
-  // Group by country preserving order
   const groups = {};
   filtered.forEach(o => {
     if (!groups[o.country]) groups[o.country] = { flag: o.flag, orgs: [] };
     groups[o.country].orgs.push(o);
   });
 
-  dir.innerHTML = Object.entries(groups).map(([country, { flag, orgs }]) => `
+  dir.innerHTML = Object.entries(groups).map(([cname, { flag, orgs }]) => `
     <div class="country-section">
       <div class="country-header">
         <span class="country-flag">${flag}</span>
-        <span class="country-name">${country}</span>
+        <span class="country-name">${cname}</span>
         <span class="country-count">${orgs.length} ${orgs.length === 1 ? 'group' : 'groups'}</span>
         <div class="country-line"></div>
       </div>
@@ -468,6 +521,105 @@ function escHtml(str) {
   return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
+/* ── Map: select country from dropdown ── */
+function onDropdownChange() {
+  const val = document.getElementById('filter-country').value;
+  setMapSelection(val);
+  renderAll();
+}
+
+/* ── Map: reset ── */
+function resetMapFilter() {
+  document.getElementById('filter-country').value = '';
+  setMapSelection('');
+  renderAll();
+}
+
+/* ── Map: update visual selection ── */
+function setMapSelection(countryName) {
+  selectedCountry = countryName;
+  const resetBtn = document.getElementById('map-reset');
+  resetBtn.style.display = countryName ? 'block' : 'none';
+  d3.selectAll('.map-country').classed('selected', function(d) {
+    const name = ISO_COUNTRY[String(parseInt(d.id))];
+    return name === countryName;
+  });
+}
+
+/* ── Map: init ── */
+async function initMap() {
+  const tooltip = document.getElementById('map-tooltip');
+
+  let world;
+  try {
+    world = await d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json');
+  } catch(e) {
+    document.getElementById('europe-map').innerHTML =
+      '<p style="text-align:center;color:var(--text-muted);font-size:13px;padding:20px">Map unavailable — use the filter below.</p>';
+    return;
+  }
+
+  const countries = topojson.feature(world, world.objects.countries);
+
+  const W = 860, H = 480;
+
+  // Mercator projection centred on Europe
+  const projection = d3.geoMercator()
+    .center([13, 52])
+    .scale(780)
+    .translate([W / 2, H / 2]);
+
+  const path = d3.geoPath().projection(projection);
+
+  const svg = d3.select('#europe-map')
+    .append('svg')
+    .attr('viewBox', `0 0 ${W} ${H}`)
+    .attr('preserveAspectRatio', 'xMidYMid meet');
+
+  // Ocean background
+  svg.append('rect')
+    .attr('width', W).attr('height', H)
+    .attr('fill', '#EAF3FA');
+
+  svg.selectAll('path')
+    .data(countries.features)
+    .enter()
+    .append('path')
+    .attr('class', d => {
+      const iso = String(parseInt(d.id));
+      return 'map-country' + (ACTIVE_ISOS.has(iso) ? ' active' : '');
+    })
+    .attr('d', path)
+    .on('mouseover', function(event, d) {
+      const iso = String(parseInt(d.id));
+      const name = ISO_COUNTRY[iso];
+      if (!name) return;
+      const count = ORG_COUNTS[name] || 0;
+      tooltip.innerHTML = `${name}<span class="tt-count">${count} group${count !== 1 ? 's' : ''}</span><span class="tt-hint">Click to filter</span>`;
+      tooltip.style.opacity = '1';
+    })
+    .on('mousemove', function(event) {
+      tooltip.style.left  = (event.clientX + 14) + 'px';
+      tooltip.style.top   = (event.clientY - 10) + 'px';
+    })
+    .on('mouseout', function() {
+      tooltip.style.opacity = '0';
+    })
+    .on('click', function(event, d) {
+      const iso = String(parseInt(d.id));
+      const name = ISO_COUNTRY[iso];
+      if (!name) return;
+
+      const newVal = (selectedCountry === name) ? '' : name;
+      document.getElementById('filter-country').value = newVal;
+      setMapSelection(newVal);
+      renderAll();
+      // Smooth scroll to listings
+      document.getElementById('listings-top').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+}
+
+/* ── Mobile menu ── */
 function toggleMenu() {
   document.getElementById('mobileMenu').classList.toggle('open');
 }
@@ -478,6 +630,7 @@ document.querySelectorAll('.mobile-menu a').forEach(a => {
 /* ── Boot ── */
 populateFilter();
 renderAll();
+initMap();
 </script>
 
 </body>
