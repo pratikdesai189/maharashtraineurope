@@ -6,6 +6,19 @@
   <title>Sahayak — Travel & Letter Network | Maharashtra in Europe</title>
   <meta name="description" content="Find a Marathi travel companion or letter carrier to India. Connecting Maharashtrians across Europe." />
 
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://maharashtraineurope.com/sahayak" />
+  <meta property="og:title"       content="Sahayak — Find a Marathi Travel Companion in Europe" />
+  <meta property="og:description" content="Find a travel companion or letter carrier to India. Connecting Maharashtrians across Europe, one journey at a time." />
+  <meta property="og:image"       content="https://maharashtraineurope.com/logo.png" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="Sahayak — Find a Marathi Travel Companion in Europe" />
+  <meta name="twitter:description" content="Find a travel companion or letter carrier to India. Connecting Maharashtrians across Europe, one journey at a time." />
+  <meta name="twitter:image"       content="https://maharashtraineurope.com/logo.png" />
+
   <!-- ─── REPLACE THIS URL with your actual published Google Sheet CSV URL ─── -->
   <!-- How to get it: Google Sheets → File → Share → Publish to web → CSV → Copy URL -->
   <script>
@@ -190,6 +203,16 @@
       font-size: 11px; padding: 2px 9px; border-radius: 99px;
       border: 0.5px solid var(--border); color: var(--text-muted); background: var(--off-white);
     }
+    .pill-expired {
+      font-size: 11px; padding: 2px 9px; border-radius: 99px;
+      border: 0.5px solid #E0C0C0; color: #A05050; background: #FDF0F0;
+    }
+    .toggle-expired {
+      font-size: 12px; color: var(--text-muted); cursor: pointer;
+      display: inline-flex; align-items: center; gap: 6px;
+      margin-bottom: 12px; user-select: none;
+    }
+    .toggle-expired input { cursor: pointer; accent-color: var(--saffron); }
 
     .btn-connect {
       font-size: 12px; padding: 8px 15px;
@@ -320,6 +343,12 @@
     </select>
   </div>
 
+  <!-- ── Expired toggle ── -->
+  <label class="toggle-expired">
+    <input type="checkbox" id="show-expired" onchange="render()" />
+    Show past listings
+  </label>
+
   <!-- ── Listings ── -->
   <div id="listings-section">
     <div class="section-label">Active listings</div>
@@ -406,20 +435,31 @@ function populateSelects() {
   tos.forEach(c   => { const o = document.createElement('option'); o.value = c; o.textContent = 'To: '   + c; ft.appendChild(o); });
 }
 
-/* ── Update stat counters ── */
+/* ── Update stat counters (active listings only) ── */
 function updateStats() {
-  document.getElementById('s-total').textContent  = allData.length;
-  document.getElementById('s-travel').textContent = allData.filter(r => r.type_of_listing === 'Travel companion' || r.type_of_listing === 'Both').length;
-  document.getElementById('s-letter').textContent = allData.filter(r => r.type_of_listing === 'Letter carrier'   || r.type_of_listing === 'Both').length;
-  document.getElementById('s-cities').textContent = new Set(allData.map(r => r.city_in_europe).filter(Boolean)).size;
+  const active = allData.filter(r => !isExpired(r.travel_date));
+  document.getElementById('s-total').textContent  = active.length;
+  document.getElementById('s-travel').textContent = active.filter(r => r.type_of_listing === 'Travel companion' || r.type_of_listing === 'Both').length;
+  document.getElementById('s-letter').textContent = active.filter(r => r.type_of_listing === 'Letter carrier'   || r.type_of_listing === 'Both').length;
+  document.getElementById('s-cities').textContent = new Set(active.map(r => r.city_in_europe).filter(Boolean)).size;
+}
+
+/* ── Check if a travel date string is in the past ── */
+function isExpired(dateStr) {
+  if (!dateStr) return false;
+  const d = new Date(dateStr);
+  if (isNaN(d)) return false;
+  return d < new Date(new Date().toDateString()); // compare date only, not time
 }
 
 /* ── Render filtered listing cards ── */
 function render() {
-  const fv = document.getElementById('f-from').value;
-  const tv = document.getElementById('f-to').value;
+  const fv          = document.getElementById('f-from').value;
+  const tv          = document.getElementById('f-to').value;
+  const showExpired = document.getElementById('show-expired').checked;
 
   const data = allData.filter(r => {
+    if (!showExpired && isExpired(r.travel_date)) return false;
     if (activeTab !== 'all' && r.type_of_listing !== activeTab) return false;
     if (fv && r.city_in_europe !== fv) return false;
     if (tv && r.destination_in_india !== tv) return false;
@@ -429,18 +469,19 @@ function render() {
   const el = document.getElementById('listings');
 
   if (!data.length) {
-    el.innerHTML = '<div class="empty">No listings match this filter. Try a different combination.</div>';
+    el.innerHTML = '<div class="empty">No active listings match this filter. Try enabling "Show past listings" or a different combination.</div>';
     return;
   }
 
   el.innerHTML = data.map((r, i) => {
-    const av = AV_COLORS[i % AV_COLORS.length];
-    const waMsg = encodeURIComponent(
+    const av      = AV_COLORS[i % AV_COLORS.length];
+    const expired = isExpired(r.travel_date);
+    const waMsg   = encodeURIComponent(
       'Namaste ' + r.name + ', I found your listing on Maharashtra in Europe (maharashtraineurope.com). I would like to connect!'
     );
     const waLink = 'https://wa.me/' + r.whatsapp_number.replace(/\D/g, '') + '?text=' + waMsg;
     return `
-      <div class="card">
+      <div class="card" style="${expired ? 'opacity:0.6' : ''}">
         <div class="avatar" style="background:${av.bg};color:${av.color}">${initials(r.name)}</div>
         <div class="card-body">
           <div class="card-top">
@@ -450,13 +491,16 @@ function render() {
           </div>
           <p class="card-desc">${escHtml(r.short_description)}</p>
           <div class="pills">
-            <span class="pill">&#128197; ${escHtml(r.travel_date)}</span>
+            ${expired
+              ? `<span class="pill-expired">&#128197; ${escHtml(r.travel_date)} — past</span>`
+              : `<span class="pill">&#128197; ${escHtml(r.travel_date)}</span>`
+            }
             <span class="pill">${escHtml(r.city_in_europe)}</span>
             <span class="pill">Marathi-speaking</span>
           </div>
         </div>
         <a href="${waLink}" target="_blank" rel="noopener">
-          <button class="btn-connect">Connect</button>
+          <button class="btn-connect">${expired ? 'View' : 'Connect'}</button>
         </a>
       </div>
     `;
