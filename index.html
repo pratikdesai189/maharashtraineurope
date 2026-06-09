@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maharashtra in Europe | Coming Soon</title>
+    <!-- Importing Montserrat (Body), Yatra One (Marathi Calligraphy), and Playfair Display (Tagline) -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:ital@1&family=Yatra+One&display=swap" rel="stylesheet">
+    <style>
+        /* --- CSS: The Visual Strategy --- */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Montserrat', sans-serif;
+            color: white;
+            overflow: hidden; 
+        }
+
+        .coming-soon-container {
+            height: 100%;
+            position: relative; 
+            
+            /* CONTENT POSITIONING */
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; 
+            align-items: flex-end; 
+            padding-top: 15vh; 
+            padding-right: 8vw; 
+            box-sizing: border-box;
+            z-index: 1;
+        }
+
+        /* --- THE CINEMATIC ZOOMING BACKGROUND --- */
+        .coming-soon-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            
+            background-image: url('maharaj-silhouette.png.jpg'); 
+            background-size: cover; 
+            background-position: center; 
+            background-repeat: no-repeat;
+            
+            z-index: -1; 
+            animation: slowZoom 25s ease-in-out infinite alternate;
+        }
+
+        @keyframes slowZoom {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.12); }
+        }
+
+        /* --- Text Styling (Desktop Foreground) --- */
+        .text-content {
+            z-index: 10; 
+            text-align: right; 
+            max-width: 650px; 
+        }
+
+        h1 {
+            font-size: 5rem; 
+            font-weight: 700;
+            margin: 0;
+            color: #FFD700; 
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8), 0px 0px 15px rgba(0,0,0,0.4);
+        }
+
+        h2 {
+            font-family: 'Yatra One', cursive; 
+            font-size: 3.5rem; 
+            font-weight: 400;
+            margin: -10px 0 15px 0; 
+            color: #FFD700; 
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+        }
+
+        .tagline {
+            font-family: 'Playfair Display', serif; 
+            font-size: 1.8rem;
+            font-style: italic; 
+            margin: 5px 0 20px 0; 
+            color: #FFFFFF; 
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.9); 
+        }
+
+        p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.9); 
+        }
+
+        /* =========================================
+           MOBILE RESPONSIVENESS (Phones & Tablets) 
+           ========================================= */
+        @media (max-width: 768px) {
+            .coming-soon-container {
+                align-items: center; /* Centers the text block on narrow screens */
+                padding-right: 5vw;
+                padding-left: 5vw;
+                padding-top: 10vh; /* Pushes text slightly higher on phones */
+            }
+
+            .text-content {
+                text-align: center; /* Centers the actual words */
+                background: rgba(0, 0, 0, 0.2); /* Adds a very faint dark shadow box behind text to ensure it's readable over any part of the image */
+                padding: 20px;
+                border-radius: 15px;
+            }
+
+            /* Shrink all the fonts so they fit beautifully */
+            h1 { font-size: 3rem; }
+            h2 { font-size: 2.2rem; }
+            .tagline { font-size: 1.2rem; }
+            p { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="coming-soon-container">
+        <!-- Text Content Area -->
+        <div class="text-content">
+            <h1>Coming Soon...</h1>
+            <h2>महाराष्ट्र इन युरोप</h2>
+            <div class="tagline">"Where the Sahyadri meets the Alps"</div>
+            <p>Building the definitive digital hub for Marathi expats across the continent. Secure your spot in the conversation.</p>
+        </div>
+    </div>
+
+</body>
+</html>
