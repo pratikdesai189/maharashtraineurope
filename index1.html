@@ -7,248 +7,330 @@
     <link rel="icon" type="image/png" href="logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:ital@1&family=Yatra+One&display=swap" rel="stylesheet">
     <style>
-        /* --- CSS: The Visual Strategy --- */
+        /* ── Reset ── */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --saffron:       #C4440A;
+            --saffron-hover: #A33708;
+            --gold:          #C9922A;
+            --gold-light:    #FAF3E0;
+            --border:        rgba(255,255,255,0.18);
+        }
+
         body, html {
-            margin: 0;
-            padding: 0;
             height: 100%;
             font-family: 'Montserrat', sans-serif;
             color: white;
-            overflow: hidden; 
+            overflow: hidden;
         }
 
+        /* ── Navbar ── */
+        .navbar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            background: var(--saffron);
+            padding: 13px 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        /* gold rope line at bottom of navbar — mirrors Sahayak hero detail */
+        .navbar::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0; height: 3px;
+            background: repeating-linear-gradient(
+                90deg,
+                var(--gold) 0, var(--gold) 8px,
+                transparent 8px, transparent 13px
+            );
+            opacity: 0.6;
+        }
+
+        .navbar-brand {
+            color: #fff;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            line-height: 1.25;
+            text-decoration: none;
+        }
+        .navbar-brand span {
+            display: block;
+            font-family: 'Yatra One', cursive;
+            font-size: 13px;
+            font-weight: 400;
+            opacity: 0.82;
+            margin-top: 1px;
+        }
+
+        .navbar-links {
+            display: flex;
+            gap: 22px;
+            align-items: center;
+        }
+        .navbar-links a {
+            color: rgba(255,255,255,0.72);
+            font-size: 13px;
+            font-weight: 400;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            transition: color .15s;
+        }
+        .navbar-links a:hover { color: #fff; }
+        .navbar-links a.active {
+            color: #fff;
+            font-weight: 700;
+        }
+        /* Sahayak pill — stands out as the community feature */
+        .navbar-links a.nav-sahayak {
+            background: rgba(255,255,255,0.15);
+            border: 0.5px solid rgba(255,255,255,0.35);
+            padding: 4px 13px;
+            border-radius: 99px;
+            color: #fff;
+            font-weight: 600;
+        }
+        .navbar-links a.nav-sahayak:hover {
+            background: rgba(255,255,255,0.25);
+        }
+
+        /* ── Hamburger (mobile only) ── */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 4px;
+            background: none;
+            border: none;
+        }
+        .hamburger span {
+            display: block;
+            width: 22px; height: 2px;
+            background: #fff;
+            border-radius: 2px;
+            transition: all .25s;
+        }
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            gap: 0;
+            background: var(--saffron);
+            border-top: 0.5px solid rgba(255,255,255,0.2);
+        }
+        .mobile-menu a {
+            padding: 13px 28px;
+            color: rgba(255,255,255,0.85);
+            font-size: 14px;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            border-bottom: 0.5px solid rgba(255,255,255,0.1);
+            transition: background .15s;
+        }
+        .mobile-menu a:hover { background: rgba(255,255,255,0.1); }
+        .mobile-menu a.active { color: #fff; font-weight: 700; }
+        .mobile-menu.open { display: flex; }
+
+        /* ── Hero background ── */
         .coming-soon-container {
             height: 100%;
-            position: relative; 
-            
-            /* CONTENT POSITIONING */
+            padding-top: calc(15vh + 52px); /* 52px = navbar height */
+            padding-right: 8vw;
+            position: relative;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start; 
-            align-items: flex-end; 
-            padding-top: 15vh; 
-            padding-right: 8vw; 
+            justify-content: flex-start;
+            align-items: flex-end;
             box-sizing: border-box;
             z-index: 1;
         }
 
-        /* --- THE CINEMATIC ZOOMING BACKGROUND --- */
         .coming-soon-container::before {
             content: "";
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('maharaj-silhouette.png.jpg'); 
-            background-size: cover; 
-            background-position: center; 
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image: url('maharaj-silhouette.png.jpg');
+            background-size: cover;
+            background-position: center;
             background-repeat: no-repeat;
-            z-index: -1; 
+            z-index: -1;
             animation: slowZoom 25s ease-in-out infinite alternate;
         }
 
         @keyframes slowZoom {
-            0% { transform: scale(1); }
+            0%   { transform: scale(1); }
             100% { transform: scale(1.12); }
         }
 
-        /* --- Text Styling (Desktop Foreground) --- */
+        /* ── Text content ── */
         .text-content {
-            z-index: 10; 
-            text-align: right; 
-            max-width: 650px; 
+            z-index: 10;
+            text-align: right;
+            max-width: 650px;
         }
 
         h1 {
-            font-size: 5rem; 
+            font-size: 5rem;
             font-weight: 700;
             margin: 0;
-            color: #FFD700; 
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8), 0px 0px 15px rgba(0,0,0,0.4);
+            color: #FFD700;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.8), 0 0 15px rgba(0,0,0,0.4);
         }
 
         h2 {
-            font-family: 'Yatra One', cursive; 
-            font-size: 3.5rem; 
+            font-family: 'Yatra One', cursive;
+            font-size: 3.5rem;
             font-weight: 400;
-            margin: -10px 0 15px 0; 
-            color: #FFD700; 
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+            margin: -10px 0 15px 0;
+            color: #FFD700;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.8);
         }
 
         .tagline {
-            font-family: 'Playfair Display', serif; 
+            font-family: 'Playfair Display', serif;
             font-size: 1.8rem;
-            font-style: italic; 
-            margin: 5px 0 20px 0; 
-            color: #FFFFFF; 
-            text-shadow: 2px 2px 5px rgba(0,0,0,0.9); 
+            font-style: italic;
+            margin: 5px 0 20px 0;
+            color: #FFFFFF;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.9);
         }
 
         p {
             font-size: 1.2rem;
             line-height: 1.6;
-            text-shadow: 2px 2px 5px rgba(0,0,0,0.9); 
-            margin-bottom: 40px; 
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.9);
+            margin-bottom: 30px;
         }
 
-        /* =========================================
-           CRITICAL FIX: TRUE 3D THICK COIN MECHANICS
-           ========================================= */
+        /* ── Sahayak CTA button on homepage ── */
+        .cta-sahayak {
+            display: inline-block;
+            background: var(--saffron);
+            color: #fff;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            padding: 11px 26px;
+            border-radius: 8px;
+            text-decoration: none;
+            margin-bottom: 28px;
+            border: 2px solid var(--gold);
+            text-shadow: none;
+            transition: background .15s, transform .15s;
+            letter-spacing: 0.02em;
+        }
+        .cta-sahayak:hover {
+            background: var(--saffron-hover);
+            transform: translateY(-2px);
+        }
+
+        /* ── Logo ── */
         .logo-container {
             display: flex;
-            justify-content: flex-end; 
+            justify-content: flex-end;
             width: 100%;
-            perspective: 2000px; /* Increased perspective depth */
-            -webkit-perspective: 2000px;
         }
-
-        .coin {
-            width: 200px;
-            height: 200px;
-            position: relative;
-            
-            /* CRUCIAL: Forces browser engine to handle children layers in 3D */
-            transform-style: preserve-3d;
-            -webkit-transform-style: preserve-3d;
-            
-            transform-origin: center center;
-            animation: spinVertical 6s linear infinite; 
-            filter: drop-shadow(0px 15px 25px rgba(0, 0, 0, 0.6));
-        }
-
-        /* Base rules for ALL stacked layers */
-        .coin div {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+        .brand-logo {
+            width: 220px;
+            height: auto;
+            object-fit: contain;
             border-radius: 50%;
-            background-image: url('logo.png');
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            
-            /* Keeps 3D matrix alive deep into the nested DOM */
-            transform-style: preserve-3d;
-            -webkit-transform-style: preserve-3d;
-            backface-visibility: hidden;
-            -webkit-backface-visibility: hidden;
+            filter: drop-shadow(0 8px 16px rgba(0,0,0,0.6));
+            transition: transform 0.4s ease;
         }
+        .brand-logo:hover { transform: scale(1.20); }
 
-        /* Front and Back Outer Face Rims */
-        .coin .coin-front, .coin .coin-back {
-            border: 6px solid #d4af37;
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.65);
-            box-sizing: border-box;
-            background-color: #2b0000;
-        }
-
-        /* Front Face (Pulled 8px forward to make a deep 16px thick coin total) */
-        .coin .coin-front {
-            transform: translateZ(8px);
-        }
-
-        /* Back Face (Rotated and pushed 8px backward) */
-        .coin .coin-back {
-            transform: rotateY(180deg) translateZ(8px);
-        }
-
-        /* Dense 3D Slice Stack: Builds a completely solid rim wall. 
-           Filters mimic lighting reflections off the metallic edge as it turns.
-        */
-        .coin .edge-1  { transform: translateZ(7px);   filter: brightness(0.95); }
-        .coin .edge-2  { transform: translateZ(6px);   filter: brightness(0.90); }
-        .coin .edge-3  { transform: translateZ(5px);   filter: brightness(0.85); }
-        .coin .edge-4  { transform: translateZ(4px);   filter: brightness(0.80); }
-        .coin .edge-5  { transform: translateZ(3px);   filter: brightness(0.75); }
-        .coin .edge-6  { transform: translateZ(2px);   filter: brightness(0.70); }
-        .coin .edge-7  { transform: translateZ(1px);   filter: brightness(0.65); }
-        .coin .edge-8  { transform: translateZ(0px);   filter: brightness(0.60); } /* Center Line Shadow */
-        .coin .edge-9  { transform: translateZ(-1px);  filter: brightness(0.65); }
-        .coin .edge-10 { transform: translateZ(-2px);  filter: brightness(0.70); }
-        .coin .edge-11 { transform: translateZ(-3px);  filter: brightness(0.75); }
-        .coin .edge-12 { transform: translateZ(-4px);  filter: brightness(0.80); }
-        .coin .edge-13 { transform: translateZ(-5px);  filter: brightness(0.85); }
-        .coin .edge-14 { transform: translateZ(-6px);  filter: brightness(0.90); }
-        .coin .edge-15 { transform: translateZ(-7px);  filter: brightness(0.95); }
-
-        /* Smooth 360 Axis Spin */
-        @keyframes spinVertical {
-            0% { transform: rotateY(0deg); }
-            100% { transform: rotateY(360deg); }
-        }
-
-        /* =========================================
-           MOBILE RESPONSIVENESS (Phones & Tablets) 
-           ========================================= */
+        /* ── Mobile ── */
         @media (max-width: 768px) {
+            .navbar-links { display: none; }
+            .hamburger { display: flex; }
+
             .coming-soon-container {
-                align-items: center; 
+                align-items: center;
                 padding-right: 5vw;
                 padding-left: 5vw;
-                padding-top: 10vh; 
+                padding-top: calc(10vh + 52px);
             }
-
             .text-content {
-                text-align: center; 
-                background: rgba(0, 0, 0, 0.2); 
+                text-align: center;
+                background: rgba(0,0,0,0.2);
                 padding: 20px;
                 border-radius: 15px;
             }
-
             h1 { font-size: 3rem; }
             h2 { font-size: 2.2rem; }
             .tagline { font-size: 1.2rem; }
             p { font-size: 1rem; }
+            .logo-container { justify-content: center; }
+            .brand-logo { width: 160px; }
+            .cta-sahayak { font-size: 13px; padding: 10px 20px; }
+        }
 
-            .logo-container {
-                justify-content: center;
-            }
-
-            .coin {
-                width: 150px;
-                height: 150px;
-            }
+        @media (prefers-reduced-motion: reduce) {
+            .coming-soon-container::before { animation: none; }
         }
     </style>
 </head>
 <body>
 
+    <!-- ── Navbar ── -->
+    <nav class="navbar">
+        <a href="index.html" class="navbar-brand">
+            Maharashtra in Europe
+            <span>महाराष्ट्र इन युरोप</span>
+        </a>
+        <div class="navbar-links">
+            <a href="index.html" class="active">Home</a>
+            <a href="#">City guides</a>
+            <a href="#">Community</a>
+            <a href="sahayak.html" class="nav-sahayak">Sahayak ✈</a>
+        </div>
+        <!-- Hamburger for mobile -->
+        <button class="hamburger" onclick="toggleMenu()" aria-label="Open menu">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <!-- Mobile menu (hidden by default) -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="index.html" class="active">Home</a>
+        <a href="#">City guides</a>
+        <a href="#">Community</a>
+        <a href="sahayak.html">Sahayak — Travel & Letter Network</a>
+    </div>
+
+    <!-- ── Hero ── -->
     <div class="coming-soon-container">
         <div class="text-content">
             <h1>Coming Soon...</h1>
             <h2>महाराष्ट्र इन युरोप</h2>
             <div class="tagline">"Where the Sahyadri meets the Alps"</div>
             <p>Building the definitive digital hub for Marathi expats across the continent. Secure your spot in the conversation.</p>
-            
+
+            <!-- Sahayak CTA — live feature they can use now -->
+            <a href="sahayak.html" class="cta-sahayak">✈ &nbsp;Sahayak — Find a travel companion</a>
+
             <div class="logo-container">
-                <div class="coin">
-                    <div class="coin-front"></div>
-                    
-                    <div class="edge-1"></div>
-                    <div class="edge-2"></div>
-                    <div class="edge-3"></div>
-                    <div class="edge-4"></div>
-                    <div class="edge-5"></div>
-                    <div class="edge-6"></div>
-                    <div class="edge-7"></div>
-                    <div class="edge-8"></div>
-                    <div class="edge-9"></div>
-                    <div class="edge-10"></div>
-                    <div class="edge-11"></div>
-                    <div class="edge-12"></div>
-                    <div class="edge-13"></div>
-                    <div class="edge-14"></div>
-                    <div class="edge-15"></div>
-                    
-                    <div class="coin-back"></div>
-                </div>
+                <img src="logo.png" alt="Maharashtra in Europe Emblem" class="brand-logo">
             </div>
         </div>
     </div>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('mobileMenu').classList.toggle('open');
+        }
+        // Close mobile menu on link click
+        document.querySelectorAll('.mobile-menu a').forEach(a => {
+            a.addEventListener('click', () => {
+                document.getElementById('mobileMenu').classList.remove('open');
+            });
+        });
+    </script>
 
 </body>
 </html>
