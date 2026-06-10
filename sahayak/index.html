@@ -4,19 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sahayak — Travel & Letter Network | Maharashtra in Europe</title>
-  <meta name="description" content="Find a Marathi travel companion or letter carrier to India. Connecting Maharashtrians across Europe." />
+  <meta name="description" content="Find a travel companion or letter carrier between Europe and India. Open to all Indians, hosted by the Marathi community." />
 
   <!-- Open Graph -->
   <meta property="og:type"        content="website" />
   <meta property="og:url"         content="https://maharashtraineurope.com/sahayak" />
-  <meta property="og:title"       content="Sahayak — Find a Marathi Travel Companion in Europe" />
-  <meta property="og:description" content="Find a travel companion or letter carrier to India. Connecting Maharashtrians across Europe, one journey at a time." />
+  <meta property="og:title"       content="Sahayak — Find a Travel Companion Between Europe and India" />
+  <meta property="og:description" content="Find a travel companion or letter carrier between Europe and India. Open to all Indians, one journey at a time." />
   <meta property="og:image"       content="https://maharashtraineurope.com/assets/logo.png" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card"        content="summary_large_image" />
-  <meta name="twitter:title"       content="Sahayak — Find a Marathi Travel Companion in Europe" />
-  <meta name="twitter:description" content="Find a travel companion or letter carrier to India. Connecting Maharashtrians across Europe, one journey at a time." />
+  <meta name="twitter:title"       content="Sahayak — Find a Travel Companion Between Europe and India" />
+  <meta name="twitter:description" content="Find a travel companion or letter carrier between Europe and India. Open to all Indians, one journey at a time." />
   <meta name="twitter:image"       content="https://maharashtraineurope.com/assets/logo.png" />
 
   <link rel="icon" href="/favicon.ico" sizes="any">
@@ -31,7 +31,7 @@
     "@id": "https://maharashtraineurope.com/sahayak",
     "url": "https://maharashtraineurope.com/sahayak",
     "name": "Sahayak — Travel & Letter Network",
-    "description": "Find a Marathi travel companion or letter carrier to India. Connecting Maharashtrians across Europe.",
+    "description": "Find a travel companion or letter carrier between Europe and India. Open to all Indians, hosted by the Marathi community.",
     "isPartOf": { "@id": "https://maharashtraineurope.com/#website" },
     "about": {
       "@type": "Service",
@@ -40,7 +40,7 @@
       "areaServed": "Europe",
       "audience": {
         "@type": "Audience",
-        "audienceType": "Marathi expats in Europe"
+        "audienceType": "Indian expats and travelers in Europe"
       }
     }
   }
@@ -309,8 +309,8 @@
     <h1>Sahayak — सहायक</h1>
     <p class="hero-sub">"Where the Sahyadri meets the Alps"</p>
     <p class="hero-desc">
-      Find a travel companion or someone carrying letters to India.<br>
-      Connecting Maharashtrians across Europe, one journey at a time.
+      Find a travel companion or someone carrying letters — Europe to India, or India to Europe.<br>
+      Open to all Indians traveling between Europe and India — proudly hosted by the Marathi community.
     </p>
     <div class="hero-actions">
       <!-- ─── REPLACE href with your actual Google Form link ─── -->
@@ -362,11 +362,16 @@
 
   <!-- ── Dropdowns ── -->
   <div class="selects">
+    <select id="f-direction" onchange="render()">
+      <option value="">Any direction</option>
+      <option value="Europe to India">Europe → India</option>
+      <option value="India to Europe">India → Europe</option>
+    </select>
     <select id="f-from" onchange="render()">
-      <option value="">From: any city</option>
+      <option value="">Europe: any city</option>
     </select>
     <select id="f-to" onchange="render()">
-      <option value="">To: any city in India</option>
+      <option value="">India: any city</option>
     </select>
   </div>
 
@@ -452,14 +457,14 @@ function parseCSV(text) {
 /* ── Populate filter dropdowns ── */
 function populateSelects() {
   const froms = [...new Set(allData.map(r => r.city_in_europe).filter(Boolean))].sort();
-  const tos   = [...new Set(allData.map(r => r.destination_in_india).filter(Boolean))].sort();
+  const tos   = [...new Set(allData.map(r => r.city_in_india).filter(Boolean))].sort();
   const ff = document.getElementById('f-from');
   const ft = document.getElementById('f-to');
   // Clear existing options beyond first
   while (ff.options.length > 1) ff.remove(1);
   while (ft.options.length > 1) ft.remove(1);
-  froms.forEach(c => { const o = document.createElement('option'); o.value = c; o.textContent = 'From: ' + c; ff.appendChild(o); });
-  tos.forEach(c   => { const o = document.createElement('option'); o.value = c; o.textContent = 'To: '   + c; ft.appendChild(o); });
+  froms.forEach(c => { const o = document.createElement('option'); o.value = c; o.textContent = 'Europe: ' + c; ff.appendChild(o); });
+  tos.forEach(c   => { const o = document.createElement('option'); o.value = c; o.textContent = 'India: '  + c; ft.appendChild(o); });
 }
 
 /* ── Update stat counters (active listings only) ── */
@@ -483,13 +488,15 @@ function isExpired(dateStr) {
 function render() {
   const fv          = document.getElementById('f-from').value;
   const tv          = document.getElementById('f-to').value;
+  const dv          = document.getElementById('f-direction').value;
   const showExpired = document.getElementById('show-expired').checked;
 
   const data = allData.filter(r => {
     if (!showExpired && isExpired(r.travel_date)) return false;
     if (activeTab !== 'all' && r.type_of_listing !== activeTab) return false;
     if (fv && r.city_in_europe !== fv) return false;
-    if (tv && r.destination_in_india !== tv) return false;
+    if (tv && r.city_in_india !== tv) return false;
+    if (dv && (r.direction || 'Europe to India') !== dv) return false;
     return true;
   });
 
@@ -507,6 +514,10 @@ function render() {
       'Namaste ' + r.name + ', I found your listing on Maharashtra in Europe (maharashtraineurope.com). I would like to connect!'
     );
     const waLink = 'https://wa.me/' + r.whatsapp_number.replace(/\D/g, '') + '?text=' + waMsg;
+    const langs     = (r.languages_spoken || '').split(',').map(s => s.trim()).filter(Boolean);
+    const direction = r.direction || 'Europe to India';
+    const fromCity  = direction === 'India to Europe' ? r.city_in_india : r.city_in_europe;
+    const toCity    = direction === 'India to Europe' ? r.city_in_europe : r.city_in_india;
     return `
       <div class="card" style="${expired ? 'opacity:0.6' : ''}">
         <div class="avatar" style="background:${av.bg};color:${av.color}">${initials(r.name)}</div>
@@ -514,7 +525,7 @@ function render() {
           <div class="card-top">
             <span class="card-name">${escHtml(r.name)}</span>
             <span class="badge ${badgeClass(r.type_of_listing)}">${escHtml(r.type_of_listing)}</span>
-            <span class="card-route">${escHtml(r.city_in_europe)} → ${escHtml(r.destination_in_india)}</span>
+            <span class="card-route">${escHtml(fromCity)} → ${escHtml(toCity)}</span>
           </div>
           <p class="card-desc">${escHtml(r.short_description)}</p>
           <div class="pills">
@@ -523,7 +534,8 @@ function render() {
               : `<span class="pill">&#128197; ${escHtml(r.travel_date)}</span>`
             }
             <span class="pill">${escHtml(r.city_in_europe)}</span>
-            <span class="pill">Marathi-speaking</span>
+            ${r.flight_number ? `<span class="pill">&#9992; ${escHtml(r.flight_number)}</span>` : ''}
+            ${langs.map(l => `<span class="pill">${escHtml(l)}</span>`).join('')}
           </div>
         </div>
         <a href="${waLink}" target="_blank" rel="noopener">
@@ -577,12 +589,13 @@ async function loadListings() {
 
 /* ── Sample data shown before Sheet is connected ── */
 const SAMPLE_DATA = [
-  { name:'Priya R.', city_in_europe:'Frankfurt', destination_in_india:'Pune', travel_date:'14 Jul 2026', type_of_listing:'Travel companion', short_description:'Travelling home for summer. Parents flying alone for first time — happy to assist elderly co-travellers on the same flight. Can also carry sealed letters.', whatsapp_number:'4917600000001' },
-  { name:'Sagar M.', city_in_europe:'Amsterdam', destination_in_india:'Mumbai', travel_date:'28 Jul 2026', type_of_listing:'Letter carrier', short_description:'Going home end of July. Can carry sealed letters and A4 documents. Based in Amsterdam — pick-up at Schiphol or nearby.', whatsapp_number:'3161000000002' },
-  { name:'Anita N.', city_in_europe:'London', destination_in_india:'Nagpur', travel_date:'3 Aug 2026', type_of_listing:'Both', short_description:'Looking for a travel companion for my mother (68) from Heathrow T2. Also happy to carry letters to Nagpur area. Via Mumbai.', whatsapp_number:'4479000000003' },
-  { name:'Rahul D.', city_in_europe:'Frankfurt', destination_in_india:'Nashik', travel_date:'22 Aug 2026', type_of_listing:'Letter carrier', short_description:'Travelling home for Ganesh festival. Can carry letters or official documents to Nashik or nearby Pune. WhatsApp preferred.', whatsapp_number:'4917600000004' },
-  { name:'Meera K.', city_in_europe:'Zurich', destination_in_india:'Mumbai', travel_date:'10 Jul 2026', type_of_listing:'Travel companion', short_description:'Looking for a female travel companion for my grandmother. Zurich to Mumbai direct on Swiss Air. Any Marathi-speaking lady on the same route?', whatsapp_number:'4179000000005' },
-  { name:'Vikram P.', city_in_europe:'Eindhoven', destination_in_india:'Pune', travel_date:'5 Sep 2026', type_of_listing:'Both', short_description:'Visiting family for Diwali. Can carry letters or small documents. Also open to accompanying elderly travellers — have done this before.', whatsapp_number:'3140000000006' },
+  { name:'Priya R.', city_in_europe:'Frankfurt', city_in_india:'Pune', travel_date:'14 Jul 2026', type_of_listing:'Travel companion', short_description:'Travelling home for summer. Parents flying alone for first time — happy to assist elderly co-travellers on the same flight. Can also carry sealed letters.', whatsapp_number:'4917600000001', languages_spoken:'Marathi, Hindi', flight_number:'LH756', direction:'Europe to India' },
+  { name:'Sagar M.', city_in_europe:'Amsterdam', city_in_india:'Mumbai', travel_date:'28 Jul 2026', type_of_listing:'Letter carrier', short_description:'Going home end of July. Can carry sealed letters and A4 documents. Based in Amsterdam — pick-up at Schiphol or nearby.', whatsapp_number:'3161000000002', languages_spoken:'Marathi, Hindi, English', flight_number:'', direction:'Europe to India' },
+  { name:'Anita N.', city_in_europe:'London', city_in_india:'Nagpur', travel_date:'3 Aug 2026', type_of_listing:'Both', short_description:'Looking for a travel companion for my mother (68) from Heathrow T2. Also happy to carry letters to Nagpur area. Via Mumbai.', whatsapp_number:'4479000000003', languages_spoken:'Marathi, Hindi', flight_number:'AI131', direction:'Europe to India' },
+  { name:'Rahul D.', city_in_europe:'Frankfurt', city_in_india:'Nashik', travel_date:'22 Aug 2026', type_of_listing:'Letter carrier', short_description:'Travelling home for Ganesh festival. Can carry letters or official documents to Nashik or nearby Pune. WhatsApp preferred.', whatsapp_number:'4917600000004', languages_spoken:'Marathi, Hindi', flight_number:'', direction:'Europe to India' },
+  { name:'Meera K.', city_in_europe:'Zurich', city_in_india:'Mumbai', travel_date:'10 Jul 2026', type_of_listing:'Travel companion', short_description:'Looking for a travel companion for my grandmother. Zurich to Mumbai direct on Swiss Air. Same flight preferred.', whatsapp_number:'4179000000005', languages_spoken:'Marathi, Hindi, Gujarati', flight_number:'LX146', direction:'Europe to India' },
+  { name:'Vikram P.', city_in_europe:'Eindhoven', city_in_india:'Pune', travel_date:'5 Sep 2026', type_of_listing:'Both', short_description:'Visiting family for Diwali. Can carry letters or small documents. Also open to accompanying elderly travellers — have done this before.', whatsapp_number:'3140000000006', languages_spoken:'Hindi, Punjabi, English', flight_number:'', direction:'Europe to India' },
+  { name:'Shreya T.', city_in_europe:'Munich', city_in_india:'Pune', travel_date:'18 Jul 2026', type_of_listing:'Both', short_description:'Flying back to Munich after summer break. Can help a student travelling alone for the first time, or carry small parcels/documents from Pune.', whatsapp_number:'919800000007', languages_spoken:'Marathi, Hindi, English', flight_number:'LH757', direction:'India to Europe' },
 ];
 
 /* ── Boot ── */
