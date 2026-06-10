@@ -504,11 +504,25 @@ function updateStats() {
   document.getElementById('s-cities').textContent = new Set(active.map(r => r.city_in_europe).filter(Boolean)).size;
 }
 
+/* ── Parse a travel date string.
+   Google Forms submits dates as DD/MM/YYYY, which JS's Date constructor
+   misreads as MM/DD/YYYY — so handle that format explicitly.
+   Falls back to native parsing for other formats (e.g. "14 Jul 2026"). ── */
+function parseDate(dateStr) {
+  if (!dateStr) return null;
+  const m = dateStr.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+  if (m) {
+    const d = new Date(+m[3], +m[2] - 1, +m[1]);
+    return isNaN(d) ? null : d;
+  }
+  const d = new Date(dateStr);
+  return isNaN(d) ? null : d;
+}
+
 /* ── Check if a travel date string is in the past ── */
 function isExpired(dateStr) {
-  if (!dateStr) return false;
-  const d = new Date(dateStr);
-  if (isNaN(d)) return false;
+  const d = parseDate(dateStr);
+  if (!d) return false;
   return d < new Date(new Date().toDateString()); // compare date only, not time
 }
 
@@ -532,9 +546,9 @@ function render() {
 
   // Soonest travel date first; listings with an unparseable date sink to the bottom
   data.sort((a, b) => {
-    const da = new Date(a.travel_date), db = new Date(b.travel_date);
-    const va = isNaN(da) ? Infinity : da.getTime();
-    const vb = isNaN(db) ? Infinity : db.getTime();
+    const da = parseDate(a.travel_date), db = parseDate(b.travel_date);
+    const va = da ? da.getTime() : Infinity;
+    const vb = db ? db.getTime() : Infinity;
     return va - vb;
   });
 
