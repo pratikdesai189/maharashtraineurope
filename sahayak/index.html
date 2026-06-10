@@ -530,6 +530,14 @@ function render() {
     return true;
   });
 
+  // Soonest travel date first; listings with an unparseable date sink to the bottom
+  data.sort((a, b) => {
+    const da = new Date(a.travel_date), db = new Date(b.travel_date);
+    const va = isNaN(da) ? Infinity : da.getTime();
+    const vb = isNaN(db) ? Infinity : db.getTime();
+    return va - vb;
+  });
+
   const el = document.getElementById('listings');
 
   if (!data.length) {
