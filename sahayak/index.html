@@ -222,6 +222,8 @@
     .badge-travel { background: #FDF1EB; color: #7A2A00; border: 0.5px solid #EAC0A0; }
     .badge-letter { background: var(--gold-light); color: #6B4A10; border: 0.5px solid #E0D0A0; }
     .badge-both   { background: var(--saffron); color: #fff; }
+    .badge-role-offering { background: #E8F5E9; color: #2E7D32; border: 0.5px solid #A5D6A7; }
+    .badge-role-looking  { background: #EAF2FB; color: #1F5A8A; border: 0.5px solid #B7D2EC; }
 
     .card-desc { font-size: 13px; color: var(--text-muted); line-height: 1.55; margin-bottom: 8px; }
 
@@ -367,6 +369,11 @@
       <option value="Europe to India">Europe → India</option>
       <option value="India to Europe">India → Europe</option>
     </select>
+    <select id="f-role" onchange="render()">
+      <option value="">Looking or offering: any</option>
+      <option value="Looking for assistance">Looking for assistance</option>
+      <option value="Offering to help">Offering to help</option>
+    </select>
     <select id="f-from" onchange="render()">
       <option value="">Europe: any city</option>
     </select>
@@ -433,6 +440,12 @@ function badgeClass(type) {
   return 'badge-both';
 }
 
+function roleBadgeClass(role) {
+  if (role === 'Offering to help')        return 'badge-role-offering';
+  if (role === 'Looking for assistance')  return 'badge-role-looking';
+  return '';
+}
+
 /* ── Parse CSV text into array of objects ── */
 function parseCSV(text) {
   const lines = text.trim().split('\n');
@@ -489,6 +502,7 @@ function render() {
   const fv          = document.getElementById('f-from').value;
   const tv          = document.getElementById('f-to').value;
   const dv          = document.getElementById('f-direction').value;
+  const rv          = document.getElementById('f-role').value;
   const showExpired = document.getElementById('show-expired').checked;
 
   const data = allData.filter(r => {
@@ -497,6 +511,7 @@ function render() {
     if (fv && r.city_in_europe !== fv) return false;
     if (tv && r.city_in_india !== tv) return false;
     if (dv && (r.direction || 'Europe to India') !== dv) return false;
+    if (rv && r.looking_for_or_offering !== rv) return false;
     return true;
   });
 
@@ -524,6 +539,7 @@ function render() {
         <div class="card-body">
           <div class="card-top">
             <span class="card-name">${escHtml(r.name)}</span>
+            ${r.looking_for_or_offering ? `<span class="badge ${roleBadgeClass(r.looking_for_or_offering)}">${escHtml(r.looking_for_or_offering)}</span>` : ''}
             <span class="badge ${badgeClass(r.type_of_listing)}">${escHtml(r.type_of_listing)}</span>
             <span class="card-route">${escHtml(fromCity)} → ${escHtml(toCity)}</span>
           </div>
@@ -589,13 +605,13 @@ async function loadListings() {
 
 /* ── Sample data shown before Sheet is connected ── */
 const SAMPLE_DATA = [
-  { name:'Priya R.', city_in_europe:'Frankfurt', city_in_india:'Pune', travel_date:'14 Jul 2026', type_of_listing:'Travel companion', short_description:'Travelling home for summer. Parents flying alone for first time — happy to assist elderly co-travellers on the same flight. Can also carry sealed letters.', whatsapp_number:'4917600000001', languages_spoken:'Marathi, Hindi', flight_number:'LH756', direction:'Europe to India' },
-  { name:'Sagar M.', city_in_europe:'Amsterdam', city_in_india:'Mumbai', travel_date:'28 Jul 2026', type_of_listing:'Letter carrier', short_description:'Going home end of July. Can carry sealed letters and A4 documents. Based in Amsterdam — pick-up at Schiphol or nearby.', whatsapp_number:'3161000000002', languages_spoken:'Marathi, Hindi, English', flight_number:'', direction:'Europe to India' },
-  { name:'Anita N.', city_in_europe:'London', city_in_india:'Nagpur', travel_date:'3 Aug 2026', type_of_listing:'Both', short_description:'Looking for a travel companion for my mother (68) from Heathrow T2. Also happy to carry letters to Nagpur area. Via Mumbai.', whatsapp_number:'4479000000003', languages_spoken:'Marathi, Hindi', flight_number:'AI131', direction:'Europe to India' },
-  { name:'Rahul D.', city_in_europe:'Frankfurt', city_in_india:'Nashik', travel_date:'22 Aug 2026', type_of_listing:'Letter carrier', short_description:'Travelling home for Ganesh festival. Can carry letters or official documents to Nashik or nearby Pune. WhatsApp preferred.', whatsapp_number:'4917600000004', languages_spoken:'Marathi, Hindi', flight_number:'', direction:'Europe to India' },
-  { name:'Meera K.', city_in_europe:'Zurich', city_in_india:'Mumbai', travel_date:'10 Jul 2026', type_of_listing:'Travel companion', short_description:'Looking for a travel companion for my grandmother. Zurich to Mumbai direct on Swiss Air. Same flight preferred.', whatsapp_number:'4179000000005', languages_spoken:'Marathi, Hindi, Gujarati', flight_number:'LX146', direction:'Europe to India' },
-  { name:'Vikram P.', city_in_europe:'Eindhoven', city_in_india:'Pune', travel_date:'5 Sep 2026', type_of_listing:'Both', short_description:'Visiting family for Diwali. Can carry letters or small documents. Also open to accompanying elderly travellers — have done this before.', whatsapp_number:'3140000000006', languages_spoken:'Hindi, Punjabi, English', flight_number:'', direction:'Europe to India' },
-  { name:'Shreya T.', city_in_europe:'Munich', city_in_india:'Pune', travel_date:'18 Jul 2026', type_of_listing:'Both', short_description:'Flying back to Munich after summer break. Can help a student travelling alone for the first time, or carry small parcels/documents from Pune.', whatsapp_number:'919800000007', languages_spoken:'Marathi, Hindi, English', flight_number:'LH757', direction:'India to Europe' },
+  { name:'Priya R.', city_in_europe:'Frankfurt', city_in_india:'Pune', travel_date:'14 Jul 2026', type_of_listing:'Travel companion', short_description:'Travelling home for summer. Parents flying alone for first time — happy to assist elderly co-travellers on the same flight. Can also carry sealed letters.', whatsapp_number:'4917600000001', languages_spoken:'Marathi, Hindi', flight_number:'LH756', direction:'Europe to India', looking_for_or_offering:'Offering to help' },
+  { name:'Sagar M.', city_in_europe:'Amsterdam', city_in_india:'Mumbai', travel_date:'28 Jul 2026', type_of_listing:'Letter carrier', short_description:'Going home end of July. Can carry sealed letters and A4 documents. Based in Amsterdam — pick-up at Schiphol or nearby.', whatsapp_number:'3161000000002', languages_spoken:'Marathi, Hindi, English', flight_number:'', direction:'Europe to India', looking_for_or_offering:'Offering to help' },
+  { name:'Anita N.', city_in_europe:'London', city_in_india:'Nagpur', travel_date:'3 Aug 2026', type_of_listing:'Both', short_description:'Looking for a travel companion for my mother (68) from Heathrow T2. Also happy to carry letters to Nagpur area. Via Mumbai.', whatsapp_number:'4479000000003', languages_spoken:'Marathi, Hindi', flight_number:'AI131', direction:'Europe to India', looking_for_or_offering:'Looking for assistance' },
+  { name:'Rahul D.', city_in_europe:'Frankfurt', city_in_india:'Nashik', travel_date:'22 Aug 2026', type_of_listing:'Letter carrier', short_description:'Travelling home for Ganesh festival. Can carry letters or official documents to Nashik or nearby Pune. WhatsApp preferred.', whatsapp_number:'4917600000004', languages_spoken:'Marathi, Hindi', flight_number:'', direction:'Europe to India', looking_for_or_offering:'Offering to help' },
+  { name:'Meera K.', city_in_europe:'Zurich', city_in_india:'Mumbai', travel_date:'10 Jul 2026', type_of_listing:'Travel companion', short_description:'Looking for a travel companion for my grandmother. Zurich to Mumbai direct on Swiss Air. Same flight preferred.', whatsapp_number:'4179000000005', languages_spoken:'Marathi, Hindi, Gujarati', flight_number:'LX146', direction:'Europe to India', looking_for_or_offering:'Looking for assistance' },
+  { name:'Vikram P.', city_in_europe:'Eindhoven', city_in_india:'Pune', travel_date:'5 Sep 2026', type_of_listing:'Both', short_description:'Visiting family for Diwali. Can carry letters or small documents. Also open to accompanying elderly travellers — have done this before.', whatsapp_number:'3140000000006', languages_spoken:'Hindi, Punjabi, English', flight_number:'', direction:'Europe to India', looking_for_or_offering:'Offering to help' },
+  { name:'Shreya T.', city_in_europe:'Munich', city_in_india:'Pune', travel_date:'18 Jul 2026', type_of_listing:'Both', short_description:'Flying back to Munich after summer break. Can help a student travelling alone for the first time, or carry small parcels/documents from Pune.', whatsapp_number:'919800000007', languages_spoken:'Marathi, Hindi, English', flight_number:'LH757', direction:'India to Europe', looking_for_or_offering:'Offering to help' },
 ];
 
 /* ── Boot ── */
