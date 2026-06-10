@@ -446,23 +446,38 @@ function roleBadgeClass(role) {
   return '';
 }
 
-/* ── Parse CSV text into array of objects ── */
+/* ── Parse CSV text into array of objects ──
+   Proper character-level parser: handles quoted fields that contain
+   commas AND newlines (e.g. multi-line question titles/answers from
+   Google Forms), plus escaped "" quotes. ── */
 function parseCSV(text) {
-  const lines = text.trim().split('\n');
-  if (lines.length < 2) return [];
-  const headers = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g, '').toLowerCase().replace(/\s+/g, '_'));
-  return lines.slice(1).map(line => {
-    // Handle quoted fields with commas
-    const cols = [];
-    let cur = '', inQ = false;
-    for (let i = 0; i < line.length; i++) {
-      if (line[i] === '"') { inQ = !inQ; continue; }
-      if (line[i] === ',' && !inQ) { cols.push(cur.trim()); cur = ''; continue; }
-      cur += line[i];
+  const rows = [];
+  let row = [], cur = '', inQ = false;
+
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (inQ) {
+      if (c === '"') {
+        if (text[i + 1] === '"') { cur += '"'; i++; } // escaped quote
+        else inQ = false;
+      } else {
+        cur += c;
+      }
+    } else {
+      if (c === '"') inQ = true;
+      else if (c === ',') { row.push(cur); cur = ''; }
+      else if (c === '\r') { /* ignore, \n handles line end */ }
+      else if (c === '\n') { row.push(cur); rows.push(row); row = []; cur = ''; }
+      else cur += c;
     }
-    cols.push(cur.trim());
+  }
+  if (cur.length || row.length) { row.push(cur); rows.push(row); }
+
+  if (rows.length < 2) return [];
+  const headers = rows[0].map(h => h.trim().toLowerCase().replace(/\s+/g, '_'));
+  return rows.slice(1).map(cols => {
     const obj = {};
-    headers.forEach((h, i) => obj[h] = (cols[i] || '').replace(/^"|"$/g, '').trim());
+    headers.forEach((h, i) => obj[h] = (cols[i] || '').trim());
     return obj;
   }).filter(r => r.name && r.name.length > 0); // skip empty rows
 }
