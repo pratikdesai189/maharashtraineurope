@@ -619,7 +619,7 @@ function render() {
                   : `<span class="pill">&#128197; Flexible — any upcoming trip</span>`)
             }
             <span class="pill">${escHtml(r.city_in_europe)}</span>
-            ${r.flight_number ? `<span class="pill">&#9992; ${escHtml(r.flight_number)}</span>` : ''}
+            ${r.flight_number ? `<span class="pill">&#9992; ${escHtml(formatFlightDisplay(r.flight_number))}</span>` : ''}
             ${langs.map(l => `<span class="pill">${escHtml(l)}</span>`).join('')}
           </div>
         </div>
@@ -633,6 +633,13 @@ function render() {
 
 function escHtml(str) {
   return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// Normalizes a flight number for display: uppercase, strips stray
+// punctuation/spaces, following the IATA flight designator format
+// (no space between airline code and flight digits, e.g. "ai 2028" -> "AI2028").
+function formatFlightDisplay(value) {
+  return String(value || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
 }
 
 function setTab(t, el) {
