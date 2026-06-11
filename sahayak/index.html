@@ -443,15 +443,13 @@ function isCompanionType(r) {
 function isCarrierType(r) {
   return helpItems(r).some(i => CARRY_LABELS.includes(i));
 }
-function carryItems(r) {
-  return helpItems(r).filter(i => CARRY_LABELS.includes(i));
-}
 function typeBadgeLabel(r) {
-  const comp = isCompanionType(r), carr = isCarrierType(r);
-  if (comp && carr) return 'Both';
-  if (comp) return 'Travel companion';
-  if (carr) return 'Letter / Medicine carrier';
-  return '';
+  const items    = helpItems(r);
+  const companion = items.filter(i => !CARRY_LABELS.includes(i));
+  const carry     = items.filter(i => CARRY_LABELS.includes(i));
+  const parts = [...companion];
+  if (carry.length) parts.push(carry.join(', ') + ' carrier');
+  return parts.join(', ');
 }
 function badgeClass(r) {
   const comp = isCompanionType(r), carr = isCarrierType(r);
@@ -599,7 +597,6 @@ function render() {
     );
     const waLink = 'https://wa.me/' + r.whatsapp_number.replace(/\D/g, '') + '?text=' + waMsg;
     const langs       = (r.languages_spoken || '').split(',').map(s => s.trim()).filter(Boolean);
-    const carry       = carryItems(r);
     const direction   = r.direction || 'Europe to India';
     const fromCity  = direction === 'India to Europe' ? r.city_in_india : r.city_in_europe;
     const toCity    = direction === 'India to Europe' ? r.city_in_europe : r.city_in_india;
@@ -623,7 +620,6 @@ function render() {
             }
             <span class="pill">${escHtml(r.city_in_europe)}</span>
             ${r.flight_number ? `<span class="pill">&#9992; ${escHtml(r.flight_number)}</span>` : ''}
-            ${carry.map(c => `<span class="pill">${escHtml(c)}</span>`).join('')}
             ${langs.map(l => `<span class="pill">${escHtml(l)}</span>`).join('')}
           </div>
         </div>
