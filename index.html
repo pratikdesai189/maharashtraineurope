@@ -10,20 +10,20 @@
     <!-- Open Graph -->
     <meta property="og:type"        content="website" />
     <meta property="og:url"         content="https://maharashtraineurope.com/" />
-    <meta property="og:title"       content="Maharashtra in Europe — महाराष्ट्र इन युरोप" />
+    <meta property="og:title"       content="Maharashtra in Europe | महाराष्ट्र इन युरोप" />
     <meta property="og:description" content="The definitive digital hub for Marathi expats across Europe. Where the Sahyadri meets the Alps." />
     <meta property="og:image"       content="https://maharashtraineurope.com/assets/logo.png" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card"        content="summary_large_image" />
-    <meta name="twitter:title"       content="Maharashtra in Europe — महाराष्ट्र इन युरोप" />
+    <meta name="twitter:title"       content="Maharashtra in Europe | महाराष्ट्र इन युरोप" />
     <meta name="twitter:description" content="The definitive digital hub for Marathi expats across Europe. Where the Sahyadri meets the Alps." />
     <meta name="twitter:image"       content="https://maharashtraineurope.com/assets/logo.png" />
 
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png">
     <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:ital@1&family=Yatra+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Playfair+Display:ital@1&family=Yatra+One&display=swap" rel="stylesheet">
 
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
@@ -61,14 +61,16 @@
             --saffron-hover: #A33708;
             --gold:          #C9922A;
             --gold-light:    #FAF3E0;
+            --maroon-dark:   #170705;
+            --maroon-deep:   #2B0F08;
             --border:        rgba(255,255,255,0.18);
+            --live-green:    #4CAF7D;
         }
 
         body, html {
-            height: 100%;
+            min-height: 100%;
             font-family: 'Montserrat', sans-serif;
             color: white;
-            overflow: hidden;
         }
 
         /* ── Navbar ── */
@@ -96,6 +98,9 @@
         }
 
         .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
             color: #fff;
             font-family: 'Montserrat', sans-serif;
             font-size: 15px;
@@ -103,7 +108,15 @@
             line-height: 1.25;
             text-decoration: none;
         }
-        .navbar-brand span {
+        .navbar-logo {
+            width: 34px;
+            height: 34px;
+            object-fit: contain;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .navbar-brand-text { display: block; }
+        .navbar-brand-sub {
             display: block;
             font-family: 'Yatra One', cursive;
             font-size: 13px;
@@ -123,7 +136,7 @@
             font-weight: 400;
             text-decoration: none;
             font-family: 'Montserrat', sans-serif;
-            transition: color .15s;
+            transition: color .25s cubic-bezier(0.16,1,0.3,1);
         }
         .navbar-links a:hover { color: #fff; }
         .navbar-links a.active {
@@ -138,9 +151,12 @@
             border-radius: 99px;
             color: #fff;
             font-weight: 600;
+            transition: background-color .25s cubic-bezier(0.16,1,0.3,1),
+                        border-color .25s cubic-bezier(0.16,1,0.3,1);
         }
         .navbar-links a.nav-sahayak:hover {
             background: rgba(255,255,255,0.25);
+            border-color: rgba(255,255,255,0.5);
         }
 
         /* ── Hamburger (mobile only) ── */
@@ -180,144 +196,519 @@
         .mobile-menu a.active { color: #fff; font-weight: 700; }
         .mobile-menu.open { display: flex; }
 
-        /* ── Hero background ── */
-        .coming-soon-container {
-            height: 100%;
-            padding-top: calc(15vh + 52px); /* 52px = navbar height */
-            padding-right: 8vw;
+        /* ── Hero: Global Vari ── */
+        .vari-hero {
             position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: flex-end;
-            box-sizing: border-box;
-            z-index: 1;
+            min-height: 100vh;
+            min-height: 100dvh;
+            padding-top: 52px; /* navbar height */
+            background:
+                radial-gradient(circle at 82% 18%, rgba(196,68,10,0.38), transparent 55%),
+                radial-gradient(circle at 12% 85%, rgba(201,146,42,0.20), transparent 50%),
+                linear-gradient(160deg, var(--maroon-dark) 0%, var(--maroon-deep) 55%, var(--maroon-dark) 100%);
+            overflow: hidden;
         }
 
-        .coming-soon-container::before {
+        .vari-hero::before {
+            /* faint warrior silhouette as cultural texture, dimmed under the grid */
             content: "";
             position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
+            inset: 0;
             background-image: url('assets/maharaj-silhouette.png.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            z-index: -1;
-            animation: slowZoom 25s ease-in-out infinite alternate;
+            opacity: 0.10;
+            mix-blend-mode: luminosity;
+            z-index: 0;
         }
 
-        @keyframes slowZoom {
-            0%   { transform: scale(1); }
-            100% { transform: scale(1.12); }
+        .grid-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            background-image:
+                repeating-linear-gradient(0deg, rgba(255,255,255,0.05) 0 1px, transparent 1px 64px),
+                repeating-linear-gradient(90deg, rgba(255,255,255,0.05) 0 1px, transparent 1px 64px);
+            -webkit-mask-image: linear-gradient(180deg, transparent, rgba(0,0,0,0.7) 25%, rgba(0,0,0,0.7) 85%, transparent);
+                    mask-image: linear-gradient(180deg, transparent, rgba(0,0,0,0.7) 25%, rgba(0,0,0,0.7) 85%, transparent);
+            pointer-events: none;
         }
 
-        /* ── Text content ── */
-        .text-content {
-            z-index: 10;
-            text-align: right;
-            max-width: 650px;
+        .hero-grid {
+            position: relative;
+            z-index: 2;
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 56px 6vw 80px;
+            display: grid;
+            grid-template-columns: 1.25fr 1fr;
+            gap: 48px;
+            align-items: center;
+            min-height: calc(100vh - 52px);
+            min-height: calc(100dvh - 52px);
         }
 
-        h1 {
-            font-size: 5rem;
+        .eyebrow {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
             font-weight: 700;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 18px;
+        }
+
+        .mega-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: clamp(3.4rem, 12vw, 8.5rem);
+            line-height: 0.95;
+            color: var(--gold-light);
+            text-shadow: 0 0 50px rgba(196,68,10,0.55);
             margin: 0;
-            color: #FFD700;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.8), 0 0 15px rgba(0,0,0,0.4);
+            letter-spacing: 0.01em;
+            animation: floatY 6s ease-in-out infinite;
         }
-
-        h2 {
+        .mega-title .dev {
+            display: block;
             font-family: 'Yatra One', cursive;
-            font-size: 3.5rem;
             font-weight: 400;
-            margin: -10px 0 15px 0;
-            color: #FFD700;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.8);
+            font-size: clamp(1.8rem, 5.5vw, 3.6rem);
+            color: var(--saffron);
+            margin-top: -6px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.6);
         }
 
-        .tagline {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            font-style: italic;
-            margin: 5px 0 20px 0;
-            color: #FFFFFF;
-            text-shadow: 2px 2px 5px rgba(0,0,0,0.9);
+        @keyframes floatY {
+            0%, 100% { transform: translateY(0); }
+            50%      { transform: translateY(-10px); }
         }
 
-        p {
-            font-size: 1.2rem;
-            line-height: 1.6;
-            text-shadow: 2px 2px 5px rgba(0,0,0,0.9);
+        .route-tag {
+            font-family: 'Yatra One', cursive;
+            font-size: clamp(1.2rem, 3vw, 1.7rem);
+            color: #fff;
+            margin: 18px 0 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+        }
+        .route-tag .arrow {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: var(--gold);
+        }
+
+        .hero-desc {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.02rem;
+            line-height: 1.75;
+            color: rgba(255,255,255,0.85);
+            max-width: 540px;
             margin-bottom: 30px;
         }
 
-        /* ── Sahayak CTA button on homepage ── */
-        .cta-sahayak {
+        .cta-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-bottom: 8px;
+        }
+
+        .cta-primary, .cta-secondary {
             display: inline-block;
-            background: var(--saffron);
-            color: #fff;
             font-family: 'Montserrat', sans-serif;
-            font-size: 14px;
             font-weight: 700;
-            padding: 11px 26px;
+            font-size: 14px;
+            padding: 13px 26px;
             border-radius: 8px;
             text-decoration: none;
-            margin-bottom: 28px;
-            border: 2px solid var(--gold);
-            text-shadow: none;
-            transition: background .15s, transform .15s;
             letter-spacing: 0.02em;
+            transition: background-color .3s cubic-bezier(0.16,1,0.3,1),
+                        border-color .3s cubic-bezier(0.16,1,0.3,1),
+                        transform .3s cubic-bezier(0.16,1,0.3,1),
+                        box-shadow .3s cubic-bezier(0.16,1,0.3,1);
         }
-        .cta-sahayak:hover {
+        .cta-primary {
+            background: var(--saffron);
+            color: #fff;
+            border: 2px solid var(--gold);
+        }
+        .cta-primary:hover {
             background: var(--saffron-hover);
             transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(196,68,10,0.35);
+        }
+        .cta-primary:active {
+            transform: translateY(0);
+            box-shadow: none;
+        }
+        .cta-secondary {
+            background: rgba(255,255,255,0.06);
+            color: var(--gold-light);
+            border: 1px solid rgba(255,255,255,0.25);
+        }
+        .cta-secondary:hover {
+            background: rgba(255,255,255,0.12);
+            border-color: rgba(255,255,255,0.4);
+            transform: translateY(-2px);
+        }
+        .cta-secondary:active {
+            transform: translateY(0);
         }
 
-        /* ── Logo ── */
-        .logo-container {
+        /* ── Route panel ── */
+        .hero-route-panel {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 18px;
+            padding: 26px;
+            backdrop-filter: blur(6px);
+        }
+
+        .stat-row {
             display: flex;
-            justify-content: flex-end;
-            width: 100%;
+            justify-content: space-between;
+            margin-bottom: 20px;
         }
-        .brand-logo {
-            width: 220px;
-            height: auto;
-            object-fit: contain;
-            border-radius: 50%;
-            filter: drop-shadow(0 8px 16px rgba(0,0,0,0.6));
-            transition: transform 0.4s ease;
+        .stat { text-align: center; }
+        .stat strong {
+            display: block;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 2.1rem;
+            color: var(--gold);
         }
-        .brand-logo:hover { transform: scale(1.20); }
+        .stat span {
+            font-size: 10.5px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.6);
+        }
+
+        .route-svg { width: 100%; height: auto; display: block; }
+        .route-path {
+            fill: none;
+            stroke: rgba(255,255,255,0.18);
+            stroke-width: 2;
+            stroke-dasharray: 5 8;
+        }
+        .route-node { fill: var(--gold-light); }
+        .route-node.start { fill: var(--gold-light); }
+        .route-node.end { fill: var(--saffron); }
+        .route-glow {
+            fill: var(--gold);
+            filter: drop-shadow(0 0 6px var(--gold));
+        }
+
+        .route-labels {
+            display: flex;
+            justify-content: space-between;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            color: rgba(255,255,255,0.75);
+            margin-top: 4px;
+        }
+
+        .wari-dates {
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255,255,255,0.12);
+            font-size: 12.5px;
+            line-height: 1.65;
+            color: rgba(255,255,255,0.65);
+        }
+        .wari-dates strong { color: var(--gold-light); }
 
         /* ── Mobile ── */
+        @media (max-width: 860px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                padding: 36px 6vw 56px;
+                gap: 36px;
+                min-height: auto;
+            }
+            .hero-desc { max-width: none; }
+        }
+
+        @media (max-width: 480px) {
+            .navbar-logo { width: 28px; height: 28px; }
+        }
+
         @media (max-width: 768px) {
             .navbar-links { display: none; }
             .hamburger { display: flex; }
-
-            .coming-soon-container {
-                align-items: center;
-                padding-right: 5vw;
-                padding-left: 5vw;
-                padding-top: calc(10vh + 52px);
-            }
-            .text-content {
-                text-align: center;
-                background: rgba(0,0,0,0.2);
-                padding: 20px;
-                border-radius: 15px;
-            }
-            h1 { font-size: 3rem; }
-            h2 { font-size: 2.2rem; }
-            .tagline { font-size: 1.2rem; }
-            p { font-size: 1rem; }
-            .logo-container { justify-content: center; }
-            .brand-logo { width: 160px; }
-            .cta-sahayak { font-size: 13px; padding: 10px 20px; }
         }
 
         @media (prefers-reduced-motion: reduce) {
-            .coming-soon-container::before { animation: none; }
+            .mega-title { animation: none; }
+            .cinema-nav .dot-live { animation: none; }
+            .cinema-info .s-dot { animation: none; }
+        }
+
+        /* ── Cinema: The Path (London -> Pandharpur), canvas scrollytelling ── */
+        .vari-cinema {
+            position: relative;
+            background: #050208;
+        }
+
+        .cinema-sticky {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            height: 100dvh;
+            overflow: hidden;
+        }
+        .cinema-sticky canvas {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        /* Intro overlay */
+        .cinema-intro {
+            position: absolute;
+            inset: 0;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 6vw;
+            background: linear-gradient(180deg, rgba(5,2,8,0.35), rgba(5,2,8,0.7));
+            transition: opacity 0.35s ease, visibility 0.35s ease;
+        }
+        .cinema-intro.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        .cinema-intro h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: clamp(2.4rem, 8vw, 5.5rem);
+            line-height: 1;
+            color: var(--gold-light);
+            text-shadow: 0 0 50px rgba(196,68,10,0.55);
+            margin: 10px 0 2px;
+        }
+        .cinema-intro h2 .dev {
+            display: block;
+            font-family: 'Yatra One', cursive;
+            font-weight: 400;
+            font-size: clamp(1.3rem, 4vw, 2.4rem);
+            color: var(--saffron);
+            margin-top: 4px;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.6);
+        }
+        .cinema-intro p {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.7);
+            max-width: 540px;
+            margin: 16px auto 26px;
+            line-height: 1.75;
+        }
+        .cinema-stats {
+            display: flex;
+            gap: 40px;
+        }
+        .cinema-stats .stat strong {
+            display: block;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 2.1rem;
+            color: var(--gold);
+        }
+        .cinema-stats .stat span {
+            font-size: 10.5px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.6);
+        }
+        /* Fixed status pill */
+        .cinema-nav {
+            position: absolute;
+            top: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 9;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 18px;
+            border-radius: 99px;
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(255,255,255,0.12);
+            backdrop-filter: blur(6px);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            color: var(--gold-light);
+            white-space: nowrap;
+            max-width: 90vw;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .cinema-nav .dot-live {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: var(--live-green);
+            animation: pulseDot 2s infinite;
+            flex-shrink: 0;
+        }
+        .cinema-nav .dot-live.is-done   { background: var(--gold); animation: none; box-shadow: none; }
+        .cinema-nav .dot-live.is-locked { background: rgba(255,255,255,0.3); animation: none; box-shadow: none; }
+
+        /* Vertical progress bar */
+        .cinema-progress {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 3px;
+            height: 50vh;
+            max-height: 320px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 99px;
+            z-index: 9;
+            overflow: hidden;
+        }
+        .cinema-progress-fill {
+            position: absolute;
+            left: 0; top: 0;
+            width: 100%; height: 0%;
+            background: linear-gradient(180deg, var(--saffron), var(--gold));
+            border-radius: 99px;
+        }
+
+        /* City counter dots */
+        .cinema-counter {
+            position: absolute;
+            right: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        .cinema-counter .c-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.18);
+            border: 1px solid rgba(255,255,255,0.25);
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+        .cinema-counter .c-dot.done { background: var(--gold); border-color: var(--gold); }
+        .cinema-counter .c-dot.live {
+            background: var(--live-green);
+            border-color: var(--live-green);
+            width: 12px; height: 12px;
+            box-shadow: 0 0 0 4px rgba(76,175,125,0.22);
+            animation: pulseDot 2s infinite;
+        }
+        .cinema-counter .c-dot.locked { background: transparent; }
+
+        @keyframes pulseDot {
+            0%   { box-shadow: 0 0 0 0 rgba(76,175,125,0.5); }
+            70%  { box-shadow: 0 0 0 9px rgba(76,175,125,0); }
+            100% { box-shadow: 0 0 0 0 rgba(76,175,125,0); }
+        }
+
+        /* Info panel */
+        .cinema-info {
+            position: absolute;
+            left: 6vw;
+            bottom: 7vh;
+            max-width: 440px;
+            z-index: 9;
+        }
+        .cinema-info .city-num {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 8px;
+        }
+        .cinema-info h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: clamp(1.8rem, 5vw, 3.2rem);
+            color: var(--gold-light);
+            margin: 0;
+            line-height: 1.05;
+            text-shadow: 0 0 30px rgba(0,0,0,0.6);
+        }
+        .cinema-info .city-flag { font-size: 1.3rem; margin-right: 10px; }
+        .cinema-info .city-country {
+            font-family: 'Yatra One', cursive;
+            font-size: 1rem;
+            color: var(--saffron);
+            margin: 6px 0 12px;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.6);
+        }
+        .cinema-info .city-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 10.5px;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            padding: 5px 12px;
+            border-radius: 99px;
+            border: 1px solid rgba(255,255,255,0.18);
+            color: rgba(255,255,255,0.65);
+            margin-bottom: 12px;
+            background: rgba(0,0,0,0.25);
+        }
+        .cinema-info .city-status.is-done   { color: var(--gold); border-color: rgba(201,146,42,0.4); }
+        .cinema-info .city-status.is-live   { color: var(--live-green); border-color: rgba(76,175,125,0.4); background: rgba(76,175,125,0.1); }
+        .cinema-info .city-status.is-locked { color: rgba(255,255,255,0.45); }
+        .cinema-info .city-status .s-dot {
+            width: 7px; height: 7px; border-radius: 50%; background: currentColor; flex-shrink: 0;
+        }
+        .cinema-info .city-status.is-live .s-dot { animation: pulseDot 2s infinite; }
+        .cinema-info .city-desc {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.88rem;
+            line-height: 1.7;
+            color: rgba(255,255,255,0.65);
+            text-shadow: 0 1px 6px rgba(0,0,0,0.5);
+        }
+        .cinema-info .city-landmark {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: rgba(255,255,255,0.85);
+            margin-top: 10px;
+        }
+        .cinema-info .city-landmark::before { content: "📍 "; }
+
+        /* Spacer sections drive scroll length — one per stop */
+        .cinema-spacer { height: 140vh; }
+
+        @media (max-width: 768px) {
+            .cinema-progress { display: none; }
+            .cinema-counter { display: none; }
+            .cinema-info { left: 5vw; right: 5vw; bottom: 6vh; max-width: none; }
+            .cinema-info h3 { font-size: clamp(1.6rem, 8vw, 2.4rem); }
+            .cinema-nav { font-size: 10.5px; padding: 6px 14px; top: 10px; }
+            .cinema-spacer { height: 120vh; }
+            .cinema-stats { gap: 26px; }
         }
     </style>
 </head>
@@ -326,8 +717,11 @@
     <!-- ── Navbar ── -->
     <nav class="navbar">
         <a href="/" class="navbar-brand">
-            Maharashtra in Europe
-            <span>महाराष्ट्र इन युरोप</span>
+            <img src="assets/logo.png" alt="Maharashtra in Europe Emblem" class="navbar-logo">
+            <span class="navbar-brand-text">
+                Maharashtra in Europe
+                <span class="navbar-brand-sub">महाराष्ट्र इन युरोप</span>
+            </span>
         </a>
         <div class="navbar-links">
             <a href="/" class="active">Home</a>
@@ -346,25 +740,138 @@
         <a href="/" class="active">Home</a>
         <a href="#">City guides</a>
         <a href="/community">Community</a>
-        <a href="/sahayak">Sahayak — Travel & Letter Network</a>
+        <a href="/sahayak">Sahayak: Travel & Letter Network</a>
     </div>
 
-    <!-- ── Hero ── -->
-    <div class="coming-soon-container">
-        <div class="text-content">
-            <h1>Coming Soon...</h1>
-            <h2>महाराष्ट्र इन युरोप</h2>
-            <div class="tagline">"Where the Sahyadri meets the Alps"</div>
-            <p>Building the definitive digital hub for Marathi expats across the continent. Secure your spot in the conversation.</p>
+    <!-- ── Hero: Global Vari ── -->
+    <div class="vari-hero">
+        <div class="grid-overlay"></div>
 
-            <!-- Sahayak CTA — live feature they can use now -->
-            <a href="/sahayak" class="cta-sahayak">✈ &nbsp;Sahayak — Find a travel companion</a>
+        <div class="hero-grid">
+            <!-- Main: oversized typography + story -->
+            <div class="hero-main">
+                <div class="eyebrow">Global Vari · 2026</div>
+                <h1 class="mega-title">VARI<span class="dev">वारी</span></h1>
+                <div class="route-tag">लंडन <span class="arrow">→</span> पंढरपूर</div>
+                <p class="hero-desc">
+                    For the first time, the Pandharpur Vari has gone global. Devotees are carrying the
+                    paduka of Sant Dnyaneshwar and Sant Tukaram on a journey spanning 11 countries and
+                    50 days, from London all the way to Pandharpur, to reach Lord Vitthal in time for
+                    Ashadhi Ekadashi.
+                </p>
+                <div class="cta-row">
+                    <a href="https://www.navarashtra.com/maharashtra/pandharpur-wari-went-global-as-devotee-traveling-from-london-to-pandharpur-1247419.html" class="cta-primary" target="_blank" rel="noopener noreferrer">Read the full story →</a>
+                    <a href="/sahayak" class="cta-secondary">✈ Sahayak: Find a travel companion</a>
+                </div>
+            </div>
 
-            <div class="logo-container">
-                <img src="assets/logo.png" alt="Maharashtra in Europe Emblem" class="brand-logo">
+            <!-- Route panel: London -> Pandharpur -->
+            <div class="hero-route-panel">
+                <div class="stat-row">
+                    <div class="stat"><strong>11</strong><span>Countries</span></div>
+                    <div class="stat"><strong>50</strong><span>Days</span></div>
+                    <div class="stat"><strong>1</strong><span>Devotion</span></div>
+                </div>
+
+                <svg class="route-svg" viewBox="0 0 600 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path id="variPath" class="route-path" d="M 20 180 C 120 60, 250 40, 380 90 S 520 170, 580 50" />
+
+                    <!-- 11 nodes: London + 9 countries en route + Pandharpur -->
+                    <circle class="route-node start" cx="20"  cy="180" r="6" />
+                    <circle class="route-node" cx="85"  cy="130" r="3" />
+                    <circle class="route-node" cx="150" cy="85"  r="3" />
+                    <circle class="route-node" cx="215" cy="55"  r="3" />
+                    <circle class="route-node" cx="280" cy="50"  r="3" />
+                    <circle class="route-node" cx="345" cy="65"  r="3" />
+                    <circle class="route-node" cx="410" cy="95"  r="3" />
+                    <circle class="route-node" cx="470" cy="125" r="3" />
+                    <circle class="route-node" cx="520" cy="115" r="3" />
+                    <circle class="route-node" cx="560" cy="80"  r="3" />
+                    <circle class="route-node end" cx="580" cy="50" r="6" />
+
+                    <!-- traveling glow, looping the route continuously -->
+                    <circle class="route-glow" r="5">
+                        <animateMotion dur="8s" repeatCount="indefinite">
+                            <mpath href="#variPath" />
+                        </animateMotion>
+                    </circle>
+                </svg>
+
+                <div class="route-labels">
+                    <span>London</span>
+                    <span>Pandharpur</span>
+                </div>
+
+                <div class="wari-dates">
+                    Pandharpur Wari 2026: <strong>19 June - 7 July</strong> · Ashadhi Ekadashi at the
+                    Vitthal Mandir, Pandharpur.
+                </div>
             </div>
         </div>
     </div>
+
+    <!-- ── Journey: The Path (Canvas Cinema) ── -->
+    <section class="vari-cinema" id="variCinema">
+        <div class="cinema-sticky">
+            <canvas id="cinema-bg" aria-hidden="true"></canvas>
+            <canvas id="cinema-landmark" aria-hidden="true"></canvas>
+            <canvas id="cinema-ground" aria-hidden="true"></canvas>
+
+            <div class="cinema-intro" id="cinemaIntro">
+                <div class="eyebrow">Global Vari · 2026</div>
+                <h2>THE PATH<span class="dev">वारीचा मार्ग</span></h2>
+                <p>Scroll to follow the palkhi as it travels from London to Pandharpur. The dindi walks from city to city and pauses exactly where it really is today.</p>
+                <div class="cinema-stats">
+                    <div class="stat"><strong>10</strong><span>Stops</span></div>
+                    <div class="stat"><strong>50</strong><span>Days</span></div>
+                    <div class="stat"><strong>1</strong><span>Devotion</span></div>
+                </div>
+            </div>
+
+            <div class="cinema-nav">
+                <span class="dot-live" id="cinemaNavDot"></span>
+                <span id="cinemaNavText">Dindi · London</span>
+            </div>
+
+            <div class="cinema-progress">
+                <div class="cinema-progress-fill" id="cinemaProgressFill"></div>
+            </div>
+
+            <div class="cinema-counter" id="cinemaCounter" aria-hidden="true">
+                <span class="c-dot"></span>
+                <span class="c-dot"></span>
+                <span class="c-dot"></span>
+                <span class="c-dot"></span>
+                <span class="c-dot"></span>
+                <span class="c-dot"></span>
+                <span class="c-dot"></span>
+                <span class="c-dot"></span>
+                <span class="c-dot"></span>
+                <span class="c-dot"></span>
+            </div>
+
+            <div class="cinema-info" id="cinemaInfo">
+                <div class="city-num" id="infoNum">STOP 01 / 10</div>
+                <h3><span class="city-flag" id="infoFlag">🇬🇧</span><span id="infoName">London</span></h3>
+                <div class="city-country" id="infoCountry">United Kingdom</div>
+                <div class="city-status is-done" id="infoStatus"><span class="s-dot"></span><span id="infoStatusText">21 Mar 2026 · Visited</span></div>
+                <p class="city-desc" id="infoDesc">The Global Vari sets off from London, carrying the paduka of Sant Dnyaneshwar and Sant Tukaram on a 50-day journey to Pandharpur.</p>
+                <div class="city-landmark" id="infoLandmark">Big Ben &amp; the Houses of Parliament</div>
+            </div>
+        </div>
+
+        <!-- spacer sections — one per stop, drives scroll length -->
+        <div class="cinema-spacer" data-city="0"></div>
+        <div class="cinema-spacer" data-city="1"></div>
+        <div class="cinema-spacer" data-city="2"></div>
+        <div class="cinema-spacer" data-city="3"></div>
+        <div class="cinema-spacer" data-city="4"></div>
+        <div class="cinema-spacer" data-city="5"></div>
+        <div class="cinema-spacer" data-city="6"></div>
+        <div class="cinema-spacer" data-city="7"></div>
+        <div class="cinema-spacer" data-city="8"></div>
+        <div class="cinema-spacer" data-city="9"></div>
+    </section>
 
     <script>
         function toggleMenu() {
@@ -376,6 +883,1248 @@
                 document.getElementById('mobileMenu').classList.remove('open');
             });
         });
+    </script>
+
+    <!-- ── The Path: canvas cinema scrollytelling ── -->
+    <script>
+    (function () {
+        'use strict';
+
+        const section = document.getElementById('variCinema');
+        if (!section) return;
+
+        const bgCanvas = document.getElementById('cinema-bg');
+        const lmCanvas = document.getElementById('cinema-landmark');
+        const grCanvas = document.getElementById('cinema-ground');
+        const intro    = document.getElementById('cinemaIntro');
+        const progressFill = document.getElementById('cinemaProgressFill');
+        const counterDots  = Array.from(document.querySelectorAll('#cinemaCounter .c-dot'));
+        const navDot   = document.getElementById('cinemaNavDot');
+        const navText  = document.getElementById('cinemaNavText');
+        const infoNum  = document.getElementById('infoNum');
+        const infoFlag = document.getElementById('infoFlag');
+        const infoName = document.getElementById('infoName');
+        const infoCountry = document.getElementById('infoCountry');
+        const infoStatus  = document.getElementById('infoStatus');
+        const infoStatusText = document.getElementById('infoStatusText');
+        const infoDesc = document.getElementById('infoDesc');
+        const infoLandmark = document.getElementById('infoLandmark');
+
+        if (!bgCanvas || !lmCanvas || !grCanvas) return;
+
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const LIVE_INDEX = 5; // Hungary & Poland — approx. real-world position (mid-June 2026)
+
+        const CITIES = [
+            { flag:'🇬🇧', name:'London', country:'United Kingdom', date:'21 Mar 2026', label:'Journey begins',
+              landmark:'Big Ben & the Houses of Parliament',
+              desc:'The Global Vari sets off from London, carrying the paduka of Sant Dnyaneshwar and Sant Tukaram on a 50-day journey to Pandharpur.',
+              sky:['#1b2a4a','#5d7fa6'], draw: drawLondon },
+            { flag:'🇬🇧', name:'UK Tour', country:'United Kingdom', date:'Mar - May 2026', label:'20+ towns',
+              landmark:'High streets across Britain',
+              desc:'Over two months, the palkhi travels to more than 20 towns and cities across the UK before crossing to mainland Europe.',
+              sky:['#26405c','#7a9bc4'], draw: drawUKTour },
+            { flag:'🇫🇷', name:'France', country:'France', date:'Late May 2026', label:'Crossing the Channel',
+              landmark:'The Eiffel Tower, Paris',
+              desc:'Crossing the Channel from Dover, the Vari enters continental Europe through France.',
+              sky:['#3a4a78','#9bb6e0'], draw: drawFrance },
+            { flag:'🇩🇪', name:'Benelux & Germany', country:'Belgium · Netherlands · Germany', date:'June 2026', label:'Through the Low Countries',
+              landmark:'The Brandenburg Gate, Berlin',
+              desc:'The journey continues through Belgium, Luxembourg, the Netherlands and Germany.',
+              sky:['#2f3f66','#7e98c8'], draw: drawGermany },
+            { flag:'🇨🇿', name:'Czechia, Slovakia & Croatia', country:'Central & Southeast Europe', date:'June 2026', label:'Across Central Europe',
+              landmark:'Charles Bridge, Prague',
+              desc:'Onward through Central Europe: Czechia, Slovakia and Croatia.',
+              sky:['#3c4570','#8b8fc9'], draw: drawCzechia },
+            { flag:'🇭🇺', name:'Hungary & Poland', country:'Hungary · Poland', date:'June 2026', label:'approx. current position',
+              landmark:'The Hungarian Parliament, Budapest',
+              desc:'The Vari is currently making its way through Hungary and Poland. Somewhere along the Danube, the dindi pauses here today.',
+              sky:['#ff9a52','#3a3a6b'], draw: drawHungary },
+            { flag:'🇹🇷', name:'Serbia, Bulgaria & Türkiye', country:'Southeast Europe', date:'June 2026', label:'June 2026',
+              landmark:'Hagia Sophia, Istanbul',
+              desc:'Next, the palkhi heads southeast through Serbia, Bulgaria and Türkiye.',
+              sky:['#241c3d','#5a4a7a'], draw: drawTurkiye },
+            { flag:'🇳🇵', name:'Georgia & Nepal', country:'Georgia · Nepal', date:'late June 2026', label:'late June 2026',
+              landmark:'The Himalaya',
+              desc:'Continuing through Georgia and Nepal, towards the Indian subcontinent.',
+              sky:['#16203a','#445a82'], draw: drawHimalaya },
+            { flag:'🇮🇳', name:'India', country:'India', date:'July 2026', label:'July 2026',
+              landmark:'Gateway of India, Mumbai',
+              desc:'Arriving in India, the final stretch of the journey begins.',
+              sky:['#ffb15c','#2c3a5e'], draw: drawIndia },
+            { flag:'🇮🇳', name:'Pandharpur', country:'Maharashtra, India', date:'7 Jul 2026', label:'7 Jul 2026 · Ashadhi Ekadashi',
+              landmark:'Shri Vitthal-Rukmini Mandir',
+              desc:"Journey's end: the palkhi reaches the Vitthal Mandir in Pandharpur for Ashadhi Ekadashi.",
+              sky:['#ffd27a','#3a4a6b'], draw: drawPandharpur }
+        ];
+
+        /* ───────── canvas setup ───────── */
+        const ctxBg = bgCanvas.getContext('2d');
+        const ctxLm = lmCanvas.getContext('2d');
+        const ctxGr = grCanvas.getContext('2d');
+        let W = 0, H = 0;
+
+        function resize() {
+            const dpr = Math.min(window.devicePixelRatio || 1, 2);
+            W = section.clientWidth;
+            H = window.innerHeight;
+            [[bgCanvas, ctxBg], [lmCanvas, ctxLm], [grCanvas, ctxGr]].forEach(([c, ctx]) => {
+                c.width  = Math.round(W * dpr);
+                c.height = Math.round(H * dpr);
+                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            });
+        }
+
+        /* ───────── helpers ───────── */
+        function lerp(a, b, t) { return a + (b - a) * t; }
+        function hexToRgb(hex) {
+            hex = hex.replace('#', '');
+            return { r: parseInt(hex.substr(0,2),16), g: parseInt(hex.substr(2,2),16), b: parseInt(hex.substr(4,2),16) };
+        }
+        function lerpColor(c1, c2, t) {
+            const a = hexToRgb(c1), b = hexToRgb(c2);
+            return `rgb(${Math.round(lerp(a.r,b.r,t))},${Math.round(lerp(a.g,b.g,t))},${Math.round(lerp(a.b,b.b,t))})`;
+        }
+        function roundRect(ctx, x, y, w, h, r) {
+            if (r === undefined) r = 4;
+            ctx.beginPath();
+            ctx.moveTo(x+r, y);
+            ctx.arcTo(x+w, y,   x+w, y+h, r);
+            ctx.arcTo(x+w, y+h, x,   y+h, r);
+            ctx.arcTo(x,   y+h, x,   y,   r);
+            ctx.arcTo(x,   y,   x+w, y,   r);
+            ctx.closePath();
+        }
+        function drawCloud(ctx, x, y, s) {
+            ctx.beginPath();
+            ctx.arc(x, y, s*0.30, 0, Math.PI*2);
+            ctx.arc(x+s*0.35, y-s*0.12, s*0.22, 0, Math.PI*2);
+            ctx.arc(x+s*0.65, y, s*0.28, 0, Math.PI*2);
+            ctx.closePath();
+            ctx.fill();
+        }
+
+        /* ───────── sky / background ───────── */
+        const stars = [];
+        for (let i = 0; i < 90; i++) stars.push({ x: Math.random(), y: Math.random()*0.62, r: Math.random()*1.4+0.3, ph: Math.random()*Math.PI*2 });
+
+        function drawSky(cityIdx, cp, time) {
+            const cur = CITIES[cityIdx];
+            const nxt = CITIES[Math.min(cityIdx+1, CITIES.length-1)];
+            const topC = lerpColor(cur.sky[0], nxt.sky[0], cp);
+            const botC = lerpColor(cur.sky[1], nxt.sky[1], cp);
+
+            const g = ctxBg.createLinearGradient(0, 0, 0, H);
+            g.addColorStop(0, topC);
+            g.addColorStop(1, botC);
+            ctxBg.fillStyle = g;
+            ctxBg.fillRect(0, 0, W, H);
+
+            // stars fade in when the top of the sky is dark
+            const top = hexToRgb(lerpColor(cur.sky[0], nxt.sky[0], cp));
+            const brightness = (top.r + top.g + top.b) / 3;
+            const starAlpha = Math.max(0, Math.min(1, (95 - brightness) / 55));
+            if (starAlpha > 0.02) {
+                stars.forEach(s => {
+                    const tw = 0.4 + 0.6 * Math.sin(time/700 + s.ph);
+                    ctxBg.fillStyle = `rgba(255,255,255,${(starAlpha*tw).toFixed(3)})`;
+                    ctxBg.beginPath();
+                    ctxBg.arc(s.x*W, s.y*H*0.85, s.r, 0, Math.PI*2);
+                    ctxBg.fill();
+                });
+            }
+
+            // drifting clouds
+            ctxBg.fillStyle = 'rgba(255,255,255,0.10)';
+            for (let i = 0; i < 4; i++) {
+                const cx = (((time/45000) + i/4 + cityIdx*0.137) % 1.3 - 0.15) * W;
+                const cy = H * (0.10 + i*0.07);
+                drawCloud(ctxBg, cx, cy, 55 + i*16);
+            }
+
+            // sun / moon glow — warm for the "live" city, soft for others
+            const sunColor = cityIdx === LIVE_INDEX ? 'rgba(255,180,110,0.55)' : 'rgba(255,255,255,0.18)';
+            const sunX = W * (0.78 - cp*0.06);
+            const sunY = H * (cityIdx === LIVE_INDEX ? 0.28 : 0.16);
+            const rg = ctxBg.createRadialGradient(sunX, sunY, 4, sunX, sunY, 120);
+            rg.addColorStop(0, sunColor);
+            rg.addColorStop(1, 'rgba(255,255,255,0)');
+            ctxBg.fillStyle = rg;
+            ctxBg.fillRect(0, 0, W, H);
+        }
+
+        /* ───────── ground / dindi procession ───────── */
+        function drawGround(time, progress, capped) {
+            const groundY = H * 0.78;
+            ctxGr.clearRect(0, 0, W, H);
+
+            // path/road
+            const g = ctxGr.createLinearGradient(0, groundY, 0, H);
+            g.addColorStop(0, '#5a4636');
+            g.addColorStop(1, '#3a2c20');
+            ctxGr.fillStyle = g;
+            ctxGr.fillRect(0, groundY, W, H - groundY);
+
+            // verge
+            ctxGr.fillStyle = 'rgba(110,90,60,0.5)';
+            ctxGr.fillRect(0, groundY, W, 4);
+
+            // dashed centre line — scrolls while the dindi is walking, freezes when capped
+            const speed = capped ? 0 : time / 14;
+            const dashLen = 36, gapLen = 28, period = dashLen + gapLen;
+            const offset = (speed + progress * 3000) % period;
+            ctxGr.strokeStyle = 'rgba(250,243,224,0.35)';
+            ctxGr.lineWidth = 3;
+            ctxGr.setLineDash([dashLen, gapLen]);
+            ctxGr.lineDashOffset = -offset;
+            ctxGr.beginPath();
+            ctxGr.moveTo(0, groundY + (H-groundY)*0.45);
+            ctxGr.lineTo(W, groundY + (H-groundY)*0.45);
+            ctxGr.stroke();
+            ctxGr.setLineDash([]);
+
+            // the dindi procession, anchored just left of centre
+            const baseX = W * 0.5;
+            const baseY = groundY + (H - groundY) * 0.62;
+            drawDindi(baseX, baseY, Math.min(W, H*1.6) / 760, time, !capped);
+        }
+
+        /* ── individual varkari figures (based on a real dindi photo) ── */
+        function wkLegs(ctx, x, stride, color) {
+            ctx.fillStyle = color;
+            roundRect(ctx, x-10, -32, 9, 32, 3); ctx.fill();
+            ctx.save();
+            ctx.translate(x+4, -32);
+            ctx.rotate(stride);
+            roundRect(ctx, -5, 0, 9, 32, 3); ctx.fill();
+            ctx.restore();
+            ctx.fillStyle = '#7a5a3a';
+            ctx.fillRect(x-12, -4, 13, 6);
+            ctx.save();
+            ctx.translate(x+4, -32);
+            ctx.rotate(stride);
+            ctx.fillRect(-7, 28, 13, 6);
+            ctx.restore();
+        }
+
+        function wkHead(ctx, x, capColor) {
+            ctx.fillStyle = '#e7c9a3';
+            ctx.beginPath(); ctx.arc(x, -84, 11, 0, Math.PI*2); ctx.fill();
+            ctx.fillStyle = capColor;
+            ctx.beginPath(); ctx.arc(x, -87, 10, Math.PI, Math.PI*2); ctx.fill();
+            ctx.fillRect(x-10, -87, 20, 4);
+        }
+
+        function wkTorso(ctx, x, color, w) {
+            ctx.fillStyle = color;
+            roundRect(ctx, x-w/2, -72, w, 40, 6); ctx.fill();
+        }
+
+        // 1 = taal (cymbal) player · 2 = child with taal · 3 = flag-bearer with bhagwa dhwaj & satchel
+        // 4 = tanpura player · 5 = woman carrying tulsi vrindavan · 6 = mridang drummer
+        function drawWarkariFigure(ctx, type, x, stride, time) {
+            switch (type) {
+                case 1: {
+                    wkLegs(ctx, x, stride, '#FAF3E0');
+                    wkTorso(ctx, x, '#f4e1c4', 26);
+                    ctx.strokeStyle = '#C4440A'; ctx.lineWidth = 4;
+                    ctx.beginPath(); ctx.moveTo(x-10,-70); ctx.lineTo(x+8,-34); ctx.stroke();
+                    ctx.strokeStyle = '#e7c9a3'; ctx.lineWidth = 6; ctx.lineCap = 'round';
+                    ctx.beginPath(); ctx.moveTo(x-9,-66); ctx.lineTo(x-15,-94); ctx.stroke();
+                    ctx.beginPath(); ctx.moveTo(x+9,-66); ctx.lineTo(x+15,-94); ctx.stroke();
+                    ctx.fillStyle = '#E8C547';
+                    ctx.beginPath(); ctx.arc(x-15,-98,6,0,Math.PI*2); ctx.fill();
+                    ctx.beginPath(); ctx.arc(x+15,-98,6,0,Math.PI*2); ctx.fill();
+                    wkHead(ctx, x, '#FAF3E0');
+                    break;
+                }
+                case 2: {
+                    ctx.save();
+                    ctx.translate(x, 0);
+                    ctx.scale(0.72, 0.72);
+                    drawWarkariFigure(ctx, 1, 0, stride, time);
+                    ctx.restore();
+                    break;
+                }
+                case 3: {
+                    wkLegs(ctx, x, stride, '#FAF3E0');
+                    wkTorso(ctx, x, '#FAF3E0', 26);
+                    ctx.strokeStyle = '#C4440A'; ctx.lineWidth = 4;
+                    ctx.beginPath(); ctx.moveTo(x-10,-70); ctx.lineTo(x+8,-34); ctx.stroke();
+                    wkHead(ctx, x, '#FAF3E0');
+                    // arm holding the flag pole
+                    ctx.strokeStyle = '#e7c9a3'; ctx.lineWidth = 6; ctx.lineCap = 'round';
+                    ctx.beginPath(); ctx.moveTo(x+9,-66); ctx.lineTo(x+15,-50); ctx.stroke();
+                    // pole + bhagwa dhwaj (fluttering)
+                    ctx.strokeStyle = '#b08552'; ctx.lineWidth = 4;
+                    ctx.beginPath(); ctx.moveTo(x+15,-50); ctx.lineTo(x+28,-156); ctx.stroke();
+                    const flap = Math.sin(time/300 + 1) * 8;
+                    ctx.fillStyle = '#FF8A3D';
+                    ctx.beginPath();
+                    ctx.moveTo(x+28,-156); ctx.lineTo(x+66,-146+flap); ctx.lineTo(x+28,-124);
+                    ctx.closePath(); ctx.fill();
+                    // satchel bag on a shoulder strap
+                    ctx.strokeStyle = '#8a5a3a'; ctx.lineWidth = 2;
+                    ctx.beginPath(); ctx.moveTo(x-12,-70); ctx.lineTo(x-18,-40); ctx.stroke();
+                    ctx.fillStyle = '#C0539A';
+                    roundRect(ctx, x-26,-44,16,18,3); ctx.fill();
+                    break;
+                }
+                case 4: {
+                    wkLegs(ctx, x, stride, '#FAF3E0');
+                    wkTorso(ctx, x, '#FAF3E0', 26);
+                    ctx.strokeStyle = '#FF8A3D'; ctx.lineWidth = 5;
+                    ctx.beginPath(); ctx.moveTo(x-12,-70); ctx.lineTo(x+10,-34); ctx.stroke();
+                    wkHead(ctx, x, '#FF8A3D');
+                    // tanpura, held diagonally
+                    ctx.save();
+                    ctx.translate(x+8,-48);
+                    ctx.rotate(-0.55);
+                    ctx.fillStyle = '#c9985f';
+                    ctx.beginPath(); ctx.ellipse(0,20,9,15,0,0,Math.PI*2); ctx.fill();
+                    ctx.fillRect(-3,-32,6,50);
+                    ctx.restore();
+                    ctx.strokeStyle = '#e7c9a3'; ctx.lineWidth = 6; ctx.lineCap = 'round';
+                    ctx.beginPath(); ctx.moveTo(x-8,-66); ctx.lineTo(x+2,-50); ctx.stroke();
+                    ctx.beginPath(); ctx.moveTo(x+9,-66); ctx.lineTo(x+13,-80); ctx.stroke();
+                    break;
+                }
+                case 5: {
+                    // feet peeking out from under the saree
+                    ctx.fillStyle = '#7a5a3a';
+                    ctx.fillRect(x-12,-6,13,6);
+                    ctx.save();
+                    ctx.translate(x+4, 0);
+                    ctx.rotate(stride*0.4);
+                    ctx.fillRect(-7,-6,13,6);
+                    ctx.restore();
+                    // saree
+                    ctx.fillStyle = '#2f8a4a';
+                    roundRect(ctx, x-15,-74,30,46,10); ctx.fill();
+                    // blouse
+                    ctx.fillStyle = '#E8C547';
+                    roundRect(ctx, x-13,-74,26,16,5); ctx.fill();
+                    // head + bun
+                    ctx.fillStyle = '#e7c9a3';
+                    ctx.beginPath(); ctx.arc(x,-84,11,0,Math.PI*2); ctx.fill();
+                    ctx.fillStyle = '#3a2418';
+                    ctx.beginPath(); ctx.arc(x-7,-90,5,0,Math.PI*2); ctx.fill();
+                    // tulsi vrindavan on her head
+                    ctx.fillStyle = '#b97a4a';
+                    roundRect(ctx, x-9,-106,18,12,3); ctx.fill();
+                    ctx.fillStyle = '#3a7a4a';
+                    [-6,0,6].forEach(dx => {
+                        ctx.beginPath();
+                        ctx.moveTo(x+dx,-106); ctx.lineTo(x+dx-5,-122); ctx.lineTo(x+dx+5,-122);
+                        ctx.closePath(); ctx.fill();
+                    });
+                    // arms — one steadying the pot, one swinging
+                    ctx.strokeStyle = '#e7c9a3'; ctx.lineWidth = 6; ctx.lineCap = 'round';
+                    ctx.beginPath(); ctx.moveTo(x+11,-70); ctx.lineTo(x+8,-102); ctx.stroke();
+                    ctx.beginPath(); ctx.moveTo(x-11,-70); ctx.lineTo(x-15,-46); ctx.stroke();
+                    break;
+                }
+                case 6: {
+                    wkLegs(ctx, x, stride, '#bfe0c8');
+                    wkTorso(ctx, x, '#bfe0c8', 26);
+                    wkHead(ctx, x, '#8a2a2a');
+                    // mridang drum on a shoulder strap
+                    ctx.strokeStyle = '#8a5a3a'; ctx.lineWidth = 3;
+                    ctx.beginPath(); ctx.moveTo(x-9,-70); ctx.lineTo(x+15,-40); ctx.stroke();
+                    ctx.fillStyle = '#b97a4a';
+                    roundRect(ctx, x+1,-46,28,16,4); ctx.fill();
+                    ctx.fillStyle = '#3a2418';
+                    ctx.fillRect(x+1,-46,28,3); ctx.fillRect(x+1,-33,28,3);
+                    ctx.strokeStyle = '#e7c9a3'; ctx.lineWidth = 6; ctx.lineCap = 'round';
+                    ctx.beginPath(); ctx.moveTo(x+9,-66); ctx.lineTo(x+14,-44); ctx.stroke();
+                    ctx.beginPath(); ctx.moveTo(x-9,-66); ctx.lineTo(x-13,-50); ctx.stroke();
+                    break;
+                }
+            }
+        }
+
+        function drawDindi(x, y, scale, time, walking) {
+            const ctx = ctxGr;
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.scale(scale, scale);
+
+            // ground shadow under the whole dindi
+            ctx.fillStyle = 'rgba(0,0,0,0.22)';
+            ctx.beginPath(); ctx.ellipse(0, 4, 210, 13, 0, 0, Math.PI*2); ctx.fill();
+
+            // the dindi: cymbal players, a child, the flag-bearer, the tanpura
+            // player, the woman with the tulsi vrindavan, and the drummer
+            const types = [1, 2, 3, 4, 5, 6];
+            types.forEach((type, i) => {
+                const fx = (i - 2.5) * 62;
+                const phase = time/180 + i*0.85;
+                const stride = walking ? Math.sin(phase) * 0.55 : 0.05;
+                const bob = walking ? 0 : Math.sin(time/900 + i*0.6) * 1.5;
+                ctx.save();
+                ctx.translate(fx, bob);
+                drawWarkariFigure(ctx, type, 0, stride, time);
+                ctx.restore();
+            });
+
+            ctx.restore();
+        }
+
+        /* ───────── landmark drawings ───────── */
+        function sky2ground() { return H * 0.78; }
+
+        function drawLondon(cp) {
+            const ctx = ctxLm, gy = sky2ground();
+            // Thames
+            ctx.fillStyle = 'rgba(58,90,120,0.85)';
+            ctx.fillRect(0, gy, W, H-gy);
+            ctx.fillStyle = 'rgba(255,255,255,0.07)';
+            for (let i=0;i<6;i++) ctx.fillRect(W*0.05+i*W*0.16, gy+12, 50, 2);
+
+            // London Eye, distant on the south bank
+            const eyeCx = W*0.84, eyeCy = gy-H*0.30, eyeR = H*0.16;
+            ctx.strokeStyle = 'rgba(230,224,212,0.45)'; ctx.lineWidth = 4;
+            ctx.beginPath(); ctx.arc(eyeCx, eyeCy, eyeR, 0, Math.PI*2); ctx.stroke();
+            ctx.lineWidth = 1.5;
+            for (let i=0;i<16;i++) {
+                const a = i/16*Math.PI*2 + cp*0.6;
+                ctx.beginPath(); ctx.moveTo(eyeCx,eyeCy);
+                ctx.lineTo(eyeCx+Math.cos(a)*eyeR, eyeCy+Math.sin(a)*eyeR); ctx.stroke();
+                ctx.fillStyle = '#FAF3E0';
+                roundRect(ctx, eyeCx+Math.cos(a)*eyeR-5, eyeCy+Math.sin(a)*eyeR-3, 10, 6, 1); ctx.fill();
+            }
+            ctx.strokeStyle = 'rgba(230,224,212,0.45)'; ctx.lineWidth = 4;
+            ctx.beginPath(); ctx.moveTo(eyeCx-eyeR*0.7, eyeCy+eyeR*0.7); ctx.lineTo(eyeCx, gy); ctx.stroke();
+            ctx.beginPath(); ctx.moveTo(eyeCx+eyeR*0.7, eyeCy+eyeR*0.7); ctx.lineTo(eyeCx, gy); ctx.stroke();
+
+            // Houses of Parliament — gothic facade with pointed windows + roofline pinnacles
+            const bx = W*0.06, bw = W*0.5, bh = H*0.16, by = gy-bh;
+            ctx.fillStyle = '#cdb89a';
+            ctx.fillRect(bx, by, bw, bh);
+            // pointed-arch windows
+            ctx.fillStyle = 'rgba(60,40,20,0.35)';
+            for (let x=bx+10; x<bx+bw-26; x += 22) {
+                ctx.beginPath();
+                ctx.moveTo(x, by+bh*0.32+bh*0.5);
+                ctx.lineTo(x, by+bh*0.42); ctx.arc(x+4, by+bh*0.42, 4, Math.PI, 0); ctx.lineTo(x+8, by+bh*0.82);
+                ctx.closePath(); ctx.fill();
+            }
+            // roofline crenellations + pinnacles
+            ctx.fillStyle = '#cdb89a';
+            for (let x=bx; x<bx+bw; x += bw/14) {
+                ctx.fillRect(x, by-8, bw/30, 8);
+                ctx.beginPath(); ctx.moveTo(x, by-8); ctx.lineTo(x+bw/60, by-16); ctx.lineTo(x+bw/30, by-8); ctx.closePath(); ctx.fill();
+            }
+            // Victoria Tower — taller square tower with pyramidal roof, left end
+            const vtX = bx-2, vtW = bw*0.13, vtH = H*0.27, vtY = gy-vtH;
+            ctx.fillStyle = '#cdb89a';
+            ctx.fillRect(vtX, vtY, vtW, vtH);
+            ctx.fillStyle = 'rgba(60,40,20,0.3)';
+            for (let wy=vtY+18; wy<gy-20; wy+=30) ctx.fillRect(vtX+vtW*0.3, wy, vtW*0.4, 16);
+            ctx.beginPath();
+            ctx.moveTo(vtX-4,vtY); ctx.lineTo(vtX+vtW/2, vtY-H*0.06); ctx.lineTo(vtX+vtW+4,vtY); ctx.closePath();
+            ctx.fillStyle = '#b89968'; ctx.fill();
+            // four corner pinnacles
+            [[vtX-2,vtY],[vtX+vtW+2,vtY]].forEach(([px,py]) => {
+                ctx.fillStyle = '#cdb89a'; ctx.fillRect(px-3, py-14, 6, 14);
+                ctx.beginPath(); ctx.moveTo(px-3,py-14); ctx.lineTo(px,py-24); ctx.lineTo(px+3,py-14); ctx.closePath(); ctx.fill();
+            });
+
+            // Big Ben (Elizabeth Tower) — slender, gothic, gold-trimmed
+            const tx = W*0.62, tw = W*0.07, th = H*0.42, ty = gy-th;
+            ctx.fillStyle = '#e7d8bd';
+            ctx.fillRect(tx, ty, tw, th);
+            // gold trim bands
+            ctx.fillStyle = '#C9922A';
+            for (let yy=ty+th*0.1; yy<gy-10; yy+=th*0.22) ctx.fillRect(tx-2, yy, tw+4, 4);
+            // corner pinnacles flanking the spire
+            [tx-6, tx+tw+6].forEach(px => {
+                ctx.fillStyle = '#cdb89a'; ctx.fillRect(px-3, ty-8, 6, 18);
+                ctx.beginPath(); ctx.moveTo(px-4,ty-8); ctx.lineTo(px,ty-26); ctx.lineTo(px+4,ty-8); ctx.closePath(); ctx.fillStyle='#b89968'; ctx.fill();
+            });
+            // spire
+            ctx.beginPath();
+            ctx.moveTo(tx,ty); ctx.lineTo(tx+tw/2, ty-H*0.10); ctx.lineTo(tx+tw, ty); ctx.closePath();
+            ctx.fillStyle = '#b89968'; ctx.fill();
+            ctx.fillStyle = '#C9922A';
+            ctx.beginPath(); ctx.arc(tx+tw/2, ty-H*0.10, 3, 0, Math.PI*2); ctx.fill();
+            // clock face
+            ctx.beginPath(); ctx.arc(tx+tw/2, ty+th*0.16, tw*0.36, 0, Math.PI*2);
+            ctx.fillStyle = '#FAF3E0'; ctx.fill();
+            ctx.strokeStyle = '#C9922A'; ctx.lineWidth = 3; ctx.stroke();
+            const ang = -Math.PI/2 + cp*Math.PI*2;
+            ctx.strokeStyle = '#2a1a0a'; ctx.lineWidth = 2;
+            ctx.beginPath(); ctx.moveTo(tx+tw/2, ty+th*0.16);
+            ctx.lineTo(tx+tw/2+Math.cos(ang)*tw*0.20, ty+th*0.16+Math.sin(ang)*tw*0.20);
+            ctx.stroke();
+
+            // double-decker bus
+            const busX = W*0.04 + cp*W*0.04;
+            roundRect(ctx, busX, gy-40, 80, 38, 6); ctx.fillStyle = '#C4440A'; ctx.fill();
+            ctx.fillStyle = 'rgba(255,255,255,0.3)';
+            ctx.fillRect(busX+6, gy-34, 68, 12);
+            ctx.fillStyle = '#222';
+            ctx.beginPath(); ctx.arc(busX+16, gy, 7, 0, Math.PI*2); ctx.arc(busX+64, gy, 7, 0, Math.PI*2); ctx.fill();
+        }
+
+        function drawUKTour(cp) {
+            const ctx = ctxLm, gy = sky2ground();
+
+            // rolling Cotswolds hills
+            const hillColors = ['#4f7a42','#5f8e4e','#74a35e'];
+            hillColors.forEach((c, i) => {
+                const hh = H*(0.05 + i*0.035);
+                ctx.fillStyle = c;
+                ctx.beginPath();
+                ctx.moveTo(0, gy - hh*0.2);
+                ctx.quadraticCurveTo(W*0.25, gy-hh-hh*0.6, W*0.55, gy-hh*0.35);
+                ctx.quadraticCurveTo(W*0.82, gy-hh-hh*0.7, W, gy-hh*0.15);
+                ctx.lineTo(W, gy+10); ctx.lineTo(0, gy+10);
+                ctx.closePath(); ctx.fill();
+            });
+
+            // hilltop castle, background
+            const ccx = W*0.74, ccy = gy-H*0.34;
+            ctx.fillStyle = '#cdb89a';
+            ctx.fillRect(ccx-W*0.075, ccy, W*0.15, H*0.15);
+            ctx.fillStyle = 'rgba(120,100,70,0.3)';
+            for (let wx=ccx-W*0.06; wx<ccx+W*0.06; wx+=18) ctx.fillRect(wx, ccy+H*0.05, 8, H*0.06);
+            [-1,0,1].forEach(s => {
+                const tx = ccx + s*W*0.06;
+                ctx.fillStyle = '#cdb89a';
+                ctx.fillRect(tx-9, ccy-H*0.07, 18, H*0.07+4);
+                ctx.fillStyle = '#9c4a3a';
+                ctx.beginPath(); ctx.moveTo(tx-10,ccy-H*0.07); ctx.lineTo(tx,ccy-H*0.07-18); ctx.lineTo(tx+10,ccy-H*0.07); ctx.closePath(); ctx.fill();
+            });
+            // pennant on the keep
+            ctx.strokeStyle = '#cfcfcf'; ctx.lineWidth = 2;
+            ctx.beginPath(); ctx.moveTo(ccx, ccy-H*0.07-18); ctx.lineTo(ccx, ccy-H*0.07-32); ctx.stroke();
+            ctx.fillStyle = '#C4440A';
+            ctx.beginPath(); ctx.moveTo(ccx,ccy-H*0.07-32); ctx.lineTo(ccx+18,ccy-H*0.07-28); ctx.lineTo(ccx,ccy-H*0.07-24); ctx.closePath(); ctx.fill();
+
+            // thatched-roof cottages
+            [W*0.05, W*0.30].forEach((x, i) => {
+                const w = W*0.18, h = H*0.105, y = gy-h;
+                ctx.fillStyle = '#f3e6cf';
+                ctx.fillRect(x, y, w, h);
+                // tudor timber framing
+                ctx.strokeStyle = '#5a4636'; ctx.lineWidth = 3;
+                ctx.strokeRect(x+4, y+4, w-8, h-8);
+                ctx.beginPath();
+                ctx.moveTo(x+w*0.25,y); ctx.lineTo(x+w*0.25,y+h);
+                ctx.moveTo(x+w*0.75,y); ctx.lineTo(x+w*0.75,y+h);
+                ctx.stroke();
+                // thatched roof
+                ctx.fillStyle = '#c9a96a';
+                ctx.beginPath();
+                ctx.moveTo(x-10,y); ctx.lineTo(x+w/2,y-H*0.07); ctx.lineTo(x+w+10,y); ctx.lineTo(x+w+4,y+8); ctx.lineTo(x-4,y+8);
+                ctx.closePath(); ctx.fill();
+                // door
+                ctx.fillStyle = '#5a4636'; roundRect(ctx, x+w*0.42, y+h*0.45, w*0.16, h*0.55, 4); ctx.fill();
+                // glowing windows
+                ctx.fillStyle = `rgba(255,224,150,${0.4+0.35*Math.sin(cp*Math.PI*2+i*1.7)})`;
+                ctx.fillRect(x+w*0.12, y+h*0.28, w*0.16, h*0.26);
+                ctx.fillRect(x+w*0.72, y+h*0.28, w*0.16, h*0.26);
+                // chimney + drifting smoke
+                ctx.fillStyle = '#9c4a3a'; ctx.fillRect(x+w*0.8, y-H*0.045, 9, H*0.045);
+                ctx.fillStyle = 'rgba(255,255,255,0.35)';
+                for (let s=0;s<3;s++) {
+                    ctx.beginPath();
+                    ctx.arc(x+w*0.8+4+s*4, y-H*0.045-10-s*10+Math.sin(cp*Math.PI*2+s)*4, 5+s*2, 0, Math.PI*2);
+                    ctx.fill();
+                }
+            });
+
+            // grazing sheep on the near hillside
+            ctx.fillStyle = '#FAF3E0';
+            [[W*0.50,gy-H*0.045],[W*0.585,gy-H*0.025],[W*0.66,gy-H*0.055]].forEach(([sx,sy]) => {
+                ctx.beginPath(); ctx.ellipse(sx, sy, 11, 8, 0, 0, Math.PI*2); ctx.fill();
+                ctx.fillStyle = '#4a3a2a';
+                ctx.beginPath(); ctx.arc(sx-10, sy-2, 4, 0, Math.PI*2); ctx.fill();
+                ctx.fillStyle = '#FAF3E0';
+            });
+
+            // red phone booth
+            const px = W*0.12 + cp*W*0.02;
+            roundRect(ctx, px, gy-58, 26, 58, 3); ctx.fillStyle = '#C4440A'; ctx.fill();
+            ctx.fillStyle = 'rgba(255,255,255,0.5)'; ctx.fillRect(px+4, gy-50, 18, 26);
+            // Union Jack flag on a pole
+            const fx = W*0.78;
+            ctx.strokeStyle = '#cfcfcf'; ctx.lineWidth = 3;
+            ctx.beginPath(); ctx.moveTo(fx, gy); ctx.lineTo(fx, gy-H*0.22); ctx.stroke();
+            const fw = 70, fh = 42, fyy = gy-H*0.22;
+            ctx.fillStyle = '#1b3a7a'; ctx.fillRect(fx, fyy, fw, fh);
+            ctx.strokeStyle = '#FAF3E0'; ctx.lineWidth = 6;
+            ctx.beginPath(); ctx.moveTo(fx,fyy); ctx.lineTo(fx+fw,fyy+fh); ctx.moveTo(fx+fw,fyy); ctx.lineTo(fx,fyy+fh); ctx.stroke();
+            ctx.strokeStyle = '#C4440A'; ctx.lineWidth = 3;
+            ctx.beginPath(); ctx.moveTo(fx,fyy); ctx.lineTo(fx+fw,fyy+fh); ctx.moveTo(fx+fw,fyy); ctx.lineTo(fx,fyy+fh); ctx.stroke();
+            ctx.fillStyle = '#FAF3E0'; ctx.fillRect(fx, fyy+fh*0.4, fw, fh*0.2); ctx.fillRect(fx+fw*0.4, fyy, fw*0.2, fh);
+            ctx.fillStyle = '#C4440A'; ctx.fillRect(fx, fyy+fh*0.46, fw, fh*0.08); ctx.fillRect(fx+fw*0.46, fyy, fw*0.08, fh);
+        }
+
+        function drawFrance(cp) {
+            const ctx = ctxLm, gy = sky2ground();
+            // Seine
+            ctx.fillStyle = 'rgba(58,90,120,0.85)';
+            ctx.fillRect(0, gy, W, H-gy);
+            ctx.fillStyle = 'rgba(255,255,255,0.08)';
+            for (let i=0;i<6;i++) ctx.fillRect(W*0.05+i*W*0.16, gy+12, 50, 2);
+
+            // Haussmann riverside buildings with mansard roofs
+            const bColors = ['#cdb89a','#d8c4a6','#c2ad8e'];
+            for (let i=0;i<6;i++) {
+                const segW = W/6, x = i*segW, h = H*0.085, y = gy-h;
+                ctx.fillStyle = bColors[i%bColors.length];
+                ctx.fillRect(x+4, y, segW-8, h);
+                ctx.fillStyle = '#5a6a7a';
+                ctx.fillRect(x+4, y-8, segW-8, 8);
+                ctx.fillStyle = 'rgba(120,100,70,0.35)';
+                for (let wx=x+10; wx<x+segW-14; wx+=16) ctx.fillRect(wx, y+10, 8, h*0.5);
+            }
+
+            // Eiffel Tower — tapered legs, two platforms, slender spire
+            const cx = W*0.5, baseW = W*0.32, baseY = gy, topY = gy-H*0.64;
+            const midY = baseY-(baseY-topY)*0.38, midW = baseW*0.42;
+            const upperY = baseY-(baseY-topY)*0.72, upperW = baseW*0.16;
+            ctx.fillStyle = '#caa56a';
+            ctx.beginPath();
+            ctx.moveTo(cx-baseW/2, baseY); ctx.lineTo(cx-midW/2, midY); ctx.lineTo(cx-midW/2+6, midY); ctx.lineTo(cx-baseW/2+18, baseY);
+            ctx.closePath(); ctx.fill();
+            ctx.beginPath();
+            ctx.moveTo(cx+baseW/2, baseY); ctx.lineTo(cx+midW/2, midY); ctx.lineTo(cx+midW/2-6, midY); ctx.lineTo(cx+baseW/2-18, baseY);
+            ctx.closePath(); ctx.fill();
+            ctx.fillRect(cx-midW/2-4, midY-4, midW+8, 5);
+            ctx.beginPath();
+            ctx.moveTo(cx-midW/2, midY); ctx.lineTo(cx-upperW/2, upperY); ctx.lineTo(cx-upperW/2+3, upperY); ctx.lineTo(cx-midW/2+10, midY);
+            ctx.closePath(); ctx.fill();
+            ctx.beginPath();
+            ctx.moveTo(cx+midW/2, midY); ctx.lineTo(cx+upperW/2, upperY); ctx.lineTo(cx+upperW/2-3, upperY); ctx.lineTo(cx+midW/2-10, midY);
+            ctx.closePath(); ctx.fill();
+            ctx.fillRect(cx-upperW/2-3, upperY-4, upperW+6, 4);
+            ctx.beginPath();
+            ctx.moveTo(cx-upperW/2, upperY); ctx.lineTo(cx, topY); ctx.lineTo(cx+upperW/2, upperY); ctx.closePath(); ctx.fill();
+
+            // lattice cross-bracing
+            ctx.strokeStyle = '#caa56a'; ctx.lineWidth = 2;
+            for (let i=1;i<=5;i++) {
+                const f = i/6, yy = baseY - f*(baseY-midY), xw = lerp(baseW/2, midW/2, f);
+                ctx.beginPath();
+                ctx.moveTo(cx-xw, yy+10); ctx.lineTo(cx+xw, yy-10);
+                ctx.moveTo(cx+xw, yy+10); ctx.lineTo(cx-xw, yy-10);
+                ctx.stroke();
+            }
+            for (let i=1;i<=3;i++) {
+                const f = i/4, yy = midY - f*(midY-upperY), xw = lerp(midW/2, upperW/2, f);
+                ctx.beginPath();
+                ctx.moveTo(cx-xw, yy+6); ctx.lineTo(cx+xw, yy-6);
+                ctx.moveTo(cx+xw, yy+6); ctx.lineTo(cx-xw, yy-6);
+                ctx.stroke();
+            }
+
+            // antenna + blinking beacon
+            ctx.strokeStyle = '#caa56a'; ctx.lineWidth = 3;
+            ctx.beginPath(); ctx.moveTo(cx, topY); ctx.lineTo(cx, topY-H*0.045); ctx.stroke();
+            ctx.fillStyle = `rgba(255,180,90,${0.4+0.6*Math.abs(Math.sin(cp*Math.PI*4))})`;
+            ctx.beginPath(); ctx.arc(cx, topY-H*0.045, 4, 0, Math.PI*2); ctx.fill();
+
+            // Champ de Mars lawn
+            ctx.fillStyle = 'rgba(95,142,78,0.5)';
+            ctx.fillRect(cx-baseW*0.9, gy-6, baseW*1.8, 6);
+
+            // pont (bridge arches) + a passing bateau-mouche
+            ctx.strokeStyle = 'rgba(250,243,224,0.5)'; ctx.lineWidth = 6;
+            ctx.beginPath();
+            for (let i=0;i<5;i++) {
+                const ax = W*0.08 + i*W*0.21;
+                ctx.moveTo(ax, gy+10); ctx.arc(ax+W*0.105, gy+10, W*0.105, Math.PI, 0);
+            }
+            ctx.stroke();
+            const boatX = W*0.1 + cp*W*0.55;
+            roundRect(ctx, boatX, gy+H*0.045, 60, 14, 5); ctx.fillStyle = '#FAF3E0'; ctx.fill();
+            ctx.fillStyle = '#3a5a8a'; ctx.fillRect(boatX+8, gy+H*0.045-6, 44, 6);
+        }
+
+        function drawGermany(cp) {
+            const ctx = ctxLm, gy = sky2ground();
+
+            // Fernsehturm (Berlin TV Tower), distant
+            const ftx = W*0.87, ftBaseY = gy-H*0.04;
+            ctx.strokeStyle = 'rgba(207,198,192,0.7)'; ctx.lineWidth = 5;
+            ctx.beginPath(); ctx.moveTo(ftx, ftBaseY); ctx.lineTo(ftx, ftBaseY-H*0.40); ctx.stroke();
+            ctx.fillStyle = 'rgba(207,198,192,0.7)';
+            ctx.beginPath(); ctx.arc(ftx, ftBaseY-H*0.40, 16, 0, Math.PI*2); ctx.fill();
+            ctx.strokeStyle = 'rgba(207,198,192,0.7)'; ctx.lineWidth = 3;
+            ctx.beginPath(); ctx.moveTo(ftx, ftBaseY-H*0.40-16); ctx.lineTo(ftx, ftBaseY-H*0.40-34); ctx.stroke();
+            ctx.fillStyle = `rgba(255,200,120,${0.4+0.5*Math.abs(Math.sin(cp*Math.PI*4))})`;
+            ctx.beginPath(); ctx.arc(ftx, ftBaseY-H*0.40-34, 4, 0, Math.PI*2); ctx.fill();
+
+            const cx = W*0.5, gateW = W*0.46, colW = gateW/6, gateH = H*0.34, top = gy-gateH;
+            // platform / steps
+            ctx.fillStyle = '#cfc6b8'; ctx.fillRect(cx-gateW/2-14, gy-12, gateW+28, 12);
+            ctx.fillStyle = '#b8aea0'; ctx.fillRect(cx-gateW/2-10, gy-6, gateW+20, 6);
+
+            // 6 fluted Doric columns forming 5 passageways
+            for (let i=0;i<6;i++) {
+                const cxp = cx-gateW/2 + i*colW + colW*0.18, cw = colW*0.64;
+                ctx.fillStyle = '#e8e2d4';
+                ctx.fillRect(cxp, top+gateH*0.12, cw, gateH*0.88);
+                ctx.strokeStyle = 'rgba(150,135,110,0.4)'; ctx.lineWidth = 1;
+                for (let f=1;f<4;f++) {
+                    ctx.beginPath(); ctx.moveTo(cxp+cw*f/4, top+gateH*0.12); ctx.lineTo(cxp+cw*f/4, top+gateH); ctx.stroke();
+                }
+            }
+            // entablature with triglyph frieze + attic
+            ctx.fillStyle = '#e8e2d4';
+            ctx.fillRect(cx-gateW/2-6, top, gateW+12, gateH*0.12);
+            ctx.fillStyle = 'rgba(120,105,85,0.4)';
+            for (let x=cx-gateW/2; x<cx+gateW/2; x+=colW/2) ctx.fillRect(x, top+gateH*0.02, 6, gateH*0.08);
+            ctx.fillStyle = '#cfc6b8';
+            ctx.fillRect(cx-gateW/2+gateW*0.08, top-gateH*0.06, gateW*0.84, gateH*0.06);
+
+            // quadriga — chariot, four horses, winged Victoria
+            const qy = top-gateH*0.06;
+            ctx.fillStyle = '#3a3a3a';
+            for (let i=0;i<4;i++) {
+                const hx = cx - 66 + i*36;
+                ctx.beginPath(); ctx.ellipse(hx, qy-14, 18, 9, 0, 0, Math.PI*2); ctx.fill();
+                ctx.fillRect(hx-10, qy-6, 3, 12); ctx.fillRect(hx+6, qy-6, 3, 12);
+                ctx.beginPath(); ctx.ellipse(hx+16, qy-22, 7, 5, -0.4, 0, Math.PI*2); ctx.fill();
+            }
+            roundRect(ctx, cx-22, qy-18, 44, 14, 3); ctx.fill();
+            ctx.fillRect(cx-3, qy-34, 6, 16);
+            ctx.beginPath(); ctx.arc(cx, qy-38, 5, 0, Math.PI*2); ctx.fill();
+            ctx.beginPath(); ctx.moveTo(cx-3,qy-30); ctx.lineTo(cx-18,qy-26); ctx.lineTo(cx-3,qy-22); ctx.closePath(); ctx.fill();
+            ctx.beginPath(); ctx.moveTo(cx+3,qy-30); ctx.lineTo(cx+18,qy-26); ctx.lineTo(cx+3,qy-22); ctx.closePath(); ctx.fill();
+
+            // small flags (Belgium / Netherlands / Germany — Benelux & Germany leg)
+            const flags = [
+                ['#000','#FDDA24','#EF3340'],
+                ['#AE1C28','#FFFFFF','#21468B'],
+                ['#000','#DD0000','#FFCE00']
+            ];
+            flags.forEach((cols, i) => {
+                const fx = W*0.08 + i*W*0.06, fy = gy-H*0.2;
+                ctx.strokeStyle = '#cfcfcf'; ctx.lineWidth=2;
+                ctx.beginPath(); ctx.moveTo(fx, gy); ctx.lineTo(fx, fy); ctx.stroke();
+                cols.forEach((c, j) => { ctx.fillStyle=c; ctx.fillRect(fx, fy+j*10, 36, 10); });
+            });
+
+            // Pariser Platz cobblestones
+            ctx.fillStyle = 'rgba(120,110,95,0.22)';
+            for (let x=0; x<W; x+=14) for (let row=0; row<2; row++) ctx.fillRect(x+(row%2)*7, gy+row*7, 8, 5);
+        }
+
+        function drawCzechia(cp) {
+            const ctx = ctxLm, gy = sky2ground();
+            // Vltava
+            ctx.fillStyle = 'rgba(58,90,120,0.85)';
+            ctx.fillRect(0, gy, W, H-gy);
+            ctx.fillStyle = 'rgba(255,255,255,0.07)';
+            for (let i=0;i<6;i++) ctx.fillRect(W*0.05+i*W*0.16, gy+12, 50, 2);
+
+            // Prague Castle hill + St. Vitus Cathedral, background
+            const hillX = W*0.62, hillY = gy-H*0.20;
+            ctx.fillStyle = '#6f8a62';
+            ctx.beginPath();
+            ctx.moveTo(W*0.4, gy); ctx.quadraticCurveTo(hillX, hillY-H*0.05, W, gy-H*0.05); ctx.lineTo(W,gy); ctx.closePath(); ctx.fill();
+            ctx.fillStyle = '#cfc6b8';
+            ctx.fillRect(hillX-W*0.02, hillY, W*0.22, H*0.07);
+            [[-1,0.16],[0,0.22],[1,0.16]].forEach(([s,hh]) => {
+                const tx = hillX+W*0.09 + s*W*0.05;
+                ctx.fillStyle = '#cfc6b8';
+                ctx.fillRect(tx-6, hillY-H*hh, 12, H*hh);
+                ctx.beginPath(); ctx.moveTo(tx-7,hillY-H*hh); ctx.lineTo(tx,hillY-H*hh-H*0.06); ctx.lineTo(tx+7,hillY-H*hh); ctx.closePath();
+                ctx.fillStyle = '#5a6a7a'; ctx.fill();
+            });
+
+            // distant red rooftops along the bank
+            for (let i=0;i<8;i++) {
+                const x = i*W/8, h = H*(0.06+ (i%3)*0.015);
+                ctx.fillStyle = '#cfc6b8'; ctx.fillRect(x+4, gy-h, W/8-8, h);
+                ctx.beginPath(); ctx.moveTo(x+4,gy-h); ctx.lineTo(x+W/16,gy-h-12); ctx.lineTo(x+W/8-4,gy-h); ctx.closePath();
+                ctx.fillStyle = '#9c4a3a'; ctx.fill();
+            }
+
+            // Charles Bridge towers with gothic roofs + gallery windows
+            const towW = W*0.07, towH = H*0.30;
+            [W*0.18, W*0.74].forEach(tx => {
+                ctx.fillStyle = '#cdb89a';
+                ctx.fillRect(tx, gy-towH, towW, towH);
+                ctx.fillStyle = 'rgba(120,100,70,0.35)';
+                for (let wy=gy-towH+14; wy<gy-26; wy+=26) ctx.fillRect(tx+towW*0.3, wy, towW*0.4, 14);
+                ctx.beginPath();
+                ctx.moveTo(tx-4, gy-towH); ctx.lineTo(tx+towW/2, gy-towH-H*0.06); ctx.lineTo(tx+towW+4, gy-towH); ctx.closePath();
+                ctx.fillStyle = '#5a6a7a'; ctx.fill();
+            });
+            // bridge deck with arches
+            const deckY = gy-towH*0.35;
+            ctx.fillStyle = '#cdb89a';
+            ctx.fillRect(W*0.18, deckY, W*0.56+towW, H*0.05);
+            ctx.fillStyle = lerpColor('#3c4570','#8b8fc9',cp);
+            for (let i=0;i<5;i++) {
+                const ax = W*0.18 + towW + i*W*0.105;
+                ctx.beginPath(); ctx.arc(ax+W*0.05, gy, W*0.05, Math.PI, 0); ctx.fill();
+            }
+            // baroque statues along the parapet
+            ctx.fillStyle = '#8a8478';
+            for (let i=0;i<6;i++) {
+                const sx = W*0.21 + i*W*0.095, sy = deckY;
+                ctx.fillRect(sx-2, sy-14, 4, 14);
+                ctx.beginPath(); ctx.arc(sx, sy-17, 4, 0, Math.PI*2); ctx.fill();
+            }
+        }
+
+        function drawHungary(cp) {
+            const ctx = ctxLm, gy = sky2ground();
+            // Danube with sunset reflection
+            const rg = ctxLm.createLinearGradient(0,gy,0,H);
+            rg.addColorStop(0,'rgba(255,154,82,0.55)');
+            rg.addColorStop(1,'rgba(40,40,80,0.85)');
+            ctx.fillStyle = rg; ctx.fillRect(0,gy,W,H-gy);
+
+            // Parliament building — neo-Gothic facade
+            const cx = W*0.5, bw = W*0.62, bh = H*0.20, by = gy-bh;
+            ctx.fillStyle = '#e8d9b8';
+            ctx.fillRect(cx-bw/2, by, bw, bh);
+            // arched windows
+            ctx.fillStyle = 'rgba(120,90,50,0.3)';
+            for (let x=cx-bw/2+12; x<cx+bw/2-12; x+=20) {
+                ctx.beginPath();
+                ctx.moveTo(x, by+bh*0.85); ctx.lineTo(x, by+bh*0.45); ctx.arc(x+4, by+bh*0.45, 4, Math.PI, 0); ctx.lineTo(x+8, by+bh*0.85);
+                ctx.closePath(); ctx.fill();
+            }
+            // roofline pinnacles
+            ctx.fillStyle = '#e8d9b8';
+            for (let x=cx-bw/2+8; x<cx+bw/2-8; x+=18) {
+                ctx.fillRect(x, by-6, 4, 6);
+                ctx.beginPath(); ctx.moveTo(x-2,by-6); ctx.lineTo(x+2,by-16); ctx.lineTo(x+6,by-6); ctx.closePath(); ctx.fill();
+            }
+            // central dome — ribbed cupola, lantern + gold spire
+            const domeR = bw*0.13;
+            ctx.fillStyle = '#cdbb95';
+            ctx.beginPath(); ctx.arc(cx, by, domeR, Math.PI, 0); ctx.fill();
+            ctx.strokeStyle = 'rgba(120,95,55,0.4)'; ctx.lineWidth = 2;
+            for (let i=1;i<6;i++) {
+                const a = Math.PI - i*Math.PI/6;
+                ctx.beginPath(); ctx.moveTo(cx,by); ctx.lineTo(cx+Math.cos(a)*domeR, by+Math.sin(a)*domeR); ctx.stroke();
+            }
+            ctx.fillStyle = '#e8d9b8'; ctx.fillRect(cx-7, by-domeR-10, 14, 10);
+            ctx.fillStyle = '#c9922a';
+            ctx.beginPath(); ctx.moveTo(cx-6,by-domeR-10); ctx.lineTo(cx,by-domeR-34); ctx.lineTo(cx+6,by-domeR-10); ctx.closePath(); ctx.fill();
+            ctx.beginPath(); ctx.arc(cx, by-domeR-36, 3, 0, Math.PI*2); ctx.fill();
+            // side spires on each wing
+            for (let i=-1;i<=1;i+=2) {
+                for (let k=1;k<=3;k++) {
+                    const sx = cx + i*(bw*0.18 + k*bw*0.075);
+                    ctx.fillStyle = '#e8d9b8';
+                    ctx.fillRect(sx-5, by-26, 10, 26);
+                    ctx.beginPath(); ctx.moveTo(sx-5,by-26); ctx.lineTo(sx,by-40); ctx.lineTo(sx+5,by-26); ctx.closePath(); ctx.fill();
+                    ctx.fillStyle = '#c9922a';
+                    ctx.beginPath(); ctx.arc(sx, by-40, 2, 0, Math.PI*2); ctx.fill();
+                }
+            }
+            // windows glow
+            ctx.fillStyle = `rgba(255,210,140,${0.35+0.25*Math.sin(cp*Math.PI*2)})`;
+            for (let x=cx-bw/2+14; x<cx+bw/2-14; x+=22) ctx.fillRect(x, by+bh*0.35, 8, bh*0.4);
+
+            // Chain Bridge crossing the Danube, foreground
+            const chy = gy + (H-gy)*0.32;
+            ctx.strokeStyle = 'rgba(40,30,20,0.55)'; ctx.lineWidth = 4;
+            [W*0.14, W*0.86].forEach(px => {
+                ctx.beginPath(); ctx.moveTo(px, chy+30); ctx.lineTo(px, chy-H*0.07); ctx.stroke();
+                ctx.beginPath(); ctx.moveTo(px-10, chy-H*0.07); ctx.lineTo(px+10, chy-H*0.07); ctx.stroke();
+            });
+            ctx.beginPath();
+            ctx.moveTo(W*0.14, chy); ctx.quadraticCurveTo(W*0.5, chy-H*0.05, W*0.86, chy); ctx.stroke();
+            ctx.lineWidth = 2;
+            for (let i=0;i<10;i++) {
+                const t = i/9, x = lerp(W*0.14, W*0.86, t);
+                const y = chy - H*0.05*4*t*(1-t);
+                ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x, chy+24); ctx.stroke();
+            }
+            ctx.lineWidth = 3;
+            ctx.beginPath(); ctx.moveTo(W*0.14, chy+24); ctx.lineTo(W*0.86, chy+24); ctx.stroke();
+
+            // reflection
+            ctx.fillStyle = 'rgba(255,180,110,0.18)';
+            ctx.fillRect(cx-bw/2, gy, bw, (H-gy)*0.5);
+        }
+
+        function drawTurkiye(cp) {
+            const ctx = ctxLm, gy = sky2ground();
+            // Bosphorus
+            ctx.fillStyle = 'rgba(40,40,80,0.85)'; ctx.fillRect(0,gy,W,H-gy);
+            ctx.fillStyle = 'rgba(255,255,255,0.08)';
+            for (let i=0;i<6;i++) ctx.fillRect(W*0.05+i*W*0.16, gy+14, 50, 2);
+
+            const cx = W*0.5, domeR = W*0.14, by = gy-H*0.10;
+            // main building base
+            ctx.fillStyle = '#cdb89a';
+            ctx.fillRect(cx-domeR*1.8, by, domeR*3.6, H*0.10);
+            ctx.fillStyle = 'rgba(120,100,70,0.3)';
+            for (let x=cx-domeR*1.7; x<cx+domeR*1.7; x+=18) ctx.fillRect(x, by+H*0.02, 8, H*0.06);
+
+            // buttress half-domes around the base
+            [-1.05,-0.55,0.55,1.05].forEach(s => {
+                ctx.beginPath(); ctx.arc(cx+s*domeR, by+8, domeR*0.42, Math.PI, 0); ctx.fillStyle = '#a99cc0'; ctx.fill();
+            });
+            // smaller flanking domes
+            [-1,1].forEach(s => {
+                ctx.beginPath(); ctx.arc(cx+s*domeR*1.5, by, domeR*0.6, Math.PI, 0); ctx.fillStyle = '#a99cc0'; ctx.fill();
+            });
+
+            // central dome with ribbing
+            ctx.beginPath(); ctx.arc(cx, by, domeR, Math.PI, 0); ctx.fillStyle = '#bdb0c8'; ctx.fill();
+            ctx.strokeStyle = 'rgba(110,95,135,0.4)'; ctx.lineWidth = 1.5;
+            for (let i=1;i<6;i++) {
+                const a = Math.PI - i*Math.PI/6;
+                ctx.beginPath(); ctx.moveTo(cx,by); ctx.lineTo(cx+Math.cos(a)*domeR, by+Math.sin(a)*domeR); ctx.stroke();
+            }
+            // crescent finial
+            ctx.fillStyle = '#FAF3E0';
+            ctx.beginPath(); ctx.arc(cx, by-domeR-14, 6, 0, Math.PI*2); ctx.fill();
+            ctx.fillStyle = lerpColor('#241c3d','#5a4a7a',cp);
+            ctx.beginPath(); ctx.arc(cx+2.5, by-domeR-14, 6, 0, Math.PI*2); ctx.fill();
+
+            // four pencil minarets — near pair + a distant pair across the strait
+            [
+                {s:-2.6, h:0.32, far:false},
+                {s: 2.6, h:0.32, far:false},
+                {s:-3.6, h:0.22, far:true},
+                {s: 3.6, h:0.22, far:true}
+            ].forEach(m => {
+                const mx = cx + m.s*domeR*0.9, mh = H*m.h;
+                ctx.fillStyle = m.far ? 'rgba(180,170,200,0.5)' : '#cdb89a';
+                ctx.fillRect(mx-3, by-mh, 6, mh+H*0.10);
+                ctx.fillRect(mx-5, by-mh*0.4, 10, 3);
+                ctx.beginPath(); ctx.moveTo(mx-3, by-mh); ctx.lineTo(mx, by-mh-22); ctx.lineTo(mx+3, by-mh); ctx.closePath();
+                ctx.fillStyle = m.far ? 'rgba(160,150,185,0.5)' : '#a99cc0'; ctx.fill();
+            });
+
+            // boats crossing the Bosphorus
+            ctx.fillStyle = '#FAF3E0';
+            const boatX = W*0.12 + cp*W*0.6;
+            roundRect(ctx, boatX, gy+H*0.06, 46, 12, 5); ctx.fill();
+            ctx.fillStyle = '#C4440A'; ctx.fillRect(boatX+6, gy+H*0.06-8, 4, 8);
+        }
+
+        function drawHimalaya(cp) {
+            const ctx = ctxLm, gy = sky2ground();
+            const layers = [
+                { h: 0.30, c: '#2b3a5e' },
+                { h: 0.22, c: '#3c4f7a' },
+                { h: 0.14, c: '#54699a' }
+            ];
+            layers.forEach((L, li) => {
+                ctx.fillStyle = L.c;
+                ctx.beginPath();
+                ctx.moveTo(0, gy);
+                const peaks = 4 + li;
+                for (let i=0;i<=peaks;i++) {
+                    const x = (i/peaks)*W;
+                    const y = gy - H*L.h*(0.5 + 0.5*Math.sin(i*1.7+li*2));
+                    ctx.lineTo(x,y);
+                }
+                ctx.lineTo(W,gy); ctx.closePath(); ctx.fill();
+                // snow caps on front layer only
+                if (li === layers.length-1) {
+                    ctx.fillStyle = 'rgba(255,255,255,0.85)';
+                    for (let i=0;i<=peaks;i++) {
+                        const x = (i/peaks)*W;
+                        const y = gy - H*L.h*(0.5 + 0.5*Math.sin(i*1.7+li*2));
+                        ctx.beginPath();
+                        ctx.moveTo(x-18,y+22); ctx.lineTo(x,y); ctx.lineTo(x+18,y+22); ctx.closePath(); ctx.fill();
+                    }
+                }
+            });
+            // a distinct fishtail peak (Machapuchare-style), centre-stage
+            const px = W*0.52, py = gy - H*0.46;
+            ctx.fillStyle = '#54699a';
+            ctx.beginPath();
+            ctx.moveTo(px-W*0.10, gy); ctx.lineTo(px-6, py+16); ctx.lineTo(px, py); ctx.lineTo(px+6, py+16); ctx.lineTo(px+W*0.10, gy);
+            ctx.closePath(); ctx.fill();
+            ctx.fillStyle = 'rgba(255,255,255,0.92)';
+            ctx.beginPath();
+            ctx.moveTo(px-26,py+30); ctx.lineTo(px-6,py+16); ctx.lineTo(px,py); ctx.lineTo(px+6,py+16); ctx.lineTo(px+26,py+30);
+            ctx.lineTo(px+14,py+34); ctx.lineTo(px,py+16); ctx.lineTo(px-14,py+34); ctx.closePath(); ctx.fill();
+
+            // gompa (monastery) with a stupa on the near hillside
+            const gx = W*0.18, gby = gy-H*0.05;
+            ctx.fillStyle = '#cdb89a'; roundRect(ctx, gx, gby-H*0.075, W*0.10, H*0.075, 3); ctx.fill();
+            ctx.fillStyle = '#9c4a3a'; ctx.fillRect(gx-4, gby-H*0.085, W*0.10+8, H*0.012);
+            ctx.fillStyle = 'rgba(120,90,50,0.35)';
+            for (let wx=gx+6; wx<gx+W*0.10-10; wx+=14) ctx.fillRect(wx, gby-H*0.055, 7, H*0.03);
+            const stx = gx + W*0.135;
+            ctx.fillStyle = '#FAF3E0';
+            ctx.beginPath(); ctx.arc(stx, gby-H*0.03, 14, Math.PI, 0); ctx.fill();
+            ctx.fillRect(stx-14, gby-H*0.03, 28, 6);
+            ctx.fillStyle = '#C9922A';
+            ctx.beginPath(); ctx.moveTo(stx-5, gby-H*0.03-14); ctx.lineTo(stx+5, gby-H*0.03-14); ctx.lineTo(stx, gby-H*0.03-32); ctx.closePath(); ctx.fill();
+            ctx.fillStyle = '#2a1a0a';
+            ctx.beginPath(); ctx.arc(stx-3, gby-H*0.03-16, 1.5, 0, Math.PI*2); ctx.arc(stx+3, gby-H*0.03-16, 1.5, 0, Math.PI*2); ctx.fill();
+
+            // prayer flags strung across
+            const fy = gy-H*0.34;
+            ctx.strokeStyle = 'rgba(255,255,255,0.4)'; ctx.lineWidth = 2;
+            ctx.beginPath(); ctx.moveTo(W*0.15,fy); ctx.quadraticCurveTo(W*0.5,fy+30,W*0.85,fy-8); ctx.stroke();
+            const flagColors = ['#3a5fa0','#FAF3E0','#C4440A','#3a7a4a','#C9922A'];
+            for (let i=0;i<10;i++) {
+                const t = i/9;
+                const x = lerp(W*0.15, W*0.85, t);
+                const y = lerp(fy, fy-8, t) + 30*Math.sin(Math.PI*t);
+                ctx.fillStyle = flagColors[i%flagColors.length];
+                ctx.beginPath(); ctx.moveTo(x,y); ctx.lineTo(x+10,y); ctx.lineTo(x+5,y+16); ctx.closePath(); ctx.fill();
+            }
+        }
+
+        function drawIndia(cp) {
+            const ctx = ctxLm, gy = sky2ground();
+            // Arabian Sea
+            ctx.fillStyle = 'rgba(40,60,90,0.85)'; ctx.fillRect(0,gy,W,H-gy);
+            ctx.fillStyle = 'rgba(255,255,255,0.18)';
+            for (let i=0;i<8;i++) ctx.fillRect(Math.random()*W, gy+10+Math.random()*(H-gy-20), 30, 2);
+
+            // Taj Mahal Palace Hotel, alongside the Gateway
+            const thx = W*0.74, thw = W*0.16, thh = H*0.18, thy = gy-thh;
+            ctx.fillStyle = '#d8c4a6';
+            ctx.fillRect(thx, thy, thw, thh);
+            ctx.fillStyle = 'rgba(120,100,70,0.3)';
+            for (let wy=thy+10; wy<gy-12; wy+=18) for (let wx=thx+8; wx<thx+thw-12; wx+=18) ctx.fillRect(wx, wy, 8, 10);
+            ctx.fillStyle = '#cdb89a';
+            ctx.beginPath(); ctx.arc(thx+thw/2, thy, thw*0.16, Math.PI, 0); ctx.fill();
+            ctx.fillStyle = '#C9922A';
+            ctx.beginPath(); ctx.moveTo(thx+thw/2-4, thy-thw*0.16); ctx.lineTo(thx+thw/2, thy-thw*0.16-16); ctx.lineTo(thx+thw/2+4, thy-thw*0.16); ctx.closePath(); ctx.fill();
+
+            // Gateway of India — central arch, domed crown, flanked by domed turrets
+            const cx = W*0.42, archW = W*0.16, archH = H*0.32, by = gy;
+            ctx.fillStyle = '#cdb89a';
+            ctx.fillRect(cx-archW*1.8, by-archH*0.55, archW*3.6, archH*0.55);
+            // jali (lattice) screens on the wings
+            ctx.fillStyle = 'rgba(120,100,70,0.3)';
+            for (let s=-1;s<=1;s+=2) {
+                for (let wx=cx+s*archW*0.9; Math.abs(wx-cx) < archW*1.7; wx += s*22) {
+                    for (let wy=by-archH*0.48; wy<by-archH*0.1; wy+=20) ctx.fillRect(wx, wy, 10, 12);
+                }
+            }
+            // big central arch
+            ctx.fillStyle = '#bda87f';
+            roundRect(ctx, cx-archW/2, by-archH, archW, archH, archW*0.5); ctx.fill();
+            ctx.fillStyle = lerpColor('#ffb15c','#2c3a5e',cp);
+            ctx.beginPath(); ctx.arc(cx, by-archH*0.42, archW*0.32, 0, Math.PI, true); ctx.fill();
+            ctx.fillRect(cx-archW*0.32, by-archH*0.42, archW*0.64, archH*0.42);
+            // central dome above the arch
+            ctx.fillStyle = '#cdb89a';
+            ctx.beginPath(); ctx.arc(cx, by-archH, archW*0.34, Math.PI, 0); ctx.fill();
+            ctx.fillStyle = '#C9922A';
+            ctx.beginPath(); ctx.moveTo(cx-5, by-archH-archW*0.34); ctx.lineTo(cx, by-archH-archW*0.34-20); ctx.lineTo(cx+5, by-archH-archW*0.34); ctx.closePath(); ctx.fill();
+            ctx.beginPath(); ctx.arc(cx, by-archH-archW*0.34-22, 3, 0, Math.PI*2); ctx.fill();
+            // side turrets with small domes
+            [-1,1].forEach(s => {
+                const tx = cx + s*archW*1.6;
+                ctx.fillStyle = '#cdb89a';
+                ctx.fillRect(tx-8, by-archH*0.75, 16, archH*0.75);
+                ctx.beginPath(); ctx.arc(tx, by-archH*0.75, 9, Math.PI, 0); ctx.fill();
+                ctx.fillStyle = '#C9922A';
+                ctx.beginPath(); ctx.moveTo(tx-3, by-archH*0.75-9); ctx.lineTo(tx, by-archH*0.75-20); ctx.lineTo(tx+3, by-archH*0.75-9); ctx.closePath(); ctx.fill();
+            });
+
+            // ferry boats crossing toward Elephanta
+            ctx.fillStyle = '#FAF3E0';
+            const bx2 = W*0.05 + cp*W*0.55;
+            roundRect(ctx, bx2, gy+H*0.05, 50, 13, 5); ctx.fill();
+            ctx.fillStyle = '#3a5a8a'; ctx.fillRect(bx2+8, gy+H*0.05-7, 5, 7);
+
+            // birds
+            ctx.strokeStyle = 'rgba(255,255,255,0.6)'; ctx.lineWidth = 2;
+            for (let i=0;i<3;i++) {
+                const bx = W*0.1 + i*W*0.06 + cp*W*0.02, byy = H*0.16 + i*16;
+                ctx.beginPath();
+                ctx.moveTo(bx-8,byy); ctx.quadraticCurveTo(bx,byy-8,bx+8,byy);
+                ctx.moveTo(bx,byy); ctx.quadraticCurveTo(bx+8,byy-8,bx+16,byy);
+                ctx.stroke();
+            }
+        }
+
+        function drawPandharpur(cp) {
+            const ctx = ctxLm, gy = sky2ground();
+            // Chandrabhaga river
+            const rg = ctxLm.createLinearGradient(0,gy,0,H);
+            rg.addColorStop(0,'rgba(255,210,122,0.5)');
+            rg.addColorStop(1,'rgba(58,74,107,0.85)');
+            ctx.fillStyle = rg; ctx.fillRect(0,gy,W,H-gy);
+            // gentle ripples on the river
+            ctx.strokeStyle = 'rgba(255,255,255,0.18)'; ctx.lineWidth = 2;
+            for (let i=0;i<5;i++) {
+                const ry = gy + H*0.06 + i*H*0.045;
+                ctx.beginPath(); ctx.moveTo(0, ry);
+                for (let x=0;x<=W;x+=20) ctx.lineTo(x, ry + Math.sin(x*0.05 + cp*6 + i)*2);
+                ctx.stroke();
+            }
+
+            // ghat steps leading down to the river
+            const cx = W*0.5, hallW = W*0.42, hallH = H*0.12, by = gy-hallH;
+            const ghatW = hallW*1.15, ghatSteps = 4;
+            for (let i=0;i<ghatSteps;i++) {
+                const f = i/ghatSteps;
+                ctx.fillStyle = lerpColor('#cdb89a','#a89576', f);
+                const sw = ghatW*(1-f*0.18);
+                ctx.fillRect(cx-sw/2, gy + i*7, sw, 9);
+            }
+            // a few pilgrim silhouettes on the ghat steps
+            ctx.fillStyle = '#8a5a3a';
+            [[-0.30,1],[-0.12,2],[0.08,1],[0.24,3]].forEach(([off,step]) => {
+                const px = cx + off*ghatW, py = gy + step*7 + 2;
+                ctx.beginPath(); ctx.arc(px, py-7, 3, 0, Math.PI*2); ctx.fill();
+                ctx.fillRect(px-3, py-4, 6, 7);
+            });
+
+            // temple hall (sabha mandap) with pillared entrance
+            ctx.fillStyle = '#e8d9b8';
+            ctx.fillRect(cx-hallW/2, by, hallW, hallH);
+            ctx.fillStyle = 'rgba(150,90,40,0.4)';
+            for (let x=cx-hallW/2+10;x<cx+hallW/2-10;x+=18) ctx.fillRect(x, by+hallH*0.3, 6, hallH*0.5);
+            // arched doorway under the main shikhara
+            ctx.fillStyle = lerpColor('#ffd27a','#3a4a6b', cp);
+            roundRect(ctx, cx-hallW*0.08, by+hallH*0.15, hallW*0.16, hallH*0.85, hallW*0.06); ctx.fill();
+
+            // flanking smaller shrine towers (domed)
+            [-1,1].forEach(s => {
+                const sx = cx + s*W*0.165, sw = W*0.09, sh = H*0.18, sby = gy-hallH*0.7;
+                ctx.fillStyle = '#e8d9b8'; ctx.fillRect(sx-sw/2, sby-sh, sw, sh);
+                ctx.fillStyle = 'rgba(150,90,40,0.35)';
+                ctx.fillRect(sx-4, sby-sh*0.55, 8, sh*0.4);
+                // ribbed dome
+                ctx.fillStyle = '#d9622a';
+                ctx.beginPath(); ctx.arc(sx, sby-sh, sw*0.42, Math.PI, 0); ctx.fill();
+                ctx.strokeStyle = '#C4440A'; ctx.lineWidth = 1.5;
+                for (let r=-2;r<=2;r++) {
+                    ctx.beginPath(); ctx.moveTo(sx, sby-sh); ctx.lineTo(sx + r*sw*0.16, sby-sh-sw*0.4); ctx.stroke();
+                }
+                ctx.fillStyle = '#C9922A';
+                ctx.beginPath(); ctx.arc(sx, sby-sh-sw*0.42, 4, 0, Math.PI*2); ctx.fill();
+            });
+
+            // main shikhara (tiered tower) — taller & more ornate
+            const tiers = 6, twBase = W*0.20, th = H*0.40;
+            for (let i=0;i<tiers;i++) {
+                const f = i/tiers, nf = (i+1)/tiers;
+                const w0 = twBase*(1-f*0.82), w1 = twBase*(1-nf*0.82);
+                const y0 = by - th*f, y1 = by - th*nf;
+                ctx.fillStyle = i%2===0 ? '#C4440A' : '#d9622a';
+                ctx.beginPath();
+                ctx.moveTo(cx-w0/2,y0); ctx.lineTo(cx-w1/2,y1); ctx.lineTo(cx+w1/2,y1); ctx.lineTo(cx+w0/2,y0); ctx.closePath();
+                ctx.fill();
+                // small niche markings on each tier
+                ctx.fillStyle = 'rgba(255,230,180,0.35)';
+                ctx.fillRect(cx-w1*0.12, y1+ (y0-y1)*0.3, w1*0.24, (y0-y1)*0.4);
+            }
+            // amalaka + kalash + flag (bhagwa dhwaj)
+            ctx.fillStyle = '#FAF3E0';
+            ctx.beginPath(); ctx.ellipse(cx, by-th, twBase*0.09, twBase*0.05, 0, 0, Math.PI*2); ctx.fill();
+            ctx.fillStyle = '#C9922A';
+            ctx.beginPath(); ctx.arc(cx, by-th-8, 7, 0, Math.PI*2); ctx.fill();
+            ctx.strokeStyle = '#C9922A'; ctx.lineWidth = 2;
+            ctx.beginPath(); ctx.moveTo(cx,by-th-8); ctx.lineTo(cx,by-th-38); ctx.stroke();
+            const flap = Math.sin(cp*Math.PI*2)*6;
+            ctx.fillStyle = '#C4440A';
+            ctx.beginPath(); ctx.moveTo(cx,by-th-36); ctx.lineTo(cx+28,by-th-32+flap); ctx.lineTo(cx,by-th-23); ctx.closePath(); ctx.fill();
+
+            // outer side shrines
+            [-1,1].forEach(s => {
+                const sx = cx + s*W*0.30;
+                ctx.fillStyle = '#e8d9b8'; ctx.fillRect(sx-22, gy-H*0.10, 44, H*0.10);
+                ctx.fillStyle = '#d9622a';
+                ctx.beginPath(); ctx.moveTo(sx-22,gy-H*0.10); ctx.lineTo(sx,gy-H*0.18); ctx.lineTo(sx+22,gy-H*0.10); ctx.closePath(); ctx.fill();
+                ctx.fillStyle = '#C9922A';
+                ctx.beginPath(); ctx.arc(sx, gy-H*0.18, 3, 0, Math.PI*2); ctx.fill();
+            });
+
+            // golden glow
+            ctx.fillStyle = 'rgba(255,210,122,0.18)';
+            ctx.beginPath(); ctx.arc(cx, by-th*0.4, W*0.3, 0, Math.PI*2); ctx.fill();
+        }
+
+        /* ───────── panels ───────── */
+        let lastCity = -1;
+        function updatePanels(cityIdx) {
+            counterDots.forEach((d, i) => {
+                d.classList.remove('done','live','locked');
+                if (i < LIVE_INDEX) d.classList.add('done');
+                else if (i === LIVE_INDEX) d.classList.add('live');
+                else d.classList.add('locked');
+                d.style.opacity = i === cityIdx ? '1' : (i < cityIdx ? '0.85' : '0.35');
+            });
+
+            if (cityIdx === lastCity) return;
+            lastCity = cityIdx;
+
+            const c = CITIES[cityIdx];
+            infoNum.textContent = `STOP ${String(cityIdx+1).padStart(2,'0')} / ${CITIES.length}`;
+            infoFlag.textContent = c.flag;
+            infoName.textContent = c.name;
+            infoCountry.textContent = c.country;
+            infoDesc.textContent = c.desc;
+            infoLandmark.textContent = c.landmark;
+
+            infoStatus.className = 'city-status';
+            navDot.className = 'dot-live';
+
+            if (cityIdx < LIVE_INDEX) {
+                infoStatus.classList.add('is-done');
+                infoStatusText.textContent = `${c.date} · Visited`;
+                navDot.classList.add('is-done');
+                navText.textContent = `Dindi · ${c.name}`;
+            } else if (cityIdx === LIVE_INDEX) {
+                infoStatus.classList.add('is-live');
+                infoStatusText.textContent = `${c.date} · ${c.label}`;
+                navText.textContent = `Dindi Live · ${c.name}`;
+            } else {
+                infoStatus.classList.add('is-locked');
+                infoStatusText.textContent = `Upcoming · ${c.label}`;
+                navDot.classList.add('is-locked');
+                navText.textContent = `Upcoming · ${c.name}`;
+            }
+        }
+
+        /* ───────── main render loop ───────── */
+        const CAP = (LIVE_INDEX + 0.5) / CITIES.length;
+
+        function render(now) {
+            const rect = section.getBoundingClientRect();
+            const scrollable = Math.max(1, section.offsetHeight - window.innerHeight);
+            const scrolled = -rect.top;
+            const t = Math.max(0, Math.min(1, scrolled / scrollable));
+
+            const idxFloat = t * CITIES.length;
+            const cityIdx = Math.min(CITIES.length - 1, Math.floor(idxFloat));
+            const cp = idxFloat - cityIdx;
+
+            intro.classList.toggle('hidden', t > 0.015);
+            progressFill.style.height = (t * 100).toFixed(1) + '%';
+
+            updatePanels(cityIdx);
+
+            drawSky(cityIdx, cp, now);
+
+            ctxLm.clearRect(0, 0, W, H);
+            CITIES[cityIdx].draw(cp);
+
+            const tCapped = Math.min(t, CAP);
+            drawGround(now, tCapped, t >= CAP);
+
+            if (!reduceMotion) requestAnimationFrame(render);
+        }
+
+        resize();
+        window.addEventListener('resize', resize);
+
+        if (reduceMotion) {
+            render(0);
+            window.addEventListener('scroll', () => render(performance.now()), { passive: true });
+        } else {
+            requestAnimationFrame(render);
+        }
+    })();
     </script>
 
     <script data-goatcounter="https://maharashtraineurope.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
