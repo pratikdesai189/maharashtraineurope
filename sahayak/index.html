@@ -319,7 +319,7 @@
     /* ── Responsive ── */
     @media (max-width: 600px) {
       .stats { grid-template-columns: repeat(2, 1fr); }
-      .navbar-links { display: none; }
+      .navbar-links a:not(.nav-sahayak) { display: none; }
       .card-route { display: none; }
     }
 
@@ -373,9 +373,9 @@
   </div>
   <div class="navbar-links">
     <a href="/">Home</a>
-    <a href="#">City guides</a>
-    <a href="/sahayak" class="nav-sahayak active">Sahayak ✈</a>
+    <a href="/about">About</a>
     <a href="/community">Community</a>
+    <a href="/sahayak" class="nav-sahayak active">Sahayak ✈</a>
   </div>
 </nav>
 

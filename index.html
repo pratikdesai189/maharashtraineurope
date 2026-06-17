@@ -456,7 +456,7 @@
         }
 
         @media (max-width: 768px) {
-            .navbar-links { display: none; }
+            .navbar-links a:not(.nav-sahayak) { display: none; }
             .hamburger { display: flex; }
         }
 
@@ -779,7 +779,7 @@
         </a>
         <div class="navbar-links">
             <a href="/" class="active">Home</a>
-            <a href="#">City guides</a>
+            <a href="/about">About</a>
             <a href="/community">Community</a>
             <a href="/sahayak" class="nav-sahayak">Sahayak ✈</a>
         </div>
@@ -792,9 +792,8 @@
     <!-- Mobile menu (hidden by default) -->
     <div class="mobile-menu" id="mobileMenu">
         <a href="/" class="active">Home</a>
-        <a href="#">City guides</a>
+        <a href="/about">About</a>
         <a href="/community">Community</a>
-        <a href="/sahayak">Sahayak: Travel & Letter Network</a>
     </div>
 
     <!-- ── Hero: Global Vari ── -->

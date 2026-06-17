@@ -296,7 +296,7 @@
 
     /* ── Responsive ── */
     @media (max-width: 600px) {
-      .navbar-links { display: none; }
+      .navbar-links a:not(.nav-sahayak) { display: none; }
       .hamburger { display: flex; }
       .org-card { flex-wrap: wrap; }
       .map-hint { display: none; }
@@ -313,7 +313,7 @@
   </a>
   <div class="navbar-links">
     <a href="/">Home</a>
-    <a href="#">City guides</a>
+    <a href="/about">About</a>
     <a href="/community" class="active">Community</a>
     <a href="/sahayak" class="nav-sahayak">Sahayak ✈</a>
   </div>
@@ -323,9 +323,8 @@
 </nav>
 <div class="mobile-menu" id="mobileMenu">
   <a href="/">Home</a>
-  <a href="#">City guides</a>
+  <a href="/about">About</a>
   <a href="/community" class="active">Community</a>
-  <a href="/sahayak">Sahayak ✈</a>
 </div>
 
 <!-- ── Hero ── -->
