@@ -22,6 +22,9 @@
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png">
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Yatra+One&display=swap" rel="stylesheet">
 
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
@@ -68,7 +71,10 @@
       --text:          #1A0A00;
       --text-muted:    #7A5A40;
       --border:        #EAD8C8;
-      --font:          system-ui, -apple-system, 'Segoe UI', sans-serif;
+      --font:          'Montserrat', system-ui, sans-serif;
+      --radius-sm:     6px;
+      --radius-md:     10px;
+      --radius-lg:     16px;
     }
 
     body {
@@ -123,8 +129,8 @@
       letter-spacing: 0.06em; margin-bottom: 12px;
     }
     .hero h1 { color: #fff; font-size: 22px; font-weight: 600; margin-bottom: 4px; }
-    .hero-sub { color: rgba(255,255,255,0.78); font-size: 13px; margin-bottom: 6px; font-style: italic; }
-    .hero-desc { color: rgba(255,255,255,0.7); font-size: 13px; line-height: 1.65; }
+    .hero-sub { color: rgba(255,255,255,0.92); font-size: 15px; margin-bottom: 6px; font-weight: 500; }
+    .hero-desc { color: rgba(255,255,255,0.88); font-size: 14px; line-height: 1.65; }
     .hero-actions { margin-top: 1.3rem; display: flex; gap: 10px; flex-wrap: wrap; }
     .btn-white {
       background: #fff; color: var(--saffron);
@@ -166,15 +172,24 @@
     }
 
     /* ── Filters ── */
-    .filters { display: flex; gap: 7px; flex-wrap: wrap; margin-bottom: 12px; }
+    .filters {
+      display: flex; gap: 7px; margin-bottom: 12px;
+      overflow-x: auto; scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 2px;
+    }
+    .filters::-webkit-scrollbar { display: none; }
     .tab {
-      font-size: 13px; padding: 5px 16px; border-radius: 99px;
+      font-size: 13px; padding: 7px 16px; border-radius: 99px;
       border: 0.5px solid var(--border);
       background: var(--white); color: var(--text-muted);
       cursor: pointer; transition: all .15s;
+      white-space: nowrap; flex-shrink: 0;
+      min-height: 36px;
     }
     .tab.on { background: var(--saffron); color: #fff; border-color: var(--saffron); }
     .tab:hover:not(.on) { border-color: var(--saffron); color: var(--saffron); }
+    @media (pointer: coarse) { .tab { min-height: 44px; padding: 10px 18px; } }
 
     /* ── Selects ── */
     .selects { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
@@ -199,12 +214,17 @@
     .card {
       background: var(--white);
       border: 0.5px solid var(--border);
-      border-radius: 12px; padding: 16px;
+      border-radius: var(--radius-lg); padding: 16px;
       margin-bottom: 10px;
       display: flex; gap: 13px; align-items: flex-start;
-      transition: border-color .15s;
+      transition: border-color .2s, transform .2s cubic-bezier(.16,1,.3,1),
+                  box-shadow .2s cubic-bezier(.16,1,.3,1);
     }
-    .card:hover { border-color: var(--saffron-mid); }
+    .card:hover {
+      border-color: var(--saffron-mid);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(196,68,10,0.09);
+    }
 
     .avatar {
       width: 42px; height: 42px; border-radius: 50%;
@@ -285,6 +305,41 @@
 
     @media (prefers-reduced-motion: reduce) {
       .loading-spinner { animation: none; }
+    }
+
+    /* ── Navbar scroll state ── */
+    .navbar { transition: background .3s ease; }
+    .navbar.is-scrolled {
+      background: rgba(150, 32, 6, 0.92);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    /* ── Focus visible ── */
+    .tab:focus-visible,
+    .btn-white:focus-visible,
+    .btn-outline-white:focus-visible,
+    .btn-connect:focus-visible,
+    .navbar-links a:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    /* ── Dark mode ── */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --off-white:  #130700;
+        --white:      #1E0B00;
+        --text:       #F5E8D8;
+        --text-muted: #C4A07A;
+        --border:     #3A2010;
+        --gold-light: #2A1A00;
+      }
+      .disclaimer { background: #2A1500; color: #C8A060; }
+      .badge-role-offering { background: #0D2010; color: #6FCF7A; border-color: #2E6035; }
+      .badge-role-looking  { background: #0A1828; color: #72B8F0; border-color: #1C4070; }
+      .pill { background: #1A0A00; }
     }
   </style>
 </head>
@@ -417,14 +472,12 @@
 let allData = [];
 let activeTab = 'all';
 
-/* ── Avatar colors cycling through warm saffron/gold tones ── */
-const AV_COLORS = [
-  { bg: '#FDF1EB', color: '#7A2A00' },
-  { bg: '#FAF3E0', color: '#6B4A10' },
-  { bg: '#FDF8F0', color: '#8B5010' },
-  { bg: '#FEF5EA', color: '#5A3A00' },
-  { bg: '#FDF2E5', color: '#6B3A10' },
-];
+/* ── Avatar colors: HSL rotation anchored to the saffron hue ── */
+function avatarColor(name) {
+  const h = [...(name || 'X')].reduce((a, c) => a + c.charCodeAt(0), 0) % 60;
+  const hue = 18 + h; // 18–78° — warm orange → gold range
+  return { bg: `hsl(${hue},80%,93%)`, color: `hsl(${hue},65%,26%)` };
+}
 
 function initials(name) {
   return name.trim().split(/\s+/).map(w => w[0]).join('').toUpperCase().slice(0, 2);
@@ -590,7 +643,7 @@ function render() {
   }
 
   el.innerHTML = data.map((r, i) => {
-    const av      = AV_COLORS[i % AV_COLORS.length];
+    const av      = avatarColor(r.name);
     const expired = isExpired(r.travel_date);
     const waMsg   = encodeURIComponent(
       'Namaste ' + r.name + ', I found your listing on Maharashtra in Europe (maharashtraineurope.com). I would like to connect!'
@@ -693,6 +746,14 @@ const SAMPLE_DATA = [
 
 /* ── Boot ── */
 loadListings();
+
+/* ── Navbar scroll state ── */
+const _nav = document.querySelector('.navbar');
+if (_nav) {
+  window.addEventListener('scroll', () => {
+    _nav.classList.toggle('is-scrolled', window.scrollY > 60);
+  }, { passive: true });
+}
 </script>
 
 <script data-goatcounter="https://maharashtraineurope.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
