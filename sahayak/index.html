@@ -101,6 +101,26 @@
     .navbar-links a { color: rgba(255,255,255,0.72); font-size: 13px; transition: color .15s; }
     .navbar-links a:hover, .navbar-links a.active { color: #fff; }
 
+    /* ── Sahayak pill — ALWAYS include this on every page you build.
+       Sahayak is the flagship community feature; it must stand out
+       in the nav at all times. Copy this class + the ✈ emoji to
+       any new page's navbar: <a href="/sahayak" class="nav-sahayak">Sahayak ✈</a> ── */
+    .navbar-links a.nav-sahayak {
+      background: rgba(255,255,255,0.15);
+      border: 0.5px solid rgba(255,255,255,0.35);
+      padding: 4px 13px;
+      border-radius: 99px;
+      color: #fff;
+      font-weight: 600;
+      transition: background .2s, border-color .2s;
+    }
+    .navbar-links a.nav-sahayak:hover,
+    .navbar-links a.nav-sahayak.active {
+      background: rgba(255,255,255,0.25);
+      border-color: rgba(255,255,255,0.55);
+      color: #fff;
+    }
+
     /* ── Hero ── */
     .hero {
       background: var(--saffron);
@@ -354,7 +374,7 @@
   <div class="navbar-links">
     <a href="/">Home</a>
     <a href="#">City guides</a>
-    <a href="/sahayak" class="active">Sahayak</a>
+    <a href="/sahayak" class="nav-sahayak active">Sahayak ✈</a>
     <a href="/community">Community</a>
   </div>
 </nav>
