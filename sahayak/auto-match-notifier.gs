@@ -3,14 +3,16 @@
  * ------------------------------------------------------------
  * Lives in: Google Sheet (Form Responses) → Extensions → Apps Script
  *
- * What it does:
- *  - Runs every time the Sahayak form is submitted.
- *  - Compares the new entry against all previous entries.
- *  - If two entries have the same flight number + same travel date,
- *    and one is "Looking for help" while the other is "Offering to help",
- *    it emails BOTH people letting them know about the match —
- *    without sharing each other's contact details directly.
- *    They go to the Sahayak portal to find the listing and connect.
+ * Matching rules
+ * ──────────────
+ * 1. Need companion  ↔  Offer companion  →  same flight + same date (strict)
+ * 2. Need companion  ↔  Offer carrier    →  same flight + same date (strict)
+ *    (carrier is travelling anyway, can accompany)
+ * 3. Need carrier    ↔  Offer carrier    →  same route + same month (flexible)
+ * 4. Need carrier    ↔  Offer companion  →  same route + same month (flexible)
+ *    (companion is travelling anyway, can carry a letter)
+ *
+ * Spam cap: max 3 match emails per new submission (earliest dates first).
  *
  * IMPORTANT PREREQUISITE:
  *  This requires an email address for each respondent. In your Google Form,
@@ -25,15 +27,15 @@
  *  4. Run the function `logHeaders` once (top toolbar: select it from the
  *     function dropdown, click Run). Approve the permissions prompt.
  *  5. Open View → Logs (or Executions) and check the printed list.
- *     Confirm these keys exist on the left side:
- *        name, flight_number, travel_date, looking_for_or_offering
+ *     Confirm these keys exist:
+ *        name, flight_number, travel_date, looking_for_or_offering,
+ *        what_kind_of_help, city_in_europe, city_in_india, direction
  *     and that an "email" key exists too.
  *     If any key looks different, edit the COL constants below to match.
  *  6. Run the function `setupTrigger` once. This installs the trigger
  *     that fires on every new form submission.
- *  7. Test: submit two test entries via the form with the same flight
- *     number + date, opposite roles ("Looking for help" / "Offering to
- *     help"), and a real email address you can check.
+ *  7. Test: submit two test entries via the form on the same route/month
+ *     with opposite roles and a real email you can check.
  *
  * Emails are sent from YOUR Gmail account (the one that owns this script),
  * via Gmail's free MailApp service (100 emails/day limit).
@@ -43,22 +45,28 @@
 
 const PORTAL_URL = 'https://maharashtraineurope.com/sahayak/';
 
-// Normalized header names (lowercase, spaces -> underscore, punctuation
-// stripped) that this script looks for. Adjust if logHeaders() shows
-// different keys for your sheet.
+const MAX_MATCHES_PER_SUBMISSION = 3;
+
+// Normalized header names. Run logHeaders() to verify these match your sheet.
 const COL = {
-  name: 'name',
+  name:       'name',
   flightNumber: 'flight_number',
   travelDate: 'travel_date',
-  role: 'looking_for_or_offering', // values: "Looking for help" / "Offering to help"
+  role:       'looking_for_or_offering', // "Looking for help" / "Offering to help"
+  helpType:   'what_kind_of_help',       // "🧳 Travel companion, ✉️ Letter / Documents" etc.
+  cityEurope: 'city_in_europe',
+  cityIndia:  'city_in_india',
+  direction:  'direction',               // "Europe to India" / "India to Europe"
 };
+
+const COMPANION_LABEL = '🧳 Travel companion';
 
 // ---- MAIN TRIGGER ------------------------------------------------------
 
 function onSahayakFormSubmit(e) {
   try {
     const sheet = e.range.getSheet();
-    const data = sheet.getDataRange().getValues();
+    const data  = sheet.getDataRange().getValues();
     const headers = data[0];
 
     const headerMap = {};
@@ -71,33 +79,101 @@ function onSahayakFormSubmit(e) {
     }
 
     const newRowIdx = e.range.getRow() - 1; // 0-based index into data[]
-    const newEntry = extractEntry(data[newRowIdx], headerMap, emailColIdx);
+    const newEntry  = extractEntry(data[newRowIdx], headerMap, emailColIdx);
 
-    // Need flight + date + role + email to even consider matching
-    if (!newEntry.flight || !newEntry.date || !roleGroup(newEntry.role) || !newEntry.email) {
-      return;
-    }
+    if (!roleGroup(newEntry.role) || !newEntry.email) return;
+
+    // Collect all candidates, score by travel date (soonest first)
+    const candidates = [];
 
     for (let i = 1; i < data.length; i++) {
       if (i === newRowIdx) continue;
 
       const existing = extractEntry(data[i], headerMap, emailColIdx);
-      if (!existing.flight || !existing.date || !roleGroup(existing.role) || !existing.email) continue;
-      if (existing.email === newEntry.email) continue;          // same person
-      if (existing.flight !== newEntry.flight) continue;        // different flight
-      if (existing.date !== newEntry.date) continue;            // different date
-      if (roleGroup(existing.role) === roleGroup(newEntry.role)) continue; // same role, not useful
+      if (!roleGroup(existing.role) || !existing.email) continue;
+      if (existing.email === newEntry.email) continue;
 
-      sendMatchEmail(existing, newEntry);
-      sendMatchEmail(newEntry, existing);
+      const reason = matchReason(newEntry, existing);
+      if (!reason) continue;
+
+      candidates.push({ entry: existing, reason });
     }
+
+    // Sort by travel date ascending (soonest need first), cap at MAX_MATCHES
+    candidates.sort((a, b) => {
+      const da = parseNormalizedDate(a.entry.date);
+      const db = parseNormalizedDate(b.entry.date);
+      if (!da && !db) return 0;
+      if (!da) return 1;
+      if (!db) return -1;
+      return da - db;
+    });
+
+    const toNotify = candidates.slice(0, MAX_MATCHES_PER_SUBMISSION);
+
+    toNotify.forEach(({ entry: existing, reason }) => {
+      sendMatchEmail(existing, newEntry, reason);
+      sendMatchEmail(newEntry, existing, reason);
+    });
+
   } catch (err) {
-    // Email yourself if something breaks, so it doesn't fail silently
-    MailApp.sendEmail(Session.getActiveUser().getEmail(), 'Sahayak auto-match script error', String(err) + '\n' + err.stack);
+    MailApp.sendEmail(
+      Session.getActiveUser().getEmail(),
+      'Sahayak auto-match script error',
+      String(err) + '\n' + err.stack
+    );
   }
 }
 
-// ---- ONE-TIME SETUP ------------------------------------------------------
+// ---- MATCH LOGIC -------------------------------------------------------
+
+/**
+ * Returns a match reason string if the two entries should be connected,
+ * or null if they don't match.
+ *
+ * Rules:
+ *  Companion-side (one needs companion) → strict: same flight + same date
+ *  Carrier-side   (one needs carrier)   → flexible: same route + same month
+ */
+function matchReason(a, b) {
+  const aRole = roleGroup(a.role); // 'looking' | 'offering'
+  const bRole = roleGroup(b.role);
+  if (!aRole || !bRole || aRole === bRole) return null; // same role = no match
+
+  const aLooking  = aRole === 'looking';
+  const bLooking  = bRole === 'looking';
+
+  const needsCompanion = aLooking ? a.isCompanion : b.isCompanion;
+  const offersTravel   = aLooking
+    ? (b.isCompanion || b.isCarrier)   // b is offering; companion or carrier both travel
+    : (a.isCompanion || a.isCarrier);
+
+  const needsCarrier   = aLooking ? a.isCarrier   : b.isCarrier;
+  const offersTravel2  = offersTravel; // same check — offering companion or carrier
+
+  // Companion-side: strict flight + date match
+  if (needsCompanion && offersTravel) {
+    if (a.flight && b.flight && a.flight === b.flight && a.date && a.date === b.date) {
+      return 'companion';
+    }
+  }
+
+  // Carrier-side: flexible route + month match
+  if (needsCarrier && offersTravel2) {
+    if (
+      a.cityEurope && a.cityEurope === b.cityEurope &&
+      a.cityIndia  && a.cityIndia  === b.cityIndia  &&
+      a.direction  && a.direction  === b.direction   &&
+      a.month      && a.month      === b.month
+    ) {
+      return 'carrier';
+    }
+  }
+
+  return null;
+}
+
+// ---- ONE-TIME SETUP ----------------------------------------------------
 
 function setupTrigger() {
   ScriptApp.getProjectTriggers().forEach(t => {
@@ -115,7 +191,7 @@ function logHeaders() {
   headers.forEach(h => Logger.log(normalizeHeader(h) + '   <-   "' + h + '"'));
 }
 
-// ---- HELPERS ------------------------------------------------------------
+// ---- HELPERS -----------------------------------------------------------
 
 function normalizeHeader(h) {
   return h.toString().trim().toLowerCase().replace(/\s+/g, '_').replace(/[^\w]/g, '');
@@ -133,7 +209,6 @@ function normalizeFlight(value) {
   return (value || '').toString().toUpperCase().replace(/[^A-Z0-9]/g, '');
 }
 
-// Handles real Date objects (Sheets date columns) and DD/MM/YYYY strings
 function normalizeDateValue(value) {
   if (value instanceof Date) {
     return Utilities.formatDate(value, Session.getScriptTimeZone(), 'yyyy-MM-dd');
@@ -152,6 +227,18 @@ function normalizeDateValue(value) {
   return s.toLowerCase();
 }
 
+// Returns a Date object from a normalized yyyy-MM-dd string (for sorting)
+function parseNormalizedDate(dateStr) {
+  if (!dateStr) return null;
+  const d = new Date(dateStr);
+  return isNaN(d.getTime()) ? null : d;
+}
+
+// Returns "yyyy-MM" for month-level matching
+function monthOf(normalizedDate) {
+  return normalizedDate ? normalizedDate.slice(0, 7) : '';
+}
+
 function formatDateDisplay(value) {
   if (value instanceof Date) {
     return Utilities.formatDate(value, Session.getScriptTimeZone(), 'd MMM yyyy');
@@ -161,45 +248,78 @@ function formatDateDisplay(value) {
 
 function roleGroup(role) {
   const r = (role || '').toString().toLowerCase();
-  if (r.indexOf('looking') !== -1) return 'looking';
+  if (r.indexOf('looking')  !== -1) return 'looking';
   if (r.indexOf('offering') !== -1) return 'offering';
   return '';
 }
 
+function helpItems(helpRaw) {
+  return (helpRaw || '').toString().split(',').map(s => s.trim()).filter(Boolean);
+}
+
+function normalizeCity(value) {
+  return (value || '').toString().trim().toLowerCase();
+}
+
+function normalizeDirection(value) {
+  return (value || '').toString().trim().toLowerCase();
+}
+
 function extractEntry(row, headerMap, emailColIdx) {
-  const flightRaw = row[headerMap[COL.flightNumber]];
-  const dateRaw = row[headerMap[COL.travelDate]];
+  const flightRaw  = row[headerMap[COL.flightNumber]];
+  const dateRaw    = row[headerMap[COL.travelDate]];
+  const helpRaw    = headerMap[COL.helpType] !== undefined ? row[headerMap[COL.helpType]] : '';
+  const items      = helpItems(helpRaw);
+  const normalizedDate = normalizeDateValue(dateRaw);
+
   return {
-    name: (row[headerMap[COL.name]] || '').toString().trim(),
-    flight: normalizeFlight(flightRaw),
+    name:        (row[headerMap[COL.name]] || '').toString().trim(),
+    flight:      normalizeFlight(flightRaw),
     flightDisplay: (flightRaw || '').toString().trim(),
-    date: normalizeDateValue(dateRaw),
+    date:        normalizedDate,
+    month:       monthOf(normalizedDate),
     dateDisplay: formatDateDisplay(dateRaw),
-    role: (row[headerMap[COL.role]] || '').toString().trim(),
-    email: (row[emailColIdx] || '').toString().trim().toLowerCase(),
+    role:        (row[headerMap[COL.role]] || '').toString().trim(),
+    isCompanion: items.includes(COMPANION_LABEL),
+    isCarrier:   items.some(i => i !== COMPANION_LABEL && i.length > 0),
+    cityEurope:  normalizeCity(headerMap[COL.cityEurope]  !== undefined ? row[headerMap[COL.cityEurope]]  : ''),
+    cityIndia:   normalizeCity(headerMap[COL.cityIndia]   !== undefined ? row[headerMap[COL.cityIndia]]   : ''),
+    direction:   normalizeDirection(headerMap[COL.direction] !== undefined ? row[headerMap[COL.direction]] : ''),
+    email:       (row[emailColIdx] || '').toString().trim().toLowerCase(),
   };
 }
 
-// other.flight is already normalized (uppercase, alphanumeric only),
-// which matches the IATA flight designator format (no space, e.g. "AI2028").
-// Keeps the email's flight number consistent with how it's shown on the
-// Sahayak cards (see formatFlightDisplay in sahayak/index.html).
-function formatFlightDisplay(flight) {
-  return (flight || '').toString();
-}
+// ---- EMAIL -------------------------------------------------------------
 
-function sendMatchEmail(recipient, other) {
+function sendMatchEmail(recipient, other, reason) {
   const otherRoleText = roleGroup(other.role) === 'offering' ? 'offering to help' : 'looking for help';
-  const flightDisplay = formatFlightDisplay(other.flight);
-  const subject = `✈️ Possible match on Sahayak — flight ${flightDisplay}`;
+
+  let matchContext;
+  if (reason === 'companion') {
+    matchContext =
+      `They are ${otherRoleText} on flight ${other.flightDisplay || other.flight} on ${other.dateDisplay} — the same flight as your listing.`;
+  } else {
+    // carrier match — route + month
+    const monthDisplay = other.month
+      ? new Date(other.month + '-01').toLocaleString('en-GB', { month: 'long', year: 'numeric' })
+      : other.dateDisplay;
+    matchContext =
+      `They are ${otherRoleText} on the same route in ${monthDisplay}.` +
+      (other.flight ? ` Their flight: ${other.flightDisplay || other.flight}.` : '');
+  }
+
+  const subject = reason === 'companion'
+    ? `✈️ Possible companion match on Sahayak — flight ${other.flightDisplay || other.flight}`
+    : `📦 Possible carrier match on Sahayak — ${monthOf(other.date) ? new Date(other.month + '-01').toLocaleString('en-GB', { month: 'long', year: 'numeric' }) : other.dateDisplay}`;
+
   const body =
 `Namaste ${recipient.name || 'there'},
 
 Good news — there's a possible match for your Sahayak listing!
 
-Someone named ${other.name} also posted about flight ${flightDisplay} on ${other.dateDisplay}, and they're ${otherRoleText}.
+Someone named ${other.name} also posted on Sahayak. ${matchContext}
 
-Visit Sahayak and look for their listing (search by flight number ${flightDisplay}) to connect:
+Visit Sahayak and look for their listing to connect:
 ${PORTAL_URL}
 
 — Maharashtra in Europe`;

@@ -698,9 +698,10 @@ function render() {
             ${langs.map(l => `<span class="pill">${escHtml(l)}</span>`).join('')}
           </div>
         </div>
-        <a href="${waLink}" target="_blank" rel="noopener">
-          <button class="btn-connect">${expired ? 'View' : 'Connect'}</button>
-        </a>
+        ${expired
+          ? `<button class="btn-connect" disabled style="opacity:0.4;cursor:not-allowed;pointer-events:none;">Trip Complete</button>`
+          : `<a href="${waLink}" target="_blank" rel="noopener"><button class="btn-connect">Connect</button></a>`
+        }
       </div>
     `;
   }).join('');
