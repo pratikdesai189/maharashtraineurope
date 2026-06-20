@@ -360,8 +360,8 @@
     .section-divider { height: 1px; background: linear-gradient(to right, transparent, var(--border), transparent); margin: 80px 0 0; }
 
     /* ── Footer ── */
-    .footer { text-align: center; padding: 48px 24px; border-top: 1px solid var(--border); margin-top: 80px; }
-    .footer p { font-size: 12px; color: var(--text-muted); }
+    .footer { text-align: center; font-size: 12px; color: var(--text-muted); margin-top: 2rem; padding-top: 1.2rem; border-top: 0.5px solid var(--border); }
+    .footer strong { color: var(--saffron); }
     .footer a { color: var(--saffron); text-decoration: none; }
   </style>
 </head>
@@ -849,9 +849,15 @@
 </div><!-- /page-body -->
 
 <!-- ── Footer ── -->
-<footer class="footer">
-  <p>© 2026 Maharashtra in Europe · <a href="/">maharashtraineurope.com</a> · <a href="/community">Community</a> · <a href="/sahayak">Sahayak</a></p>
-</footer>
+<div class="footer">
+  <strong>Maharashtra in Europe</strong> &nbsp;·&nbsp; महाराष्ट्र इन युरोप &nbsp;·&nbsp;
+  "Where the Sahyadri meets the Alps"<br>
+  <span style="margin-top:4px;display:block">
+    <a href="/">Home</a> &nbsp;·&nbsp;
+    <a href="/community">Community</a> &nbsp;·&nbsp;
+    <a href="/sahayak">Sahayak ✈</a>
+  </span>
+</div>
 
 <!-- ── Modal ── -->
 <div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
