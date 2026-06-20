@@ -1,0 +1,1463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About | Maharashtra in Europe</title>
+  <meta name="description" content="Learn about Maharashtra - its history, culture, language, and the vibrant Marathi diaspora across Europe. Maharashtra in Europe is the definitive hub for Marathi expats." />
+
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://maharashtraineurope.com/about" />
+  <meta property="og:title"       content="About Maharashtra in Europe" />
+  <meta property="og:description" content="History, culture, diaspora, and more - everything about Maharashtra and the Marathi community in Europe." />
+  <meta property="og:image"       content="https://maharashtraineurope.com/assets/og-image.jpg" />
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Yatra+One&display=swap" rel="stylesheet">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "url": "https://maharashtraineurope.com/about",
+    "name": "About Maharashtra in Europe",
+    "description": "History, culture, diaspora and mission of Maharashtra in Europe - the hub for Marathi expats.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Maharashtra in Europe",
+      "url": "https://maharashtraineurope.com"
+    }
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --saffron:       #C4440A;
+      --saffron-hover: #A33708;
+      --saffron-light: #FDF1EB;
+      --gold:          #C9922A;
+      --gold-light:    #FAF3E0;
+      --off-white:     #FDF8F4;
+      --text:          #1A0A00;
+      --text-muted:    #7A5A40;
+      --border:        #EAD8C8;
+    }
+
+    body, html {
+      min-height: 100%;
+      font-family: 'Montserrat', sans-serif;
+      color: var(--text);
+      background: var(--off-white);
+    }
+
+    /* ── Navbar ── */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: var(--saffron);
+      padding: 13px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .navbar::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0; height: 3px;
+      background: repeating-linear-gradient(90deg, var(--gold) 0, var(--gold) 8px, transparent 8px, transparent 13px);
+      opacity: 0.6;
+    }
+    .navbar-brand {
+      display: flex; align-items: center; gap: 10px;
+      color: #fff; font-size: 15px; font-weight: 700; line-height: 1.25; text-decoration: none;
+    }
+    .navbar-logo { width: 34px; height: 34px; object-fit: contain; border-radius: 50%; flex-shrink: 0; }
+    .navbar-brand-text { display: block; }
+    .navbar-brand-sub { display: block; font-family: 'Yatra One', cursive; font-size: 13px; font-weight: 400; opacity: 0.82; margin-top: 1px; }
+    .navbar-links { display: flex; gap: 22px; align-items: center; }
+    .navbar-links a { color: rgba(255,255,255,0.72); font-size: 13px; font-weight: 400; text-decoration: none; transition: color .25s; }
+    .navbar-links a:hover { color: #fff; }
+    .navbar-links a.active { color: #fff; font-weight: 700; }
+    .navbar-links a.nav-sahayak {
+      background: rgba(255,255,255,0.15); border: 0.5px solid rgba(255,255,255,0.35);
+      padding: 4px 13px; border-radius: 99px; color: #fff; font-weight: 600;
+      transition: background-color .25s, border-color .25s;
+    }
+    .navbar-links a.nav-sahayak:hover { background: rgba(255,255,255,0.25); border-color: rgba(255,255,255,0.5); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: #fff; border-radius: 2px; transform-origin: center; transition: transform .28s cubic-bezier(.16,1,.3,1), opacity .2s; }
+    .hamburger.is-open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .hamburger.is-open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger.is-open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+    .mobile-menu { display: flex; flex-direction: column; gap: 0; background: var(--saffron); border-top: 0.5px solid rgba(255,255,255,0.2); max-height: 0; overflow: hidden; transition: max-height .35s cubic-bezier(.16,1,.3,1); }
+    .mobile-menu a { padding: 13px 28px; color: rgba(255,255,255,0.85); font-size: 14px; text-decoration: none; border-bottom: 0.5px solid rgba(255,255,255,0.1); transition: background .15s; }
+    .mobile-menu a:hover { background: rgba(255,255,255,0.1); }
+    .mobile-menu a.active { color: #fff; font-weight: 700; }
+    .mobile-menu.open { max-height: 320px; }
+
+    @media (max-width: 700px) {
+      .navbar-links { display: none; }
+      .hamburger { display: flex; }
+    }
+
+    /* ── Hero ── */
+    .about-hero {
+      position: relative;
+      min-height: 52vh;
+      padding-top: 60px;
+      display: flex; align-items: center; justify-content: center; text-align: center;
+      background: var(--saffron);
+      overflow: hidden;
+    }
+    .about-hero::before {
+      content: "";
+      position: absolute; inset: 0;
+      background-image: url('/assets/maharaj-silhouette.png.jpg');
+      background-size: cover; background-position: center;
+      opacity: 0.07; mix-blend-mode: luminosity; z-index: 0;
+    }
+    .grid-overlay {
+      position: absolute; inset: 0; z-index: 1;
+      background-image:
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.04) 0 1px, transparent 1px 64px),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.04) 0 1px, transparent 1px 64px);
+      -webkit-mask-image: linear-gradient(180deg, transparent, rgba(0,0,0,0.6) 20%, rgba(0,0,0,0.6) 80%, transparent);
+              mask-image: linear-gradient(180deg, transparent, rgba(0,0,0,0.6) 20%, rgba(0,0,0,0.6) 80%, transparent);
+      pointer-events: none;
+    }
+    .hero-content { position: relative; z-index: 2; padding: 60px 24px 80px; }
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gold); border: 1px solid rgba(201,146,42,0.4); padding: 4px 14px; border-radius: 99px;
+      margin-bottom: 24px;
+      opacity: 0; transform: translateY(16px);
+      animation: fadeUp .6s .1s forwards;
+    }
+    .hero-title {
+      font-size: clamp(36px, 7vw, 80px); font-weight: 900; line-height: 1;
+      opacity: 0; transform: translateY(20px);
+      animation: fadeUp .7s .25s forwards;
+    }
+    .hero-title .dev { display: block; font-family: 'Yatra One', cursive; font-weight: 400; font-size: 0.5em; color: var(--gold); margin-top: 8px; }
+    .hero-sub {
+      max-width: 560px; margin: 20px auto 0;
+      font-size: 15px; line-height: 1.7; color: rgba(255,255,255,0.85);
+      opacity: 0; transform: translateY(16px);
+      animation: fadeUp .7s .4s forwards;
+    }
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
+    /* ── Page layout ── */
+    .page-body { max-width: 1140px; margin: 0 auto; padding: 0 24px 100px; }
+
+    /* ── Section headers ── */
+    .section-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 10px;
+    }
+    .section-title {
+      font-size: clamp(22px, 4vw, 36px); font-weight: 900; line-height: 1.15; margin-bottom: 8px;
+    }
+    .section-sub { font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-bottom: 40px; }
+
+    /* ── Scroll reveal ── */
+    .reveal { opacity: 0; transform: translateY(32px); transition: opacity .65s cubic-bezier(.16,1,.3,1), transform .65s cubic-bezier(.16,1,.3,1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: .1s; }
+    .reveal-delay-2 { transition-delay: .2s; }
+    .reveal-delay-3 { transition-delay: .3s; }
+    .reveal-delay-4 { transition-delay: .4s; }
+
+    /* ── SECTION: Who We Are ── */
+    .who-section { padding: 72px 0 0; }
+    .who-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+    .who-text p { font-size: 15px; line-height: 1.8; color: var(--text-muted); margin-bottom: 16px; }
+    .who-text p:last-child { margin-bottom: 0; }
+    .who-text strong { color: var(--saffron); }
+    .who-card {
+      background: #fff;
+      border: 1px solid var(--border); border-radius: 16px;
+      padding: 32px; text-align: center;
+    }
+    .who-card-icon { font-size: 48px; margin-bottom: 16px; }
+    .who-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 10px; color: var(--text); }
+    .who-card p { font-size: 13px; line-height: 1.7; color: var(--text-muted); }
+
+    @media (max-width: 700px) { .who-grid { grid-template-columns: 1fr; } }
+
+    /* ── SECTION: Stats ── */
+    .stats-section { padding: 80px 0 0; }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; }
+    .stat-card {
+      background: #fff; border: 1px solid var(--border);
+      border-radius: 14px; padding: 28px 20px; text-align: center;
+      cursor: pointer; transition: background .25s, border-color .25s, transform .25s;
+      position: relative; overflow: hidden;
+    }
+    .stat-card::before {
+      content: ''; position: absolute; inset: 0;
+      background: var(--saffron-light);
+      opacity: 0; transition: opacity .3s;
+    }
+    .stat-card:hover { border-color: var(--saffron); transform: translateY(-4px); }
+    .stat-card:hover::before { opacity: 1; }
+    .stat-num { font-size: 36px; font-weight: 900; color: var(--saffron); line-height: 1; }
+    .stat-unit { font-size: 14px; color: var(--text-muted); margin-bottom: 6px; }
+    .stat-label { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text); }
+    .stat-hint { font-size: 10px; color: var(--gold); margin-top: 10px; }
+    .stat-hint::before { content: 'Click for details'; }
+
+    /* ── SECTION: Diaspora in Europe ── */
+    .diaspora-section { padding: 80px 0 0; }
+    .diaspora-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
+    .diaspora-card {
+      background: #fff; border: 1px solid var(--border);
+      border-radius: 14px; padding: 24px 20px;
+      cursor: pointer; transition: background .25s, border-color .25s, transform .25s;
+      position: relative;
+    }
+    .diaspora-card:hover { border-color: var(--saffron); transform: translateY(-4px); background: var(--saffron-light); }
+    .diaspora-flag { font-size: 32px; margin-bottom: 12px; }
+    .diaspora-city { font-size: 18px; font-weight: 700; margin-bottom: 4px; color: var(--text); }
+    .diaspora-country { font-size: 12px; color: var(--text-muted); margin-bottom: 14px; }
+    .diaspora-pop { display: inline-block; font-size: 11px; font-weight: 700; color: var(--saffron); background: var(--saffron-light); border: 1px solid rgba(196,68,10,0.25); padding: 3px 10px; border-radius: 99px; margin-bottom: 10px; }
+    .diaspora-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .diaspora-tag { font-size: 10px; color: var(--text-muted); background: var(--off-white); border-radius: 99px; padding: 2px 9px; border: 1px solid var(--border); }
+    .diaspora-read { font-size: 10px; color: var(--saffron); margin-top: 14px; opacity: 0.8; }
+
+    /* ── SECTION: Culture ── */
+    .culture-section { padding: 80px 0 0; }
+    .culture-tabs { display: flex; gap: 10px; margin-bottom: 32px; flex-wrap: wrap; }
+    .culture-tab {
+      font-size: 12px; font-weight: 600; padding: 8px 20px; border-radius: 99px;
+      cursor: pointer; border: 1px solid var(--border); background: #fff; color: var(--text-muted);
+      transition: all .2s;
+    }
+    .culture-tab.active, .culture-tab:hover { background: var(--saffron); border-color: var(--saffron); color: #fff; }
+    .culture-panel { display: none; }
+    .culture-panel.active { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 18px; }
+    .culture-card {
+      background: #fff; border: 1px solid var(--border);
+      border-radius: 14px; padding: 24px 20px;
+      cursor: pointer; transition: border-color .25s, transform .25s, background .25s;
+    }
+    .culture-card:hover { border-color: var(--saffron); transform: translateY(-4px); background: var(--saffron-light); }
+    .culture-icon { font-size: 36px; margin-bottom: 12px; }
+    .culture-name { font-size: 15px; font-weight: 700; margin-bottom: 6px; color: var(--text); }
+    .culture-sub { font-size: 12px; color: var(--text-muted); line-height: 1.6; }
+    .culture-read { font-size: 10px; color: var(--saffron); margin-top: 12px; opacity: 0.8; }
+
+    /* ── SECTION: History Timeline ── */
+    .history-section { padding: 80px 0 0; }
+    .timeline { position: relative; padding-left: 32px; }
+    .timeline::before { content: ''; position: absolute; left: 7px; top: 6px; bottom: 6px; width: 2px; background: linear-gradient(to bottom, var(--saffron), var(--gold), var(--border)); }
+    .timeline-item {
+      position: relative; margin-bottom: 8px;
+      cursor: pointer;
+    }
+    .timeline-dot {
+      position: absolute; left: -29px; top: 14px;
+      width: 14px; height: 14px; border-radius: 50%;
+      background: var(--saffron); border: 2px solid var(--gold);
+      transition: transform .2s, background .2s;
+    }
+    .timeline-item:hover .timeline-dot { transform: scale(1.3); background: var(--gold); }
+    .timeline-header {
+      background: #fff; border: 1px solid var(--border);
+      border-radius: 12px; padding: 16px 20px;
+      display: flex; align-items: center; gap: 16px;
+      transition: border-color .25s, background .25s;
+    }
+    .timeline-item:hover .timeline-header { border-color: var(--saffron); background: var(--saffron-light); }
+    .timeline-year { font-size: 11px; font-weight: 700; color: var(--saffron); white-space: nowrap; min-width: 80px; }
+    .timeline-title { font-size: 14px; font-weight: 600; color: var(--text); }
+    .timeline-arrow { margin-left: auto; font-size: 12px; color: var(--text-muted); transition: transform .2s; }
+    .timeline-item.open .timeline-arrow { transform: rotate(90deg); }
+    .timeline-body {
+      max-height: 0; overflow: hidden;
+      transition: max-height .4s cubic-bezier(.16,1,.3,1);
+      padding: 0 20px 0 20px;
+    }
+    .timeline-item.open .timeline-body { max-height: 400px; }
+    .timeline-body-inner { padding: 14px 0 20px; border-top: 1px solid var(--border); margin-top: 2px; }
+    .timeline-body p { font-size: 13px; line-height: 1.8; color: var(--text-muted); }
+    .timeline-body ul { margin-top: 10px; padding-left: 18px; }
+    .timeline-body ul li { font-size: 13px; line-height: 1.7; color: var(--text-muted); margin-bottom: 4px; }
+
+    /* ── SECTION: Mission ── */
+    .mission-section { padding: 80px 0 0; }
+    .mission-list { display: flex; flex-direction: column; gap: 0; }
+    .mission-row {
+      display: grid; grid-template-columns: 80px 1fr;
+      gap: 24px; align-items: start;
+      padding: 28px 0; border-top: 1px solid var(--border);
+      transition: background .2s;
+    }
+    .mission-row:last-child { border-bottom: 1px solid var(--border); }
+    .mission-num {
+      font-size: 36px; font-weight: 900; color: rgba(196,68,10,0.18);
+      line-height: 1; padding-top: 4px;
+      transition: color .25s;
+    }
+    .mission-row:hover .mission-num { color: var(--saffron); }
+    .mission-title { font-size: 17px; font-weight: 700; margin-bottom: 8px; color: var(--text); }
+    .mission-text { font-size: 14px; line-height: 1.7; color: var(--text-muted); }
+    @media (max-width: 600px) {
+      .mission-row { grid-template-columns: 48px 1fr; gap: 16px; }
+      .mission-num { font-size: 22px; }
+    }
+
+    /* ── Modal ── */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 200;
+      background: rgba(0,0,0,0.75); backdrop-filter: blur(6px);
+      display: flex; align-items: center; justify-content: center; padding: 24px;
+      opacity: 0; pointer-events: none; transition: opacity .3s;
+    }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+    .modal {
+      background: #fff;
+      border: 1px solid var(--border); border-radius: 20px;
+      max-width: 640px; width: 100%; max-height: 85vh; overflow-y: auto;
+      padding: 40px 36px; position: relative;
+      transform: translateY(24px) scale(0.97); transition: transform .3s cubic-bezier(.16,1,.3,1);
+    }
+    .modal-overlay.open .modal { transform: translateY(0) scale(1); }
+    .modal-close {
+      position: absolute; top: 16px; right: 16px;
+      background: var(--off-white); border: 1px solid var(--border); color: var(--text);
+      width: 32px; height: 32px; border-radius: 50%; font-size: 18px; cursor: pointer; line-height: 1;
+      transition: background .2s;
+    }
+    .modal-close:hover { background: var(--border); }
+    .modal-icon { font-size: 48px; margin-bottom: 16px; }
+    .modal-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--saffron); margin-bottom: 8px; }
+    .modal-title { font-size: 24px; font-weight: 900; margin-bottom: 6px; color: var(--text); }
+    .modal-subtitle { font-size: 13px; color: var(--text-muted); margin-bottom: 24px; }
+    .modal-divider { height: 1px; background: var(--border); margin-bottom: 24px; }
+    .modal-body { font-size: 14px; line-height: 1.8; color: var(--text-muted); }
+    .modal-body p { margin-bottom: 14px; }
+    .modal-body p:last-child { margin-bottom: 0; }
+    .modal-body h4 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--saffron); margin-bottom: 8px; margin-top: 20px; }
+    .modal-body ul { padding-left: 18px; margin-bottom: 14px; }
+    .modal-body ul li { margin-bottom: 6px; line-height: 1.7; }
+    .modal-body .highlight { color: var(--saffron); font-weight: 700; }
+
+    @media (max-width: 700px) {
+      .modal { padding: 28px 20px; }
+      .modal-title { font-size: 20px; }
+    }
+
+    /* ── Divider ── */
+    .section-divider { height: 1px; background: linear-gradient(to right, transparent, var(--border), transparent); margin: 80px 0 0; }
+
+    /* ── Footer ── */
+    .footer { text-align: center; padding: 48px 24px; border-top: 1px solid var(--border); margin-top: 80px; }
+    .footer p { font-size: 12px; color: var(--text-muted); }
+    .footer a { color: var(--saffron); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+<!-- ── Navbar ── -->
+<nav class="navbar">
+  <a href="/" class="navbar-brand">
+    <img src="/assets/logo.png" alt="Maharashtra in Europe logo" class="navbar-logo">
+    <span>
+      <span class="navbar-brand-text">Maharashtra in Europe</span>
+      <span class="navbar-brand-sub">महाराष्ट्र इन युरोप</span>
+    </span>
+  </a>
+  <div class="navbar-links">
+    <a href="/">Home</a>
+    <a href="/about" class="active">About</a>
+    <a href="/community">Community</a>
+    <a href="/sahayak" class="nav-sahayak">Sahayak ✈</a>
+  </div>
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="/">Home</a>
+  <a href="/about" class="active">About</a>
+  <a href="/community">Community</a>
+</div>
+
+<!-- ── Hero ── -->
+<header class="about-hero">
+  <div class="grid-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Our Story &amp; Mission</div>
+    <h1 class="hero-title">
+      About Us
+      <span class="dev">आमच्याबद्दल</span>
+    </h1>
+    <p class="hero-sub">Maharashtra in Europe is the definitive digital home for the Marathi diaspora - connecting culture, community, and roots across continents.</p>
+  </div>
+</header>
+
+<!-- ── Page body ── -->
+<div class="page-body">
+
+  <!-- WHO WE ARE -->
+  <section class="who-section">
+    <div class="reveal reveal-delay-1"><h2 class="section-title">A bridge between Maharashtra and Europe</h2></div>
+    <div class="who-grid">
+      <div class="who-text reveal reveal-delay-1">
+        <p>Maharashtra in Europe was built around one conviction: <strong>Marathi people in Europe deserve a proper home online.</strong> A place to find community, celebrate culture, and stay connected to their roots no matter how far they are from the Sahyadri mountains.</p>
+        <p>We cover <strong>everything Marathi</strong>: events and community gatherings across European cities, cultural guides, travel companions through Sahayak, and the rich tapestry of Maharashtra's history and heritage.</p>
+        <p>Whether you've just landed in Europe or you've been here for decades, this is <strong>your platform</strong>.</p>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <div class="who-card" onclick="openModal('mission-overview')">
+          <img src="https://picsum.photos/seed/maharashtra-sahyadri-mountains/600/340" alt="Mountain landscape representing the Sahyadri" style="width:100%;border-radius:10px;margin-bottom:20px;object-fit:cover;height:180px;opacity:0.85;">
+          <h3>Where the Sahyadri meets the Alps</h3>
+          <p>Our name and mission: connecting Maharashtra's spirit to the European landscape.</p>
+          <div class="diaspora-read" style="margin-top:16px">Read our full mission →</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- MAHARASHTRA AT A GLANCE -->
+  <section class="stats-section">
+    <div class="reveal"><div class="section-label">Maharashtra at a Glance</div></div>
+    <div class="reveal reveal-delay-1"><h2 class="section-title">By the numbers</h2></div>
+    <div class="reveal reveal-delay-2"><p class="section-sub">The facts that define one of India's greatest states. <em>Click any card to learn more.</em></p></div>
+    <div class="stats-grid">
+      <div class="stat-card reveal reveal-delay-1" onclick="openModal('stat-population')">
+        <div class="stat-num" data-target="126">0</div>
+        <div class="stat-unit">million</div>
+        <div class="stat-label">Population</div>
+      </div>
+      <div class="stat-card reveal reveal-delay-2" onclick="openModal('stat-speakers')">
+        <div class="stat-num" data-target="83">0</div>
+        <div class="stat-unit">million</div>
+        <div class="stat-label">Marathi Speakers</div>
+      </div>
+      <div class="stat-card reveal reveal-delay-3" onclick="openModal('stat-districts')">
+        <div class="stat-num" data-target="36">0</div>
+        <div class="stat-unit">districts</div>
+        <div class="stat-label">Administrative Regions</div>
+      </div>
+      <div class="stat-card reveal reveal-delay-4" onclick="openModal('stat-statehood')">
+        <div class="stat-num" data-target="1960">0</div>
+        <div class="stat-unit">year</div>
+        <div class="stat-label">Statehood</div>
+      </div>
+      <div class="stat-card reveal reveal-delay-1" onclick="openModal('stat-heritage')">
+        <div class="stat-num" data-target="5">0</div>
+        <div class="stat-unit">UNESCO sites</div>
+        <div class="stat-label">World Heritage</div>
+      </div>
+      <div class="stat-card reveal reveal-delay-2" onclick="openModal('stat-gdp')">
+        <div class="stat-num" data-target="14">0</div>
+        <div class="stat-unit">% of India's GDP</div>
+        <div class="stat-label">Economic Powerhouse</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- MARATHI IN EUROPE -->
+  <section class="diaspora-section">
+    <div class="reveal reveal-delay-1"><h2 class="section-title">Our community across the continent</h2></div>
+    <div class="reveal reveal-delay-2"><p class="section-sub">Marathi people have built vibrant communities in cities across Europe. Click a city to explore.</p></div>
+    <div class="diaspora-grid">
+      <div class="diaspora-card reveal reveal-delay-1" onclick="openModal('city-london')">
+        <div class="diaspora-flag">🇬🇧</div>
+        <div class="diaspora-city">London</div>
+        <div class="diaspora-country">United Kingdom</div>
+        <div class="diaspora-pop">~15,000+ Marathi</div>
+        <div class="diaspora-tags"><span class="diaspora-tag">Tech</span><span class="diaspora-tag">Finance</span><span class="diaspora-tag">Healthcare</span></div>
+        <div class="diaspora-read">Click to explore →</div>
+      </div>
+      <div class="diaspora-card reveal reveal-delay-2" onclick="openModal('city-amsterdam')">
+        <div class="diaspora-flag">🇳🇱</div>
+        <div class="diaspora-city">Amsterdam</div>
+        <div class="diaspora-country">Netherlands</div>
+        <div class="diaspora-pop">~5,000+ Marathi</div>
+        <div class="diaspora-tags"><span class="diaspora-tag">Tech</span><span class="diaspora-tag">Consulting</span></div>
+        <div class="diaspora-read">Click to explore →</div>
+      </div>
+      <div class="diaspora-card reveal reveal-delay-3" onclick="openModal('city-frankfurt')">
+        <div class="diaspora-flag">🇩🇪</div>
+        <div class="diaspora-city">Frankfurt</div>
+        <div class="diaspora-country">Germany</div>
+        <div class="diaspora-pop">~8,000+ Marathi</div>
+        <div class="diaspora-tags"><span class="diaspora-tag">Engineering</span><span class="diaspora-tag">Finance</span></div>
+        <div class="diaspora-read">Click to explore →</div>
+      </div>
+      <div class="diaspora-card reveal reveal-delay-4" onclick="openModal('city-zurich')">
+        <div class="diaspora-flag">🇨🇭</div>
+        <div class="diaspora-city">Zurich</div>
+        <div class="diaspora-country">Switzerland</div>
+        <div class="diaspora-pop">~3,000+ Marathi</div>
+        <div class="diaspora-tags"><span class="diaspora-tag">Finance</span><span class="diaspora-tag">Pharma</span></div>
+        <div class="diaspora-read">Click to explore →</div>
+      </div>
+      <div class="diaspora-card reveal reveal-delay-1" onclick="openModal('city-vienna')">
+        <div class="diaspora-flag">🇦🇹</div>
+        <div class="diaspora-city">Vienna</div>
+        <div class="diaspora-country">Austria</div>
+        <div class="diaspora-pop">~2,000+ Marathi</div>
+        <div class="diaspora-tags"><span class="diaspora-tag">Academia</span><span class="diaspora-tag">UN orgs</span></div>
+        <div class="diaspora-read">Click to explore →</div>
+      </div>
+      <div class="diaspora-card reveal reveal-delay-2" onclick="openModal('city-paris')">
+        <div class="diaspora-flag">🇫🇷</div>
+        <div class="diaspora-city">Paris</div>
+        <div class="diaspora-country">France</div>
+        <div class="diaspora-pop">~4,000+ Marathi</div>
+        <div class="diaspora-tags"><span class="diaspora-tag">Luxury</span><span class="diaspora-tag">Engineering</span></div>
+        <div class="diaspora-read">Click to explore →</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- CULTURE SHOWCASE -->
+  <section class="culture-section">
+    <div class="reveal reveal-delay-1"><h2 class="section-title">The heart of Maharashtra</h2></div>
+    <div class="reveal reveal-delay-2"><p class="section-sub">Festivals, food, arts, language. Click any card to dive deeper.</p></div>
+
+    <div class="culture-tabs reveal reveal-delay-3">
+      <button class="culture-tab active" onclick="switchTab('festivals', this)">🎉 Festivals</button>
+      <button class="culture-tab" onclick="switchTab('food', this)">🍱 Food</button>
+      <button class="culture-tab" onclick="switchTab('arts', this)">🎭 Arts</button>
+      <button class="culture-tab" onclick="switchTab('language', this)">🗣️ Language</button>
+    </div>
+
+    <!-- Festivals -->
+    <div class="culture-panel active" id="panel-festivals">
+      <div class="culture-card" onclick="openModal('fest-ganesh')">
+        <div class="culture-icon">🐘</div>
+        <div class="culture-name">Ganesh Chaturthi</div>
+        <div class="culture-sub">10 days of devotion, music, and community. The world's most beloved festival.</div>
+        <div class="culture-read">Read more →</div>
+      </div>
+      <div class="culture-card" onclick="openModal('fest-gudi')">
+        <div class="culture-icon">🎋</div>
+        <div class="culture-name">Gudi Padwa</div>
+        <div class="culture-sub">Marathi New Year, celebrated with the iconic Gudi raised at every home.</div>
+        <div class="culture-read">Read more →</div>
+      </div>
+      <div class="culture-card" onclick="openModal('fest-vari')">
+        <div class="culture-icon">🚶</div>
+        <div class="culture-name">Wari - Pandharpur</div>
+        <div class="culture-sub">The sacred pilgrimage to Vitthal, now going global from Europe in 2026.</div>
+        <div class="culture-read">Read more →</div>
+      </div>
+      <div class="culture-card" onclick="openModal('fest-pola')">
+        <div class="culture-icon">🐂</div>
+        <div class="culture-name">Bail Pola</div>
+        <div class="culture-sub">A uniquely Maharashtrian agricultural tradition honouring the bull.</div>
+        <div class="culture-read">Read more →</div>
+      </div>
+    </div>
+
+    <!-- Food -->
+    <div class="culture-panel" id="panel-food">
+      <div class="culture-card" onclick="openModal('food-vadapav')">
+        <div class="culture-icon">🍔</div>
+        <div class="culture-name">Vada Pav</div>
+        <div class="culture-sub">Mumbai's soul food: spiced potato fritter in a soft bun with chutneys.</div>
+        <div class="culture-read">Read more →</div>
+      </div>
+      <div class="culture-card" onclick="openModal('food-puranpoli')">
+        <div class="culture-icon">🫓</div>
+        <div class="culture-name">Puran Poli</div>
+        <div class="culture-sub">A sweet flatbread stuffed with jaggery and chana dal, loved across generations.</div>
+        <div class="culture-read">Read more →</div>
+      </div>
+      <div class="culture-card" onclick="openModal('food-modak')">
+        <div class="culture-icon">🍡</div>
+        <div class="culture-name">Modak</div>
+        <div class="culture-sub">Lord Ganesha's favourite: the steamed sweet dumpling central to Chaturthi.</div>
+        <div class="culture-read">Read more →</div>
+      </div>
+      <div class="culture-card" onclick="openModal('food-misal')">
+        <div class="culture-icon">🥣</div>
+        <div class="culture-name">Misal Pav</div>
+        <div class="culture-sub">Fiery sprouted lentil curry topped with farsan, a breakfast staple in Pune and Nashik.</div>
+        <div class="culture-read">Read more →</div>
+      </div>
+    </div>
+
+    <!-- Arts -->
+    <div class="culture-panel" id="panel-arts">
+      <div class="culture-card" onclick="openModal('art-lavani')">
+        <div class="culture-icon">💃</div>
+        <div class="culture-name">Lavani</div>
+        <div class="culture-sub">Energetic folk dance-drama performed with dholki rhythm, expressing emotion and satire.</div>
+        <div class="culture-read">Read more →</div>
+      </div>
+      <div class="culture-card" onclick="openModal('art-warli')">
+        <div class="culture-icon">🎨</div>
+        <div class="culture-name">Warli Painting</div>
+        <div class="culture-sub">Ancient tribal art from North Maharashtra: geometric figures on white, globally recognised.</div>
+        <div class="culture-read">Read more →</div>
+      </div>
+      <div class="culture-card" onclick="openModal('art-powada')">
+        <div class="culture-icon">🎶</div>
+        <div class="culture-name">Powada</div>
+        <div class="culture-sub">Epic ballads celebrating Shivaji Maharaj and Maratha warriors, performed by Shahirs.</div>
+        <div class="culture-read">Read more →</div>
+      </div>
+      <div class="culture-card" onclick="openModal('art-kirtan')">
+        <div class="culture-icon">🪘</div>
+        <div class="culture-name">Kirtan</div>
+        <div class="culture-sub">Devotional performance combining narration, music, and philosophy of the Varkari saints.</div>
+        <div class="culture-read">Read more →</div>
+      </div>
+    </div>
+
+    <!-- Language -->
+    <div class="culture-panel" id="panel-language">
+      <div class="culture-card" onclick="openModal('lang-marathi')">
+        <div class="culture-icon">🔤</div>
+        <div class="culture-name">Marathi Language</div>
+        <div class="culture-sub">Over 2,500 years old. The official language of Maharashtra, spoken by 83 million people.</div>
+        <div class="culture-read">Read more →</div>
+      </div>
+      <div class="culture-card" onclick="openModal('lang-script')">
+        <div class="culture-icon">📜</div>
+        <div class="culture-name">Devanagari Script</div>
+        <div class="culture-sub">The beautiful script of Marathi, also shared with Hindi and Sanskrit.</div>
+        <div class="culture-read">Read more →</div>
+      </div>
+      <div class="culture-card" onclick="openModal('lang-phrases')">
+        <div class="culture-icon">👋</div>
+        <div class="culture-name">Common Phrases</div>
+        <div class="culture-sub">Learn to say hello, thank you, and more in Marathi. Start your journey with the language.</div>
+        <div class="culture-read">Read more →</div>
+      </div>
+      <div class="culture-card" onclick="openModal('lang-dialects')">
+        <div class="culture-icon">🗺️</div>
+        <div class="culture-name">Dialects</div>
+        <div class="culture-sub">From Varhadi to Kolhapuri: rich regional variations across Maharashtra.</div>
+        <div class="culture-read">Read more →</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- HISTORY TIMELINE -->
+  <section class="history-section">
+    <div class="reveal"><div class="section-label">History</div></div>
+    <div class="reveal reveal-delay-1"><h2 class="section-title">Maharashtra through the ages</h2></div>
+    <div class="reveal reveal-delay-2"><p class="section-sub">A civilisation spanning thousands of years. <em>Click any era to expand the full story.</em></p></div>
+    <div class="timeline reveal reveal-delay-3">
+
+      <div class="timeline-item" onclick="toggleTimeline(this)">
+        <div class="timeline-dot"></div>
+        <div class="timeline-header">
+          <div class="timeline-year">230 BCE</div>
+          <div class="timeline-title">Satavahana Empire: Maharashtra's first great kingdom</div>
+          <div class="timeline-arrow">▶</div>
+        </div>
+        <div class="timeline-body">
+          <div class="timeline-body-inner">
+            <p>The Satavahana dynasty (230 BCE – 220 CE) established one of the earliest and most powerful kingdoms in the Deccan. Based in Pratishthana (modern Paithan), they unified much of central India and were great patrons of art and trade.</p>
+            <ul>
+              <li>Controlled major trade routes between northern and southern India</li>
+              <li>Built the earliest Buddhist cave complexes at Ajanta and Karla</li>
+              <li>Their currency and administration influenced the entire Deccan region</li>
+              <li>Prakrit language flourished under their patronage</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item" onclick="toggleTimeline(this)">
+        <div class="timeline-dot"></div>
+        <div class="timeline-header">
+          <div class="timeline-year">600–1200 CE</div>
+          <div class="timeline-title">Chalukyas, Rashtrakutas &amp; the golden age of cave art</div>
+          <div class="timeline-arrow">▶</div>
+        </div>
+        <div class="timeline-body">
+          <div class="timeline-body-inner">
+            <p>Maharashtra witnessed successive waves of powerful dynasties who left an indelible mark on art, architecture, and literature. The Badami Chalukyas and Rashtrakutas built some of the most spectacular rock-cut temples in the world.</p>
+            <ul>
+              <li>Ellora Caves (UNESCO) - 34 monasteries and temples carved into rock between 600–1000 CE</li>
+              <li>Ajanta Caves (UNESCO) - Buddhist murals considered the finest surviving examples of ancient Indian art</li>
+              <li>Rashtrakuta king Dantidurga established dominion over much of India</li>
+              <li>Kailasa Temple at Ellora - carved top-down from a single rock, an engineering marvel</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item" onclick="toggleTimeline(this)">
+        <div class="timeline-dot"></div>
+        <div class="timeline-header">
+          <div class="timeline-year">1630–1680</div>
+          <div class="timeline-title">Chhatrapati Shivaji Maharaj: birth of the Maratha Empire</div>
+          <div class="timeline-arrow">▶</div>
+        </div>
+        <div class="timeline-body">
+          <div class="timeline-body-inner">
+            <p>Shivaji Maharaj is the defining figure of Maharashtrian identity. Born in 1630 at Shivneri fort, he founded the Maratha Empire and built a navy, a civil administration, and a military force that challenged the Mughal Empire at its peak.</p>
+            <ul>
+              <li>Captured his first fort - Torna - at just 16 years of age</li>
+              <li>Created India's first modern navy to protect the Konkan coast</li>
+              <li>Coronation at Raigad Fort in 1674 - established Hindavi Swarajya</li>
+              <li>Known for his treatment of women with respect and protection of all faiths</li>
+              <li>Guerrilla warfare tactics in the Sahyadri mountains remain studied in military history</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item" onclick="toggleTimeline(this)">
+        <div class="timeline-dot"></div>
+        <div class="timeline-header">
+          <div class="timeline-year">1680–1818</div>
+          <div class="timeline-title">The Peshwa era: Maratha Empire at its greatest extent</div>
+          <div class="timeline-arrow">▶</div>
+        </div>
+        <div class="timeline-body">
+          <div class="timeline-body-inner">
+            <p>After Shivaji, the Peshwas (Prime Ministers) based in Pune expanded the Maratha Empire to cover nearly two-thirds of the Indian subcontinent. At its peak, the Maratha Confederacy was the dominant power in India.</p>
+            <ul>
+              <li>Peshwa Bajirao I (1720–1740) - widely regarded as the greatest cavalry general of his time, never lost a battle</li>
+              <li>Maratha influence extended from Attock (Pakistan) to Thanjavur (Tamil Nadu)</li>
+              <li>Third Battle of Panipat (1761) - a turning point that weakened the confederacy</li>
+              <li>Pune became a major centre of art, literature, and governance</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item" onclick="toggleTimeline(this)">
+        <div class="timeline-dot"></div>
+        <div class="timeline-header">
+          <div class="timeline-year">1818–1947</div>
+          <div class="timeline-title">British era: reformers, thinkers, and the freedom movement</div>
+          <div class="timeline-arrow">▶</div>
+        </div>
+        <div class="timeline-body">
+          <div class="timeline-body-inner">
+            <p>Under British rule, Maharashtra became a crucible of social reform and freedom struggle. Some of India's most influential thinkers and freedom fighters emerged from Marathi society.</p>
+            <ul>
+              <li>Jyotirao Phule (1827–1890) - championed education for women and lower castes, founded the first school for girls</li>
+              <li>Lokmanya Bal Gangadhar Tilak - launched "Swaraj is my birthright" and popularised Ganesh Chaturthi as a public festival</li>
+              <li>Dr. B.R. Ambedkar - from Mhow, Madhya Pradesh but deeply Maharashtrian - drafted India's Constitution</li>
+              <li>Savitribai Phule - India's first female teacher and pioneering social reformer</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item" onclick="toggleTimeline(this)">
+        <div class="timeline-dot"></div>
+        <div class="timeline-header">
+          <div class="timeline-year">1 May 1960</div>
+          <div class="timeline-title">Maharashtra State formed: Marathi pride realised</div>
+          <div class="timeline-arrow">▶</div>
+        </div>
+        <div class="timeline-body">
+          <div class="timeline-body-inner">
+            <p>After years of the Samyukta Maharashtra movement, Maharashtra was carved out as a separate state on 1 May 1960 - now celebrated annually as Maharashtra Day (Maharashtra Din). Mumbai became its capital.</p>
+            <ul>
+              <li>The movement was led by figures like Keshavrao Jedhe and Senapati Bapat</li>
+              <li>105 people lost their lives in the movement - honoured at Hutatma Chowk, Mumbai</li>
+              <li>Maharashtra quickly became India's industrial and financial capital</li>
+              <li>Bombay (Mumbai) emerged as Asia's film capital - Bollywood</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item" onclick="toggleTimeline(this)">
+        <div class="timeline-dot"></div>
+        <div class="timeline-header">
+          <div class="timeline-year">Present</div>
+          <div class="timeline-title">Modern Maharashtra: global diaspora, enduring culture</div>
+          <div class="timeline-arrow">▶</div>
+        </div>
+        <div class="timeline-body">
+          <div class="timeline-body-inner">
+            <p>Today Maharashtra is India's largest economy and most urbanised state. Marathi people work across every profession in every continent - while keeping their language, food, festivals, and identity alive.</p>
+            <ul>
+              <li>Mumbai is India's financial capital and home to the world's largest film industry</li>
+              <li>Pune is one of Asia's fastest-growing tech and education hubs</li>
+              <li>An estimated 3+ million Marathi people live outside India</li>
+              <li>Ganesh Chaturthi is now celebrated in 50+ countries worldwide</li>
+              <li>Maharashtra in Europe is part of this global story - bringing the community together across the continent</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- MISSION -->
+  <section class="mission-section">
+    <div class="reveal reveal-delay-1"><h2 class="section-title">What we're building</h2></div>
+    <div class="reveal reveal-delay-2"><p class="section-sub">Maharashtra in Europe is a living community platform. Four things drive everything we do.</p></div>
+    <div class="mission-list">
+      <div class="mission-row reveal reveal-delay-1">
+        <div class="mission-num">01</div>
+        <div class="mission-body">
+          <div class="mission-title">Connect the Community</div>
+          <div class="mission-text">Build lasting connections between Marathi people across European cities: from London to Vienna, Amsterdam to Zurich.</div>
+        </div>
+      </div>
+      <div class="mission-row reveal reveal-delay-2">
+        <div class="mission-num">02</div>
+        <div class="mission-body">
+          <div class="mission-title">Preserve Culture</div>
+          <div class="mission-text">Keep Marathi language, festivals, food, and arts alive for the next generation, no matter how far from Maharashtra.</div>
+        </div>
+      </div>
+      <div class="mission-row reveal reveal-delay-3">
+        <div class="mission-num">03</div>
+        <div class="mission-body">
+          <div class="mission-title">Sahayak: Travel Together</div>
+          <div class="mission-text">Our flagship feature: helping Marathi travellers find companions for trips between Europe and India. <a href="/sahayak" style="color:var(--gold);text-decoration:none;">Try Sahayak →</a></div>
+        </div>
+      </div>
+      <div class="mission-row reveal reveal-delay-4">
+        <div class="mission-num">04</div>
+        <div class="mission-body">
+          <div class="mission-title">Be the Hub</div>
+          <div class="mission-text">The go-to source for Marathi events, news, and resources across Europe. One platform for everything.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /page-body -->
+
+<!-- ── Footer ── -->
+<footer class="footer">
+  <p>© 2026 Maharashtra in Europe · <a href="/">maharashtraineurope.com</a> · <a href="/community">Community</a> · <a href="/sahayak">Sahayak</a></p>
+</footer>
+
+<!-- ── Modal ── -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="closeModal()" aria-label="Close">✕</button>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+<script>
+// ── Nav toggle ──
+function toggleMenu() {
+  const m = document.getElementById('mobileMenu');
+  const h = document.querySelector('.hamburger');
+  const open = m.classList.toggle('open');
+  h.classList.toggle('is-open', open);
+  h.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+}
+document.querySelectorAll('.mobile-menu a').forEach(a => a.addEventListener('click', () => {
+  document.getElementById('mobileMenu').classList.remove('open');
+  document.querySelector('.hamburger').classList.remove('is-open');
+}));
+
+// ── Scroll reveal ──
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ── Counter animation ──
+function animateCounter(el) {
+  const target = parseInt(el.dataset.target);
+  const duration = target > 1000 ? 1800 : 900;
+  const start = performance.now();
+  function step(now) {
+    const p = Math.min((now - start) / duration, 1);
+    const ease = 1 - Math.pow(1 - p, 3);
+    const val = Math.round(ease * target);
+    el.textContent = target >= 1900 ? val.toString() : val.toLocaleString();
+    if (p < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+const counterObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { animateCounter(e.target); counterObs.unobserve(e.target); } });
+}, { threshold: 0.5 });
+document.querySelectorAll('[data-target]').forEach(el => counterObs.observe(el));
+
+// ── Culture tabs ──
+function switchTab(tab, btn) {
+  document.querySelectorAll('.culture-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.culture-tab').forEach(b => b.classList.remove('active'));
+  document.getElementById('panel-' + tab).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ── Timeline accordion ──
+function toggleTimeline(item) {
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.timeline-item.open').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
+// ── Modal data ──
+const MODALS = {
+  'mission-overview': {
+    icon: '🏔️', eyebrow: 'Our Story', title: 'Where the Sahyadri meets the Alps',
+    subtitle: 'The story behind Maharashtra in Europe',
+    body: `
+      <p>Maharashtra in Europe was founded with a single conviction: <span class="highlight">the Marathi diaspora in Europe deserves a proper digital home.</span></p>
+      <p>Millions of Marathi people have made Europe their home: in London's finance corridors, Frankfurt's engineering firms, Amsterdam's tech campuses, and Zurich's banks. Until now, there was no single platform that brought them together, celebrated their culture, and helped them stay connected.</p>
+      <h4>What we do</h4>
+      <ul>
+        <li>Curate events and community gatherings across European cities</li>
+        <li>Run Sahayak, a travel companion finder for Marathi travellers between Europe and India</li>
+        <li>Document Maharashtra's culture, history, and diaspora stories</li>
+        <li>Be the go-to resource for any Marathi person arriving in Europe</li>
+      </ul>
+      <h4>Our name</h4>
+      <p>The Sahyadri mountains are the spine of Maharashtra: dramatic, enduring, defining. The Alps are their European counterpart. Our name carries the idea that Maharashtra's spirit travels with its people, no matter where they go.</p>
+    `
+  },
+  'stat-population': {
+    icon: '👥', eyebrow: 'Maharashtra Facts', title: '126 Million People',
+    subtitle: 'Maharashtra is India\'s second most populous state',
+    body: `
+      <p>With over <span class="highlight">126 million people</span>, Maharashtra is home to more people than most countries in the world. If it were a country, it would be the 11th largest by population.</p>
+      <h4>Key population facts</h4>
+      <ul>
+        <li>Mumbai alone has a metropolitan population of ~21 million</li>
+        <li>Pune is one of India's fastest-growing cities, with ~7 million in the metro area</li>
+        <li>Maharashtra is 70% Hindu, with significant Muslim, Buddhist, and Christian communities</li>
+        <li>Literacy rate: 82%, above the national average</li>
+        <li>Estimated 3+ million Maharashtrians live outside India</li>
+      </ul>
+      <h4>Urban centres</h4>
+      <p>Mumbai, Pune, Nagpur, Aurangabad (Chhatrapati Sambhajinagar), and Nashik are the five largest cities. Mumbai is India's commercial capital, Pune its intellectual hub, Nagpur its geographic centre.</p>
+    `
+  },
+  'stat-speakers': {
+    icon: '🗣️', eyebrow: 'Maharashtra Facts', title: '83 Million Marathi Speakers',
+    subtitle: 'The 10th most spoken language in the world',
+    body: `
+      <p>Marathi is spoken by <span class="highlight">over 83 million people</span> worldwide, making it one of the world's major languages. It is the official language of Maharashtra and co-official in Goa and Daman & Diu.</p>
+      <h4>Language facts</h4>
+      <ul>
+        <li>Marathi has a recorded literary history of over 900 years</li>
+        <li>Dnyaneshwari (1290 CE) by Sant Dnyaneshwar is a landmark in Marathi literature</li>
+        <li>Written in Devanagari script, the same used for Hindi and Sanskrit</li>
+        <li>Has over 40 dialects including Varhadi, Ahirani, Kolhapuri, and Malvani</li>
+        <li>Significant Marathi-speaking communities in USA, UK, Gulf countries, and across Europe</li>
+      </ul>
+      <h4>Marathi in Europe</h4>
+      <p>In Europe, Marathi is spoken across households in London, Frankfurt, Amsterdam, Zurich, and Vienna. Marathi cultural organisations in these cities actively run language classes for children of the diaspora to ensure the language thrives across generations.</p>
+    `
+  },
+  'stat-districts': {
+    icon: '🗺️', eyebrow: 'Maharashtra Facts', title: '36 Districts',
+    subtitle: 'Six administrative divisions covering 308,000 km²',
+    body: `
+      <p>Maharashtra is divided into <span class="highlight">36 districts</span>, grouped into six divisions: Konkan, Nashik, Pune, Aurangabad, Amravati, and Nagpur. It is the third largest state in India by area.</p>
+      <h4>The six divisions</h4>
+      <ul>
+        <li><strong>Konkan</strong> - the coastal strip including Mumbai, known for its beaches and seafood</li>
+        <li><strong>Nashik</strong> - the wine capital of India and a major pilgrimage centre (Kumbh Mela)</li>
+        <li><strong>Pune</strong> - the cultural capital, home to the Peshwas, IT industry, and top universities</li>
+        <li><strong>Aurangabad</strong> - gateway to Ajanta and Ellora caves, heart of the Marathwada region</li>
+        <li><strong>Amravati</strong> - Vidarbha region, known for cotton farming and tiger reserves</li>
+        <li><strong>Nagpur</strong> - India's geographic centre, famous for oranges and the seat of the Winter Assembly</li>
+      </ul>
+    `
+  },
+  'stat-statehood': {
+    icon: '🏛️', eyebrow: 'Maharashtra Facts', title: 'Maharashtra: 1 May 1960',
+    subtitle: 'The Samyukta Maharashtra movement and the birth of a state',
+    body: `
+      <p>Maharashtra as a separate state came into existence on <span class="highlight">1 May 1960</span> - a date now celebrated as Maharashtra Din (Maharashtra Day). It was the culmination of the Samyukta Maharashtra movement.</p>
+      <h4>The Samyukta Maharashtra movement</h4>
+      <ul>
+        <li>Before 1960, the region was part of Bombay State - a large, linguistically mixed province</li>
+        <li>Marathi speakers demanded a separate state based on linguistic identity</li>
+        <li>105 people were martyred in police firing during protests - honoured at Hutatma Chowk, Mumbai</li>
+        <li>Key leaders: Keshavrao Jedhe, Senapati Bapat, S.M. Joshi, and Acharya Atre</li>
+      </ul>
+      <h4>Maharashtra on 1 May</h4>
+      <p>Every year on 1 May, Maharashtra Day is observed with parades, flag hoisting, and cultural programmes. It falls on International Workers' Day - a coincidence that resonates deeply given the state's working-class roots.</p>
+    `
+  },
+  'stat-heritage': {
+    icon: '🏯', eyebrow: 'Maharashtra Facts', title: '5 UNESCO World Heritage Sites',
+    subtitle: 'Among the most extraordinary in all of Asia',
+    body: `
+      <p>Maharashtra is home to <span class="highlight">5 UNESCO World Heritage Sites</span> - a remarkable concentration of ancient art, architecture, and natural beauty.</p>
+      <h4>The five sites</h4>
+      <ul>
+        <li><strong>Ajanta Caves</strong> (2nd century BCE–5th century CE) - 30 rock-cut Buddhist cave monuments with masterpiece murals</li>
+        <li><strong>Ellora Caves</strong> (600–1000 CE) - 34 monasteries and temples of Buddhist, Hindu, and Jain faiths carved into a single cliff face</li>
+        <li><strong>Elephanta Caves</strong> - on an island near Mumbai, dedicated to Shiva with the iconic Trimurti sculpture</li>
+        <li><strong>Chhatrapati Shivaji Maharaj Terminus</strong> - the gothic Victorian railway station in Mumbai, still a working terminus</li>
+        <li><strong>Victorian Gothic and Art Deco Ensembles of Mumbai</strong> - the Oval Maidan precinct of colonial-era buildings</li>
+      </ul>
+    `
+  },
+  'stat-gdp': {
+    icon: '💰', eyebrow: 'Maharashtra Facts', title: '14% of India\'s GDP',
+    subtitle: 'The economic engine of the world\'s fifth largest economy',
+    body: `
+      <p>Maharashtra contributes approximately <span class="highlight">14% of India's total GDP</span> - more than any other state. It is the undisputed economic capital of India and one of Asia's most important business hubs.</p>
+      <h4>Economic highlights</h4>
+      <ul>
+        <li>Mumbai is home to the Bombay Stock Exchange (BSE), Asia's oldest stock exchange</li>
+        <li>Maharashtra hosts the highest concentration of Fortune 500 company offices in India</li>
+        <li>Pune is one of India's top IT and automobile manufacturing hubs</li>
+        <li>Nashik is a major wine, grape, and pharmaceutical production centre</li>
+        <li>Maharashtra accounts for ~40% of India's total FDI inflows</li>
+      </ul>
+      <h4>Key industries</h4>
+      <p>Finance, information technology, pharmaceuticals, automobiles, textiles, entertainment (Bollywood), and agriculture are the pillars of the Maharashtrian economy.</p>
+    `
+  },
+  'city-london': {
+    icon: '🇬🇧', eyebrow: 'Marathi in Europe', title: 'London',
+    subtitle: 'United Kingdom · The largest Marathi hub in Europe',
+    body: `
+      <p>London is home to the <span class="highlight">largest Marathi community in Europe</span>, with an estimated 15,000+ Marathi-speaking residents spread across the city and surrounding counties.</p>
+      <h4>Where the community lives</h4>
+      <ul>
+        <li>Harrow, Wembley, and Southall have the highest concentrations of Marathi families</li>
+        <li>Surrey and Hertfordshire are popular among Marathi professionals with families</li>
+        <li>City of London and Canary Wharf attract Marathi finance professionals</li>
+      </ul>
+      <h4>Community organisations</h4>
+      <ul>
+        <li>Marathi Vishwa UK - one of the oldest and most active Marathi organisations in Europe</li>
+        <li>Ganesh Chaturthi celebrations are held publicly in London, attracting thousands</li>
+        <li>Annual Marathi Sahitya Sammelan (literary conference) organised in London</li>
+      </ul>
+      <h4>Professions</h4>
+      <p>Marathi Londoners are heavily represented in finance, NHS healthcare, information technology, and academia. Several senior NHS consultants and City bankers are from Maharashtrian backgrounds.</p>
+    `
+  },
+  'city-amsterdam': {
+    icon: '🇳🇱', eyebrow: 'Marathi in Europe', title: 'Amsterdam',
+    subtitle: 'Netherlands · A growing tech and consulting community',
+    body: `
+      <p>Amsterdam and the broader Netherlands are home to an estimated <span class="highlight">5,000+ Marathi-speaking people</span>, many drawn by the Netherlands' welcoming immigration policies and strong tech sector.</p>
+      <h4>Why Amsterdam</h4>
+      <ul>
+        <li>The Netherlands' highly skilled migrant visa (kennismigrant) makes it easy for Indian tech workers to relocate</li>
+        <li>Major employers include ASML, Philips, ING, and dozens of tech companies</li>
+        <li>Amsterdam's international culture and English-friendliness makes settlement easy</li>
+      </ul>
+      <h4>Community life</h4>
+      <ul>
+        <li>An active Marathi WhatsApp and Meetup community organises regular gatherings</li>
+        <li>Ganesh Chaturthi is celebrated in The Hague and Amsterdam annually</li>
+        <li>The Indian community overall is well-established, with Marathi families forming a significant sub-group</li>
+      </ul>
+    `
+  },
+  'city-frankfurt': {
+    icon: '🇩🇪', eyebrow: 'Marathi in Europe', title: 'Frankfurt & Germany',
+    subtitle: 'Germany · Engineering, finance, and a growing diaspora',
+    body: `
+      <p>Germany hosts one of the fastest-growing Marathi communities in Europe, with an estimated <span class="highlight">8,000+ Marathi speakers</span> across Frankfurt, Munich, Stuttgart, and Berlin.</p>
+      <h4>Why Germany</h4>
+      <ul>
+        <li>Germany's "Blue Card" visa scheme actively recruits skilled engineers and IT professionals</li>
+        <li>Frankfurt is Germany's financial capital - home to the ECB and major international banks</li>
+        <li>Stuttgart and Munich attract automotive engineers (BMW, Mercedes-Benz, Bosch, Siemens)</li>
+      </ul>
+      <h4>Community presence</h4>
+      <ul>
+        <li>Maharashtra Mandal Frankfurt is one of the oldest Marathi organisations in Germany</li>
+        <li>Annual Ganesh Utsav celebrations are held across German cities</li>
+        <li>Strong network through IIT/IIM alumni communities</li>
+      </ul>
+    `
+  },
+  'city-zurich': {
+    icon: '🇨🇭', eyebrow: 'Marathi in Europe', title: 'Zurich',
+    subtitle: 'Switzerland · Finance, pharma, and a tight-knit community',
+    body: `
+      <p>Zurich's Marathi community, while smaller at ~3,000+, is among the most professionally accomplished in Europe, concentrated in <span class="highlight">finance, pharmaceuticals, and engineering</span>.</p>
+      <h4>Key employers</h4>
+      <ul>
+        <li>UBS, Credit Suisse (now absorbed into UBS), and Zurich Insurance employ many Marathi professionals</li>
+        <li>Roche, Novartis, and other Basel-area pharma giants draw Marathi scientists and researchers</li>
+        <li>ABB and other engineering firms in the region attract Marathi engineers</li>
+      </ul>
+      <h4>Community life</h4>
+      <ul>
+        <li>Small but active community - Marathi families gather regularly for festivals</li>
+        <li>Excellent Indian food scene and cultural infrastructure in Zurich</li>
+        <li>High quality of life draws Marathi families planning long-term stays in Europe</li>
+      </ul>
+    `
+  },
+  'city-vienna': {
+    icon: '🇦🇹', eyebrow: 'Marathi in Europe', title: 'Vienna',
+    subtitle: 'Austria · UN organisations, academia, and diplomacy',
+    body: `
+      <p>Vienna is unique in the European Marathi landscape - its community is characterised by <span class="highlight">UN employees, academics, and diplomats</span>, drawn by the city's role as an international hub.</p>
+      <h4>Vienna's special character</h4>
+      <ul>
+        <li>Vienna hosts major UN agencies including IAEA, UNODC, and UNIDO</li>
+        <li>OPEC headquarters draws energy sector professionals</li>
+        <li>University of Vienna and TU Wien attract Indian academics and researchers</li>
+        <li>Austria's high quality of life and central European location appeals to families</li>
+      </ul>
+      <h4>Community</h4>
+      <ul>
+        <li>The Indian community in Vienna is small but cosmopolitan and well-connected</li>
+        <li>Marathi families are active in the broader Indian cultural events in the city</li>
+        <li>Growing interest in Vienna as a base for Marathi professionals within EU institutions</li>
+      </ul>
+    `
+  },
+  'city-paris': {
+    icon: '🇫🇷', eyebrow: 'Marathi in Europe', title: 'Paris',
+    subtitle: 'France · Luxury, engineering, and a proud diaspora',
+    body: `
+      <p>Paris hosts an estimated <span class="highlight">4,000+ Marathi-speaking people</span>, with communities also present in Lyon and Toulouse. The French Marathi diaspora is known for its professional diversity and cultural pride.</p>
+      <h4>Key sectors</h4>
+      <ul>
+        <li>Airbus in Toulouse attracts Marathi aerospace engineers</li>
+        <li>LVMH, L'Oréal, and luxury sector companies employ Marathi professionals in Paris</li>
+        <li>Renault-Nissan and other automotive companies in the Paris region</li>
+        <li>UNESCO headquarters in Paris has Indian professionals including Marathi individuals</li>
+      </ul>
+      <h4>Community</h4>
+      <ul>
+        <li>Active Marathi community with regular cultural events</li>
+        <li>Strong ties to the broader French-Indian community centred around La Chapelle neighbourhood</li>
+        <li>Annual Ganesh Chaturthi celebrations in Paris draw Marathi families from across France</li>
+      </ul>
+    `
+  },
+  'fest-ganesh': {
+    icon: '🐘', eyebrow: 'Festivals', title: 'Ganesh Chaturthi',
+    subtitle: 'गणेश चतुर्थी · The world\'s largest festival',
+    body: `
+      <p>Ganesh Chaturthi is Maharashtra's most iconic festival - a <span class="highlight">10-day celebration</span> of Lord Ganesha that transforms entire cities into open-air temples of devotion, music, and joy.</p>
+      <h4>The festival</h4>
+      <ul>
+        <li>Celebrated on the 4th day of the Hindu month of Bhadrapada (August–September)</li>
+        <li>Clay idols of Ganesha are installed in homes and public pandals</li>
+        <li>On the final day (Anant Chaturdashi), idols are immersed in water bodies - the Visarjan</li>
+        <li>Mumbai's Lalbaugcha Raja is one of the most visited religious sites in the world during Chaturthi</li>
+      </ul>
+      <h4>History</h4>
+      <p>While Ganesh worship is ancient, the public festival format was popularised by Lokmanya Bal Gangadhar Tilak in 1893 as a way to bring people together during British rule - turning a religious event into a tool of community building and political awakening.</p>
+      <h4>In Europe</h4>
+      <p>Ganesh Chaturthi is now celebrated in London, Amsterdam, Frankfurt, and other European cities, with eco-friendly clay idols and cultural programmes. It is the most visible annual expression of Marathi identity in Europe.</p>
+    `
+  },
+  'fest-gudi': {
+    icon: '🎋', eyebrow: 'Festivals', title: 'Gudi Padwa',
+    subtitle: 'गुढी पाडवा · Marathi New Year',
+    body: `
+      <p>Gudi Padwa marks the <span class="highlight">Marathi New Year</span> - celebrated on the first day of the Hindu month of Chaitra (March–April). It is one of Maharashtra's most distinctive festivals.</p>
+      <h4>The Gudi</h4>
+      <p>Every Marathi household raises a Gudi - a bamboo stick topped with a bright silk cloth, neem leaves, sugar crystals (sakhar), and a copper pot (kalash). It is placed at the entrance of homes as a symbol of victory and new beginnings.</p>
+      <h4>Traditions</h4>
+      <ul>
+        <li>Homes are cleaned and decorated with rangoli</li>
+        <li>Traditional Marathi dishes like Shrikhand, Puran Poli, and Soonth Panak are prepared</li>
+        <li>Processions are held in cities - especially in Pune and Mumbai</li>
+        <li>New business ventures are traditionally started on Gudi Padwa</li>
+      </ul>
+      <h4>In Europe</h4>
+      <p>Marathi families across Europe celebrate Gudi Padwa with small Gudis at home, community gatherings, and traditional Maharashtrian meals - a beautiful way to mark the new year thousands of miles from Maharashtra.</p>
+    `
+  },
+  'fest-vari': {
+    icon: '🚶', eyebrow: 'Festivals', title: 'Wari - Pandharpur Pilgrimage',
+    subtitle: 'वारी · The sacred journey to Lord Vitthal',
+    body: `
+      <p>The Pandharpur Wari is Maharashtra's most sacred pilgrimage - a centuries-old tradition where hundreds of thousands of devotees (Warkaris) walk to the Vitthal temple in Pandharpur, singing the abhangas of the Varkari saints.</p>
+      <h4>The pilgrimage</h4>
+      <ul>
+        <li>Held twice a year - Ashadhi Ekadashi (June–July) and Kartiki Ekadashi (October–November)</li>
+        <li>Processions (dindis) carry the padukas (footwear) of Sant Dnyaneshwar and Sant Tukaram</li>
+        <li>Participants walk for weeks, singing devotional songs (abhangas) continuously</li>
+        <li>At its peak, over 1 million people join the pilgrimage</li>
+      </ul>
+      <h4>2026: The Global Wari</h4>
+      <p>For the first time in 2026, the Pandharpur Wari went global - with devotees carrying the padukas from London, travelling through 11 countries over 50 days, to reach Pandharpur for Ashadhi Ekadashi. Maharashtra in Europe is following this historic journey closely.</p>
+    `
+  },
+  'fest-pola': {
+    icon: '🐂', eyebrow: 'Festivals', title: 'Bail Pola',
+    subtitle: 'बैल पोळा · Honouring the bull',
+    body: `
+      <p>Bail Pola (Bull Festival) is a uniquely Maharashtrian agricultural festival that honours <span class="highlight">the bull - the farmer's most important companion</span>. It reflects Maharashtra's deep agrarian roots.</p>
+      <h4>The celebration</h4>
+      <ul>
+        <li>Celebrated on the new moon day of the Hindu month of Shravana (August–September)</li>
+        <li>Bulls are given a ritual bath, decorated with colourful garlands, and painted</li>
+        <li>They are paraded through villages and towns with drumbeats and fanfare</li>
+        <li>Farmers express gratitude to their bulls for the year's hard work</li>
+      </ul>
+      <h4>Deeper meaning</h4>
+      <p>Bail Pola reflects the Maharashtrian tradition of honouring animals and nature. In Vidarbha and Marathwada, where farming is central to life, Bail Pola is one of the most important festivals of the year. In cities and among the diaspora, toy bulls (clay or wooden) are decorated as a nod to the tradition.</p>
+    `
+  },
+  'food-vadapav': {
+    icon: '🍔', eyebrow: 'Food', title: 'Vada Pav',
+    subtitle: 'वडा पाव · Mumbai\'s soul food',
+    body: `
+      <p>Vada Pav is Maharashtra's most beloved street food - sometimes called <span class="highlight">"the Indian burger"</span>, it is available on every street corner in Mumbai and has become an icon of the state's food identity.</p>
+      <h4>What it is</h4>
+      <ul>
+        <li>A deep-fried spiced potato dumpling (batata vada) placed inside a soft bun (pav)</li>
+        <li>Served with dry garlic chutney (sukha lasun chutney) and green chilli chutney</li>
+        <li>Price ranges from ₹10–₹50 - one of the most affordable foods in India</li>
+      </ul>
+      <h4>History</h4>
+      <p>Vada Pav was invented in the 1960s near Dadar station, Mumbai - reportedly by Ashok Vaidya, who needed a quick, affordable meal for the city's mill workers. It became Mumbai's defining food, democratically eaten by everyone from factory workers to CEOs.</p>
+      <h4>In Europe</h4>
+      <p>Indian restaurants in London, Amsterdam, and other European cities often serve Vada Pav. Marathi households make it at home for parties and cultural events - always sparking nostalgia for Mumbai's streets.</p>
+    `
+  },
+  'food-puranpoli': {
+    icon: '🫓', eyebrow: 'Food', title: 'Puran Poli',
+    subtitle: 'पुरण पोळी · The festive sweet flatbread',
+    body: `
+      <p>Puran Poli is Maharashtra's most celebrated sweet dish - a <span class="highlight">golden flatbread stuffed with sweetened lentil filling</span>, made for every major festival and family occasion.</p>
+      <h4>What it is</h4>
+      <ul>
+        <li>A wheat-flour flatbread stuffed with a filling of chana dal (split chickpeas) cooked with jaggery and cardamom</li>
+        <li>Served warm with ghee, milk, or katachi amti (spiced dal broth)</li>
+        <li>Making it well is considered a mark of culinary skill</li>
+      </ul>
+      <h4>When it's made</h4>
+      <p>Puran Poli is central to Holi, Diwali, Ganesh Chaturthi, weddings, and any significant celebration. Every Marathi household has its own recipe - passed down through generations, often a closely guarded family secret.</p>
+      <h4>In Europe</h4>
+      <p>Marathi families in Europe prepare Puran Poli for festivals and community potlucks - it is always the dish that provokes the most intense nostalgia and the most animated discussions about whose mother or grandmother makes it best.</p>
+    `
+  },
+  'food-modak': {
+    icon: '🍡', eyebrow: 'Food', title: 'Modak',
+    subtitle: 'मोदक · Lord Ganesha\'s favourite',
+    body: `
+      <p>Modak is the sweet dumpling synonymous with Ganesh Chaturthi - considered <span class="highlight">Lord Ganesha's favourite food</span> and an essential offering during the festival.</p>
+      <h4>What it is</h4>
+      <ul>
+        <li>A steamed dumpling made from rice flour, stuffed with a mixture of fresh coconut and jaggery</li>
+        <li>The traditional ukdiche modak (steamed) is considered the authentic form</li>
+        <li>Fried modak (talache modak) is a popular variation</li>
+        <li>Modern versions include chocolate, dry fruit, and mawa modak</li>
+      </ul>
+      <h4>Cultural significance</h4>
+      <p>21 modaks are traditionally offered to Lord Ganesha during Chaturthi puja. The shape of a modak - bulbous at the top tapering to a point - is said to represent enlightenment (jnana) within a human vessel.</p>
+    `
+  },
+  'food-misal': {
+    icon: '🥣', eyebrow: 'Food', title: 'Misal Pav',
+    subtitle: 'मिसळ पाव · Pune\'s fiery breakfast',
+    body: `
+      <p>Misal Pav is a beloved Maharashtrian breakfast and snack - a <span class="highlight">fiery sprouted lentil curry</span> topped with crunchy farsan, served with pav bread.</p>
+      <h4>What it is</h4>
+      <ul>
+        <li>Sprouted moth beans (matki) cooked in a spicy gravy of onion, tomato, and Maharashtrian spices</li>
+        <li>Topped with farsan (crunchy chickpea-flour noodles), onion, lemon, and coriander</li>
+        <li>Served with soft pav bread</li>
+        <li>The gravy is called "kat" or "tarri" - and each city has its own version of spice level</li>
+      </ul>
+      <h4>Regional varieties</h4>
+      <p>Pune Misal, Kolhapuri Misal, Nashik Misal, and Mumbai Misal are all distinct - varying in spice level, consistency, and toppings. Kolhapuri Misal is the spiciest, while Puneri Misal is milder but more complex in flavour.</p>
+    `
+  },
+  'art-lavani': {
+    icon: '💃', eyebrow: 'Arts', title: 'Lavani',
+    subtitle: 'लावणी · Maharashtra\'s vibrant folk performance',
+    body: `
+      <p>Lavani is Maharashtra's most energetic folk dance-drama - a <span class="highlight">centuries-old tradition combining powerful rhythm, evocative poetry, and expressive performance</span>.</p>
+      <h4>What it is</h4>
+      <ul>
+        <li>A performance combining singing and dancing to the rhythm of the dholki drum</li>
+        <li>Traditionally performed by women in nine-yard sarees (nauvari), wearing distinctive heavy jewellery</li>
+        <li>Songs are called "lavanis" - typically romantic, satirical, or socially critical</li>
+        <li>Two main styles: Nirguni (philosophical, devotional) and Shringari (romantic, sensuous)</li>
+      </ul>
+      <h4>History</h4>
+      <p>Lavani was patronised by the Maratha kings and Peshwas, performed in royal courts. It was also used as a form of social commentary - artists known as tamasha performers used Lavani to critique authority and social norms.</p>
+      <h4>Today</h4>
+      <p>Lavani is a UNESCO-recognised art form and is performed at cultural events across Maharashtra and by the diaspora in Europe. It has also influenced Bollywood dance choreography significantly.</p>
+    `
+  },
+  'art-warli': {
+    icon: '🎨', eyebrow: 'Arts', title: 'Warli Painting',
+    subtitle: 'वारली चित्रकला · Ancient tribal art',
+    body: `
+      <p>Warli painting is one of India's oldest art forms - created by the <span class="highlight">Warli tribe of North Maharashtra</span> using simple geometric shapes to depict human figures, nature, and rituals.</p>
+      <h4>The style</h4>
+      <ul>
+        <li>Uses only white pigment (traditionally made from rice paste) on a dark ochre or mud background</li>
+        <li>Composed of basic shapes: circles (sun/moon), triangles (mountains/trees), squares (fields), and lines</li>
+        <li>Human and animal figures are depicted through two triangles joined at their tips</li>
+        <li>Scenes typically show harvests, weddings, hunting, dancing, and daily village life</li>
+      </ul>
+      <h4>Global recognition</h4>
+      <p>Warli art is now recognised internationally - displayed in galleries across Europe and used in fashion, architecture, and design. The art form is taught in European Marathi cultural centres to preserve its tradition among diaspora children.</p>
+    `
+  },
+  'art-powada': {
+    icon: '🎶', eyebrow: 'Arts', title: 'Powada',
+    subtitle: 'पोवाडा · Ballads of Maratha valour',
+    body: `
+      <p>Powada are epic ballads - <span class="highlight">oral histories set to music</span> that celebrated the deeds of Shivaji Maharaj, Maratha warriors, and key historical battles. They were Maharashtra's equivalent of oral epics.</p>
+      <h4>The tradition</h4>
+      <ul>
+        <li>Composed and performed by bards known as Shahirs (poet-musicians)</li>
+        <li>Accompanied by the dholki, tutari (long brass horn), and tasha (drum)</li>
+        <li>The most famous Powadas were written by Shahir Agnidas and Shahir Tulsidas</li>
+        <li>Historically performed at forts, in battle camps, and to inspire soldiers</li>
+      </ul>
+      <h4>Modern Powada</h4>
+      <p>The Shahir tradition continues today - modern Shahirs compose Powadas about contemporary social issues, political events, and community pride. In the diaspora, Powada performances are a highlight of cultural events, connecting younger generations to Maharashtra's epic past.</p>
+    `
+  },
+  'art-kirtan': {
+    icon: '🪘', eyebrow: 'Arts', title: 'Kirtan',
+    subtitle: 'कीर्तन · Devotional performance of the Varkari saints',
+    body: `
+      <p>Kirtan is the devotional performance tradition of the Varkari saints - a unique combination of <span class="highlight">music, philosophy, storytelling, and audience participation</span> that has shaped Maharashtrian culture for 700 years.</p>
+      <h4>What it is</h4>
+      <ul>
+        <li>A Kirtankar (performer) narrates stories from the lives of saints and mythology</li>
+        <li>Interspersed with abhangas (devotional songs) of saints like Dnyaneshwar, Tukaram, and Namdev</li>
+        <li>The audience participates by repeating refrains and clapping along</li>
+        <li>A performance typically lasts 2–4 hours and covers both spiritual and social themes</li>
+      </ul>
+      <h4>The Varkari tradition</h4>
+      <p>The Varkari movement (12th–17th centuries) produced Maharashtra's greatest spiritual poets. Their abhangas - devotional poems written in simple Marathi - remain sung daily by millions. The Wari (Pandharpur pilgrimage) is the living expression of this tradition.</p>
+    `
+  },
+  'lang-marathi': {
+    icon: '🔤', eyebrow: 'Language', title: 'Marathi Language',
+    subtitle: 'मराठी भाषा · 2,500 years of literary history',
+    body: `
+      <p>Marathi is one of the world's oldest living languages with a continuous literary tradition spanning <span class="highlight">over 2,500 years</span>. It is the official language of Maharashtra and the mother tongue of 83+ million people.</p>
+      <h4>Language family</h4>
+      <ul>
+        <li>Belongs to the Indo-Aryan branch of the Indo-European language family</li>
+        <li>Descended from Maharashtri Prakrit - a major literary language of ancient India</li>
+        <li>Related to Hindi, Gujarati, and Bengali, but with a distinct grammar and vocabulary</li>
+        <li>Has absorbed words from Sanskrit, Persian, Arabic, Portuguese, and English over centuries</li>
+      </ul>
+      <h4>Literary milestones</h4>
+      <ul>
+        <li>Dnyaneshwari (1290 CE) - commentary on the Bhagavad Gita by Sant Dnyaneshwar, a masterpiece of Marathi literature</li>
+        <li>Dasbodh by Samarth Ramdas - spiritual text that guided Shivaji Maharaj</li>
+        <li>Abhangas of Sant Tukaram - devotional poems still sung daily across Maharashtra</li>
+        <li>Modern Marathi literature has produced giants like P.L. Deshpande (Pu La) and Vijay Tendulkar</li>
+      </ul>
+    `
+  },
+  'lang-script': {
+    icon: '📜', eyebrow: 'Language', title: 'Devanagari Script',
+    subtitle: 'देवनागरी · The script of gods and men',
+    body: `
+      <p>Marathi is written in Devanagari - a script whose name translates literally as <span class="highlight">"script of the city of gods"</span>. It is also used for Hindi, Sanskrit, Nepali, and several other South Asian languages.</p>
+      <h4>The script</h4>
+      <ul>
+        <li>An abugida - each consonant carries an inherent vowel sound</li>
+        <li>Written left to right, with a horizontal line (matra) connecting letters at the top</li>
+        <li>Marathi uses 48 characters (16 vowels and 36 consonants)</li>
+        <li>Some Marathi characters are distinct from Hindi Devanagari</li>
+      </ul>
+      <h4>How to start</h4>
+      <p>Learning Devanagari takes most adults 1–2 weeks of consistent practice. Once learned, it unlocks reading ability in Marathi, Hindi, and Sanskrit simultaneously. Several apps and online tools offer Devanagari courses - and Marathi cultural organisations in Europe run language and script classes.</p>
+    `
+  },
+  'lang-phrases': {
+    icon: '👋', eyebrow: 'Language', title: 'Common Marathi Phrases',
+    subtitle: 'Learn the basics of Maharashtra\'s language',
+    body: `
+      <p>Here are essential Marathi phrases to get you started. Marathi speakers in Europe will always appreciate the effort - even a simple <span class="highlight">"Namaskar"</span> will earn a warm smile.</p>
+      <h4>Greetings</h4>
+      <ul>
+        <li><strong>नमस्कार</strong> (Namaskar) - Hello / Greetings</li>
+        <li><strong>कसे आहात?</strong> (Kase aahat?) - How are you? (formal)</li>
+        <li><strong>मी ठीक आहे</strong> (Mi thik aahe) - I am fine</li>
+        <li><strong>बरं आहे का?</strong> (Baran aahe ka?) - How are you doing? (informal)</li>
+      </ul>
+      <h4>Courtesy</h4>
+      <ul>
+        <li><strong>धन्यवाद</strong> (Dhanyawad) - Thank you</li>
+        <li><strong>कृपया</strong> (Krupaya) - Please</li>
+        <li><strong>माफ करा</strong> (Maaf kara) - I'm sorry / Excuse me</li>
+      </ul>
+      <h4>Useful phrases</h4>
+      <ul>
+        <li><strong>मला मराठी येते</strong> (Mala Marathi yete) - I know Marathi</li>
+        <li><strong>तुम्ही कुठून आहात?</strong> (Tumhi kutthun aahat?) - Where are you from?</li>
+        <li><strong>जय महाराष्ट्र!</strong> (Jai Maharashtra!) - Long live Maharashtra!</li>
+      </ul>
+    `
+  },
+  'lang-dialects': {
+    icon: '🗺️', eyebrow: 'Language', title: 'Marathi Dialects',
+    subtitle: 'From Varhadi to Kolhapuri - regional richness',
+    body: `
+      <p>Marathi is not a monolithic language - it has <span class="highlight">over 40 distinct dialects</span>, each reflecting the geography, history, and culture of a particular region of Maharashtra.</p>
+      <h4>Major dialects</h4>
+      <ul>
+        <li><strong>Standard Marathi (Pune dialect)</strong> - the prestige dialect, used in media, education, and formal settings</li>
+        <li><strong>Varhadi</strong> - spoken in Vidarbha (Nagpur region), has distinct vocabulary and a softer sound</li>
+        <li><strong>Kolhapuri</strong> - the dialect of southern Maharashtra, known for its strength and expressiveness</li>
+        <li><strong>Malvani / Konkani Marathi</strong> - spoken on the Konkan coast, influenced by Konkani and Goan Portuguese</li>
+        <li><strong>Ahirani</strong> - spoken in the Khandesh region (Dhule, Jalgaon), considered a dialect cluster in itself</li>
+        <li><strong>Thanjavuri Marathi</strong> - a distinct variety spoken by Marathi communities in Tamil Nadu, descendants of Maratha rulers</li>
+      </ul>
+      <h4>In the diaspora</h4>
+      <p>In Europe, you'll encounter Marathi speakers from all these regions - the variety of accents and expressions is a delight. Standard (Pune) Marathi is understood by all and is what's taught in diaspora language classes.</p>
+    `
+  }
+};
+
+function openModal(id) {
+  const data = MODALS[id];
+  if (!data) return;
+  document.getElementById('modal-content').innerHTML = `
+    <div class="modal-icon">${data.icon}</div>
+    <div class="modal-eyebrow">${data.eyebrow}</div>
+    <div class="modal-title">${data.title}</div>
+    <div class="modal-subtitle">${data.subtitle}</div>
+    <div class="modal-divider"></div>
+    <div class="modal-body">${data.body}</div>
+  `;
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeModalOutside(e) {
+  if (e.target === document.getElementById('modalOverlay')) closeModal();
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+</body>
+</html>
