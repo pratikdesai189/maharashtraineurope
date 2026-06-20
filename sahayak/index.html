@@ -693,7 +693,6 @@ function render() {
                   ? `<span class="pill">&#128197; ${escHtml(r.travel_date)}</span>`
                   : `<span class="pill">&#128197; Flexible — any upcoming trip</span>`)
             }
-            <span class="pill">${escHtml(r.city_in_europe)}</span>
             ${r.flight_number ? `<span class="pill">&#9992; ${escHtml(formatFlightDisplay(r.flight_number))}</span>` : ''}
             ${langs.map(l => `<span class="pill">${escHtml(l)}</span>`).join('')}
           </div>
