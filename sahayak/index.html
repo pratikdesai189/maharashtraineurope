@@ -1,784 +1,477 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sahayak — Travel & Letter Network | Maharashtra in Europe</title>
-  <meta name="description" content="Find a travel companion or letter carrier between Europe and India. Open to all Indians, hosted by the Marathi community." />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sahayak — Find a Travel Companion | Maharashtra in Europe</title>
 
-  <!-- Open Graph -->
-  <meta property="og:type"        content="website" />
-  <meta property="og:url"         content="https://maharashtraineurope.com/sahayak" />
-  <meta property="og:title"       content="Sahayak — Find a Travel Companion Between Europe and India" />
-  <meta property="og:description" content="Find a travel companion or letter carrier between Europe and India. Open to all Indians, one journey at a time." />
-  <meta property="og:image"       content="https://maharashtraineurope.com/assets/og-image-sahayak.jpg" />
-  <meta property="og:image:width"  content="1200" />
-  <meta property="og:image:height" content="630" />
+  <!-- Tab Icons (Goes up one level to assets) -->
+  <link rel="icon" type="image/x-icon" href="../favicon.ico">
+  <link rel="icon" type="image/png" sizes="192x192" href="../assets/icon-192.png">
 
-  <!-- Twitter Card -->
-  <meta name="twitter:card"        content="summary_large_image" />
-  <meta name="twitter:title"       content="Sahayak — Find a Travel Companion Between Europe and India" />
-  <meta name="twitter:description" content="Find a travel companion or letter carrier between Europe and India. Open to all Indians, one journey at a time." />
-  <meta name="twitter:image"       content="https://maharashtraineurope.com/assets/og-image-sahayak.jpg" />
+  <!-- Social Card / WhatsApp Preview -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://maharashtraineurope.com/sahayak/">
+  <meta property="og:title" content="Sahayak — Find a Travel Companion between Europe & India">
+  <meta property="og:description"
+    content="Travel together, help each other. Find a travel companion or letter carrier through the Maharashtra in Europe community.">
+  <meta property="og:image" content="https://maharashtraineurope.com/assets/og-image-sahayak.png">
 
-  <link rel="icon" href="/favicon.ico" sizes="any">
-  <link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png">
-  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Yatra+One&display=swap" rel="stylesheet">
-
-  <!-- JSON-LD Structured Data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    "@id": "https://maharashtraineurope.com/sahayak",
-    "url": "https://maharashtraineurope.com/sahayak",
-    "name": "Sahayak — Travel & Letter Network",
-    "description": "Find a travel companion or letter carrier between Europe and India. Open to all Indians, hosted by the Marathi community.",
-    "isPartOf": { "@id": "https://maharashtraineurope.com/#website" },
-    "about": {
-      "@type": "Service",
-      "name": "Sahayak Travel Companion Network",
-      "serviceType": "Community Travel Companion Matching",
-      "areaServed": "Europe",
-      "audience": {
-        "@type": "Audience",
-        "audienceType": "Indian expats and travelers in Europe"
-      }
-    }
-  }
-  </script>
-
-  <!-- ─── REPLACE THIS URL with your actual published Google Sheet CSV URL ─── -->
-  <!-- How to get it: Google Sheets → File → Share → Publish to web → CSV → Copy URL -->
-  <script>
-    const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ4VhZY3eQJlzyET99mCG13Rwz41RKSOAaVDS1gfOgUl7DMDNDTf8bQz7EcnLvCUo_LZVSOTcn7D5Pd/pub?gid=1005612043&single=true&output=csv';
-  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Hind:wght@400;600;700&display=swap"
+    rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
 
   <style>
-    /* ── Reset & Base ── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --saffron:       #C4440A;
-      --saffron-hover: #A33708;
-      --saffron-light: #FDF1EB;
-      --saffron-mid:   #E07040;
-      --gold:          #C9922A;
-      --gold-light:    #FAF3E0;
-      --white:         #FFFFFF;
-      --off-white:     #FDF8F4;
-      --text:          #1A0A00;
-      --text-muted:    #7A5A40;
-      --border:        #EAD8C8;
-      --font:          'Montserrat', system-ui, sans-serif;
-      --radius-sm:     6px;
-      --radius-md:     10px;
-      --radius-lg:     16px;
-    }
-
     body {
-      font-family: var(--font);
-      background: var(--off-white);
-      color: var(--text);
-      min-height: 100vh;
+      font-family: 'Poppins', sans-serif;
     }
 
-    a { color: inherit; text-decoration: none; }
-
-    /* ── Layout wrapper ── */
-    .wrap { max-width: 860px; margin: 0 auto; padding: 0 16px 60px; }
-
-    /* ── Nav ── */
-    .navbar {
-      background: var(--saffron);
-      padding: 13px 20px;
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .navbar-brand { color: #fff; font-size: 15px; font-weight: 600; line-height: 1.2; }
-    .navbar-brand span { display: block; font-size: 12px; font-weight: 400; opacity: 0.78; }
-    .navbar-links { display: flex; gap: 20px; }
-    .navbar-links a { color: rgba(255,255,255,0.72); font-size: 13px; transition: color .15s; }
-    .navbar-links a:hover, .navbar-links a.active { color: #fff; }
-
-    /* ── Sahayak pill — ALWAYS include this on every page you build.
-       Sahayak is the flagship community feature; it must stand out
-       in the nav at all times. Copy this class + the ✈ emoji to
-       any new page's navbar: <a href="/sahayak" class="nav-sahayak">Sahayak ✈</a> ── */
-    .navbar-links a.nav-sahayak {
-      background: rgba(255,255,255,0.15);
-      border: 0.5px solid rgba(255,255,255,0.35);
-      padding: 4px 13px;
-      border-radius: 99px;
-      color: #fff;
-      font-weight: 600;
-      transition: background .2s, border-color .2s;
-    }
-    .navbar-links a.nav-sahayak:hover,
-    .navbar-links a.nav-sahayak.active {
-      background: rgba(255,255,255,0.25);
-      border-color: rgba(255,255,255,0.55);
-      color: #fff;
+    .marathi {
+      font-family: 'Hind', sans-serif;
     }
 
-    /* ── Hero ── */
-    .hero {
-      background: var(--saffron);
-      padding: 2.2rem 20px 2.8rem;
-      position: relative; overflow: hidden;
-      margin-bottom: 28px;
-    }
-    .hero::before {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0; height: 3px;
-      background: repeating-linear-gradient(90deg, var(--gold) 0, var(--gold) 8px, transparent 8px, transparent 13px);
-      opacity: 0.65;
-    }
-    .hero::after {
-      content: '';
-      position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
-      background: repeating-linear-gradient(90deg, var(--gold) 0, var(--gold) 8px, transparent 8px, transparent 13px);
-      opacity: 0.4;
-    }
-    .hero-eyebrow {
-      display: inline-block;
-      background: rgba(255,255,255,0.18);
-      border: 0.5px solid rgba(255,255,255,0.35);
-      color: #fff; font-size: 11px; font-weight: 500;
-      padding: 3px 12px; border-radius: 99px;
-      letter-spacing: 0.06em; margin-bottom: 12px;
-    }
-    .hero h1 { color: #fff; font-size: 22px; font-weight: 600; margin-bottom: 4px; }
-    .hero-sub { color: rgba(255,255,255,0.92); font-size: 15px; margin-bottom: 6px; font-weight: 500; }
-    .hero-desc { color: rgba(255,255,255,0.88); font-size: 14px; line-height: 1.65; }
-    .hero-actions { margin-top: 1.3rem; display: flex; gap: 10px; flex-wrap: wrap; }
-    .btn-white {
-      background: #fff; color: var(--saffron);
-      border: none; padding: 9px 22px;
-      border-radius: 7px; font-size: 13px; font-weight: 600;
-      cursor: pointer; transition: background .15s;
-    }
-    .btn-white:hover { background: var(--gold-light); }
-    .btn-outline-white {
-      background: transparent; color: #fff;
-      border: 1px solid rgba(255,255,255,0.45);
-      padding: 9px 22px; border-radius: 7px; font-size: 13px;
-      cursor: pointer; transition: all .15s;
-    }
-    .btn-outline-white:hover { border-color: #fff; background: rgba(255,255,255,0.1); }
-
-    /* ── Stats ── */
-    .stats {
-      display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
-      margin-bottom: 20px;
-    }
-    .stat {
-      background: var(--white);
-      border: 0.5px solid var(--border);
-      border-top: 3px solid var(--gold);
-      border-radius: 8px; padding: 14px 14px 12px;
-    }
-    .stat-n { font-size: 24px; font-weight: 600; color: var(--saffron); }
-    .stat-l { font-size: 11px; color: var(--text-muted); margin-top: 3px; }
-
-    /* ── Disclaimer ── */
-    .disclaimer {
-      background: var(--gold-light);
-      border-left: 3px solid var(--gold);
-      border-radius: 0 8px 8px 0;
-      padding: 10px 14px;
-      font-size: 12px; color: #6B4A10;
-      margin-bottom: 20px; line-height: 1.6;
+    .hero-bg {
+      background: linear-gradient(rgba(234, 88, 12, 0.9), rgba(196, 68, 10, 0.9)), url('https://images.unsplash.com/photo-1436491865332-7a61a109c05a?auto=format&fit=crop&w=1600&q=80');
+      background-size: cover;
+      background-position: center;
     }
 
-    /* ── Filters ── */
-    .filters {
-      display: flex; gap: 7px; margin-bottom: 12px;
-      overflow-x: auto; scrollbar-width: none;
-      -webkit-overflow-scrolling: touch;
-      padding-bottom: 2px;
-    }
-    .filters::-webkit-scrollbar { display: none; }
-    .tab {
-      font-size: 13px; padding: 7px 16px; border-radius: 99px;
-      border: 0.5px solid var(--border);
-      background: var(--white); color: var(--text-muted);
-      cursor: pointer; transition: all .15s;
-      white-space: nowrap; flex-shrink: 0;
-      min-height: 36px;
-    }
-    .tab.on { background: var(--saffron); color: #fff; border-color: var(--saffron); }
-    .tab:hover:not(.on) { border-color: var(--saffron); color: var(--saffron); }
-    @media (pointer: coarse) { .tab { min-height: 44px; padding: 10px 18px; } }
-
-    /* ── Selects ── */
-    .selects { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
-    .selects select {
-      font-size: 13px; padding: 7px 11px;
-      border-radius: 7px; border: 0.5px solid var(--border);
-      background: var(--white); color: var(--text); cursor: pointer;
-      font-family: var(--font);
-    }
-    .selects select:focus { outline: none; border-color: var(--saffron); }
-
-    /* ── Section label ── */
-    .section-label {
-      font-size: 11px; font-weight: 600; color: var(--text-muted);
-      letter-spacing: 0.08em; text-transform: uppercase;
-      margin-bottom: 12px;
-      display: flex; align-items: center; gap: 10px;
-    }
-    .section-label::after { content: ''; flex: 1; height: 0.5px; background: var(--border); }
-
-    /* ── Cards ── */
-    .card {
-      background: var(--white);
-      border: 0.5px solid var(--border);
-      border-radius: var(--radius-lg); padding: 16px;
-      margin-bottom: 10px;
-      display: flex; gap: 13px; align-items: flex-start;
-      transition: border-color .2s, transform .2s cubic-bezier(.16,1,.3,1),
-                  box-shadow .2s cubic-bezier(.16,1,.3,1);
-    }
-    .card:hover {
-      border-color: var(--saffron-mid);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(196,68,10,0.09);
+    .custom-scrollbar::-webkit-scrollbar {
+      height: 4px;
     }
 
-    .avatar {
-      width: 42px; height: 42px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 13px; font-weight: 600; flex-shrink: 0;
-      border: 1.5px solid var(--gold);
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #e2e8f0;
+      border-radius: 10px;
     }
 
-    .card-body { flex: 1; min-width: 0; }
-    .card-top { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 6px; }
-    .card-name { font-size: 14px; font-weight: 600; color: var(--text); }
-    .card-route { font-size: 12px; color: var(--text-muted); margin-left: auto; white-space: nowrap; }
-
-    .badge { font-size: 11px; padding: 2px 9px; border-radius: 99px; font-weight: 500; }
-    .badge-travel { background: #FDF1EB; color: #7A2A00; border: 0.5px solid #EAC0A0; }
-    .badge-letter { background: var(--gold-light); color: #6B4A10; border: 0.5px solid #E0D0A0; }
-    .badge-both   { background: var(--saffron); color: #fff; }
-    .badge-role-offering { background: #E8F5E9; color: #2E7D32; border: 0.5px solid #A5D6A7; }
-    .badge-role-looking  { background: #EAF2FB; color: #1F5A8A; border: 0.5px solid #B7D2EC; }
-
-    .card-desc { font-size: 13px; color: var(--text-muted); line-height: 1.55; margin-bottom: 8px; }
-
-    .pills { display: flex; gap: 5px; flex-wrap: wrap; }
-    .pill {
-      font-size: 11px; padding: 2px 9px; border-radius: 99px;
-      border: 0.5px solid var(--border); color: var(--text-muted); background: var(--off-white);
-    }
-    .pill-expired {
-      font-size: 11px; padding: 2px 9px; border-radius: 99px;
-      border: 0.5px solid #E0C0C0; color: #A05050; background: #FDF0F0;
-    }
-    .toggle-expired {
-      font-size: 12px; color: var(--text-muted); cursor: pointer;
-      display: inline-flex; align-items: center; gap: 6px;
-      margin-bottom: 12px; user-select: none;
-    }
-    .toggle-expired input { cursor: pointer; accent-color: var(--saffron); }
-
-    .btn-connect {
-      font-size: 12px; padding: 8px 15px;
-      border-radius: 7px;
-      border: 1.5px solid var(--saffron);
-      background: transparent; color: var(--saffron);
-      cursor: pointer; white-space: nowrap; flex-shrink: 0;
-      align-self: center; font-weight: 600;
-      transition: all .15s;
-    }
-    .btn-connect:hover { background: var(--saffron); color: #fff; }
-
-    /* ── States ── */
-    .loading, .empty, .error {
-      text-align: center; padding: 3rem 1rem;
-      color: var(--text-muted); font-size: 14px;
-    }
-    .loading-spinner {
-      width: 28px; height: 28px; border-radius: 50%;
-      border: 2.5px solid var(--border);
-      border-top-color: var(--saffron);
-      animation: spin .7s linear infinite;
-      margin: 0 auto 12px;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    /* ── Footer ── */
-    .footer {
-      text-align: center; font-size: 12px; color: var(--text-muted);
-      margin-top: 2rem; padding-top: 1.2rem;
-      border-top: 0.5px solid var(--border);
-    }
-    .footer strong { color: var(--saffron); }
-
-    /* ── Responsive ── */
-    @media (max-width: 600px) {
-      .stats { grid-template-columns: repeat(2, 1fr); }
-      .navbar-links a:not(.nav-sahayak) { display: none; }
-      .card-route { display: none; }
+    #mobile-menu {
+      transition: all 0.3s ease-in-out;
+      max-height: 0;
+      overflow: hidden;
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      .loading-spinner { animation: none; }
-    }
-
-    /* ── Navbar scroll state ── */
-    .navbar { transition: background .3s ease; }
-    .navbar.is-scrolled {
-      background: rgba(150, 32, 6, 0.92);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-    }
-
-    /* ── Focus visible ── */
-    .tab:focus-visible,
-    .btn-white:focus-visible,
-    .btn-outline-white:focus-visible,
-    .btn-connect:focus-visible,
-    .navbar-links a:focus-visible {
-      outline: 2px solid var(--gold);
-      outline-offset: 3px;
-      border-radius: 4px;
-    }
-
-    /* ── Dark mode ── */
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --off-white:  #130700;
-        --white:      #1E0B00;
-        --text:       #F5E8D8;
-        --text-muted: #C4A07A;
-        --border:     #3A2010;
-        --gold-light: #2A1A00;
-      }
-      .disclaimer { background: #2A1500; color: #C8A060; }
-      .badge-role-offering { background: #0D2010; color: #6FCF7A; border-color: #2E6035; }
-      .badge-role-looking  { background: #0A1828; color: #72B8F0; border-color: #1C4070; }
-      .pill { background: #1A0A00; }
+    #mobile-menu.open {
+      max-height: 500px;
     }
   </style>
 </head>
-<body>
 
-<!-- ── Navigation ── -->
-<nav class="navbar">
-  <div class="navbar-brand">
-    Maharashtra in Europe
-    <span>महाराष्ट्र इन युरोप</span>
-  </div>
-  <div class="navbar-links">
-    <a href="/">Home</a>
-    <a href="/about">About</a>
-    <a href="/community">Community</a>
-    <a href="/sahayak" class="nav-sahayak active">Sahayak ✈</a>
-  </div>
-</nav>
+<body class="bg-gray-50 text-gray-800">
 
-<!-- ── Hero ── -->
-<div class="hero">
-  <div class="wrap" style="padding-top:0;padding-bottom:0">
-    <span class="hero-eyebrow">COMMUNITY FEATURE</span>
-    <h1>Sahayak — सहायक</h1>
-    <p class="hero-sub">"Where the Sahyadri meets the Alps"</p>
-    <p class="hero-desc">
-      Find a travel companion or someone carrying letters — Europe to India, or India to Europe.<br>
-      Open to all Indians traveling between Europe and India — proudly hosted by the Marathi community.
-    </p>
-    <div class="hero-actions">
-      <!-- ─── REPLACE href with your actual Google Form link ─── -->
-      <a href="https://forms.gle/XUH1CCBFHC5dtASq6" target="_blank" rel="noopener">
-        <button class="btn-white">+ Post your listing</button>
-      </a>
-      <button class="btn-outline-white" onclick="document.getElementById('listings-section').scrollIntoView({behavior:'smooth'})">
-        Browse listings
-      </button>
-    </div>
-  </div>
-</div>
+  <!-- 1. NAVIGATION (Pointers fixed for /sahayak/ folder) -->
+  <nav class="bg-white py-3 px-4 md:px-6 shadow-sm sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <img src="../assets/logo.png" alt="Logo" class="w-10 h-10 md:w-12 md:h-12 object-contain">
+        <div>
+          <h1 class="font-bold text-sm md:text-lg leading-tight text-orange-600">Maharashtra <span
+              class="text-gray-700">in Europe</span></h1>
+          <p class="marathi text-[8px] md:text-[10px] text-gray-500">॥ महाराष्ट्रा ते युरोप, एकत्र समुदाय ॥</p>
+        </div>
+      </div>
 
-<div class="wrap">
+      <!-- Desktop Menu -->
+      <div class="hidden md:flex items-center gap-6 text-sm font-medium text-gray-600">
+        <a href="/" class="hover:text-orange-600">Home</a>
+        <a href="#" class="hover:text-orange-600">News</a>
+        <a href="/sahayak/" class="text-orange-600 border-b-2 border-orange-600">Sahayak</a>
+        <a href="/community/" class="hover:text-orange-600">Community</a>
+        <a href="#" class="hover:text-orange-600">Events</a>
+        <a href="#" class="hover:text-orange-600">Directory</a>
+        <a href="#" class="hover:text-orange-600">Jobs</a>
+        <a href="#" class="hover:text-orange-600">Student Corner</a>
+      </div>
 
-  <!-- ── Stats ── -->
-  <div class="stats">
-    <div class="stat">
-      <div class="stat-n" id="s-total">—</div>
-      <div class="stat-l">Active listings</div>
-    </div>
-    <div class="stat">
-      <div class="stat-n" id="s-travel">—</div>
-      <div class="stat-l">Travel companions</div>
-    </div>
-    <div class="stat">
-      <div class="stat-n" id="s-letter">—</div>
-      <div class="stat-l">Letter / Medicine carriers</div>
-    </div>
-    <div class="stat">
-      <div class="stat-n" id="s-cities">—</div>
-      <div class="stat-l">Cities active</div>
-    </div>
-  </div>
-
-  <!-- ── Disclaimer ── -->
-  <div class="disclaimer">
-    &#9432;&nbsp; Listings are posted by community members. Always verify identity before sharing documents or valuables.
-    Maharashtra in Europe is not responsible for lost or undelivered items.
-  </div>
-
-  <!-- ── Filters ── -->
-  <div class="filters">
-    <button class="tab on" onclick="setTab('all', this)">All</button>
-    <button class="tab" onclick="setTab('need-companion', this)">Need companion</button>
-    <button class="tab" onclick="setTab('offer-companion', this)">Offer companion</button>
-    <button class="tab" onclick="setTab('need-carrier', this)">Need carrier</button>
-    <button class="tab" onclick="setTab('offer-carrier', this)">Offer carrier</button>
-  </div>
-
-  <!-- ── Dropdowns ── -->
-  <div class="selects">
-    <select id="f-direction" onchange="render()">
-      <option value="">Any direction</option>
-      <option value="Europe to India">Europe → India</option>
-      <option value="India to Europe">India → Europe</option>
-    </select>
-    <select id="f-from" onchange="render()">
-      <option value="">Europe: any city</option>
-    </select>
-    <select id="f-to" onchange="render()">
-      <option value="">India: any city</option>
-    </select>
-  </div>
-
-  <!-- ── Expired toggle ── -->
-  <label class="toggle-expired">
-    <input type="checkbox" id="show-expired" onchange="render()" />
-    Show past listings
-  </label>
-
-  <!-- ── Listings ── -->
-  <div id="listings-section">
-    <div class="section-label">Active listings</div>
-    <div id="listings">
-      <div class="loading">
-        <div class="loading-spinner"></div>
-        Loading listings…
+      <div class="flex items-center gap-2 md:gap-4">
+        <a href="https://www.instagram.com/mheu.in?igsh=cDcwYnozOGRvNTRm&utm_source=qr" target="_blank"
+          class="hidden sm:flex bg-orange-600 text-white px-4 py-2 rounded-full text-sm font-semibold items-center gap-2 hover:bg-orange-700 transition">
+          <i data-lucide="users" class="w-4 h-4"></i> Join
+        </a>
+        <button id="menu-toggle" class="md:hidden p-2 text-gray-600 focus:outline-none">
+          <i data-lucide="menu" id="menu-icon" class="w-6 h-6"></i>
+        </button>
       </div>
     </div>
-  </div>
 
-  <!-- ── Footer ── -->
-  <div class="footer">
-    <strong>Maharashtra in Europe</strong> &nbsp;·&nbsp; महाराष्ट्र इन युरोप &nbsp;·&nbsp;
-    "Where the Sahyadri meets the Alps"<br>
-    <span style="margin-top:4px;display:block">
-      <a href="/" style="color:var(--saffron)">Home</a> &nbsp;·&nbsp;
-      Community feature — free to use, always
-    </span>
-  </div>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="md:hidden bg-white border-t mt-3">
+      <div class="flex flex-col gap-4 p-4 text-sm font-medium text-gray-600">
+        <a href="/" class="hover:text-orange-600">Home</a>
+        <a href="#" class="hover:text-orange-600">News</a>
+        <a href="/sahayak/" class="text-orange-600 font-bold">Sahayak</a>
+        <a href="/community/" class="hover:text-orange-600">Community</a>
+        <a href="#" class="hover:text-orange-600">Events</a>
+        <a href="#" class="hover:text-orange-600">Directory</a>
+        <a href="#" class="hover:text-orange-600">Jobs</a>
+        <a href="#" class="hover:text-orange-600">Student Corner</a>
+        <a href="https://www.instagram.com/mheu.in?igsh=cDcwYnozOGRvNTRm&utm_source=qr" target="_blank"
+          class="bg-orange-600 text-white px-4 py-2 rounded-lg font-bold text-center">Join Community</a>
+      </div>
+    </div>
+  </nav>
 
-</div><!-- /wrap -->
+  <!-- 2. HERO SECTION -->
+  <section class="hero-bg py-16 px-6 text-white text-center">
+    <div class="max-w-4xl mx-auto">
+      <span
+        class="bg-white/20 border border-white/30 px-3 py-1 rounded-full text-xs font-medium tracking-widest uppercase mb-4 inline-block">Community
+        Feature</span>
+      <h2 class="marathi text-4xl md:text-6xl font-bold mb-2">सहायक (Sahayak)</h2>
+      <p class="text-xl opacity-90 mb-8 font-light">"Where the Sahyadri meets the Alps"</p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="https://forms.gle/XUH1CCBFHC5dtASq6" target="_blank"
+          class="bg-white text-orange-600 px-8 py-3 rounded-lg font-bold hover:bg-gray-100 transition flex items-center gap-2">
+          <i data-lucide="plus-circle" class="w-5 h-5"></i> Post Your Listing
+        </a>
+        <button onclick="document.getElementById('listings-section').scrollIntoView({behavior:'smooth'})"
+          class="bg-transparent border border-white px-8 py-3 rounded-lg font-bold hover:bg-white/10 transition">
+          Browse Listings
+        </button>
+      </div>
+    </div>
+  </section>
 
-<script>
-/* ─────────────────────────────────────────
-   SAHAYAK — listings engine
-   Reads from a published Google Sheet CSV.
-   Replace SHEET_CSV_URL above with your URL.
-───────────────────────────────────────── */
+  <!-- 3. STATS BAR -->
+  <section class="max-w-6xl mx-auto -mt-8 px-4 md:px-6 relative z-20">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+      <div class="bg-white p-4 md:p-6 rounded-2xl shadow-lg border border-gray-100 text-center">
+        <span id="s-total" class="text-2xl md:text-3xl font-bold text-orange-600">—</span>
+        <p class="text-[10px] md:text-xs text-gray-500 uppercase font-medium">Active Listings</p>
+      </div>
+      <div class="bg-white p-4 md:p-6 rounded-2xl shadow-lg border border-gray-100 text-center">
+        <span id="s-travel" class="text-2xl md:text-3xl font-bold text-blue-600">—</span>
+        <p class="text-[10px] md:text-xs text-gray-500 uppercase font-medium">Travel Companions</p>
+      </div>
+      <div class="bg-white p-4 md:p-6 rounded-2xl shadow-lg border border-gray-100 text-center">
+        <span id="s-letter" class="text-2xl md:text-3xl font-bold text-green-600">—</span>
+        <p class="text-[10px] md:text-xs text-gray-500 uppercase font-medium">Carrier Services</p>
+      </div>
+      <div class="bg-white p-4 md:p-6 rounded-2xl shadow-lg border border-gray-100 text-center">
+        <span id="s-cities" class="text-2xl md:text-3xl font-bold text-purple-600">—</span>
+        <p class="text-[10px] md:text-xs text-gray-500 uppercase font-medium">Cities Active</p>
+      </div>
+    </div>
+  </section>
 
-let allData = [];
-let activeTab = 'all';
+  <!-- 4. MAIN CONTENT -->
+  <main class="max-w-6xl mx-auto py-12 px-4 md:px-6">
 
-/* ── Avatar colors: HSL rotation anchored to the saffron hue ── */
-function avatarColor(name) {
-  const h = [...(name || 'X')].reduce((a, c) => a + c.charCodeAt(0), 0) % 60;
-  const hue = 18 + h; // 18–78° — warm orange → gold range
-  return { bg: `hsl(${hue},80%,93%)`, color: `hsl(${hue},65%,26%)` };
-}
+    <!-- DISCLAIMER -->
+    <div class="bg-orange-50 border-l-4 border-orange-400 p-4 mb-8 rounded-r-lg flex gap-3 items-start">
+      <i data-lucide="alert-triangle" class="text-orange-600 w-5 h-5 shrink-0 mt-0.5"></i>
+      <p class="text-xs text-orange-800 leading-relaxed">
+        <strong>Disclaimer:</strong> Listings are posted by community members. Always verify identity before sharing
+        documents. Maharashtra in Europe is not responsible for lost items.
+      </p>
+    </div>
 
-function initials(name) {
-  return name.trim().split(/\s+/).map(w => w[0]).join('').toUpperCase().slice(0, 2);
-}
+    <!-- FILTERS -->
+    <div class="bg-white p-4 md:p-6 rounded-2xl shadow-sm border border-gray-200 mb-8">
+      <div class="flex flex-col md:flex-row gap-6 items-center justify-between">
+        <div class="flex gap-2 overflow-x-auto custom-scrollbar w-full md:w-auto pb-2 md:pb-0">
+          <button
+            class="tab-btn active px-4 py-2 rounded-full text-xs font-semibold transition whitespace-nowrap bg-orange-600 text-white"
+            onclick="setTab('all', this)">All</button>
+          <button
+            class="tab-btn px-4 py-2 rounded-full text-xs font-semibold transition whitespace-nowrap bg-gray-100 text-gray-600 hover:bg-gray-200"
+            onclick="setTab('need-companion', this)">Need Companion</button>
+          <button
+            class="tab-btn px-4 py-2 rounded-full text-xs font-semibold transition whitespace-nowrap bg-gray-100 text-gray-600 hover:bg-gray-200"
+            onclick="setTab('offer-companion', this)">Offer Companion</button>
+          <button
+            class="tab-btn px-4 py-2 rounded-full text-xs font-semibold transition whitespace-nowrap bg-gray-100 text-gray-600 hover:bg-gray-200"
+            onclick="setTab('need-carrier', this)">Need Carrier</button>
+          <button
+            class="tab-btn px-4 py-2 rounded-full text-xs font-semibold transition whitespace-nowrap bg-gray-100 text-gray-600 hover:bg-gray-200"
+            onclick="setTab('offer-carrier', this)">Offer Carrier</button>
+        </div>
 
-/* ── "What kind of help?" is a single Checkboxes question.
-   CSV value is a comma-separated list of the checked options. ── */
-const CARRY_LABELS = ['💊 Medicine', '✉️ Letter / Documents', '🎁 Parcel'];
+        <div class="flex flex-wrap gap-3 w-full md:w-auto">
+          <select id="f-direction" onchange="render()"
+            class="text-xs border border-gray-300 rounded-lg px-3 py-2 outline-none bg-gray-50">
+            <option value="">Any direction</option>
+            <option value="Europe to India">Europe → India</option>
+            <option value="India to Europe">India → Europe</option>
+          </select>
+          <select id="f-from" onchange="render()"
+            class="text-xs border border-gray-300 rounded-lg px-3 py-2 outline-none bg-gray-50">
+            <option value="">Europe City</option>
+          </select>
+          <select id="f-to" onchange="render()"
+            class="text-xs border border-gray-300 rounded-lg px-3 py-2 outline-none bg-gray-50">
+            <option value="">India City</option>
+          </select>
+        </div>
+      </div>
+      <div class="mt-6 pt-6 border-t flex items-center gap-2">
+        <input type="checkbox" id="show-expired" onchange="render()" class="w-4 h-4 accent-orange-600">
+        <label for="show-expired" class="text-xs text-gray-500 cursor-pointer">Show past listings</label>
+      </div>
+    </div>
 
-function helpItems(r) {
-  return (r.what_kind_of_help || '').split(',').map(s => s.trim()).filter(Boolean);
-}
-function isCompanionType(r) {
-  return helpItems(r).includes('🧳 Travel companion');
-}
-function isCarrierType(r) {
-  return helpItems(r).some(i => CARRY_LABELS.includes(i));
-}
-function typeBadgeLabel(r) {
-  const items    = helpItems(r);
-  const companion = items.filter(i => !CARRY_LABELS.includes(i));
-  const carry     = items.filter(i => CARRY_LABELS.includes(i));
-  const parts = [...companion];
-  if (carry.length) parts.push(carry.join(', ') + ' carrier');
-  return parts.join(', ');
-}
-function badgeClass(r) {
-  const comp = isCompanionType(r), carr = isCarrierType(r);
-  if (comp && carr) return 'badge-both';
-  if (comp) return 'badge-travel';
-  if (carr) return 'badge-letter';
-  return '';
-}
-
-function roleBadgeClass(role) {
-  if (role === 'Offering to help')        return 'badge-role-offering';
-  if (role === 'Looking for help')  return 'badge-role-looking';
-  return '';
-}
-
-/* ── Parse CSV text into array of objects ──
-   Proper character-level parser: handles quoted fields that contain
-   commas AND newlines (e.g. multi-line question titles/answers from
-   Google Forms), plus escaped "" quotes. ── */
-function parseCSV(text) {
-  const rows = [];
-  let row = [], cur = '', inQ = false;
-
-  for (let i = 0; i < text.length; i++) {
-    const c = text[i];
-    if (inQ) {
-      if (c === '"') {
-        if (text[i + 1] === '"') { cur += '"'; i++; } // escaped quote
-        else inQ = false;
-      } else {
-        cur += c;
-      }
-    } else {
-      if (c === '"') inQ = true;
-      else if (c === ',') { row.push(cur); cur = ''; }
-      else if (c === '\r') { /* ignore, \n handles line end */ }
-      else if (c === '\n') { row.push(cur); rows.push(row); row = []; cur = ''; }
-      else cur += c;
-    }
-  }
-  if (cur.length || row.length) { row.push(cur); rows.push(row); }
-
-  if (rows.length < 2) return [];
-  const headers = rows[0].map(h => h.trim().toLowerCase().replace(/\s+/g, '_').replace(/[^\w]/g, ''));
-  return rows.slice(1).map(cols => {
-    const obj = {};
-    headers.forEach((h, i) => obj[h] = (cols[i] || '').trim());
-    return obj;
-  }).filter(r => r.name && r.name.length > 0); // skip empty rows
-}
-
-/* ── Populate filter dropdowns ── */
-function populateSelects() {
-  const froms = [...new Set(allData.map(r => r.city_in_europe).filter(Boolean))].sort();
-  const tos   = [...new Set(allData.map(r => r.city_in_india).filter(Boolean))].sort();
-  const ff = document.getElementById('f-from');
-  const ft = document.getElementById('f-to');
-  // Clear existing options beyond first
-  while (ff.options.length > 1) ff.remove(1);
-  while (ft.options.length > 1) ft.remove(1);
-  froms.forEach(c => { const o = document.createElement('option'); o.value = c; o.textContent = 'Europe: ' + c; ff.appendChild(o); });
-  tos.forEach(c   => { const o = document.createElement('option'); o.value = c; o.textContent = 'India: '  + c; ft.appendChild(o); });
-}
-
-/* ── Update stat counters (active listings only) ── */
-function updateStats() {
-  const active = allData.filter(r => !isExpired(r.travel_date));
-  document.getElementById('s-total').textContent  = active.length;
-  document.getElementById('s-travel').textContent = active.filter(isCompanionType).length;
-  document.getElementById('s-letter').textContent = active.filter(isCarrierType).length;
-  document.getElementById('s-cities').textContent = new Set(active.map(r => r.city_in_europe).filter(Boolean)).size;
-}
-
-/* ── Parse a travel date string.
-   Google Forms submits dates as DD/MM/YYYY, which JS's Date constructor
-   misreads as MM/DD/YYYY — so handle that format explicitly.
-   Falls back to native parsing for other formats (e.g. "14 Jul 2026"). ── */
-function parseDate(dateStr) {
-  if (!dateStr) return null;
-  const m = dateStr.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
-  if (m) {
-    const d = new Date(+m[3], +m[2] - 1, +m[1]);
-    return isNaN(d) ? null : d;
-  }
-  const d = new Date(dateStr);
-  return isNaN(d) ? null : d;
-}
-
-/* ── Check if a travel date string is in the past ── */
-function isExpired(dateStr) {
-  const d = parseDate(dateStr);
-  if (!d) return false;
-  return d < new Date(new Date().toDateString()); // compare date only, not time
-}
-
-/* ── Render filtered listing cards ── */
-function render() {
-  const fv          = document.getElementById('f-from').value;
-  const tv          = document.getElementById('f-to').value;
-  const dv          = document.getElementById('f-direction').value;
-  const showExpired = document.getElementById('show-expired').checked;
-
-  const data = allData.filter(r => {
-    if (!showExpired && isExpired(r.travel_date)) return false;
-    if (fv && r.city_in_europe !== fv) return false;
-    if (tv && r.city_in_india !== tv) return false;
-    if (dv && (r.direction || 'Europe to India') !== dv) return false;
-
-    if (activeTab !== 'all') {
-      const isCompanion = isCompanionType(r);
-      const isCarrier   = isCarrierType(r);
-      const isLooking   = r.looking_for_or_offering === 'Looking for help';
-      const isOffering  = r.looking_for_or_offering === 'Offering to help';
-      let match = false;
-      if (activeTab === 'need-companion')  match = isCompanion && isLooking;
-      if (activeTab === 'offer-companion') match = isCompanion && isOffering;
-      if (activeTab === 'need-carrier')    match = isCarrier   && isLooking;
-      if (activeTab === 'offer-carrier')   match = isCarrier   && isOffering;
-      if (!match) return false;
-    }
-
-    return true;
-  });
-
-  // Soonest travel date first; listings with an unparseable date sink to the bottom
-  data.sort((a, b) => {
-    const da = parseDate(a.travel_date), db = parseDate(b.travel_date);
-    const va = da ? da.getTime() : Infinity;
-    const vb = db ? db.getTime() : Infinity;
-    return va - vb;
-  });
-
-  const el = document.getElementById('listings');
-
-  if (!data.length) {
-    el.innerHTML = '<div class="empty">No active listings match this filter. Try enabling "Show past listings" or a different combination.</div>';
-    return;
-  }
-
-  el.innerHTML = data.map((r, i) => {
-    const av      = avatarColor(r.name);
-    const expired = isExpired(r.travel_date);
-    const waMsg   = encodeURIComponent(
-      'Namaste ' + r.name + ', I found your listing on Maharashtra in Europe (maharashtraineurope.com). I would like to connect!'
-    );
-    const waLink = 'https://wa.me/' + r.whatsapp_number.replace(/\D/g, '') + '?text=' + waMsg;
-    const langs       = (r.languages_spoken || '').split(',').map(s => s.trim()).filter(Boolean);
-    const direction   = r.direction || 'Europe to India';
-    const fromCity  = direction === 'India to Europe' ? r.city_in_india : r.city_in_europe;
-    const toCity    = direction === 'India to Europe' ? r.city_in_europe : r.city_in_india;
-    return `
-      <div class="card" style="${expired ? 'opacity:0.6' : ''}">
-        <div class="avatar" style="background:${av.bg};color:${av.color}">${initials(r.name)}</div>
-        <div class="card-body">
-          <div class="card-top">
-            <span class="card-name">${escHtml(r.name)}</span>
-            ${r.looking_for_or_offering ? `<span class="badge ${roleBadgeClass(r.looking_for_or_offering)}">${escHtml(r.looking_for_or_offering)}</span>` : ''}
-            ${typeBadgeLabel(r) ? `<span class="badge ${badgeClass(r)}">${escHtml(typeBadgeLabel(r))}</span>` : ''}
-            <span class="card-route">${escHtml(fromCity)} → ${escHtml(toCity)}</span>
+    <!-- LISTINGS -->
+    <div id="listings-section">
+      <div class="flex items-center gap-3 mb-6">
+        <h3 class="font-bold text-lg">Available Sahayaks</h3>
+        <div class="flex-1 h-px bg-gray-200"></div>
+      </div>
+      <div id="listings" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="col-span-full text-center py-20">
+          <div class="animate-spin w-8 h-8 border-4 border-orange-600 border-t-transparent rounded-full mx-auto mb-4">
           </div>
-          <p class="card-desc">${escHtml(r.short_description)}</p>
-          <div class="pills">
-            ${expired
-              ? `<span class="pill-expired">&#128197; ${escHtml(r.travel_date)} — past</span>`
-              : (r.travel_date
-                  ? `<span class="pill">&#128197; ${escHtml(r.travel_date)}</span>`
-                  : `<span class="pill">&#128197; Flexible — any upcoming trip</span>`)
-            }
-            ${r.flight_number ? `<span class="pill">&#9992; ${escHtml(formatFlightDisplay(r.flight_number))}</span>` : ''}
-            ${langs.map(l => `<span class="pill">${escHtml(l)}</span>`).join('')}
+          <p class="text-gray-500 animate-pulse">Loading community listings...</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-white py-12 md:py-16 px-4 md:px-6 border-t">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-8">
+      <div class="col-span-1 sm:col-span-2">
+        <div class="flex items-center gap-3 mb-6">
+          <img src="../assets/logo.png" class="w-10 h-10 object-contain">
+          <div>
+            <h1 class="font-bold text-base md:text-lg leading-tight text-orange-600">Maharashtra <span
+                class="text-gray-700">in Europe</span></h1>
+            <p class="marathi text-[8px] md:text-[10px] text-gray-500">॥ महाराष्ट्रा ते युरोप, एकत्र समुदाय ॥</p>
           </div>
         </div>
-        ${expired
-          ? `<button class="btn-connect" disabled style="opacity:0.4;cursor:not-allowed;pointer-events:none;">Trip Complete</button>`
-          : `<a href="${waLink}" target="_blank" rel="noopener"><button class="btn-connect">Connect</button></a>`
-        }
+        <p class="text-gray-500 text-xs leading-relaxed mb-6">Uniting Indians in Europe through support, opportunities
+          and Maharashtrian values.</p>
+        <div class="flex gap-3">
+          <a href="https://www.instagram.com/mheu.in?igsh=cDcwYnozOGRvNTRm&utm_source=qr" target="_blank"
+            class="p-2 bg-gray-100 rounded-full text-gray-600 hover:bg-orange-600 hover:text-white transition"><i
+              data-lucide="instagram" class="w-4 h-4"></i></a>
+        </div>
       </div>
-    `;
-  }).join('');
-}
+      <div>
+        <h5 class="font-bold text-xs mb-6 uppercase text-gray-400">Explore</h5>
+        <ul class="space-y-3 text-xs text-gray-600">
+          <li><a href="/" class="hover:text-orange-600">Home</a></li>
+          <li><a href="/sahayak/" class="text-orange-600 font-bold">Sahayak</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5 class="font-bold text-xs mb-6 uppercase text-gray-400">Contact</h5>
+        <ul class="space-y-4 text-xs text-gray-600">
+          <li class="flex gap-3"><i data-lucide="map-pin" class="w-4 h-4 text-orange-600"></i> Stuttgart, Germany</li>
+          <li class="flex gap-3"><i data-lucide="mail" class="w-4 h-4 text-orange-600"></i> info@maharashtraineurope.com
+          </li>
+        </ul>
+      </div>
+    </div>
+  </footer>
 
-function escHtml(str) {
-  return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
+  <!-- TRAFFIC TRACKING SCRIPT (GoatCounter) -->
+  <script data-goatcounter="https://maharashtraineurope.goatcounter.com/count" async
+    src="//gc.zgo.at/count.js"></script>
 
-// Normalizes a flight number for display: uppercase, strips stray
-// punctuation/spaces, following the IATA flight designator format
-// (no space between airline code and flight digits, e.g. "ai 2028" -> "AI2028").
-function formatFlightDisplay(value) {
-  return String(value || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
-}
+  <script>
+    /* ─────────────────────────────────────────
+       MOBILE MENU LOGIC
+    ───────────────────────────────────────── */
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuIcon = document.getElementById('menu-icon');
+    menuToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+      const isOpen = mobileMenu.classList.contains('open');
+      menuIcon.setAttribute('data-lucide', isOpen ? 'x' : 'menu');
+      lucide.createIcons();
+    });
 
-function setTab(t, el) {
-  activeTab = t;
-  document.querySelectorAll('.tab').forEach(b => b.classList.remove('on'));
-  el.classList.add('on');
-  render();
-}
+    /* ─────────────────────────────────────────
+       DATA ENGINE (Your Google Sheet)
+    ───────────────────────────────────────── */
+    const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ4VhZY3eQJlzyET99mCG13Rwz41RKSOAaVDS1gfOgUl7DMDNDTf8bQz7EcnLvCUo_LZVSOTcn7D5Pd/pub?gid=1005612043&single=true&output=csv';
+    let allData = [];
+    let activeTab = 'all';
 
-/* ── Fetch from Google Sheet ── */
-async function loadListings() {
-  const el = document.getElementById('listings');
+    function avatarColor(name) {
+      const h = [...(name || 'X')].reduce((a, c) => a + c.charCodeAt(0), 0) % 60;
+      return { bg: `hsl(${18 + h},80%,93%)`, color: `hsl(${18 + h},65%,26%)` };
+    }
 
-  // If URL not set yet, show sample data
-  if (!SHEET_CSV_URL || SHEET_CSV_URL === 'YOUR_GOOGLE_SHEET_CSV_URL_HERE') {
-    allData = SAMPLE_DATA;
-    populateSelects();
-    updateStats();
-    render();
-    return;
-  }
+    function initials(name) { return name.trim().split(/\s+/).map(w => w[0]).join('').toUpperCase().slice(0, 2); }
 
-  try {
-    const res = await fetch(SHEET_CSV_URL);
-    if (!res.ok) throw new Error('Network error ' + res.status);
-    const text = await res.text();
-    allData = parseCSV(text);
-    if (!allData.length) throw new Error('No data');
-    populateSelects();
-    updateStats();
-    render();
-  } catch (err) {
-    el.innerHTML = `<div class="error">
-      Could not load listings. Please check your Sheet URL or try again later.<br>
-      <small style="opacity:0.6">${err.message}</small>
-    </div>`;
-  }
-}
+    const CARRY_LABELS = ['💊 Medicine', '✉️ Letter / Documents', '🎁 Parcel'];
+    function helpItems(r) { return (r.what_kind_of_help || '').split(',').map(s => s.trim()).filter(Boolean); }
+    function isCompanionType(r) { return helpItems(r).includes('🧳 Travel companion'); }
+    function isCarrierType(r) { return helpItems(r).some(i => CARRY_LABELS.includes(i)); }
 
-/* ── Sample data shown before Sheet is connected ── */
-const SAMPLE_DATA = [
-  { name:'Priya R.', city_in_europe:'Frankfurt', city_in_india:'Pune', travel_date:'14 Jul 2026', what_kind_of_help:'🧳 Travel companion, ✉️ Letter / Documents', short_description:'Travelling home for summer. Parents flying alone for first time — happy to assist elderly co-travellers on the same flight. Can also carry sealed letters.', whatsapp_number:'4917600000001', languages_spoken:'Marathi, Hindi', flight_number:'LH756', direction:'Europe to India', looking_for_or_offering:'Offering to help' },
-  { name:'Sagar M.', city_in_europe:'Amsterdam', city_in_india:'Mumbai', travel_date:'28 Jul 2026', what_kind_of_help:'✉️ Letter / Documents', short_description:'Going home end of July. Can carry sealed letters and A4 documents. Based in Amsterdam — pick-up at Schiphol or nearby.', whatsapp_number:'3161000000002', languages_spoken:'Marathi, Hindi, English', flight_number:'', direction:'Europe to India', looking_for_or_offering:'Offering to help' },
-  { name:'Anita N.', city_in_europe:'London', city_in_india:'Nagpur', travel_date:'3 Aug 2026', what_kind_of_help:'🧳 Travel companion, ✉️ Letter / Documents', short_description:'Looking for a travel companion for my mother (68) from Heathrow T2. Also happy to carry letters to Nagpur area. Via Mumbai.', whatsapp_number:'4479000000003', languages_spoken:'Marathi, Hindi', flight_number:'AI131', direction:'Europe to India', looking_for_or_offering:'Looking for help' },
-  { name:'Rahul D.', city_in_europe:'Frankfurt', city_in_india:'Nashik', travel_date:'22 Aug 2026', what_kind_of_help:'✉️ Letter / Documents', short_description:'Travelling home for Ganesh festival. Can carry letters or official documents to Nashik or nearby Pune. WhatsApp preferred.', whatsapp_number:'4917600000004', languages_spoken:'Marathi, Hindi', flight_number:'', direction:'Europe to India', looking_for_or_offering:'Offering to help' },
-  { name:'Meera K.', city_in_europe:'Zurich', city_in_india:'Mumbai', travel_date:'10 Jul 2026', what_kind_of_help:'🧳 Travel companion', short_description:'Looking for a travel companion for my grandmother. Zurich to Mumbai direct on Swiss Air. Same flight preferred.', whatsapp_number:'4179000000005', languages_spoken:'Marathi, Hindi, Gujarati', flight_number:'LX146', direction:'Europe to India', looking_for_or_offering:'Looking for help' },
-  { name:'Vikram P.', city_in_europe:'Eindhoven', city_in_india:'Pune', travel_date:'5 Sep 2026', what_kind_of_help:'🧳 Travel companion, ✉️ Letter / Documents', short_description:'Visiting family for Diwali. Can carry letters or small documents. Also open to accompanying elderly travellers — have done this before.', whatsapp_number:'3140000000006', languages_spoken:'Hindi, Punjabi, English', flight_number:'', direction:'Europe to India', looking_for_or_offering:'Offering to help' },
-  { name:'Shreya T.', city_in_europe:'Munich', city_in_india:'Pune', travel_date:'18 Jul 2026', what_kind_of_help:'🧳 Travel companion, 🎁 Parcel, ✉️ Letter / Documents', short_description:'Flying back to Munich after summer break. Can help a student travelling alone for the first time, or carry small parcels/documents from Pune.', whatsapp_number:'919800000007', languages_spoken:'Marathi, Hindi, English', flight_number:'LH757', direction:'India to Europe', looking_for_or_offering:'Offering to help' },
-  { name:'Pooja S.', city_in_europe:'Berlin', city_in_india:'Pune', travel_date:'', what_kind_of_help:'💊 Medicine', short_description:'Need someone travelling from Pune to Berlin to carry my monthly medicines. Will cover all costs and share details directly. Any date works.', whatsapp_number:'4915000000008', languages_spoken:'Marathi, Hindi', flight_number:'', direction:'India to Europe', looking_for_or_offering:'Looking for help' },
-];
+    function getTypeStyle(r) {
+      const comp = isCompanionType(r), carr = isCarrierType(r);
+      if (comp && carr) return { label: 'Travel & Carrier', color: 'bg-orange-100 text-orange-700 border-orange-200' };
+      if (comp) return { label: 'Travel Companion', color: 'bg-blue-100 text-blue-700 border-blue-200' };
+      if (carr) return { label: 'Carrier Service', color: 'bg-green-100 text-green-700 border-green-200' };
+      return { label: 'Community Help', color: 'bg-gray-100 text-gray-700 border-gray-200' };
+    }
 
-/* ── Boot ── */
-loadListings();
+    function roleStyle(role) {
+      if (role === 'Offering to help') return 'bg-emerald-50 text-emerald-700 border-emerald-200';
+      if (role === 'Looking for help') return 'bg-sky-50 text-sky-700 border-sky-200';
+      return 'bg-gray-50 text-gray-700 border-gray-200';
+    }
 
-/* ── Navbar scroll state ── */
-const _nav = document.querySelector('.navbar');
-if (_nav) {
-  window.addEventListener('scroll', () => {
-    _nav.classList.toggle('is-scrolled', window.scrollY > 60);
-  }, { passive: true });
-}
-</script>
+    function parseCSV(text) {
+      const rows = []; let row = [], cur = '', inQ = false;
+      for (let i = 0; i < text.length; i++) {
+        const c = text[i];
+        if (inQ) { if (c === '"') { if (text[i + 1] === '"') { cur += '"'; i++; } else inQ = false; } else cur += c; }
+        else { if (c === '"') inQ = true; else if (c === ',') { row.push(cur); cur = ''; } else if (c === '\n') { row.push(cur); rows.push(row); row = []; cur = ''; } else cur += c; }
+      }
+      if (cur.length || row.length) { row.push(cur); rows.push(row); }
+      if (rows.length < 2) return [];
+      const headers = rows[0].map(h => h.trim().toLowerCase().replace(/\s+/g, '_').replace(/[^\w]/g, ''));
+      return rows.slice(1).map(cols => {
+        const obj = {}; headers.forEach((h, i) => obj[h] = (cols[i] || '').trim());
+        return obj;
+      }).filter(r => r.name && r.name.length > 0);
+    }
 
-<script data-goatcounter="https://maharashtraineurope.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+    function parseDate(dateStr) {
+      if (!dateStr) return null;
+      const m = dateStr.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+      if (m) { const d = new Date(+m[3], +m[2] - 1, +m[1]); return isNaN(d) ? null : d; }
+      const d = new Date(dateStr); return isNaN(d) ? null : d;
+    }
 
+    function isExpired(dateStr) {
+      const d = parseDate(dateStr);
+      if (!d) return false;
+      return d < new Date(new Date().toDateString());
+    }
+
+    function populateSelects() {
+      const froms = [...new Set(allData.map(r => r.city_in_europe).filter(Boolean))].sort();
+      const tos = [...new Set(allData.map(r => r.city_in_india).filter(Boolean))].sort();
+      const ff = document.getElementById('f-from');
+      const ft = document.getElementById('f-to');
+      while (ff.options.length > 1) ff.remove(1);
+      while (ft.options.length > 1) ft.remove(1);
+      froms.forEach(c => { const o = document.createElement('option'); o.value = c; o.textContent = c; ff.appendChild(o); });
+      tos.forEach(c => { const o = document.createElement('option'); o.value = c; o.textContent = c; ft.appendChild(o); });
+    }
+
+    function updateStats() {
+      const active = allData.filter(r => !isExpired(r.travel_date));
+      document.getElementById('s-total').textContent = active.length;
+      document.getElementById('s-travel').textContent = active.filter(isCompanionType).length;
+      document.getElementById('s-letter').textContent = active.filter(isCarrierType).length;
+      document.getElementById('s-cities').textContent = new Set(active.map(r => r.city_in_europe).filter(Boolean)).size;
+    }
+
+    function render() {
+      const fv = document.getElementById('f-from').value;
+      const tv = document.getElementById('f-to').value;
+      const dv = document.getElementById('f-direction').value;
+      const showExpired = document.getElementById('show-expired').checked;
+
+      const data = allData.filter(r => {
+        if (!showExpired && isExpired(r.travel_date)) return false;
+        if (fv && r.city_in_europe !== fv) return false;
+        if (tv && r.city_in_india !== tv) return false;
+        if (dv && (r.direction || 'Europe to India') !== dv) return false;
+        if (activeTab !== 'all') {
+          const isComp = isCompanionType(r), isCarr = isCarrierType(r);
+          const isLook = r.looking_for_or_offering === 'Looking for help';
+          const isOff = r.looking_for_or_offering === 'Offering to help';
+          if (activeTab === 'need-companion' && !(isComp && isLook)) return false;
+          if (activeTab === 'offer-companion' && !(isComp && isOff)) return false;
+          if (activeTab === 'need-carrier' && !(isCarr && isLook)) return false;
+          if (activeTab === 'offer-carrier' && !(isCarr && isOff)) return false;
+        }
+        return true;
+      });
+
+      data.sort((a, b) => {
+        const da = parseDate(a.travel_date), db = parseDate(b.travel_date);
+        return (da ? da.getTime() : Infinity) - (db ? db.getTime() : Infinity);
+      });
+
+      const el = document.getElementById('listings');
+      if (!data.length) {
+        el.innerHTML = '<div class="col-span-full text-center py-20 text-gray-500">No listings match your filter.</div>';
+        return;
+      }
+
+      el.innerHTML = data.map(r => {
+        const av = avatarColor(r.name);
+        const expired = isExpired(r.travel_date);
+        const type = getTypeStyle(r);
+        const waMsg = encodeURIComponent(`Namaste ${r.name}, I saw your listing on Maharashtra in Europe. I would like to connect!`);
+        const waLink = `https://wa.me/${r.whatsapp_number.replace(/\D/g, '')}?text=${waMsg}`;
+        const dir = r.direction || 'Europe to India';
+        const from = dir === 'India to Europe' ? r.city_in_india : r.city_in_europe;
+        const to = dir === 'India to Europe' ? r.city_in_europe : r.city_in_india;
+
+        return `
+                <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition-all flex gap-4 ${expired ? 'opacity-60' : ''}">
+                    <div class="w-12 h-12 rounded-full flex-shrink-0 flex items-center justify-center font-bold text-sm border-2 border-white shadow-sm" style="background:${av.bg}; color:${av.color}">
+                        ${initials(r.name)}
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="flex flex-wrap items-center gap-2 mb-2">
+                            <h4 class="font-bold text-gray-900 truncate">${r.name}</h4>
+                            <span class="text-[10px] px-2 py-0.5 rounded-full border font-medium ${roleStyle(r.looking_for_or_offering)}">${r.looking_for_or_offering}</span>
+                            <span class="text-[10px] px-2 py-0.5 rounded-full border font-medium ${type.color}">${type.label}</span>
+                        </div>
+                        <div class="flex items-center gap-1 text-xs font-semibold text-orange-600 mb-2">
+                            <i data-lucide="map-pin" class="w-3 h-3"></i> ${from} <i data-lucide="arrow-right" class="w-3 h-3"></i> ${to}
+                        </div>
+                        <p class="text-xs text-gray-500 line-clamp-2 mb-3 leading-relaxed">${r.short_description}</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="text-[10px] bg-gray-100 text-gray-600 px-2 py-1 rounded-md flex items-center gap-1">
+                                <i data-lucide="calendar" class="w-3 h-3"></i> ${r.travel_date || 'Flexible'}
+                            </span>
+                            ${r.flight_number ? `<span class="text-[10px] bg-gray-100 text-gray-600 px-2 py-1 rounded-md flex items-center gap-1"><i data-lucide="plane" class="w-3 h-3"></i> ${r.flight_number}</span>` : ''}
+                        </div>
+                    </div>
+                    <div class="flex flex-col justify-center">
+                        ${expired
+            ? `<span class="text-[10px] font-bold text-gray-400 uppercase py-2 px-3 border rounded-lg">Completed</span>`
+            : `<a href="${waLink}" target="_blank" class="bg-orange-600 text-white px-4 py-2 rounded-lg text-xs font-bold hover:bg-orange-700 transition shadow-sm">Connect</a>`
+          }
+                    </div>
+                </div>`;
+      }).join('');
+      lucide.createIcons();
+    }
+
+    function setTab(t, el) {
+      activeTab = t;
+      document.querySelectorAll('.tab-btn').forEach(b => {
+        b.classList.remove('bg-orange-600', 'text-white');
+        b.classList.add('bg-gray-100', 'text-gray-600');
+      });
+      el.classList.remove('bg-gray-100', 'text-gray-600');
+      el.classList.add('bg-orange-600', 'text-white');
+      render();
+    }
+
+    async function loadListings() {
+      try {
+        const res = await fetch(SHEET_CSV_URL);
+        const text = await res.text();
+        allData = parseCSV(text);
+        populateSelects();
+        updateStats();
+        render();
+      } catch (err) {
+        document.getElementById('listings').innerHTML = `<div class="col-span-full text-center py-20 text-red-500">Failed to load data.</div>`;
+      }
+    }
+
+    window.onload = () => {
+      loadListings();
+      lucide.createIcons();
+    };
+  </script>
 </body>
+
 </html>
