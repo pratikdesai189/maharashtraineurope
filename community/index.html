@@ -1,660 +1,258 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Marathi Community in Europe | Maharashtra in Europe</title>
-  <meta name="description" content="Directory of official Marathi and Maharashtra Mandal organizations across Europe. Find your local community." />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marathi Community Directory | Maharashtra in Europe</title>
 
-  <!-- Open Graph -->
-  <meta property="og:type"        content="website" />
-  <meta property="og:url"         content="https://maharashtraineurope.com/community" />
-  <meta property="og:title"       content="Marathi Community Directory in Europe" />
-  <meta property="og:description" content="Find official Marathi and Maharashtra Mandal organizations near you across Europe." />
-  <meta property="og:image"       content="https://maharashtraineurope.com/assets/og-image.jpg" />
-    <meta property="og:image:width"  content="1200" />
-    <meta property="og:image:height" content="630" />
+  <!-- SEO & Tab Icons -->
+  <link rel="icon" type="image/x-icon" href="../favicon.ico">
+  <link rel="icon" type="image/png" sizes="192x192" href="../assets/icon-192.png">
+  <meta name="description"
+    content="Directory of official Marathi and Maharashtra Mandal organizations across Europe. Find your local community.">
 
-  <!-- Twitter Card -->
-  <meta name="twitter:card"        content="summary_large_image" />
-  <meta name="twitter:title"       content="Marathi Community Directory in Europe" />
-  <meta name="twitter:description" content="Find official Marathi and Maharashtra Mandal organizations near you across Europe." />
-  <meta name="twitter:image"       content="https://maharashtraineurope.com/assets/og-image.jpg" />
+  <!-- Social Card / WhatsApp Preview -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://maharashtraineurope.com/community/">
+  <meta property="og:title" content="Marathi Community Directory in Europe">
+  <meta property="og:description"
+    content="Find official Marathi and Maharashtra Mandal organizations near you across Europe.">
+  <meta property="og:image" content="https://maharashtraineurope.com/assets/og-image.png">
 
-  <link rel="icon" href="/favicon.ico" sizes="any">
-  <link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png">
-  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Yatra+One&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Hind:wght@400;600;700&display=swap"
+    rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
 
-  <!-- JSON-LD Structured Data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "CollectionPage",
-    "@id": "https://maharashtraineurope.com/community",
-    "url": "https://maharashtraineurope.com/community",
-    "name": "Marathi Community Directory in Europe",
-    "description": "Directory of official Marathi and Maharashtra Mandal organizations across Europe.",
-    "isPartOf": { "@id": "https://maharashtraineurope.com/#website" },
-    "about": {
-      "@type": "ItemList",
-      "name": "Marathi Mandal Organizations in Europe",
-      "description": "Official Marathi community organizations and Maharashtra Mandals across European countries"
-    }
-  }
-  </script>
-
-  <!-- D3 + TopoJSON for map -->
+  <!-- D3 + TopoJSON for map (Kept from original) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
 
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --saffron:       #C4440A;
-      --saffron-hover: #A33708;
-      --saffron-light: #FDF1EB;
-      --saffron-mid:   #E07040;
-      --gold:          #C9922A;
-      --gold-light:    #FAF3E0;
-      --white:         #FFFFFF;
-      --off-white:     #FDF8F4;
-      --text:          #1A0A00;
-      --text-muted:    #7A5A40;
-      --border:        #EAD8C8;
-      --font:          'Montserrat', system-ui, -apple-system, sans-serif;
+    body {
+      font-family: 'Poppins', sans-serif;
     }
 
-    body { font-family: var(--font); background: var(--off-white); color: var(--text); min-height: 100vh; }
-    a { color: inherit; text-decoration: none; }
-    .wrap { max-width: 900px; margin: 0 auto; padding: 0 16px 60px; }
+    .marathi {
+      font-family: 'Hind', sans-serif;
+    }
 
-    /* ── Navbar ── */
-    .navbar {
-      background: var(--saffron);
-      padding: 13px 20px;
-      display: flex; align-items: center; justify-content: space-between;
-      position: relative;
+    .hero-bg {
+      background: linear-gradient(rgba(196, 68, 10, 0.9), rgba(163, 55, 8, 0.9)), url('https://images.unsplash.com/photo-1467269204594-9661b1370767?auto=format&fit=crop&w=1600&q=80');
+      background-size: cover;
+      background-position: center;
     }
-    .navbar::after {
-      content: '';
-      position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
-      background: repeating-linear-gradient(90deg, var(--gold) 0, var(--gold) 8px, transparent 8px, transparent 13px);
-      opacity: 0.6;
-    }
-    .navbar-brand { color: #fff; font-size: 15px; font-weight: 700; line-height: 1.2; }
-    .navbar-brand span { display: block; font-family: 'Yatra One', cursive; font-size: 12px; font-weight: 400; opacity: 0.78; margin-top: 1px; }
-    .navbar-links { display: flex; gap: 20px; align-items: center; }
-    .navbar-links a { color: rgba(255,255,255,0.72); font-size: 13px; transition: color .15s; }
-    .navbar-links a:hover, .navbar-links a.active { color: #fff; font-weight: 700; }
-    .navbar-links a.nav-sahayak {
-      background: rgba(255,255,255,0.15); border: 0.5px solid rgba(255,255,255,0.35);
-      padding: 4px 13px; border-radius: 99px; color: #fff; font-weight: 600;
-    }
-    .navbar-links a.nav-sahayak:hover { background: rgba(255,255,255,0.25); }
 
-    /* ── Hamburger ── */
-    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
-    .hamburger span { display: block; width: 22px; height: 2px; background: #fff; border-radius: 2px; }
-    .mobile-menu { display: none; flex-direction: column; background: var(--saffron); border-top: 0.5px solid rgba(255,255,255,0.2); }
-    .mobile-menu a { padding: 13px 20px; color: rgba(255,255,255,0.85); font-size: 14px; border-bottom: 0.5px solid rgba(255,255,255,0.1); transition: background .15s; }
-    .mobile-menu a:hover { background: rgba(255,255,255,0.1); }
-    .mobile-menu a.active { color: #fff; font-weight: 700; }
-    .mobile-menu.open { display: flex; }
+    .custom-scrollbar::-webkit-scrollbar {
+      height: 4px;
+    }
 
-    /* ── Hero ── */
-    .hero {
-      background: var(--saffron); padding: 2.2rem 20px 2.8rem;
-      position: relative; overflow: hidden; margin-bottom: 28px;
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #e2e8f0;
+      border-radius: 10px;
     }
-    .hero::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-      background: repeating-linear-gradient(90deg, var(--gold) 0, var(--gold) 8px, transparent 8px, transparent 13px);
-      opacity: 0.65;
-    }
-    .hero::after {
-      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
-      background: repeating-linear-gradient(90deg, var(--gold) 0, var(--gold) 8px, transparent 8px, transparent 13px);
-      opacity: 0.4;
-    }
-    .hero-eyebrow {
-      display: inline-block; background: rgba(255,255,255,0.18); border: 0.5px solid rgba(255,255,255,0.35);
-      color: #fff; font-size: 11px; font-weight: 500; padding: 3px 12px; border-radius: 99px;
-      letter-spacing: 0.06em; margin-bottom: 12px;
-    }
-    .hero h1 { color: #fff; font-size: 22px; font-weight: 700; margin-bottom: 4px; }
-    .hero-sub { color: rgba(255,255,255,0.78); font-size: 13px; margin-bottom: 6px; font-style: italic; }
-    .hero-desc { color: rgba(255,255,255,0.7); font-size: 13px; line-height: 1.65; max-width: 560px; }
 
-    /* ── Stats ── */
-    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 24px; }
-    .stat { background: var(--white); border: 0.5px solid var(--border); border-top: 3px solid var(--gold); border-radius: 8px; padding: 14px; }
-    .stat-n { font-size: 26px; font-weight: 700; color: var(--saffron); }
-    .stat-l { font-size: 11px; color: var(--text-muted); margin-top: 3px; }
+    #mobile-menu {
+      transition: all 0.3s ease-in-out;
+      max-height: 0;
+      overflow: hidden;
+    }
 
-    /* ── Interactive Map ── */
-    .map-section {
-      background: var(--white);
-      border: 0.5px solid var(--border);
-      border-radius: 12px;
-      padding: 16px 16px 12px;
-      margin-bottom: 24px;
-      position: relative;
+    #mobile-menu.open {
+      max-height: 500px;
     }
-    .map-header {
-      display: flex; align-items: center; justify-content: space-between;
-      margin-bottom: 10px; flex-wrap: wrap; gap: 8px;
-    }
-    .map-label {
-      font-size: 11px; color: var(--text-muted);
-      letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600;
-    }
-    .map-hint {
-      font-size: 11px; color: var(--text-muted); font-style: italic;
-    }
-    #europe-map { width: 100%; }
-    #europe-map svg { width: 100%; height: auto; display: block; }
 
-    /* Country path styles */
+    /* Map Specific Styles */
     .map-country {
-      fill: #DCDCDC; stroke: #fff; stroke-width: 0.6px;
-      cursor: default; transition: fill .15s;
+      fill: #DCDCDC;
+      stroke: #fff;
+      stroke-width: 0.6px;
+      cursor: default;
+      transition: fill .15s;
     }
+
     .map-country.active {
-      fill: #FDDCC8; stroke: var(--gold); stroke-width: 0.8px;
+      fill: #FDDCC8;
+      stroke: #C9922A;
+      stroke-width: 0.8px;
       cursor: pointer;
     }
+
     .map-country.active:hover {
       fill: #F5A878;
     }
+
     .map-country.active.selected {
-      fill: var(--saffron); stroke: var(--saffron-hover); stroke-width: 1.2px;
+      fill: #C4440A;
+      stroke: #A33708;
+      stroke-width: 1.2px;
     }
+
     .map-country.active.selected:hover {
-      fill: var(--saffron-hover);
-    }
-
-    /* Tooltip */
-    .map-tooltip {
-      position: fixed;
-      background: rgba(26,10,0,0.92);
-      color: #fff;
-      font-family: var(--font);
-      font-size: 12px; font-weight: 600;
-      padding: 7px 13px;
-      border-radius: 7px;
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity .12s;
-      z-index: 9999;
-      white-space: nowrap;
-      border: 1px solid rgba(201,146,42,0.4);
-    }
-    .map-tooltip .tt-count {
-      font-weight: 400; opacity: 0.72; margin-left: 6px;
-    }
-    .map-tooltip .tt-hint {
-      display: block; font-size: 10px; font-weight: 400;
-      opacity: 0.6; margin-top: 2px;
-    }
-
-    /* Reset button */
-    .map-reset {
-      display: none; margin: 10px auto 0;
-      font-size: 12px; padding: 5px 16px; border-radius: 99px;
-      border: 1.5px solid var(--saffron); background: transparent;
-      color: var(--saffron); cursor: pointer; font-weight: 600;
-      transition: all .15s; font-family: var(--font);
-    }
-    .map-reset:hover { background: var(--saffron); color: #fff; }
-
-    /* Map legend */
-    .map-legend {
-      display: flex; gap: 16px; flex-wrap: wrap;
-      justify-content: center; margin-top: 10px;
-    }
-    .legend-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--text-muted); }
-    .legend-dot { width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; }
-
-    /* ── Search & Filter ── */
-    .controls { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 24px; align-items: center; }
-    .search-input {
-      flex: 1; min-width: 200px; padding: 9px 14px; font-size: 13px; font-family: var(--font);
-      border: 0.5px solid var(--border); border-radius: 8px; background: var(--white);
-      color: var(--text); outline: none; transition: border-color .15s;
-    }
-    .search-input:focus { border-color: var(--saffron); }
-    .search-input::placeholder { color: var(--text-muted); }
-    .filter-select {
-      padding: 9px 12px; font-size: 13px; font-family: var(--font);
-      border: 0.5px solid var(--border); border-radius: 8px; background: var(--white);
-      color: var(--text); cursor: pointer; outline: none;
-    }
-    .filter-select:focus { border-color: var(--saffron); }
-
-    /* ── Country section ── */
-    .country-section { margin-bottom: 28px; }
-    .country-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
-    .country-flag { font-size: 22px; line-height: 1; }
-    .country-name { font-size: 15px; font-weight: 700; color: var(--text); }
-    .country-count {
-      font-size: 11px; color: var(--text-muted);
-      background: var(--gold-light); border: 0.5px solid var(--border);
-      padding: 2px 8px; border-radius: 99px;
-    }
-    .country-line { flex: 1; height: 0.5px; background: var(--border); }
-
-    /* ── Org card ── */
-    .org-card {
-      background: var(--white); border: 0.5px solid var(--border);
-      border-radius: 10px; padding: 14px 16px; margin-bottom: 8px;
-      display: flex; align-items: center; gap: 14px;
-      transition: border-color .15s, box-shadow .15s;
-    }
-    .org-card:hover { border-color: var(--saffron-mid); box-shadow: 0 2px 8px rgba(196,68,10,0.07); }
-    .org-avatar {
-      width: 40px; height: 40px; border-radius: 50%;
-      background: var(--saffron-light); border: 1.5px solid var(--gold);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 14px; font-weight: 700; color: var(--saffron); flex-shrink: 0;
-    }
-    .org-body { flex: 1; min-width: 0; }
-    .org-name { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 3px; }
-    .org-meta { font-size: 12px; color: var(--text-muted); display: flex; gap: 10px; flex-wrap: wrap; }
-    .org-scope {
-      font-size: 11px; padding: 1px 8px; border-radius: 99px;
-      border: 0.5px solid var(--border); color: var(--text-muted); background: var(--off-white);
-    }
-    .org-scope.national { background: var(--gold-light); color: #6B4A10; border-color: #E0D0A0; }
-    .btn-visit {
-      font-size: 12px; padding: 7px 14px; border-radius: 7px;
-      border: 1.5px solid var(--saffron); background: transparent; color: var(--saffron);
-      cursor: pointer; white-space: nowrap; flex-shrink: 0;
-      font-weight: 600; transition: all .15s; text-decoration: none; display: inline-block;
-    }
-    .btn-visit:hover { background: var(--saffron); color: #fff; }
-    .btn-visit.social { border-color: var(--gold); color: var(--gold); }
-    .btn-visit.social:hover { background: var(--gold); color: #fff; }
-
-    /* ── States ── */
-    .empty { text-align: center; padding: 3rem 1rem; color: var(--text-muted); font-size: 14px; }
-
-    /* ── Suggest banner ── */
-    .suggest-banner {
-      background: var(--gold-light); border: 0.5px solid var(--border);
-      border-left: 3px solid var(--gold); border-radius: 0 8px 8px 0;
-      padding: 12px 16px; font-size: 13px; color: #6B4A10; margin-bottom: 28px; line-height: 1.6;
-    }
-    .suggest-banner a { color: var(--saffron); font-weight: 600; }
-    .suggest-banner a:hover { text-decoration: underline; }
-
-    /* ── Footer ── */
-    .footer {
-      text-align: center; font-size: 12px; color: var(--text-muted);
-      margin-top: 2rem; padding-top: 1.2rem; border-top: 0.5px solid var(--border);
-    }
-    .footer strong { color: var(--saffron); }
-
-    /* ── Responsive ── */
-    @media (max-width: 600px) {
-      .navbar-links a:not(.nav-sahayak) { display: none; }
-      .hamburger { display: flex; }
-      .org-card { flex-wrap: wrap; }
-      .map-hint { display: none; }
+      fill: #A33708;
     }
   </style>
 </head>
-<body>
 
-<!-- ── Navbar ── -->
-<nav class="navbar">
-  <a href="/" class="navbar-brand">
-    Maharashtra in Europe
-    <span>महाराष्ट्र इन युरोप</span>
-  </a>
-  <div class="navbar-links">
-    <a href="/">Home</a>
-    <a href="/about">About</a>
-    <a href="/community" class="active">Community</a>
-    <a href="/sahayak" class="nav-sahayak">Sahayak ✈</a>
-  </div>
-  <button class="hamburger" onclick="toggleMenu()" aria-label="Open menu">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
-<div class="mobile-menu" id="mobileMenu">
-  <a href="/">Home</a>
-  <a href="/about">About</a>
-  <a href="/community" class="active">Community</a>
-</div>
+<body class="bg-gray-50 text-gray-800">
 
-<!-- ── Hero ── -->
-<div class="hero">
-  <div class="wrap" style="padding-top:0;padding-bottom:0">
-    <span class="hero-eyebrow">COMMUNITY DIRECTORY</span>
-    <h1>Marathi Organizations in Europe</h1>
-    <p class="hero-sub">महाराष्ट्र मंडळे — युरोपभर</p>
-    <p class="hero-desc">
-      Official Maharashtra Mandals and Marathi community organizations across the continent.
-      Find your local community, attend events, and stay connected.
-    </p>
-  </div>
-</div>
-
-<div class="wrap">
-
-  <!-- ── Stats ── -->
-  <div class="stats">
-    <div class="stat">
-      <div class="stat-n">23</div>
-      <div class="stat-l">Organizations</div>
-    </div>
-    <div class="stat">
-      <div class="stat-n">13</div>
-      <div class="stat-l">Countries</div>
-    </div>
-    <div class="stat">
-      <div class="stat-n">22</div>
-      <div class="stat-l">With websites</div>
-    </div>
-  </div>
-
-  <!-- ── Interactive Europe Map ── -->
-  <div class="map-section">
-    <div class="map-header">
-      <span class="map-label">🗺 Marathi communities across Europe</span>
-      <span class="map-hint">Hover to identify · Click to filter</span>
-    </div>
-    <div id="europe-map"></div>
-    <div class="map-legend">
-      <div class="legend-item">
-        <div class="legend-dot" style="background:#FDDCC8;border:1px solid #C9922A"></div>
-        Has Marathi community
-      </div>
-      <div class="legend-item">
-        <div class="legend-dot" style="background:#C4440A"></div>
-        Selected
-      </div>
-      <div class="legend-item">
-        <div class="legend-dot" style="background:#DCDCDC"></div>
-        No listing yet
-      </div>
-    </div>
-    <button class="map-reset" id="map-reset" onclick="resetMapFilter()">✕ Clear country filter</button>
-  </div>
-  <div id="map-tooltip" class="map-tooltip"></div>
-
-  <!-- ── Search & Filter ── -->
-  <div class="controls">
-    <input
-      class="search-input" id="search" type="text"
-      placeholder="Search by name or city…" oninput="renderAll()"
-    />
-    <select class="filter-select" id="filter-country" onchange="onDropdownChange()">
-      <option value="">All countries</option>
-    </select>
-  </div>
-
-  <!-- ── Suggest banner ── -->
-  <div class="suggest-banner">
-    ℹ️ Know a group that's missing? <a href="mailto:maharashtraineurope@gmail.com">Let us know</a> and we'll add it to the directory.
-  </div>
-
-  <!-- ── Directory ── -->
-  <div id="listings-top"></div>
-  <div id="directory"></div>
-
-  <!-- ── Footer ── -->
-  <div class="footer">
-    <strong>Maharashtra in Europe</strong> &nbsp;·&nbsp; महाराष्ट्र इन युरोप &nbsp;·&nbsp;
-    "Where the Sahyadri meets the Alps"<br>
-    <span style="margin-top:4px;display:block">
-      <a href="/" style="color:var(--saffron)">Home</a> &nbsp;·&nbsp;
-      <a href="/sahayak" style="color:var(--saffron)">Sahayak</a> &nbsp;·&nbsp;
-      Community directory — free to use, always
-    </span>
-  </div>
-
-</div><!-- /wrap -->
-
-<script>
-/* ── Org data ── */
-const ORGS = [
-  { country: 'Germany',        flag: '🇩🇪', city: 'Stuttgart',               name: 'Maharashtra Mandal Stuttgart e.V.',      scope: 'city',     url: 'https://mmstuttgart.de',                   urlType: 'website' },
-  { country: 'Germany',        flag: '🇩🇪', city: 'Berlin',                  name: 'Marathi Mitra Berlin',                   scope: 'city',     url: 'https://marathimitraberlin.de',            urlType: 'website' },
-  { country: 'Germany',        flag: '🇩🇪', city: 'Munich',                  name: 'Maharashtra Mandal Munich',              scope: 'city',     url: 'https://mmmunich.com',                     urlType: 'website' },
-  { country: 'Germany',        flag: '🇩🇪', city: 'Wolfsburg & Braunschweig', name: 'BraWo Marathi Mandal e.V.',             scope: 'city',     url: 'https://brawomarathimandal.de',            urlType: 'website' },
-  { country: 'Germany',        flag: '🇩🇪', city: 'Wolfsburg',               name: 'Wolfsburg Marathi Mandal',               scope: 'city',     url: 'https://wolfsburgmarathimandal.de',        urlType: 'website' },
-  { country: 'Germany',        flag: '🇩🇪', city: 'Frankfurt',               name: 'Marathi Katta Frankfurt Germany e.V.',   scope: 'city',     url: 'https://marathikattagermany.com',          urlType: 'website' },
-  { country: 'Germany',        flag: '🇩🇪', city: 'National',                name: 'Marathi Mitra Mandal Deutschland e.V.', scope: 'national', url: 'https://marathimitramandal.com',           urlType: 'website' },
-  { country: 'United Kingdom', flag: '🇬🇧', city: 'London',                  name: 'Maharashtra Mandal London',              scope: 'city',     url: 'https://mmlondon.co.uk',                   urlType: 'website' },
-  { country: 'United Kingdom', flag: '🇬🇧', city: 'Newcastle',               name: 'Mi Marathi Newcastle',                   scope: 'city',     url: 'https://mimarathi.co.uk',                  urlType: 'website' },
-  { country: 'Netherlands',    flag: '🇳🇱', city: 'National',                name: 'Netherlands Marathi Mandal',             scope: 'national', url: 'https://netherlandsmarathimandal.org',     urlType: 'website' },
-  { country: 'Netherlands',    flag: '🇳🇱', city: 'Eindhoven',               name: 'Eindhoven Marathi Mitramandal',          scope: 'city',     url: 'https://eindhoven-marathi-mitramandal.com',urlType: 'website' },
-  { country: 'Netherlands',    flag: '🇳🇱', city: 'Almere',                  name: 'Almere Maharashtra Mandal',              scope: 'city',     url: 'https://almeremaharashtramandal.nl',       urlType: 'website' },
-  { country: 'France',         flag: '🇫🇷', city: 'Paris',                   name: 'Maharashtra Mandal France',              scope: 'national', url: 'https://mmfr.org',                         urlType: 'website' },
-  { country: 'Switzerland',    flag: '🇨🇭', city: 'National',                name: 'Bruhan Maharashtra Mandal Switzerland',  scope: 'national', url: 'https://bruhan-mms.org',                   urlType: 'website' },
-  { country: 'Ireland',        flag: '🇮🇪', city: 'National',                name: 'Marathi Mandal Ireland',                 scope: 'national', url: 'https://irishmarathi.com',                 urlType: 'website' },
-  { country: 'Denmark',        flag: '🇩🇰', city: 'National',                name: 'Maharashtra Mandal Denmark',             scope: 'national', url: 'https://maharashtramandaldenmark.com',     urlType: 'website' },
-  { country: 'Finland',        flag: '🇫🇮', city: 'National',                name: 'Maharashtra Mandal Finland Ry',          scope: 'national', url: 'https://mmfinland.com',                    urlType: 'website' },
-  { country: 'Austria',        flag: '🇦🇹', city: 'Vienna',                  name: 'Maharashtra Mandal Austria',             scope: 'national', url: 'https://maharashtramandalaustria.com',     urlType: 'website' },
-  { country: 'Norway',         flag: '🇳🇴', city: 'National',                name: 'Maharashtra Mandal Norway',              scope: 'national', url: 'https://maharashtramandalnorway.no',       urlType: 'website' },
-  { country: 'Belgium',        flag: '🇧🇪', city: 'Brussels',                name: 'Belgium Marathi Mandal',                 scope: 'national', url: 'https://www.facebook.com/BRUSSELSMARATHIMANDAL/', urlType: 'social' },
-  { country: 'Luxembourg',     flag: '🇱🇺', city: 'National',                name: 'Marathi Mandal Luxembourg',              scope: 'national', url: 'https://marathimandallux.com',             urlType: 'website' },
-  { country: 'Poland',         flag: '🇵🇱', city: 'National',                name: 'Maharashtra Mandal Krakow Poland',       scope: 'city', url: 'https://mmkrakow.com/',                        urlType: 'website'  },
-  { country: 'Global Network', flag: '🌍', city: 'Global',                  name: 'Garje Marathi Global',                   scope: 'global',   url: 'https://garjemarathi.com',                 urlType: 'website' },
-];
-
-/* ── Country → ISO 3166-1 numeric mapping ── */
-const COUNTRY_ISO = {
-  'Germany':        276,
-  'United Kingdom': 826,
-  'Netherlands':    528,
-  'France':         250,
-  'Switzerland':    756,
-  'Ireland':        372,
-  'Denmark':        208,
-  'Finland':        246,
-  'Austria':        40,
-  'Norway':         578,
-  'Belgium':        56,
-  'Luxembourg':     442,
-  'Poland':         616,
-};
-const ISO_COUNTRY = Object.fromEntries(Object.entries(COUNTRY_ISO).map(([k,v]) => [String(v), k]));
-const ACTIVE_ISOS = new Set(Object.values(COUNTRY_ISO).map(String));
-
-/* ── Org counts per country ── */
-const ORG_COUNTS = {};
-ORGS.forEach(o => { if (COUNTRY_ISO[o.country]) ORG_COUNTS[o.country] = (ORG_COUNTS[o.country] || 0) + 1; });
-
-/* ── State ── */
-let selectedCountry = '';
-
-/* ── Populate country dropdown ── */
-function populateFilter() {
-  const countries = [...new Set(ORGS.map(o => o.country))];
-  const sel = document.getElementById('filter-country');
-  countries.forEach(c => {
-    const opt = document.createElement('option');
-    opt.value = c; opt.textContent = c;
-    sel.appendChild(opt);
-  });
-}
-
-/* ── Avatar initials ── */
-function initials(name) {
-  return name.trim().split(/\s+/).filter(w => /^[A-Za-z]/.test(w)).slice(0, 2).map(w => w[0]).join('').toUpperCase();
-}
-
-/* ── Render directory ── */
-function renderAll() {
-  const q       = document.getElementById('search').value.toLowerCase().trim();
-  const country = document.getElementById('filter-country').value;
-
-  const filtered = ORGS.filter(o => {
-    if (country && o.country !== country) return false;
-    if (q && !o.name.toLowerCase().includes(q) && !o.city.toLowerCase().includes(q) && !o.country.toLowerCase().includes(q)) return false;
-    return true;
-  });
-
-  const dir = document.getElementById('directory');
-  if (!filtered.length) {
-    dir.innerHTML = '<div class="empty">No organizations match your search.</div>';
-    return;
-  }
-
-  const groups = {};
-  filtered.forEach(o => {
-    if (!groups[o.country]) groups[o.country] = { flag: o.flag, orgs: [] };
-    groups[o.country].orgs.push(o);
-  });
-
-  dir.innerHTML = Object.entries(groups).map(([cname, { flag, orgs }]) => `
-    <div class="country-section">
-      <div class="country-header">
-        <span class="country-flag">${flag}</span>
-        <span class="country-name">${cname}</span>
-        <span class="country-count">${orgs.length} ${orgs.length === 1 ? 'group' : 'groups'}</span>
-        <div class="country-line"></div>
-      </div>
-      ${orgs.map(o => `
-        <div class="org-card">
-          <div class="org-avatar">${initials(o.name)}</div>
-          <div class="org-body">
-            <div class="org-name">${escHtml(o.name)}</div>
-            <div class="org-meta">
-              <span class="org-city">📍 ${escHtml(o.city)}</span>
-              <span class="org-scope ${o.scope === 'national' || o.scope === 'global' ? 'national' : ''}">${o.scope === 'national' ? 'National' : o.scope === 'global' ? 'Global' : 'City chapter'}</span>
-            </div>
-          </div>
-          <a href="${o.url}" target="_blank" rel="noopener" class="btn-visit ${o.urlType === 'social' ? 'social' : ''}">
-            ${o.urlType === 'social' ? 'Facebook ↗' : 'Visit ↗'}
-          </a>
+  <!-- 1. NAVIGATION -->
+  <nav class="bg-white py-3 px-4 md:px-6 shadow-sm sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <img src="../assets/logo.png" alt="Logo" class="w-10 h-10 md:w-12 md:h-12 object-contain">
+        <div>
+          <h1 class="font-bold text-sm md:text-lg leading-tight text-orange-600">Maharashtra <span
+              class="text-gray-700">in Europe</span></h1>
+          <p class="marathi text-[8px] md:text-[10px] text-gray-500">॥ महाराष्ट्रा ते युरोप, एकत्र समुदाय ॥</p>
         </div>
-      `).join('')}
+      </div>
+
+      <!-- Desktop Menu -->
+      <div class="hidden md:flex items-center gap-6 text-sm font-medium text-gray-600">
+        <a href="/" class="hover:text-orange-600">Home</a>
+        <a href="#" class="hover:text-orange-600">News</a>
+        <a href="/sahayak/" class="hover:text-orange-600">Sahayak</a>
+        <a href="/community/" class="text-orange-600 border-b-2 border-orange-600">Community</a>
+        <a href="#" class="hover:text-orange-600">Events</a>
+        <a href="#" class="hover:text-orange-600">Directory</a>
+        <a href="#" class="hover:text-orange-600">Jobs</a>
+        <a href="#" class="hover:text-orange-600">Student Corner</a>
+      </div>
+
+      <div class="flex items-center gap-2 md:gap-4">
+        <a href="https://www.instagram.com/mheu.in?igsh=cDcwYnozOGRvNTRm&utm_source=qr" target="_blank"
+          class="hidden sm:flex bg-orange-600 text-white px-4 py-2 rounded-full text-sm font-semibold items-center gap-2 hover:bg-orange-700 transition">
+          <i data-lucide="users" class="w-4 h-4"></i> Join
+        </a>
+        <button id="menu-toggle" class="md:hidden p-2 text-gray-600 focus:outline-none">
+          <i data-lucide="menu" id="menu-icon" class="w-6 h-6"></i>
+        </button>
+      </div>
     </div>
-  `).join('');
-}
 
-function escHtml(str) {
-  return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="md:hidden bg-white border-t mt-3">
+      <div class="flex flex-col gap-4 p-4 text-sm font-medium text-gray-600">
+        <a href="/" class="hover:text-orange-600">Home</a>
+        <a href="#" class="hover:text-orange-600">News</a>
+        <a href="/sahayak/" class="hover:text-orange-600">Sahayak</a>
+        <a href="/community/" class="text-orange-600 font-bold">Community</a>
+        <a href="#" class="hover:text-orange-600">Events</a>
+        <a href="#" class="hover:text-orange-600">Directory</a>
+        <a href="#" class="hover:text-orange-600">Jobs</a>
+        <a href="#" class="hover:text-orange-600">Student Corner</a>
+        <a href="https://www.instagram.com/mheu.in?igsh=cDcwYnozOGRvNTRm&utm_source=qr" target="_blank"
+          class="bg-orange-600 text-white px-4 py-2 rounded-lg font-bold text-center">Join Community</a>
+      </div>
+    </div>
+  </nav>
 
-/* ── Map: select country from dropdown ── */
-function onDropdownChange() {
-  const val = document.getElementById('filter-country').value;
-  setMapSelection(val);
-  renderAll();
-}
+  <!-- 2. HERO SECTION -->
+  <section class="hero-bg py-16 px-6 text-white text-center">
+    <div class="max-w-4xl mx-auto">
+      <span
+        class="bg-white/20 border border-white/30 px-3 py-1 rounded-full text-xs font-medium tracking-widest uppercase mb-4 inline-block">Community
+        Directory</span>
+      <h2 class="marathi text-4xl md:text-6xl font-bold mb-2">महाराष्ट्र मंडळे — युरोपभर</h2>
+      <p class="text-xl opacity-90 mb-8 font-light">Official Marathi Organizations in Europe</p>
+      <p class="text-base md:text-lg opacity-80 max-w-2xl mx-auto leading-relaxed">
+        Find your local community, attend cultural events, and stay connected with official Maharashtra Mandals and
+        Marathi organizations across the continent.
+      </p>
+    </div>
+  </section>
 
-/* ── Map: reset ── */
-function resetMapFilter() {
-  document.getElementById('filter-country').value = '';
-  setMapSelection('');
-  renderAll();
-}
+  <!-- 3. STATS BAR -->
+  <section class="max-w-6xl mx-auto -mt-8 px-4 md:px-6 relative z-20">
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
+      <div class="bg-white p-4 md:p-6 rounded-2xl shadow-lg border border-gray-100 text-center">
+        <span class="text-2xl md:text-3xl font-bold text-orange-600">23</span>
+        <p class="text-[10px] md:text-xs text-gray-500 uppercase font-medium">Organizations</p>
+      </div>
+      <div class="bg-white p-4 md:p-6 rounded-2xl shadow-lg border border-gray-100 text-center">
+        <span class="text-2xl md:text-3xl font-bold text-blue-600">13</span>
+        <p class="text-[10px] md:text-xs text-gray-500 uppercase font-medium">Countries</p>
+      </div>
+      <div class="bg-white p-4 md:p-6 rounded-2xl shadow-lg border border-gray-100 text-center">
+        <span class="text-2xl md:text-3xl font-bold text-green-600">22</span>
+        <p class="text-[10px] md:text-xs text-gray-500 uppercase font-medium">Websites</p>
+      </div>
+    </div>
+  </section>
 
-/* ── Map: update visual selection ── */
-function setMapSelection(countryName) {
-  selectedCountry = countryName;
-  const resetBtn = document.getElementById('map-reset');
-  resetBtn.style.display = countryName ? 'block' : 'none';
-  d3.selectAll('.map-country').classed('selected', function(d) {
-    const name = ISO_COUNTRY[String(parseInt(d.id))];
-    return name === countryName;
-  });
-}
+  <!-- 4. MAIN CONTENT -->
+  <main class="max-w-6xl mx-auto py-12 px-4 md:px-6">
 
-/* ── Map: init ── */
-async function initMap() {
-  const tooltip = document.getElementById('map-tooltip');
+    <!-- MAP SECTION -->
+    <div class="bg-white p-4 md:p-6 rounded-3xl shadow-sm border border-gray-200 mb-12">
+      <div class="flex flex-col md:flex-row justify-between items-center mb-6 gap-2">
+        <div class="flex items-center gap-2">
+          <i data-lucide="map" class="text-orange-600 w-5 h-5"></i>
+          <span class="text-sm font-bold uppercase tracking-wide text-gray-600">Explore Marathi Communities</span>
+        </div>
+        <span class="text-xs text-gray-400 italic">Hover to identify · Click to filter</span>
+      </div>
 
-  let world;
-  try {
-    world = await d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json');
-  } catch(e) {
-    document.getElementById('europe-map').innerHTML =
-      '<p style="text-align:center;color:var(--text-muted);font-size:13px;padding:20px">Map unavailable — use the filter below.</p>';
-    return;
-  }
+      <div id="europe-map" class="bg-blue-50 rounded-2xl overflow-hidden relative">
+        <!-- D3 SVG loads here -->
+      </div>
 
-  const countries = topojson.feature(world, world.objects.countries);
+      <div class="flex flex-wrap justify-center gap-6 mt-6">
+        <div class="flex items-center gap-2 text-xs text-gray-500">
+          <div class="w-3 h-3 rounded-sm bg-[#FDDCC8] border border-orange-300"></div> Has Community
+        </div>
+        <div class="flex items-center gap-2 text-xs text-gray-500">
+          <div class="w-3 h-3 rounded-sm bg-orange-600"></div> Selected
+        </div>
+        <div class="flex items-center gap-2 text-xs text-gray-500">
+          <div class="w-3 h-3 rounded-sm bg-gray-300"></div> No listing yet
+        </div>
+      </div>
+      <button
+        class="map-reset hidden mx-auto mt-6 text-xs font-bold text-orange-600 border border-orange-600 px-4 py-2 rounded-full hover:bg-orange-600 hover:text-white transition"
+        id="map-reset" onclick="resetMapFilter()">✕ Clear country filter</button>
+    </div>
 
-  const W = 860, H = 480;
+    <!-- SEARCH & FILTER -->
+    <div class="flex flex-col md:flex-row gap-4 mb-12 items-center">
+      <div class="relative flex-1 w-full">
+        <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"></i>
+        <input id="search" type="text" placeholder="Search by name, city or country..."
+          class="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-orange-500 outline-none transition"
+          oninput="renderAll()">
+      </div>
+      <select id="filter-country" onchange="onDropdownChange()"
+        class="w-full md:w-auto px-4 py-3 rounded-xl border border-gray-200 bg-white text-sm outline-none focus:ring-2 focus:ring-orange-500 transition">
+        <option value="">All Countries</option>
+      </select>
+    </div>
 
-  // Mercator projection centred on Europe
-  const projection = d3.geoMercator()
-    .center([13, 52])
-    .scale(780)
-    .translate([W / 2, H / 2]);
+    <!-- SUGGESTION BANNER -->
+    <div class="bg-orange-50 border-l-4 border-orange-400 p-4 mb-12 rounded-r-xl flex gap-3 items-center">
+      <i data-lucide="info" class="text-orange-600 w-5 h-5 shrink-0"></i>
+      <p class="text-xs text-orange-800 leading-relaxed">
+        Know a group that's missing? <a href="mailto:maharashtraineurope@gmail.com" class="font-bold underline">Let us
+          know</a> and we'll add it to the directory.
+      </p>
+    </div>
 
-  const path = d3.geoPath().projection(projection);
+    <!-- DIRECTORY LISTINGS -->
+    <div id="listings-top"></div>
+    <div id="directory" class="grid grid-cols-1 gap-8">
+      <!-- Rendered via JS -->
+    </div>
+  </main>
 
-  const svg = d3.select('#europe-map')
-    .append('svg')
-    .attr('viewBox', `0 0 ${W} ${H}`)
-    .attr('preserveAspectRatio', 'xMidYMid meet');
-
-  // Ocean background
-  svg.append('rect')
-    .attr('width', W).attr('height', H)
-    .attr('fill', '#EAF3FA');
-
-  svg.selectAll('path')
-    .data(countries.features)
-    .enter()
-    .append('path')
-    .attr('class', d => {
-      const iso = String(parseInt(d.id));
-      return 'map-country' + (ACTIVE_ISOS.has(iso) ? ' active' : '');
-    })
-    .attr('d', path)
-    .on('mouseover', function(event, d) {
-      const iso = String(parseInt(d.id));
-      const name = ISO_COUNTRY[iso];
-      if (!name) return;
-      const count = ORG_COUNTS[name] || 0;
-      tooltip.innerHTML = `${name}<span class="tt-count">${count} group${count !== 1 ? 's' : ''}</span><span class="tt-hint">Click to filter</span>`;
-      tooltip.style.opacity = '1';
-    })
-    .on('mousemove', function(event) {
-      tooltip.style.left  = (event.clientX + 14) + 'px';
-      tooltip.style.top   = (event.clientY - 10) + 'px';
-    })
-    .on('mouseout', function() {
-      tooltip.style.opacity = '0';
-    })
-    .on('click', function(event, d) {
-      const iso = String(parseInt(d.id));
-      const name = ISO_COUNTRY[iso];
-      if (!name) return;
-
-      const newVal = (selectedCountry === name) ? '' : name;
-      document.getElementById('filter-country').value = newVal;
-      setMapSelection(newVal);
-      renderAll();
-      // Smooth scroll to listings
-      document.getElementById('listings-top').scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-}
-
-/* ── Mobile menu ── */
-function toggleMenu() {
-  document.getElementById('mobileMenu').classList.toggle('open');
-}
-document.querySelectorAll('.mobile-menu a').forEach(a => {
-  a.addEventListener('click', () => document.getElementById('mobileMenu').classList.remove('open'));
-});
-
-/* ── Boot ── */
-populateFilter();
-renderAll();
-initMap();
-</script>
-
-<script data-goatcounter="https://maharashtraineurope.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-
-</body>
-</html>
+  <!-- FOOTER -->
+  <footer class="bg-white py-12 md:py-16 px-4 md:px-6 border-t">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-8">
+      <div class="col-span-1 sm:col-span-2">
+        <div class="flex items-center gap-3 mb-6">
+          <img src="../assets/logo.png" class="w-10 h-10 object-contain">
+          <div>
+            <h1 class="font-bold text-base md:text-lg leading-tight text-orange-600">Maharashtra <span
+                class="text-gray-700">in Europe</span></h1>
+            <p class="marathi text-[8px] md:text-[10px] text-gray-500">॥ महाराष्ट्रा ते
