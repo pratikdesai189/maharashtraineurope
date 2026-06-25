@@ -20,136 +20,27 @@
     content="Find official Marathi and Maharashtra Mandal organizations near you across Europe.">
   <meta property="og:image" content="https://maharashtraineurope.com/assets/og-image.png">
 
+  <!-- Global Design System (includes map CSS & hero-bg-community) -->
+  <link rel="stylesheet" href="../assets/style.css">
+
+  <!-- External Dependencies -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link
     href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Hind:wght@400;600;700&display=swap"
     rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
 
-  <!-- D3 + TopoJSON for map -->
+  <!-- D3 + TopoJSON for the interactive Europe map -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
-
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-    }
-
-    .marathi {
-      font-family: 'Hind', sans-serif;
-    }
-
-    .hero-bg {
-      background: linear-gradient(rgba(234, 88, 12, 0.9), rgba(196, 68, 10, 0.9)), url('https://images.unsplash.com/photo-1467269204594-9661b1370767?auto=format&fit=crop&w=1600&q=80');
-      background-size: cover;
-      background-position: center;
-    }
-
-    .custom-scrollbar::-webkit-scrollbar {
-      height: 4px;
-    }
-
-    .custom-scrollbar::-webkit-scrollbar-thumb {
-      background: #e2e8f0;
-      border-radius: 10px;
-    }
-
-    #mobile-menu {
-      transition: all 0.3s ease-in-out;
-      max-height: 0;
-      overflow: hidden;
-    }
-
-    #mobile-menu.open {
-      max-height: 500px;
-    }
-
-    /* Map-specific CSS */
-    .map-country {
-      fill: #DCDCDC;
-      stroke: #fff;
-      stroke-width: 0.6px;
-      cursor: default;
-      transition: fill .15s;
-    }
-
-    .map-country.active {
-      fill: #FEE2E2;
-      stroke: #fb923c;
-      stroke-width: 0.8px;
-      cursor: pointer;
-    }
-
-    .map-country.active:hover {
-      fill: #fed7aa;
-    }
-
-    .map-country.active.selected {
-      fill: #ea580c;
-      stroke: #c2410c;
-      stroke-width: 1.2px;
-    }
-
-    .map-country.active.selected:hover {
-      fill: #c2410c;
-    }
-  </style>
 </head>
 
 <body class="bg-gray-50 text-gray-800">
 
-  <!-- 1. NAVIGATION (Identical to Home/Sahayak) -->
-  <nav class="bg-white py-3 px-4 md:px-6 shadow-sm sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <img src="../assets/logo.png" alt="Logo" class="w-10 h-10 md:w-12 md:h-12 object-contain">
-        <div>
-          <h1 class="font-bold text-sm md:text-lg leading-tight text-orange-600">Maharashtra <span
-              class="text-gray-700">in Europe</span></h1>
-          <p class="marathi text-[8px] md:text-[10px] text-gray-500">॥ महाराष्ट्रा ते युरोप, एकत्र समुदाय ॥</p>
-        </div>
-      </div>
+  <!-- 1. NAVIGATION — injected by ../assets/navigation.js -->
 
-      <div class="hidden md:flex items-center gap-6 text-sm font-medium text-gray-600">
-        <a href="/" class="hover:text-orange-600">Home</a>
-        <a href="#" class="hover:text-orange-600">News</a>
-        <a href="/sahayak/" class="hover:text-orange-600">Sahayak</a>
-        <a href="/community/" class="text-orange-600 border-b-2 border-orange-600">Community</a>
-        <a href="#" class="hover:text-orange-600">Events</a>
-        <a href="#" class="hover:text-orange-600">Directory</a>
-        <a href="#" class="hover:text-orange-600">Jobs</a>
-        <a href="#" class="hover:text-orange-600">Student Corner</a>
-      </div>
-
-      <div class="flex items-center gap-2 md:gap-4">
-        <a href="https://www.instagram.com/mheu.in?igsh=cDcwYnozOGRvNTRm&utm_source=qr" target="_blank"
-          class="hidden sm:flex bg-orange-600 text-white px-4 py-2 rounded-full text-sm font-semibold items-center gap-2 hover:bg-orange-700 transition">
-          <i data-lucide="users" class="w-4 h-4"></i> Join
-        </a>
-        <button id="menu-toggle" class="md:hidden p-2 text-gray-600 focus:outline-none">
-          <i data-lucide="menu" id="menu-icon" class="w-6 h-6"></i>
-        </button>
-      </div>
-    </div>
-
-    <div id="mobile-menu" class="md:hidden bg-white border-t mt-3">
-      <div class="flex flex-col gap-4 p-4 text-sm font-medium text-gray-600">
-        <a href="/" class="hover:text-orange-600">Home</a>
-        <a href="#" class="hover:text-orange-600">News</a>
-        <a href="/sahayak/" class="hover:text-orange-600">Sahayak</a>
-        <a href="/community/" class="text-orange-600 font-bold">Community</a>
-        <a href="#" class="hover:text-orange-600">Events</a>
-        <a href="#" class="hover:text-orange-600">Directory</a>
-        <a href="#" class="hover:text-orange-600">Jobs</a>
-        <a href="#" class="hover:text-orange-600">Student Corner</a>
-        <a href="https://www.instagram.com/mheu.in?igsh=cDcwYnozOGRvNTRm&utm_source=qr" target="_blank"
-          class="bg-orange-600 text-white px-4 py-2 rounded-lg font-bold text-center">Join Community</a>
-      </div>
-    </div>
-  </nav>
-
-  <!-- 2. HERO SECTION (Identical Style to Sahayak) -->
-  <section class="hero-bg py-16 px-6 text-white text-center">
+  <!-- 2. HERO SECTION -->
+  <section class="hero-bg-community py-16 px-6 text-white text-center">
     <div class="max-w-4xl mx-auto">
       <span
         class="bg-white/20 border border-white/30 px-3 py-1 rounded-full text-xs font-medium tracking-widest uppercase mb-4 inline-block">Community
@@ -163,7 +54,7 @@
     </div>
   </section>
 
-  <!-- 3. STATS BAR (Identical to Home/Sahayak) -->
+  <!-- 3. STATS BAR -->
   <section class="max-w-6xl mx-auto -mt-8 px-4 md:px-6 relative z-20">
     <div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
       <div class="bg-white p-4 md:p-6 rounded-2xl shadow-lg border border-gray-100 text-center">
@@ -212,7 +103,7 @@
         id="map-reset" onclick="resetMapFilter()">✕ Clear country filter</button>
     </div>
 
-    <!-- SEARCH & FILTER (Identical to Sahayak) -->
+    <!-- SEARCH & FILTER -->
     <div class="flex flex-col md:flex-row gap-4 mb-12 items-center">
       <div class="relative flex-1 w-full">
         <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"></i>
@@ -235,75 +126,28 @@
       </p>
     </div>
 
-    <!-- DIRECTORY LISTINGS (Now using identical Sahayak-style grid) -->
+    <!-- DIRECTORY LISTINGS -->
     <div id="listings-top"></div>
     <div id="directory" class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div class="col-span-full text-center py-20 text-gray-400">Loading directory...</div>
     </div>
   </main>
 
-  <!-- FOOTER (Identical to Home/Sahayak) -->
-  <footer class="bg-white py-12 md:py-16 px-4 md:px-6 border-t">
-    <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-8">
-      <div class="col-span-1 sm:col-span-2">
-        <div class="flex items-center gap-3 mb-6">
-          <img src="../assets/logo.png" class="w-10 h-10 object-contain">
-          <div>
-            <h1 class="font-bold text-base md:text-lg leading-tight text-orange-600">Maharashtra <span
-                class="text-gray-700">in Europe</span></h1>
-            <p class="marathi text-[8px] md:text-[10px] text-gray-500">॥ महाराष्ट्रा ते युरोप, एकत्र समुदाय ॥</p>
-          </div>
-        </div>
-        <p class="text-gray-500 text-xs leading-relaxed mb-6">Uniting Indians in Europe through support, opportunities
-          and Maharashtrian values.</p>
-        <div class="flex gap-3">
-          <a href="https://www.instagram.com/mheu.in?igsh=cDcwYnozOGRvNTRm&utm_source=qr" target="_blank"
-            class="p-2 bg-gray-100 rounded-full text-gray-600 hover:bg-orange-600 hover:text-white transition"><i
-              data-lucide="instagram" class="w-4 h-4"></i></a>
-        </div>
-      </div>
-      <div>
-        <h5 class="font-bold text-xs mb-6 uppercase text-gray-400">Explore</h5>
-        <ul class="space-y-3 text-xs text-gray-600">
-          <li><a href="/" class="hover:text-orange-600">Home</a></li>
-          <li><a href="/sahayak/" class="hover:text-orange-600">Sahayak</a></li>
-          <li><a href="/community/" class="text-orange-600 font-bold">Community</a></li>
-        </ul>
-      </div>
-      <div>
-        <h5 class="font-bold text-xs mb-6 uppercase text-gray-400">Contact</h5>
-        <ul class="space-y-4 text-xs text-gray-600">
-          <li class="flex gap-3"><i data-lucide="map-pin" class="w-4 h-4 text-orange-600"></i> Stuttgart, Germany</li>
-          <li class="flex gap-3"><i data-lucide="mail" class="w-4 h-4 text-orange-600"></i> info@maharashtraineurope.com
-          </li>
-        </ul>
-      </div>
-    </div>
-  </footer>
+  <!-- FOOTER — injected by ../assets/navigation.js -->
 
   <!-- TOOLTIP -->
   <div id="map-tooltip"
     class="fixed bg-slate-900 text-white text-xs font-bold px-3 py-2 rounded-lg pointer-events-none opacity-0 transition-opacity z-[9999] shadow-xl border border-orange-400/30">
   </div>
 
-  <!-- TRAFFIC TRACKING SCRIPT -->
+  <!-- TRAFFIC TRACKING SCRIPT (GoatCounter) -->
   <script data-goatcounter="https://maharashtraineurope.goatcounter.com/count" async
     src="//gc.zgo.at/count.js"></script>
 
-  <script>
-    /* MOBILE MENU LOGIC */
-    const menuToggle = document.getElementById('menu-toggle');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const menuIcon = document.getElementById('menu-icon');
-    if (menuToggle) {
-      menuToggle.addEventListener('click', () => {
-        mobileMenu.classList.toggle('open');
-        const isOpen = mobileMenu.classList.contains('open');
-        menuIcon.setAttribute('data-lucide', isOpen ? 'x' : 'menu');
-        lucide.createIcons();
-      });
-    }
+  <!-- Shared Navigation & Footer Component -->
+  <script src="../assets/navigation.js"></script>
 
+  <script>
     /* ORGANIZATION DATA */
     const ORGS = [
       { country: 'Germany', flag: '🇩🇪', city: 'Stuttgart', name: 'Maharashtra Mandal Stuttgart e.V.', scope: 'city', url: 'https://mmstuttgart.de', urlType: 'website' },
@@ -375,7 +219,6 @@
           return;
         }
 
-        // Now rendering as a flat grid of cards, identical to Sahayak
         dir.innerHTML = filtered.map(o => `
               <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition-all flex gap-4">
                   <div class="w-12 h-12 rounded-full bg-orange-50 border-2 border-orange-200 flex items-center justify-center font-bold text-orange-600 shrink-0">

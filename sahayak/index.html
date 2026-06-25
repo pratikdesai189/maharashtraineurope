@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sahayak — Find a Travel Companion | Maharashtra in Europe</title>
 
-  <!-- Tab Icons (Goes up one level to assets) -->
+  <!-- Tab Icons -->
   <link rel="icon" type="image/x-icon" href="../favicon.ico">
   <link rel="icon" type="image/png" sizes="192x192" href="../assets/icon-192.png">
 
@@ -18,104 +18,23 @@
     content="Travel together, help each other. Find a travel companion or letter carrier through the Maharashtra in Europe community.">
   <meta property="og:image" content="https://maharashtraineurope.com/assets/og-image-sahayak.png">
 
+  <!-- Global Design System -->
+  <link rel="stylesheet" href="../assets/style.css">
+
+  <!-- External Dependencies -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link
     href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Hind:wght@400;600;700&display=swap"
     rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
-
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-    }
-
-    .marathi {
-      font-family: 'Hind', sans-serif;
-    }
-
-    .hero-bg {
-      background: linear-gradient(rgba(234, 88, 12, 0.9), rgba(196, 68, 10, 0.9)), url('https://images.unsplash.com/photo-1436491865332-7a61a109c05a?auto=format&fit=crop&w=1600&q=80');
-      background-size: cover;
-      background-position: center;
-    }
-
-    .custom-scrollbar::-webkit-scrollbar {
-      height: 4px;
-    }
-
-    .custom-scrollbar::-webkit-scrollbar-thumb {
-      background: #e2e8f0;
-      border-radius: 10px;
-    }
-
-    #mobile-menu {
-      transition: all 0.3s ease-in-out;
-      max-height: 0;
-      overflow: hidden;
-    }
-
-    #mobile-menu.open {
-      max-height: 500px;
-    }
-  </style>
 </head>
 
 <body class="bg-gray-50 text-gray-800">
 
-  <!-- 1. NAVIGATION (Pointers fixed for /sahayak/ folder) -->
-  <nav class="bg-white py-3 px-4 md:px-6 shadow-sm sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <img src="../assets/logo.png" alt="Logo" class="w-10 h-10 md:w-12 md:h-12 object-contain">
-        <div>
-          <h1 class="font-bold text-sm md:text-lg leading-tight text-orange-600">Maharashtra <span
-              class="text-gray-700">in Europe</span></h1>
-          <p class="marathi text-[8px] md:text-[10px] text-gray-500">॥ महाराष्ट्रा ते युरोप, एकत्र समुदाय ॥</p>
-        </div>
-      </div>
-
-      <!-- Desktop Menu -->
-      <div class="hidden md:flex items-center gap-6 text-sm font-medium text-gray-600">
-        <a href="/" class="hover:text-orange-600">Home</a>
-        <a href="#" class="hover:text-orange-600">News</a>
-        <a href="/sahayak/" class="text-orange-600 border-b-2 border-orange-600">Sahayak</a>
-        <a href="/community/" class="hover:text-orange-600">Community</a>
-        <a href="#" class="hover:text-orange-600">Events</a>
-        <a href="#" class="hover:text-orange-600">Directory</a>
-        <a href="#" class="hover:text-orange-600">Jobs</a>
-        <a href="#" class="hover:text-orange-600">Student Corner</a>
-      </div>
-
-      <div class="flex items-center gap-2 md:gap-4">
-        <a href="https://www.instagram.com/mheu.in?igsh=cDcwYnozOGRvNTRm&utm_source=qr" target="_blank"
-          class="hidden sm:flex bg-orange-600 text-white px-4 py-2 rounded-full text-sm font-semibold items-center gap-2 hover:bg-orange-700 transition">
-          <i data-lucide="users" class="w-4 h-4"></i> Join
-        </a>
-        <button id="menu-toggle" class="md:hidden p-2 text-gray-600 focus:outline-none">
-          <i data-lucide="menu" id="menu-icon" class="w-6 h-6"></i>
-        </button>
-      </div>
-    </div>
-
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="md:hidden bg-white border-t mt-3">
-      <div class="flex flex-col gap-4 p-4 text-sm font-medium text-gray-600">
-        <a href="/" class="hover:text-orange-600">Home</a>
-        <a href="#" class="hover:text-orange-600">News</a>
-        <a href="/sahayak/" class="text-orange-600 font-bold">Sahayak</a>
-        <a href="/community/" class="hover:text-orange-600">Community</a>
-        <a href="#" class="hover:text-orange-600">Events</a>
-        <a href="#" class="hover:text-orange-600">Directory</a>
-        <a href="#" class="hover:text-orange-600">Jobs</a>
-        <a href="#" class="hover:text-orange-600">Student Corner</a>
-        <a href="https://www.instagram.com/mheu.in?igsh=cDcwYnozOGRvNTRm&utm_source=qr" target="_blank"
-          class="bg-orange-600 text-white px-4 py-2 rounded-lg font-bold text-center">Join Community</a>
-      </div>
-    </div>
-  </nav>
+  <!-- 1. NAVIGATION — injected by ../assets/navigation.js -->
 
   <!-- 2. HERO SECTION -->
-  <section class="hero-bg py-16 px-6 text-white text-center">
+  <section class="hero-bg-sahayak py-16 px-6 text-white text-center">
     <div class="max-w-4xl mx-auto">
       <span
         class="bg-white/20 border border-white/30 px-3 py-1 rounded-full text-xs font-medium tracking-widest uppercase mb-4 inline-block">Community
@@ -229,64 +148,18 @@
     </div>
   </main>
 
-  <!-- FOOTER -->
-  <footer class="bg-white py-12 md:py-16 px-4 md:px-6 border-t">
-    <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-8">
-      <div class="col-span-1 sm:col-span-2">
-        <div class="flex items-center gap-3 mb-6">
-          <img src="../assets/logo.png" class="w-10 h-10 object-contain">
-          <div>
-            <h1 class="font-bold text-base md:text-lg leading-tight text-orange-600">Maharashtra <span
-                class="text-gray-700">in Europe</span></h1>
-            <p class="marathi text-[8px] md:text-[10px] text-gray-500">॥ महाराष्ट्रा ते युरोप, एकत्र समुदाय ॥</p>
-          </div>
-        </div>
-        <p class="text-gray-500 text-xs leading-relaxed mb-6">Uniting Indians in Europe through support, opportunities
-          and Maharashtrian values.</p>
-        <div class="flex gap-3">
-          <a href="https://www.instagram.com/mheu.in?igsh=cDcwYnozOGRvNTRm&utm_source=qr" target="_blank"
-            class="p-2 bg-gray-100 rounded-full text-gray-600 hover:bg-orange-600 hover:text-white transition"><i
-              data-lucide="instagram" class="w-4 h-4"></i></a>
-        </div>
-      </div>
-      <div>
-        <h5 class="font-bold text-xs mb-6 uppercase text-gray-400">Explore</h5>
-        <ul class="space-y-3 text-xs text-gray-600">
-          <li><a href="/" class="hover:text-orange-600">Home</a></li>
-          <li><a href="/sahayak/" class="text-orange-600 font-bold">Sahayak</a></li>
-        </ul>
-      </div>
-      <div>
-        <h5 class="font-bold text-xs mb-6 uppercase text-gray-400">Contact</h5>
-        <ul class="space-y-4 text-xs text-gray-600">
-          <li class="flex gap-3"><i data-lucide="map-pin" class="w-4 h-4 text-orange-600"></i> Stuttgart, Germany</li>
-          <li class="flex gap-3"><i data-lucide="mail" class="w-4 h-4 text-orange-600"></i> info@maharashtraineurope.com
-          </li>
-        </ul>
-      </div>
-    </div>
-  </footer>
+  <!-- FOOTER — injected by ../assets/navigation.js -->
 
   <!-- TRAFFIC TRACKING SCRIPT (GoatCounter) -->
   <script data-goatcounter="https://maharashtraineurope.goatcounter.com/count" async
     src="//gc.zgo.at/count.js"></script>
 
+  <!-- Shared Navigation & Footer Component -->
+  <script src="../assets/navigation.js"></script>
+
   <script>
     /* ─────────────────────────────────────────
-       MOBILE MENU LOGIC
-    ─────────────────────────────────────────  */
-    const menuToggle = document.getElementById('menu-toggle');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const menuIcon = document.getElementById('menu-icon');
-    menuToggle.addEventListener('click', () => {
-      mobileMenu.classList.toggle('open');
-      const isOpen = mobileMenu.classList.contains('open');
-      menuIcon.setAttribute('data-lucide', isOpen ? 'x' : 'menu');
-      lucide.createIcons();
-    });
-
-    /* ─────────────────────────────────────────
-       DATA ENGINE (Your Google Sheet)
+       DATA ENGINE (Google Sheet)
     ───────────────────────────────────────── */
     const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ4VhZY3eQJlzyET99mCG13Rwz41RKSOAaVDS1gfOgUl7DMDNDTf8bQz7EcnLvCUo_LZVSOTcn7D5Pd/pub?gid=1005612043&single=true&output=csv';
     let allData = [];

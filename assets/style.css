@@ -1,0 +1,93 @@
+/* ============================================================
+   MAHARASHTRA IN EUROPE — Global Design System
+   assets/style.css
+   Shared by: index.html · sahayak/index.html · community/index.html
+   ============================================================ */
+
+/* ── 1. TYPOGRAPHY ─────────────────────────────────────────── */
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+.marathi {
+    font-family: 'Hind', sans-serif;
+}
+
+/* ── 2. MOBILE MENU ─────────────────────────────────────────── */
+#mobile-menu {
+    transition: all 0.3s ease-in-out;
+    max-height: 0;
+    overflow: hidden;
+}
+
+#mobile-menu.open {
+    max-height: 500px;
+}
+
+/* ── 3. CUSTOM SCROLLBAR ────────────────────────────────────── */
+.custom-scrollbar::-webkit-scrollbar {
+    height: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #e2e8f0;
+    border-radius: 10px;
+}
+
+/* ── 4. HERO STYLES ─────────────────────────────────────────── */
+
+/* Home page hero — uses local hero.png image with dark gradient overlay */
+.hero-overlay {
+    background: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.7) 0%,
+        rgba(0, 0, 0, 0.3) 50%,
+        rgba(0, 0, 0, 0) 100%
+    );
+}
+
+/* Sahayak page hero — orange gradient over a stock plane/travel photo */
+.hero-bg-sahayak {
+    background: linear-gradient(rgba(234, 88, 12, 0.9), rgba(196, 68, 10, 0.9)),
+        url('https://images.unsplash.com/photo-1436491865332-7a61a109c05a?auto=format&fit=crop&w=1600&q=80');
+    background-size: cover;
+    background-position: center;
+}
+
+/* Community page hero — same orange gradient over a Europe cityscape photo */
+.hero-bg-community {
+    background: linear-gradient(rgba(234, 88, 12, 0.9), rgba(196, 68, 10, 0.9)),
+        url('https://images.unsplash.com/photo-1467269204594-9661b1370767?auto=format&fit=crop&w=1600&q=80');
+    background-size: cover;
+    background-position: center;
+}
+
+/* ── 5. D3 MAP (Community page) ─────────────────────────────── */
+.map-country {
+    fill: #DCDCDC;
+    stroke: #fff;
+    stroke-width: 0.6px;
+    cursor: default;
+    transition: fill .15s;
+}
+
+.map-country.active {
+    fill: #FEE2E2;
+    stroke: #fb923c;
+    stroke-width: 0.8px;
+    cursor: pointer;
+}
+
+.map-country.active:hover {
+    fill: #fed7aa;
+}
+
+.map-country.active.selected {
+    fill: #ea580c;
+    stroke: #c2410c;
+    stroke-width: 1.2px;
+}
+
+.map-country.active.selected:hover {
+    fill: #c2410c;
+}
