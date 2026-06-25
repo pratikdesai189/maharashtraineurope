@@ -168,7 +168,7 @@
     </div>
     <!-- Domain alias note -->
     <div class="mt-10 pt-5 border-t border-gray-100 flex flex-col sm:flex-row items-center justify-between gap-2">
-        <p class="text-xs text-gray-400">© 2025 Maharashtra in Europe. All rights reserved.</p>
+        <p class="text-xs text-gray-400">© 2026 Maharashtra in Europe. All rights reserved.</p>
         <p class="text-xs text-gray-400">
             Also accessible at
             <a href="https://mheu.in" target="_blank" rel="noopener"
