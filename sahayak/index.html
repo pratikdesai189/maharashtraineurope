@@ -221,13 +221,12 @@
         const from = dir === 'India to Europe' ? (r.city_in_india || 'India') : (r.city_in_europe || 'Europe');
         const to = dir === 'India to Europe' ? (r.city_in_europe || 'Europe') : (r.city_in_india || 'India');
         
-        let airlineLogoHTML = '';
-        if (r.flight_number) {
-            const iataMatch = r.flight_number.match(/^[a-zA-Z]{2}/);
-            if (iataMatch) {
-                const iata = iataMatch[0].toUpperCase();
-                airlineLogoHTML = `<img src="https://pics.avs.io/200/200/${iata}.png" class="h-6 object-contain" alt="Airline Logo" onerror="this.style.display='none'">`;
-            }
+        function getAirlineLogo(flightNum, classes) {
+            if (!flightNum) return '';
+            const match = flightNum.match(/^[a-zA-Z]{2}/);
+            if (!match) return '';
+            const iata = match[0].toUpperCase();
+            return `<img src="https://pics.avs.io/200/200/${iata}.png" class="${classes}" alt="${iata} Logo" onerror="this.style.display='none'">`;
         }
 
         const cardHTML = `
@@ -258,7 +257,7 @@
                             <p class="text-[9px] uppercase text-orange-600 font-bold tracking-wider mb-0.5">From</p>
                             <p class="text-base font-bold text-gray-900 truncate" title="${from}">${from}</p>
                         </div>
-                        <div class="flex-shrink-0 text-orange-300 px-2 transform rotate-90 sm:rotate-0">
+                        <div class="flex-shrink-0 text-orange-300 px-2">
                             <i data-lucide="plane" class="w-5 h-5"></i>
                         </div>
                         <div class="flex-1 text-right sm:border-r border-orange-200/60 sm:pr-4 sm:mr-2 min-w-0">
@@ -280,7 +279,7 @@
                     <p class="text-sm text-gray-700 leading-relaxed whitespace-pre-wrap">${r.short_description}</p>
                     ${r.flight_number ? `
                     <div class="mt-4 flex flex-col sm:flex-row sm:items-center gap-3">
-                        ${airlineLogoHTML ? airlineLogoHTML.replace('h-6', 'h-10 w-auto') : ''}
+                        ${getAirlineLogo(r.flight_number, 'h-12 w-auto max-w-[120px] object-contain')}
                         <div class="bg-gray-100 border border-gray-200 px-3 py-1.5 rounded-lg shadow-sm w-fit">
                             <span class="text-xs font-bold text-gray-800">Flight: ${r.flight_number}</span>
                         </div>
@@ -432,13 +431,12 @@
 
             const delay = (index % PAGE_SIZE) * 0.08;
 
-            let airlineLogoHTML = '';
-            if (r.flight_number) {
-                const iataMatch = r.flight_number.match(/^[a-zA-Z]{2}/);
-                if (iataMatch) {
-                    const iata = iataMatch[0].toUpperCase();
-                    airlineLogoHTML = `<img src="https://pics.avs.io/200/200/${iata}.png" class="h-4 object-contain" alt="" onerror="this.style.display='none'">`;
-                }
+            function getAirlineLogo(flightNum, classes) {
+                if (!flightNum) return '';
+                const match = flightNum.match(/^[a-zA-Z]{2}/);
+                if (!match) return '';
+                const iata = match[0].toUpperCase();
+                return `<img src="https://pics.avs.io/200/200/${iata}.png" class="${classes}" alt="" onerror="this.style.display='none'">`;
             }
 
             return `
@@ -448,7 +446,7 @@
                         <span class="text-sm font-bold text-gray-900">${r.travel_date || 'Flexible'}</span>
                         ${r.flight_number ? `
                             <div class="flex items-center gap-2 mt-0 md:mt-2">
-                                ${airlineLogoHTML ? airlineLogoHTML.replace('h-4', 'h-6') : ''}
+                                ${getAirlineLogo(r.flight_number, 'h-8 w-auto max-w-[80px] object-contain')}
                                 <div class="font-bold text-gray-800 bg-gray-100 px-2 py-0.5 rounded-md border border-gray-200 text-[10px]">
                                     <span>${r.flight_number}</span>
                                 </div>
