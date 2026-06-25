@@ -62,12 +62,25 @@
 <nav class="bg-white py-3 px-4 md:px-6 shadow-sm sticky top-0 z-50" id="site-nav">
     <div class="max-w-7xl mx-auto flex items-center justify-between">
         <div class="flex items-center gap-3">
-            <img src="${assetBase}logo.png" alt="Maharashtra in Europe Logo" class="w-10 h-10 md:w-12 md:h-12 object-contain rounded-full">
+            <!-- Logo with hover-to-enlarge tooltip (Option A) -->
+            <div class="logo-tooltip-wrapper">
+                <img src="${assetBase}logo.png" alt="Maharashtra in Europe Logo"
+                    class="w-10 h-10 md:w-12 md:h-12 object-contain rounded-full cursor-pointer" style="transition:transform .2s ease" onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'">
+                <div class="logo-tooltip">
+                    <div class="logo-tooltip-card">
+                        <img src="${assetBase}logo.png" alt="Maharashtra in Europe">
+                        <p class="tooltip-title">Maharashtra in Europe</p>
+                        <p class="tooltip-tagline">"Where the Sahyadri meets the Alps"</p>
+                    </div>
+                </div>
+            </div>
             <div>
                 <p class="font-bold text-sm md:text-lg leading-tight text-orange-600">Maharashtra <span class="text-gray-700">in Europe</span></p>
                 <p class="marathi text-[8px] md:text-[10px] text-gray-500">॥ महाराष्ट्रा ते युरोप, एकत्र समुदाय ॥</p>
+                <p class="hidden md:block text-[9px] text-orange-500 italic tracking-wide font-medium opacity-80">Where the Sahyadri meets the Alps</p>
             </div>
         </div>
+
 
         <!-- Desktop Menu -->
         <div class="hidden md:flex items-center gap-6 text-sm font-medium text-gray-600">
@@ -107,7 +120,8 @@
                     <p class="marathi text-[8px] md:text-[10px] text-gray-500">॥ महाराष्ट्रा ते युरोप, एकत्र समुदाय ॥</p>
                 </div>
             </div>
-            <p class="text-gray-500 text-xs leading-relaxed mb-6">Uniting Indians in Europe through support, opportunities and Maharashtrian values.</p>
+            <p class="text-gray-500 text-xs leading-relaxed mb-3">Uniting Indians in Europe through support, opportunities and Maharashtrian values.</p>
+            <p class="text-orange-500 text-xs italic font-medium mb-5 opacity-80">"Where the Sahyadri meets the Alps"</p>
             <div class="flex gap-3 mt-2">
                 <!-- Instagram -->
                 <a href="https://www.instagram.com/mheu.in?igsh=cDcwYnozOGRvNTRm&utm_source=qr" target="_blank"
