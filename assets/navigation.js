@@ -61,7 +61,7 @@
     const navHTML = `
 <nav class="bg-white py-3 px-4 md:px-6 shadow-sm sticky top-0 z-50" id="site-nav">
     <div class="max-w-7xl mx-auto flex items-center justify-between">
-        <div class="flex items-center gap-3">
+        <a href="/" class="flex items-center gap-3 group" aria-label="Maharashtra in Europe — Home">
             <!-- Logo with hover-to-enlarge tooltip (Option A) -->
             <div class="logo-tooltip-wrapper">
                 <img src="${assetBase}logo.png" alt="Maharashtra in Europe Logo"
@@ -75,13 +75,10 @@
                 </div>
             </div>
             <div>
-                <p class="font-bold text-sm md:text-lg leading-tight text-orange-600">Maharashtra <span class="text-gray-700">in Europe</span></p>
-                <p class="marathi text-[8px] md:text-[10px] text-gray-500">॥ महाराष्ट्रा ते युरोप, एकत्र समुदाय ॥</p>
-                <p class="hidden md:block text-[9px] text-orange-500 italic tracking-wide font-medium opacity-80">Where the Sahyadri meets the Alps</p>
+                <p class="font-bold text-sm md:text-lg leading-tight text-orange-600 group-hover:text-orange-700 transition-colors">Maharashtra <span class="text-gray-700 group-hover:text-gray-900 transition-colors">in Europe</span></p>
+                <p class="text-[9px] md:text-[10px] text-orange-500 italic tracking-wide font-medium opacity-80">Where the Sahyadri meets the Alps</p>
             </div>
-        </div>
-
-
+        </a>
         <!-- Desktop Menu -->
         <div class="hidden md:flex items-center gap-6 text-sm font-medium text-gray-600">
                 ${desktopLinks}
@@ -168,6 +165,16 @@
                 <li class="flex gap-3"><i data-lucide="mail" class="w-4 h-4 text-orange-600"></i> info@maharashtraineurope.com</li>
             </ul>
         </div>
+    </div>
+    <!-- Domain alias note -->
+    <div class="mt-10 pt-5 border-t border-gray-100 flex flex-col sm:flex-row items-center justify-between gap-2">
+        <p class="text-xs text-gray-400">© 2025 Maharashtra in Europe. All rights reserved.</p>
+        <p class="text-xs text-gray-400">
+            Also accessible at
+            <a href="https://mheu.in" target="_blank" rel="noopener"
+                class="text-orange-500 font-semibold hover:underline">mheu.in</a>
+            — both domains are the same community.
+        </p>
     </div>
 </footer>`;
 
