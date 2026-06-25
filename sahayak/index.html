@@ -215,7 +215,6 @@
         
         const av = avatarColor(r.name);
         const expired = isExpired(r.travel_date);
-        const type = getTypeStyle(r);
         const waMsg = encodeURIComponent(`Namaste ${r.name}, I saw your listing on Maharashtra in Europe. I would like to connect!`);
         const waLink = r.whatsapp_number ? `https://wa.me/${r.whatsapp_number.replace(/\D/g, '')}?text=${waMsg}` : '#';
         const dir = r.direction || 'Europe to India';
@@ -241,8 +240,8 @@
                         <div>
                             <h4 class="font-bold text-gray-900 text-lg">${r.name}</h4>
                             <div class="flex flex-wrap items-center gap-2 mt-1">
-                                <span class="text-[10px] px-2 py-0.5 rounded-full border font-medium ${roleStyle(r.looking_for_or_offering)}">${r.looking_for_or_offering}</span>
-                                <span class="text-[10px] px-2 py-0.5 rounded-full border font-medium ${type.color}">${type.label}</span>
+                            <div class="flex flex-wrap items-center gap-2 mt-1">
+                                ${getHelpItemsHTML(r)}
                             </div>
                         </div>
                     </div>
@@ -278,9 +277,11 @@
                     <p class="text-xs uppercase text-gray-400 font-bold tracking-wider mb-2">Description</p>
                     <p class="text-sm text-gray-700 leading-relaxed whitespace-pre-wrap">${r.short_description}</p>
                     ${r.flight_number ? `
-                    <div class="mt-4 flex items-center gap-3 bg-white border border-gray-200 p-2 rounded-lg w-fit shadow-sm">
-                        ${airlineLogoHTML}
-                        <span class="text-xs font-bold text-gray-800 pr-2">Flight: ${r.flight_number}</span>
+                    <div class="mt-4 flex items-center gap-3">
+                        ${airlineLogoHTML ? airlineLogoHTML.replace('h-6', 'h-8') : ''}
+                        <div class="bg-gray-100 border border-gray-200 px-3 py-1.5 rounded-lg shadow-sm">
+                            <span class="text-xs font-bold text-gray-800">Flight: ${r.flight_number}</span>
+                        </div>
                     </div>` : ''}
                 </div>
 
@@ -330,18 +331,18 @@
     function isCompanionType(r) { return helpItems(r).includes('🧳 Travel companion'); }
     function isCarrierType(r) { return helpItems(r).some(i => CARRY_LABELS.includes(i)); }
 
-    function getTypeStyle(r) {
-      const comp = isCompanionType(r), carr = isCarrierType(r);
-      if (comp && carr) return { label: 'Travel & Carrier', color: 'bg-indigo-100 text-indigo-700 border-indigo-200' };
-      if (comp) return { label: 'Travel Companion', color: 'bg-blue-100 text-blue-700 border-blue-200' };
-      if (carr) return { label: 'Carrier Service', color: 'bg-purple-100 text-purple-700 border-purple-200' };
-      return { label: 'Community Help', color: 'bg-gray-100 text-gray-700 border-gray-200' };
-    }
-
-    function roleStyle(role) {
-      if (role === 'Offering to help') return 'bg-green-100 text-green-800 border-green-200';
-      if (role === 'Looking for help') return 'bg-rose-100 text-rose-800 border-rose-200';
-      return 'bg-gray-50 text-gray-700 border-gray-200';
+    function getHelpItemsHTML(r) {
+      const items = helpItems(r);
+      if (!items.length) return `<span class="text-[10px] px-2 py-0.5 rounded-full border font-bold bg-gray-100 text-gray-700 border-gray-200 text-right whitespace-nowrap">Community Help</span>`;
+      
+      return items.map(item => {
+          let color = 'bg-gray-100 text-gray-700 border-gray-200';
+          if(item.includes('Medicine')) color = 'bg-rose-100 text-rose-700 border-rose-200';
+          if(item.includes('Letter')) color = 'bg-blue-100 text-blue-700 border-blue-200';
+          if(item.includes('Parcel')) color = 'bg-amber-100 text-amber-700 border-amber-200';
+          if(item.includes('companion')) color = 'bg-indigo-100 text-indigo-700 border-indigo-200';
+          return `<span class="text-[10px] px-2 py-0.5 rounded-full border font-bold ${color} text-right whitespace-nowrap">${item}</span>`;
+      }).join('');
     }
 
     function parseCSV(text) {
@@ -423,7 +424,6 @@
         return paginatedData.map((r, index) => {
             const globalIndex = offset + index;
             const expired = isExpired(r.travel_date);
-            const type = getTypeStyle(r);
             const dir = r.direction || 'Europe to India';
             const from = dir === 'India to Europe' ? (r.city_in_india || 'India') : (r.city_in_europe || 'Europe');
             const to = dir === 'India to Europe' ? (r.city_in_europe || 'Europe') : (r.city_in_india || 'India');
@@ -445,9 +445,11 @@
                     <div class="flex items-center justify-between md:flex-col md:justify-center md:w-32 flex-shrink-0">
                         <span class="text-sm font-bold text-gray-900">${r.travel_date || 'Flexible'}</span>
                         ${r.flight_number ? `
-                            <div class="flex items-center gap-2 mt-0 md:mt-1 font-bold text-gray-800 bg-gray-100 px-2 py-1 rounded-md border border-gray-200 text-[10px]">
-                                ${airlineLogoHTML} 
-                                <span>${r.flight_number}</span>
+                            <div class="flex items-center gap-2 mt-0 md:mt-2">
+                                ${airlineLogoHTML ? airlineLogoHTML.replace('h-4', 'h-6') : ''}
+                                <div class="font-bold text-gray-800 bg-gray-100 px-2 py-0.5 rounded-md border border-gray-200 text-[10px]">
+                                    <span>${r.flight_number}</span>
+                                </div>
                             </div>
                         ` : ''}
                     </div>
@@ -464,9 +466,8 @@
                         </div>
                     </div>
                     
-                    <div class="flex gap-2 items-end justify-end md:flex-col md:w-36 flex-shrink-0 mt-1 md:mt-0">
-                        <span class="text-[10px] px-2 py-1 rounded-full border font-bold ${roleStyle(r.looking_for_or_offering)}">${r.looking_for_or_offering === 'Looking for help' ? 'Needs Help' : 'Offering Help'}</span>
-                        <span class="text-[10px] px-2 py-1 rounded-full border font-bold ${type.color} text-right">${type.label}</span>
+                    <div class="flex flex-wrap gap-1.5 items-end justify-end md:flex-col md:w-36 flex-shrink-0 mt-2 md:mt-0">
+                        ${getHelpItemsHTML(r)}
                     </div>
                     
                     <div class="flex-shrink-0 hidden md:flex">
