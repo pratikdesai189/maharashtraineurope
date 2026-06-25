@@ -23,8 +23,10 @@
 
   <!-- External Dependencies -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Hind:wght@400;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Hind:wght@400;500;600;700&display=swap"
     rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -41,7 +43,7 @@
         Feature</span>
       <h2 class="marathi text-4xl md:text-6xl font-bold mb-2">सहायक (Sahayak)</h2>
       <p class="text-xl opacity-90 mb-8 font-light">"Where the Sahyadri meets the Alps"</p>
-      <div class="flex flex-wrap justify-center gap-4">
+      <div class="flex flex-wrap justify-center gap-4 mb-10">
         <a href="https://forms.gle/XUH1CCBFHC5dtASq6" target="_blank"
           class="bg-white text-orange-600 px-8 py-3 rounded-lg font-bold hover:bg-gray-100 transition flex items-center gap-2">
           <i data-lucide="plus-circle" class="w-5 h-5"></i> Post Your Listing
@@ -51,27 +53,25 @@
           Browse Listings
         </button>
       </div>
-    </div>
-  </section>
-
-  <!-- 3. STATS BAR -->
-  <section class="max-w-6xl mx-auto -mt-8 px-4 md:px-6 relative z-20">
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-      <div class="bg-white p-4 md:p-6 rounded-2xl shadow-lg border border-gray-100 text-center">
-        <span id="s-total" class="text-2xl md:text-3xl font-bold text-orange-600">—</span>
-        <p class="text-[10px] md:text-xs text-gray-500 uppercase font-medium">Active Listings</p>
-      </div>
-      <div class="bg-white p-4 md:p-6 rounded-2xl shadow-lg border border-gray-100 text-center">
-        <span id="s-travel" class="text-2xl md:text-3xl font-bold text-blue-600">—</span>
-        <p class="text-[10px] md:text-xs text-gray-500 uppercase font-medium">Travel Companions</p>
-      </div>
-      <div class="bg-white p-4 md:p-6 rounded-2xl shadow-lg border border-gray-100 text-center">
-        <span id="s-letter" class="text-2xl md:text-3xl font-bold text-green-600">—</span>
-        <p class="text-[10px] md:text-xs text-gray-500 uppercase font-medium">Carrier Services</p>
-      </div>
-      <div class="bg-white p-4 md:p-6 rounded-2xl shadow-lg border border-gray-100 text-center">
-        <span id="s-cities" class="text-2xl md:text-3xl font-bold text-purple-600">—</span>
-        <p class="text-[10px] md:text-xs text-gray-500 uppercase font-medium">Cities Active</p>
+      
+      <!-- INLINE STATS -->
+      <div class="pt-8 border-t border-white/20 grid grid-cols-2 md:grid-cols-4 gap-4 text-center max-w-3xl mx-auto">
+          <div>
+              <p id="s-total" class="text-3xl font-bold">—</p>
+              <p class="text-[10px] uppercase tracking-wider opacity-80 mt-1">Active Listings</p>
+          </div>
+          <div>
+              <p id="s-travel" class="text-3xl font-bold">—</p>
+              <p class="text-[10px] uppercase tracking-wider opacity-80 mt-1">Travel Companions</p>
+          </div>
+          <div>
+              <p id="s-letter" class="text-3xl font-bold">—</p>
+              <p class="text-[10px] uppercase tracking-wider opacity-80 mt-1">Carrier Services</p>
+          </div>
+          <div>
+              <p id="s-cities" class="text-3xl font-bold">—</p>
+              <p class="text-[10px] uppercase tracking-wider opacity-80 mt-1">Cities Active</p>
+          </div>
       </div>
     </div>
   </section>
