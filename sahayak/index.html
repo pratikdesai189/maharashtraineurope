@@ -113,65 +113,55 @@
     </div>
 
     <!-- FILTERS -->
-    <div class="bg-white p-4 md:p-6 rounded-2xl shadow-sm border border-gray-200 mb-8">
-      <div class="flex flex-col md:flex-row gap-6 items-center justify-between">
-        <div class="flex gap-2 overflow-x-auto custom-scrollbar w-full md:w-auto pb-2 md:pb-0">
-          <button
-            class="tab-btn active px-4 py-2 rounded-full text-xs font-semibold transition whitespace-nowrap bg-orange-600 text-white"
-            onclick="setTab('all', this)">All</button>
-          <button
-            class="tab-btn px-4 py-2 rounded-full text-xs font-semibold transition whitespace-nowrap bg-gray-100 text-gray-600 hover:bg-gray-200"
-            onclick="setTab('need-companion', this)">Need Companion</button>
-          <button
-            class="tab-btn px-4 py-2 rounded-full text-xs font-semibold transition whitespace-nowrap bg-gray-100 text-gray-600 hover:bg-gray-200"
-            onclick="setTab('offer-companion', this)">Offer Companion</button>
-          <button
-            class="tab-btn px-4 py-2 rounded-full text-xs font-semibold transition whitespace-nowrap bg-gray-100 text-gray-600 hover:bg-gray-200"
-            onclick="setTab('need-carrier', this)">Need Carrier</button>
-          <button
-            class="tab-btn px-4 py-2 rounded-full text-xs font-semibold transition whitespace-nowrap bg-gray-100 text-gray-600 hover:bg-gray-200"
-            onclick="setTab('offer-carrier', this)">Offer Carrier</button>
+    <div class="bg-white p-4 md:p-6 rounded-2xl shadow-sm border border-gray-200 mb-8 flex flex-col md:flex-row gap-4 items-center justify-between">
+      <div class="flex items-center gap-3 w-full md:w-auto overflow-x-auto pb-2 md:pb-0">
+        <div class="flex flex-col min-w-max">
+          <label class="text-[10px] uppercase text-gray-500 font-bold mb-1">From Date</label>
+          <input type="date" id="f-date-from" onchange="resetAndRender()"
+            class="text-xs border border-gray-300 rounded-lg px-3 py-2 outline-none bg-gray-50 text-gray-700">
         </div>
-
-        <div class="flex flex-wrap gap-3 w-full md:w-auto">
-          <select id="f-direction" onchange="resetAndRender()"
-            class="text-xs border border-gray-300 rounded-lg px-3 py-2 outline-none bg-gray-50">
-            <option value="">Any direction</option>
-            <option value="Europe to India">Europe → India</option>
-            <option value="India to Europe">India → Europe</option>
-          </select>
-          <select id="f-from" onchange="resetAndRender()"
-            class="text-xs border border-gray-300 rounded-lg px-3 py-2 outline-none bg-gray-50">
-            <option value="">Europe City</option>
-          </select>
-          <select id="f-to" onchange="resetAndRender()"
-            class="text-xs border border-gray-300 rounded-lg px-3 py-2 outline-none bg-gray-50">
-            <option value="">India City</option>
-          </select>
-          <input type="date" id="f-date" onchange="resetAndRender()"
-            class="text-xs border border-gray-300 rounded-lg px-3 py-2 outline-none bg-gray-50 text-gray-500" title="Travel Date">
+        <span class="text-gray-300 mt-4">—</span>
+        <div class="flex flex-col min-w-max">
+          <label class="text-[10px] uppercase text-gray-500 font-bold mb-1">To Date</label>
+          <input type="date" id="f-date-to" onchange="resetAndRender()"
+            class="text-xs border border-gray-300 rounded-lg px-3 py-2 outline-none bg-gray-50 text-gray-700">
         </div>
       </div>
-      <div class="mt-6 pt-6 border-t flex items-center gap-2">
+      
+      <div class="flex items-center gap-2 mt-2 md:mt-0 w-full md:w-auto justify-end">
         <input type="checkbox" id="show-expired" onchange="resetAndRender()" class="w-4 h-4 accent-orange-600">
-        <label for="show-expired" class="text-xs text-gray-500 cursor-pointer">Show past listings</label>
+        <label for="show-expired" class="text-xs text-gray-500 cursor-pointer font-medium whitespace-nowrap">Show past listings</label>
       </div>
     </div>
 
-    <!-- LISTINGS -->
-    <div id="listings-section">
+    <!-- LISTINGS: OFFERING HELP -->
+    <div id="listings-offering-section" class="mb-12">
       <div class="flex items-center gap-3 mb-6">
-        <h3 class="font-bold text-lg">Departure Board</h3>
+        <div class="w-2.5 h-2.5 rounded-full bg-green-500"></div>
+        <h3 class="font-bold text-lg text-gray-900">People Offering Help</h3>
         <div class="flex-1 h-px bg-gray-200"></div>
       </div>
-      <div id="listings" class="flex flex-col gap-3">
-        <div class="col-span-full text-center py-20">
-          <div class="animate-spin w-8 h-8 border-4 border-orange-600 border-t-transparent rounded-full mx-auto mb-4">
-          </div>
-          <p class="text-gray-500 animate-pulse">Loading community listings...</p>
+      <div id="listings-offering" class="flex flex-col gap-3">
+        <div class="col-span-full text-center py-10">
+          <div class="animate-spin w-8 h-8 border-4 border-green-500 border-t-transparent rounded-full mx-auto mb-4"></div>
+          <p class="text-gray-500 animate-pulse">Loading listings...</p>
         </div>
       </div>
     </div>
+
+    <!-- LISTINGS: LOOKING FOR HELP -->
+    <div id="listings-looking-section">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-2.5 h-2.5 rounded-full bg-rose-500"></div>
+        <h3 class="font-bold text-lg text-gray-900">People Looking for Help</h3>
+        <div class="flex-1 h-px bg-gray-200"></div>
+      </div>
+      <div id="listings-looking" class="flex flex-col gap-3">
+        <div class="col-span-full text-center py-10">
+          <div class="animate-spin w-8 h-8 border-4 border-rose-500 border-t-transparent rounded-full mx-auto mb-4"></div>
+          <p class="text-gray-500 animate-pulse">Loading listings...</p>
+        </div>
+      </div>
     </div>
     
     <!-- LISTING MODAL -->
@@ -198,23 +188,29 @@
     ───────────────────────────────────────── */
     const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ4VhZY3eQJlzyET99mCG13Rwz41RKSOAaVDS1gfOgUl7DMDNDTf8bQz7EcnLvCUo_LZVSOTcn7D5Pd/pub?gid=1005612043&single=true&output=csv';
     let allData = [];
-    let activeTab = 'all';
-    let currentPage = 1;
+    let currentPageOffering = 1;
+    let currentPageLooking = 1;
     const PAGE_SIZE = 6;
-    let currentPaginatedData = [];
+    let allPaginatedData = [];
 
     function resetAndRender() {
-      currentPage = 1;
+      currentPageOffering = 1;
+      currentPageLooking = 1;
       render();
     }
     
-    function loadMore() {
-      currentPage++;
+    function loadMoreOffering() {
+      currentPageOffering++;
+      render(true);
+    }
+
+    function loadMoreLooking() {
+      currentPageLooking++;
       render(true);
     }
 
     function openListing(index) {
-        const r = currentPaginatedData[index];
+        const r = allPaginatedData[index];
         if(!r) return;
         
         const av = avatarColor(r.name);
@@ -225,6 +221,15 @@
         const dir = r.direction || 'Europe to India';
         const from = dir === 'India to Europe' ? (r.city_in_india || 'India') : (r.city_in_europe || 'Europe');
         const to = dir === 'India to Europe' ? (r.city_in_europe || 'Europe') : (r.city_in_india || 'India');
+        
+        let airlineLogoHTML = '';
+        if (r.flight_number) {
+            const iataMatch = r.flight_number.match(/^[a-zA-Z]{2}/);
+            if (iataMatch) {
+                const iata = iataMatch[0].toUpperCase();
+                airlineLogoHTML = `<img src="https://pics.avs.io/200/200/${iata}.png" class="h-6 object-contain" alt="Airline Logo" onerror="this.style.display='none'">`;
+            }
+        }
 
         const cardHTML = `
             <div class="p-6">
@@ -246,7 +251,6 @@
                     </button>
                 </div>
                 
-                <!-- Flight Style Route Card -->
                 <div class="flex items-center gap-2 bg-orange-50 border border-orange-100 p-4 rounded-xl mb-5 relative overflow-hidden">
                     <div class="absolute -left-2 top-1/2 -translate-y-1/2 w-4 h-4 bg-white rounded-full border-r border-orange-100"></div>
                     <div class="absolute -right-2 top-1/2 -translate-y-1/2 w-4 h-4 bg-white rounded-full border-l border-orange-100"></div>
@@ -273,7 +277,11 @@
                 <div class="mb-6 bg-gray-50 p-4 rounded-xl border border-gray-100">
                     <p class="text-xs uppercase text-gray-400 font-bold tracking-wider mb-2">Description</p>
                     <p class="text-sm text-gray-700 leading-relaxed whitespace-pre-wrap">${r.short_description}</p>
-                    ${r.flight_number ? `<div class="mt-3 flex"><span class="text-[11px] bg-white text-gray-600 px-3 py-1.5 rounded-md flex items-center gap-1.5 border border-gray-200 font-medium shadow-sm"><i data-lucide="hash" class="w-3.5 h-3.5"></i> Flight: ${r.flight_number}</span></div>` : ''}
+                    ${r.flight_number ? `
+                    <div class="mt-4 flex items-center gap-3 bg-white border border-gray-200 p-2 rounded-lg w-fit shadow-sm">
+                        ${airlineLogoHTML}
+                        <span class="text-xs font-bold text-gray-800 pr-2">Flight: ${r.flight_number}</span>
+                    </div>` : ''}
                 </div>
 
                 <div class="flex flex-col justify-center border-t border-gray-100 pt-5">
@@ -324,15 +332,15 @@
 
     function getTypeStyle(r) {
       const comp = isCompanionType(r), carr = isCarrierType(r);
-      if (comp && carr) return { label: 'Travel & Carrier', color: 'bg-orange-100 text-orange-700 border-orange-200' };
+      if (comp && carr) return { label: 'Travel & Carrier', color: 'bg-indigo-100 text-indigo-700 border-indigo-200' };
       if (comp) return { label: 'Travel Companion', color: 'bg-blue-100 text-blue-700 border-blue-200' };
-      if (carr) return { label: 'Carrier Service', color: 'bg-green-100 text-green-700 border-green-200' };
+      if (carr) return { label: 'Carrier Service', color: 'bg-purple-100 text-purple-700 border-purple-200' };
       return { label: 'Community Help', color: 'bg-gray-100 text-gray-700 border-gray-200' };
     }
 
     function roleStyle(role) {
-      if (role === 'Offering to help') return 'bg-emerald-50 text-emerald-700 border-emerald-200';
-      if (role === 'Looking for help') return 'bg-sky-50 text-sky-700 border-sky-200';
+      if (role === 'Offering to help') return 'bg-green-100 text-green-800 border-green-200';
+      if (role === 'Looking for help') return 'bg-rose-100 text-rose-800 border-rose-200';
       return 'bg-gray-50 text-gray-700 border-gray-200';
     }
 
@@ -365,22 +373,25 @@
       return d < new Date(new Date().toDateString());
     }
 
-    function isSameDate(d1Str, d2Str) {
-      const d1 = parseDate(d1Str);
-      const d2 = parseDate(d2Str);
-      if(!d1 || !d2) return false;
-      return d1.toDateString() === d2.toDateString();
-    }
-
-    function populateSelects() {
-      const froms = [...new Set(allData.map(r => r.city_in_europe).filter(Boolean))].sort();
-      const tos = [...new Set(allData.map(r => r.city_in_india).filter(Boolean))].sort();
-      const ff = document.getElementById('f-from');
-      const ft = document.getElementById('f-to');
-      while (ff.options.length > 1) ff.remove(1);
-      while (ft.options.length > 1) ft.remove(1);
-      froms.forEach(c => { const o = document.createElement('option'); o.value = c; o.textContent = c; ff.appendChild(o); });
-      tos.forEach(c => { const o = document.createElement('option'); o.value = c; o.textContent = c; ft.appendChild(o); });
+    function isWithinDateRange(dateStr, fromStr, toStr) {
+      if (!fromStr && !toStr) return true;
+      const d = parseDate(dateStr);
+      if (!d) return false;
+      const t = d.getTime();
+      
+      let fromT = -Infinity;
+      if (fromStr) {
+        const fromD = parseDate(fromStr);
+        if (fromD) fromT = fromD.getTime();
+      }
+      
+      let toT = Infinity;
+      if (toStr) {
+        const toD = parseDate(toStr);
+        if (toD) toT = toD.getTime();
+      }
+      
+      return t >= fromT && t <= toT;
     }
 
     function updateStats() {
@@ -393,19 +404,12 @@
 
     function updateURL() {
       const url = new URL(window.location);
-      if(activeTab !== 'all') url.searchParams.set('tab', activeTab); else url.searchParams.delete('tab');
       
-      const fv = document.getElementById('f-from').value;
-      if(fv) url.searchParams.set('from', fv); else url.searchParams.delete('from');
+      const df = document.getElementById('f-date-from').value;
+      if(df) url.searchParams.set('dateFrom', df); else url.searchParams.delete('dateFrom');
       
-      const tv = document.getElementById('f-to').value;
-      if(tv) url.searchParams.set('to', tv); else url.searchParams.delete('to');
-      
-      const dv = document.getElementById('f-direction').value;
-      if(dv) url.searchParams.set('dir', dv); else url.searchParams.delete('dir');
-      
-      const dt = document.getElementById('f-date').value;
-      if(dt) url.searchParams.set('date', dt); else url.searchParams.delete('date');
+      const dt = document.getElementById('f-date-to').value;
+      if(dt) url.searchParams.set('dateTo', dt); else url.searchParams.delete('dateTo');
 
       const showExpired = document.getElementById('show-expired').checked;
       if(showExpired) url.searchParams.set('past', '1'); else url.searchParams.delete('past');
@@ -413,116 +417,119 @@
       window.history.replaceState({}, '', url);
     }
 
+    function generateBoardHTML(paginatedData, offset) {
+        if(!paginatedData.length) return '<div class="col-span-full text-center py-12 text-gray-500 bg-gray-50 rounded-xl border border-dashed border-gray-200">No listings found.</div>';
+        
+        return paginatedData.map((r, index) => {
+            const globalIndex = offset + index;
+            const expired = isExpired(r.travel_date);
+            const type = getTypeStyle(r);
+            const dir = r.direction || 'Europe to India';
+            const from = dir === 'India to Europe' ? (r.city_in_india || 'India') : (r.city_in_europe || 'Europe');
+            const to = dir === 'India to Europe' ? (r.city_in_europe || 'Europe') : (r.city_in_india || 'India');
+
+            const delay = (index % PAGE_SIZE) * 0.08;
+
+            let airlineLogoHTML = '';
+            if (r.flight_number) {
+                const iataMatch = r.flight_number.match(/^[a-zA-Z]{2}/);
+                if (iataMatch) {
+                    const iata = iataMatch[0].toUpperCase();
+                    airlineLogoHTML = `<img src="https://pics.avs.io/200/200/${iata}.png" class="h-4 object-contain" alt="" onerror="this.style.display='none'">`;
+                }
+            }
+
+            return `
+                <div class="board-row-animate ${expired ? 'expired-row bg-gray-50' : ''} bg-white border border-gray-200 rounded-xl hover:shadow-md hover:border-orange-300 transition-all cursor-pointer flex flex-col md:flex-row md:items-center p-4 gap-4" onclick="openListing(${globalIndex})" style="animation-delay: ${delay}s">
+                    
+                    <div class="flex items-center justify-between md:flex-col md:justify-center md:w-32 flex-shrink-0">
+                        <span class="text-sm font-bold text-gray-900">${r.travel_date || 'Flexible'}</span>
+                        ${r.flight_number ? `
+                            <div class="flex items-center gap-2 mt-0 md:mt-1 font-bold text-gray-800 bg-gray-100 px-2 py-1 rounded-md border border-gray-200 text-[10px]">
+                                ${airlineLogoHTML} 
+                                <span>${r.flight_number}</span>
+                            </div>
+                        ` : ''}
+                    </div>
+                    
+                    <div class="flex-1 flex items-center gap-3 bg-orange-50/50 rounded-lg p-2.5 border border-orange-100/50 min-w-0">
+                        <div class="flex-1 min-w-0">
+                            <p class="text-[9px] uppercase text-orange-600 font-bold mb-0.5 tracking-wider">From</p>
+                            <p class="text-base md:text-sm font-bold text-gray-900 truncate" title="${from}">${from}</p>
+                        </div>
+                        <i data-lucide="arrow-right" class="w-4 h-4 text-orange-400 flex-shrink-0"></i>
+                        <div class="flex-1 min-w-0 text-right">
+                            <p class="text-[9px] uppercase text-orange-600 font-bold mb-0.5 tracking-wider">To</p>
+                            <p class="text-base md:text-sm font-bold text-gray-900 truncate" title="${to}">${to}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex gap-2 items-end justify-end md:flex-col md:w-36 flex-shrink-0 mt-1 md:mt-0">
+                        <span class="text-[10px] px-2 py-1 rounded-full border font-bold ${roleStyle(r.looking_for_or_offering)}">${r.looking_for_or_offering === 'Looking for help' ? 'Needs Help' : 'Offering Help'}</span>
+                        <span class="text-[10px] px-2 py-1 rounded-full border font-bold ${type.color} text-right">${type.label}</span>
+                    </div>
+                    
+                    <div class="flex-shrink-0 hidden md:flex">
+                        <button class="bg-gray-50 text-gray-400 hover:bg-orange-600 hover:text-white hover:border-orange-600 border border-gray-200 w-10 h-10 rounded-full flex items-center justify-center transition-colors shadow-sm">
+                            <i data-lucide="chevron-right" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                </div>`;
+        }).join('');
+    }
+
     function render(isLoadMore = false) {
       updateURL();
-      const fv = document.getElementById('f-from').value;
-      const tv = document.getElementById('f-to').value;
-      const dv = document.getElementById('f-direction').value;
-      const dt = document.getElementById('f-date').value;
+      const df = document.getElementById('f-date-from').value;
+      const dt = document.getElementById('f-date-to').value;
       const showExpired = document.getElementById('show-expired').checked;
 
       const data = allData.filter(r => {
         if (!showExpired && isExpired(r.travel_date)) return false;
-        if (fv && r.city_in_europe !== fv) return false;
-        if (tv && r.city_in_india !== tv) return false;
-        if (dv && (r.direction || 'Europe to India') !== dv) return false;
-        if (dt && !isSameDate(r.travel_date, dt)) return false;
-        if (activeTab !== 'all') {
-          const isComp = isCompanionType(r), isCarr = isCarrierType(r);
-          const isLook = r.looking_for_or_offering === 'Looking for help';
-          const isOff = r.looking_for_or_offering === 'Offering to help';
-          if (activeTab === 'need-companion' && !(isComp && isLook)) return false;
-          if (activeTab === 'offer-companion' && !(isComp && isOff)) return false;
-          if (activeTab === 'need-carrier' && !(isCarr && isLook)) return false;
-          if (activeTab === 'offer-carrier' && !(isCarr && isOff)) return false;
-        }
+        if (!isWithinDateRange(r.travel_date, df, dt)) return false;
         return true;
       });
 
-      data.sort((a, b) => {
+      let offeringData = data.filter(r => r.looking_for_or_offering === 'Offering to help');
+      let lookingData = data.filter(r => r.looking_for_or_offering === 'Looking for help');
+
+      const sortFn = (a, b) => {
         const da = parseDate(a.travel_date), db = parseDate(b.travel_date);
         return (da ? da.getTime() : Infinity) - (db ? db.getTime() : Infinity);
-      });
+      };
+      offeringData.sort(sortFn);
+      lookingData.sort(sortFn);
 
-      const el = document.getElementById('listings');
-      if (!data.length) {
-        el.innerHTML = '<div class="col-span-full text-center py-20 text-gray-500">No listings match your filter.</div>';
-        return;
-      }
+      const paginatedOffering = offeringData.slice(0, currentPageOffering * PAGE_SIZE);
+      const paginatedLooking = lookingData.slice(0, currentPageLooking * PAGE_SIZE);
 
-      const totalResults = data.length;
-      const paginatedData = data.slice(0, currentPage * PAGE_SIZE);
-      currentPaginatedData = paginatedData;
+      allPaginatedData = [...paginatedOffering, ...paginatedLooking];
 
-      let html = paginatedData.map((r, i) => {
-        const expired = isExpired(r.travel_date);
-        const type = getTypeStyle(r);
-        const dir = r.direction || 'Europe to India';
-        const from = dir === 'India to Europe' ? (r.city_in_india || 'India') : (r.city_in_europe || 'Europe');
-        const to = dir === 'India to Europe' ? (r.city_in_europe || 'Europe') : (r.city_in_india || 'India');
-
-        // Calculate staggered cascade delay
-        const delay = (i % PAGE_SIZE) * 0.08;
-
-        return `
-            <div class="board-row-animate ${expired ? 'expired-row bg-gray-50' : ''} bg-white border border-gray-200 rounded-xl hover:shadow-md hover:border-orange-300 transition-all cursor-pointer flex flex-col sm:flex-row sm:items-center p-4 gap-4" onclick="openListing(${i})" style="animation-delay: ${delay}s">
-                <!-- Date & Flight -->
-                <div class="flex sm:flex-col justify-between sm:justify-center sm:w-32 flex-shrink-0">
-                    <span class="text-sm font-bold text-gray-900">${r.travel_date || 'Flexible'}</span>
-                    ${r.flight_number ? `<span class="text-[10px] text-gray-500 flex items-center gap-1 mt-1 font-medium bg-gray-100 px-2 py-0.5 rounded w-fit border border-gray-200"><i data-lucide="plane" class="w-3 h-3"></i> ${r.flight_number}</span>` : ''}
-                </div>
-                
-                <!-- Route -->
-                <div class="flex-1 flex items-center gap-3 bg-orange-50/50 rounded-lg p-2.5 border border-orange-100/50 min-w-0">
-                    <div class="flex-1 min-w-0">
-                        <p class="text-[9px] uppercase text-orange-600 font-bold mb-0.5 tracking-wider">From</p>
-                        <p class="text-sm font-bold text-gray-900 truncate" title="${from}">${from}</p>
-                    </div>
-                    <i data-lucide="arrow-right" class="w-4 h-4 text-orange-300 flex-shrink-0"></i>
-                    <div class="flex-1 min-w-0 text-right">
-                        <p class="text-[9px] uppercase text-orange-600 font-bold mb-0.5 tracking-wider">To</p>
-                        <p class="text-sm font-bold text-gray-900 truncate" title="${to}">${to}</p>
-                    </div>
-                </div>
-                
-                <!-- Badges -->
-                <div class="flex sm:flex-col gap-2 items-end sm:w-36 flex-shrink-0">
-                    <span class="text-[10px] px-2 py-0.5 rounded-full border font-bold ${roleStyle(r.looking_for_or_offering)}">${r.looking_for_or_offering === 'Looking for help' ? 'Needs Help' : 'Offering Help'}</span>
-                    <span class="text-[10px] px-2 py-0.5 rounded-full border font-bold ${type.color} text-right">${type.label}</span>
-                </div>
-                
-                <!-- Action -->
-                <div class="flex-shrink-0 hidden md:flex">
-                    <button class="bg-gray-50 text-gray-400 hover:bg-orange-600 hover:text-white hover:border-orange-600 border border-gray-200 w-10 h-10 rounded-full flex items-center justify-center transition-colors shadow-sm">
-                        <i data-lucide="chevron-right" class="w-5 h-5"></i>
-                    </button>
-                </div>
-            </div>`;
-      }).join('');
-
-      if (totalResults > currentPage * PAGE_SIZE) {
-          html += `
-            <div class="col-span-full text-center mt-4 mb-8">
-                <button onclick="loadMore()" class="bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-200 px-6 py-3 rounded-full font-bold text-sm transition shadow-sm w-full md:w-auto flex items-center justify-center gap-2 mx-auto">
-                    Show More Listings <i data-lucide="chevron-down" class="w-4 h-4"></i>
+      let htmlOffering = generateBoardHTML(paginatedOffering, 0);
+      if (offeringData.length > currentPageOffering * PAGE_SIZE) {
+          htmlOffering += `
+            <div class="col-span-full text-center mt-4">
+                <button onclick="loadMoreOffering()" class="bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-200 px-6 py-3 rounded-full font-bold text-sm transition shadow-sm w-full md:w-auto flex items-center justify-center gap-2 mx-auto">
+                    Show More Offering Listings <i data-lucide="chevron-down" class="w-4 h-4"></i>
                 </button>
             </div>
           `;
       }
+      document.getElementById('listings-offering').innerHTML = htmlOffering;
 
-      el.innerHTML = html;
+      let htmlLooking = generateBoardHTML(paginatedLooking, paginatedOffering.length);
+      if (lookingData.length > currentPageLooking * PAGE_SIZE) {
+          htmlLooking += `
+            <div class="col-span-full text-center mt-4">
+                <button onclick="loadMoreLooking()" class="bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-200 px-6 py-3 rounded-full font-bold text-sm transition shadow-sm w-full md:w-auto flex items-center justify-center gap-2 mx-auto">
+                    Show More Looking Listings <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                </button>
+            </div>
+          `;
+      }
+      document.getElementById('listings-looking').innerHTML = htmlLooking;
+
       lucide.createIcons();
-    }
-
-    function setTab(t, el) {
-      activeTab = t;
-      document.querySelectorAll('.tab-btn').forEach(b => {
-        b.classList.remove('bg-orange-600', 'text-white');
-        b.classList.add('bg-gray-100', 'text-gray-600');
-      });
-      el.classList.remove('bg-gray-100', 'text-gray-600');
-      el.classList.add('bg-orange-600', 'text-white');
-      resetAndRender();
     }
 
     async function loadListings() {
@@ -530,40 +537,14 @@
         const res = await fetch(SHEET_CSV_URL);
         const text = await res.text();
         allData = parseCSV(text);
-        populateSelects();
         
-        // Initialize from URL params
         const url = new URL(window.location);
         
-        const tabParam = url.searchParams.get('tab');
-        if(tabParam) {
-          const btn = document.querySelector(`button[onclick="setTab('${tabParam}', this)"]`);
-          if(btn) {
-            activeTab = tabParam;
-            document.querySelectorAll('.tab-btn').forEach(b => {
-              b.classList.remove('bg-orange-600', 'text-white');
-              b.classList.add('bg-gray-100', 'text-gray-600');
-            });
-            btn.classList.remove('bg-gray-100', 'text-gray-600');
-            btn.classList.add('bg-orange-600', 'text-white');
-          }
-        }
-        
-        const fromParam = url.searchParams.get('from');
-        if(fromParam && [...document.getElementById('f-from').options].some(o => o.value === fromParam)) {
-            document.getElementById('f-from').value = fromParam;
-        }
-        
-        const toParam = url.searchParams.get('to');
-        if(toParam && [...document.getElementById('f-to').options].some(o => o.value === toParam)) {
-            document.getElementById('f-to').value = toParam;
-        }
-        
-        const dirParam = url.searchParams.get('dir');
-        if(dirParam) document.getElementById('f-direction').value = dirParam;
-        
-        const dateParam = url.searchParams.get('date');
-        if(dateParam) document.getElementById('f-date').value = dateParam;
+        const dateFromParam = url.searchParams.get('dateFrom');
+        if(dateFromParam) document.getElementById('f-date-from').value = dateFromParam;
+
+        const dateToParam = url.searchParams.get('dateTo');
+        if(dateToParam) document.getElementById('f-date-to').value = dateToParam;
 
         if(url.searchParams.get('past') === '1') {
           document.getElementById('show-expired').checked = true;
@@ -572,7 +553,8 @@
         updateStats();
         render();
       } catch (err) {
-        document.getElementById('listings').innerHTML = `<div class="col-span-full text-center py-20 text-red-500">Failed to load data.</div>`;
+        document.getElementById('listings-offering').innerHTML = `<div class="col-span-full text-center py-20 text-red-500">Failed to load data.</div>`;
+        document.getElementById('listings-looking').innerHTML = `<div class="col-span-full text-center py-20 text-red-500">Failed to load data.</div>`;
       }
     }
 
