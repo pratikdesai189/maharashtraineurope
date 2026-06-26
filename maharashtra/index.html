@@ -70,39 +70,177 @@
   <!-- Main Content Story -->
   <main>
     
-    <!-- Chapter 1: History -->
-    <section class="relative min-h-[80vh] flex items-center justify-center py-20 px-6 bg-parallax" style="background-image: url('../assets/images/maharashtra/fort.png');">
-      <!-- Dark overlay to ensure image doesn't overwhelm text -->
+    <!-- Chapter 1: History Timeline -->
+    <section class="relative min-h-[80vh] py-20 px-6 bg-parallax" style="background-image: url('../assets/images/maharashtra/fort.png');">
       <div class="absolute inset-0 bg-orange-900/30"></div>
       
-      <div class="relative z-10 max-w-3xl w-full reveal">
-        <div class="glass-card rounded-3xl shadow-2xl p-8 md:p-14 border border-white/40">
-          <div class="flex items-center gap-4 mb-6">
-            <div class="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center text-orange-600 shadow-sm">
-              <i data-lucide="castle" class="w-6 h-6"></i>
+      <div class="relative z-10 max-w-5xl mx-auto">
+        <div class="text-center mb-16 reveal">
+          <div class="inline-flex w-16 h-16 rounded-full bg-orange-100 items-center justify-center text-orange-600 shadow-sm mb-4">
+            <i data-lucide="castle" class="w-8 h-8"></i>
+          </div>
+          <h2 class="text-4xl md:text-5xl font-bold text-white font-['Mukta'] drop-shadow-md">History & Heritage</h2>
+          <p class="text-orange-100 text-lg mt-4 max-w-2xl mx-auto drop-shadow-sm">A 700-year saga of shifting dynasties, fierce resistance, and cultural resilience.</p>
+        </div>
+
+        <!-- Vertical Timeline -->
+        <div class="relative">
+          <!-- Central Line -->
+          <div class="absolute left-6 md:left-1/2 top-0 bottom-0 w-1 bg-white/30 md:-translate-x-1/2 rounded-full"></div>
+
+          <!-- Timeline Item 1 -->
+          <div class="relative flex flex-col md:flex-row items-center md:justify-between mb-16 reveal">
+            <!-- Mobile Timeline Dot -->
+            <div class="absolute left-6 md:left-1/2 w-6 h-6 rounded-full bg-orange-500 border-4 border-white shadow-md transform -translate-x-1/2 z-20 mt-6 md:mt-0"></div>
+            
+            <!-- Content Left (or full on mobile) -->
+            <div class="w-full md:w-5/12 pl-16 md:pl-0 md:pr-12 text-left md:text-right">
+              <h3 class="text-3xl font-bold text-white drop-shadow-md mb-2 font-['Mukta']">1300s</h3>
+              <div class="glass-card rounded-2xl p-6 shadow-xl border border-white/40 text-left">
+                <h4 class="text-xl font-bold text-gray-900 mb-2">Dynasties & Sultanates</h4>
+                <p class="text-gray-700 text-sm md:text-base leading-relaxed">The prosperous Hindu kingdom of the <strong>Yadavas of Devagiri</strong> fell to the Delhi Sultanate. For 300 years, Islamic dynasties governed the region, but Marathi culture survived through the Bhakti movement poet-saints.</p>
+              </div>
             </div>
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 font-['Mukta']">History & Heritage</h2>
+            <!-- Empty Right (Desktop) -->
+            <div class="hidden md:block w-5/12"></div>
           </div>
-          <div class="prose prose-lg text-gray-700 leading-relaxed max-w-none">
-            <p>
-              Maharashtra literally translates to "The Great Nation". Its history is a remarkable saga of shifting dynasties, fierce resistance, and cultural resilience across the last 700 years.
-            </p>
-            <h3 class="text-xl font-bold text-gray-900 mt-6 mb-2">Dynasties and Sultanates</h3>
-            <p>
-              In the early 14th century, the prosperous Hindu kingdom of the <strong>Yadavas of Devagiri</strong> fell to the Delhi Sultanate. For the next 300 years, the region was governed by various Islamic dynasties, primarily the Bahmani Sultanate and its successors like the Nizam Shahis and Adil Shahis. Despite this political shift, the Marathi language and local culture were kept alive through the Bhakti movement by poet-saints.
-            </p>
-            <h3 class="text-xl font-bold text-gray-900 mt-6 mb-2">The Maratha Empire (1674–1818)</h3>
-            <p>
-              The course of Indian history changed dramatically in the 17th century when <strong>Chhatrapati Shivaji Maharaj</strong> successfully carved out an independent Maratha kingdom. His visionary leadership, progressive administration, and guerrilla warfare tactics laid the foundation for the Maratha Empire. By the 18th century, under the leadership of the <strong>Peshwas</strong> (Prime Ministers), Maratha power reached its zenith, controlling territory from Peshawar in the north to Thanjavur in the south.
-            </p>
-            <h3 class="text-xl font-bold text-gray-900 mt-6 mb-2">The British Raj to Modern Maharashtra</h3>
-            <p>
-              After three Anglo-Maratha Wars, the empire finally fell to the British East India Company in 1818. During the British era, Mumbai (Bombay) grew into a global trading hub, and the state became a crucible for India's freedom struggle. 
-            </p>
-            <p class="mt-4">
-              Post-independence, the Marathi-speaking people fought a fierce political battle known as the <strong>Samyukta Maharashtra Movement</strong> to secure their own linguistic state. This culminated in the formation of modern Maharashtra on <strong>May 1, 1960</strong>, with Bombay as its capital. <strong>Yashwantrao Chavan</strong> took the oath as the state's first Chief Minister, setting the foundation for its modern industrial and agricultural growth. Today, with the current Chief Minister <strong>Devendra Fadnavis</strong>, Maharashtra continues to stand tall as India's primary economic engine.
-            </p>
+
+          <!-- Timeline Item 2 -->
+          <div class="relative flex flex-col md:flex-row items-center md:justify-between mb-16 reveal">
+            <div class="absolute left-6 md:left-1/2 w-6 h-6 rounded-full bg-orange-500 border-4 border-white shadow-md transform -translate-x-1/2 z-20 mt-6 md:mt-0"></div>
+            
+            <div class="hidden md:block w-5/12"></div>
+            <div class="w-full md:w-5/12 pl-16 md:pl-12 text-left">
+              <h3 class="text-3xl font-bold text-white drop-shadow-md mb-2 font-['Mukta']">1674</h3>
+              <div class="glass-card rounded-2xl p-6 shadow-xl border border-white/40">
+                <h4 class="text-xl font-bold text-gray-900 mb-2">The Maratha Empire</h4>
+                <p class="text-gray-700 text-sm md:text-base leading-relaxed">The course of Indian history changed when <strong>Chhatrapati Shivaji Maharaj</strong> carved out an independent Maratha kingdom. His progressive administration and guerrilla warfare laid the foundation for an empire.</p>
+              </div>
+            </div>
           </div>
+
+          <!-- Timeline Item 3 -->
+          <div class="relative flex flex-col md:flex-row items-center md:justify-between mb-16 reveal">
+            <div class="absolute left-6 md:left-1/2 w-6 h-6 rounded-full bg-orange-500 border-4 border-white shadow-md transform -translate-x-1/2 z-20 mt-6 md:mt-0"></div>
+            
+            <div class="w-full md:w-5/12 pl-16 md:pl-0 md:pr-12 text-left md:text-right">
+              <h3 class="text-3xl font-bold text-white drop-shadow-md mb-2 font-['Mukta']">1700s</h3>
+              <div class="glass-card rounded-2xl p-6 shadow-xl border border-white/40 text-left">
+                <h4 class="text-xl font-bold text-gray-900 mb-2">The Peshwa Era</h4>
+                <p class="text-gray-700 text-sm md:text-base leading-relaxed">Under the leadership of the <strong>Peshwas</strong> (Prime Ministers), Maratha power reached its absolute zenith, controlling territory from Peshawar in the far north to Thanjavur in the deep south.</p>
+              </div>
+            </div>
+            <div class="hidden md:block w-5/12"></div>
+          </div>
+
+          <!-- Timeline Item 4 -->
+          <div class="relative flex flex-col md:flex-row items-center md:justify-between mb-16 reveal">
+            <div class="absolute left-6 md:left-1/2 w-6 h-6 rounded-full bg-orange-500 border-4 border-white shadow-md transform -translate-x-1/2 z-20 mt-6 md:mt-0"></div>
+            
+            <div class="hidden md:block w-5/12"></div>
+            <div class="w-full md:w-5/12 pl-16 md:pl-12 text-left">
+              <h3 class="text-3xl font-bold text-white drop-shadow-md mb-2 font-['Mukta']">1818</h3>
+              <div class="glass-card rounded-2xl p-6 shadow-xl border border-white/40">
+                <h4 class="text-xl font-bold text-gray-900 mb-2">The British Raj</h4>
+                <p class="text-gray-700 text-sm md:text-base leading-relaxed">After three brutal Anglo-Maratha Wars, the empire fell to the British East India Company. Mumbai grew into a global trading hub, and the state became the crucible of India's freedom struggle.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Timeline Item 5 -->
+          <div class="relative flex flex-col md:flex-row items-center md:justify-between reveal">
+            <div class="absolute left-6 md:left-1/2 w-6 h-6 rounded-full bg-orange-500 border-4 border-white shadow-md transform -translate-x-1/2 z-20 mt-6 md:mt-0"></div>
+            
+            <div class="w-full md:w-5/12 pl-16 md:pl-0 md:pr-12 text-left md:text-right">
+              <h3 class="text-3xl font-bold text-white drop-shadow-md mb-2 font-['Mukta']">1960</h3>
+              <div class="glass-card rounded-2xl p-6 shadow-xl border border-white/40 text-left">
+                <h4 class="text-xl font-bold text-gray-900 mb-2">Modern Maharashtra</h4>
+                <p class="text-gray-700 text-sm md:text-base leading-relaxed">Following the fierce <strong>Samyukta Maharashtra Movement</strong>, the linguistic state was formed. <strong>Yashwantrao Chavan</strong> became the first CM. Today, under CM <strong>Devendra Fadnavis</strong>, it is India's economic engine.</p>
+              </div>
+            </div>
+            <div class="hidden md:block w-5/12"></div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Chapter 1.5: Personalities Timeline -->
+    <section class="relative bg-gray-50 py-24 px-6 border-y border-gray-200 overflow-hidden">
+      <!-- Abstract Background -->
+      <div class="absolute inset-0 opacity-40 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]"></div>
+      
+      <div class="relative z-10 max-w-5xl mx-auto">
+        <div class="text-center mb-16 reveal">
+          <div class="inline-flex w-16 h-16 rounded-full bg-rose-100 items-center justify-center text-rose-600 shadow-sm mb-4">
+            <i data-lucide="users" class="w-8 h-8"></i>
+          </div>
+          <h2 class="text-4xl md:text-5xl font-bold text-gray-900 font-['Mukta']">Architects of Maharashtra</h2>
+          <p class="text-gray-500 text-lg mt-4 max-w-2xl mx-auto">The visionaries, warriors, and thinkers who shaped the destiny of the state and the nation.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          
+          <!-- Card 1 -->
+          <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 hover:-translate-y-2 transition-transform duration-300 reveal group">
+            <div class="w-14 h-14 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center mb-6 group-hover:bg-orange-600 group-hover:text-white transition-colors">
+              <i data-lucide="crown" class="w-6 h-6"></i>
+            </div>
+            <div class="text-sm font-bold text-orange-600 mb-1 tracking-wide">1630 – 1680</div>
+            <h3 class="text-2xl font-bold text-gray-900 mb-3 font-['Mukta']">Chhatrapati Shivaji Maharaj</h3>
+            <p class="text-gray-600 text-sm leading-relaxed">The visionary founder of the Maratha Empire. Known for his progressive civil administration, religious tolerance, and pioneering naval forces.</p>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 hover:-translate-y-2 transition-transform duration-300 reveal group">
+            <div class="w-14 h-14 rounded-full bg-red-100 text-red-600 flex items-center justify-center mb-6 group-hover:bg-red-600 group-hover:text-white transition-colors">
+              <i data-lucide="shield" class="w-6 h-6"></i>
+            </div>
+            <div class="text-sm font-bold text-red-600 mb-1 tracking-wide">1657 – 1689</div>
+            <h3 class="text-2xl font-bold text-gray-900 mb-3 font-['Mukta']">Chhatrapati Sambhaji Maharaj</h3>
+            <p class="text-gray-600 text-sm leading-relaxed">The eldest son of Shivaji Maharaj, a fierce protector and brilliant tactician who never lost a single battle in his entire life.</p>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 hover:-translate-y-2 transition-transform duration-300 reveal group">
+            <div class="w-14 h-14 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center mb-6 group-hover:bg-rose-600 group-hover:text-white transition-colors">
+              <i data-lucide="swords" class="w-6 h-6"></i>
+            </div>
+            <div class="text-sm font-bold text-rose-600 mb-1 tracking-wide">1675 – 1761</div>
+            <h3 class="text-2xl font-bold text-gray-900 mb-3 font-['Mukta']">Maharani Tarabai</h3>
+            <p class="text-gray-600 text-sm leading-relaxed">The warrior queen who single-handedly commanded the Maratha forces against the Mughal Empire, saving the Maratha state from total collapse.</p>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 hover:-translate-y-2 transition-transform duration-300 reveal group">
+            <div class="w-14 h-14 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center mb-6 group-hover:bg-amber-600 group-hover:text-white transition-colors">
+              <i data-lucide="flame" class="w-6 h-6"></i>
+            </div>
+            <div class="text-sm font-bold text-amber-600 mb-1 tracking-wide">1700 – 1740</div>
+            <h3 class="text-2xl font-bold text-gray-900 mb-3 font-['Mukta']">Peshwa Bajirao I</h3>
+            <p class="text-gray-600 text-sm leading-relaxed">The undefeated general who rapidly expanded the Maratha Empire across the Indian subcontinent, credited with establishing Maratha supremacy.</p>
+          </div>
+
+          <!-- Card 5 -->
+          <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 hover:-translate-y-2 transition-transform duration-300 reveal group">
+            <div class="w-14 h-14 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+              <i data-lucide="pen-tool" class="w-6 h-6"></i>
+            </div>
+            <div class="text-sm font-bold text-blue-600 mb-1 tracking-wide">1856 – 1920</div>
+            <h3 class="text-2xl font-bold text-gray-900 mb-3 font-['Mukta']">Lokmanya Tilak</h3>
+            <p class="text-gray-600 text-sm leading-relaxed">"The Father of the Indian unrest." A brilliant scholar and nationalist who transformed Ganesh Chaturthi into a massive public movement for independence.</p>
+          </div>
+
+          <!-- Card 6 -->
+          <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 hover:-translate-y-2 transition-transform duration-300 reveal group">
+            <div class="w-14 h-14 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center mb-6 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+              <i data-lucide="book-open" class="w-6 h-6"></i>
+            </div>
+            <div class="text-sm font-bold text-indigo-600 mb-1 tracking-wide">1883 – 1966</div>
+            <h3 class="text-2xl font-bold text-gray-900 mb-3 font-['Mukta']">Vinayak Damodar Savarkar</h3>
+            <p class="text-gray-600 text-sm leading-relaxed">A revolutionary philosopher, poet, and writer. He deeply influenced the Indian independence movement and advocated for social reform and a unified India.</p>
+          </div>
+
         </div>
       </div>
     </section>
