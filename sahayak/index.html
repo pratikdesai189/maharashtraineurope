@@ -4,8 +4,53 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sahayak — Find a Travel Companion | Where the Sahyadri Meets the Alps</title>
+  <title>Sahayak | Find a Travel Companion between Europe & India</title>
+  <meta name="description" content="Travel together, help each other. Find a travel companion, flight buddy for elderly parents, or a community courier between Maharashtra (India) and Europe." />
+  <meta name="keywords" content="travel companion Europe India, elderly parents flight assistance, luggage sharing, Indian community courier, Marathi travel help" />
   <link rel="canonical" href="https://maharashtraineurope.com/sahayak/" />
+
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Sahayak - Find a Travel Companion between Europe & India",
+    "description": "Find a travel companion, flight buddy for elderly parents, or a community courier between Maharashtra (India) and Europe.",
+    "url": "https://maharashtraineurope.com/sahayak/"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I find a travel companion for my parents flying to Europe?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Using Sahayak, you can submit your parents' flight details or browse our active listings to find other Indian community members traveling on the same route. Connect via WhatsApp to coordinate travel assistance at the airport or during layovers."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I find someone to carry urgent documents to India?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes! Many community members offer carrier services. Look for listings tagged with 'Letter / Documents' and contact the traveler directly. Always ensure safety and mutual trust before exchanging documents."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is it safe to use community travel assistance?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sahayak connects members of the Marathi and Indian diaspora in Europe. While it is built on community trust, we advise all users to verify identities and use common sense before handing over documents, money, or goods."
+        }
+      }
+    ]
+  }
+  </script>
 
   <!-- Tab Icons -->
   <link rel="icon" type="image/x-icon" href="../favicon.ico">
@@ -153,6 +198,14 @@
           <input type="date" id="f-date-to" onchange="resetAndRender()"
             class="text-xs border border-gray-300 rounded-lg px-3 py-2 outline-none bg-gray-50 text-gray-700">
         </div>
+
+        <div class="ml-2 md:ml-4 pl-2 md:pl-4 border-l border-gray-200 flex flex-col min-w-max">
+          <label class="text-[10px] uppercase text-gray-500 font-bold mb-1">Route</label>
+          <button id="f-direction" onclick="toggleDirection()" class="flex items-center justify-between gap-2 text-xs border border-gray-300 rounded-lg px-3 py-2 outline-none bg-white text-gray-700 hover:bg-orange-50 hover:border-orange-200 transition-colors shadow-sm w-36">
+            <span id="f-direction-text" class="font-bold text-center flex-1">All Routes</span>
+            <i data-lucide="arrow-left-right" class="w-4 h-4 text-orange-500"></i>
+          </button>
+        </div>
       </div>
       
       <div class="flex items-center gap-2 mt-2 md:mt-0 w-full md:w-auto justify-end">
@@ -198,6 +251,93 @@
         <!-- Injected Card -->
       </div>
     </div>
+
+    <!-- SEO CONTENT: WHY CHOOSE SAHAYAK -->
+    <section class="mt-20 pt-16 border-t border-gray-200">
+      <div class="max-w-3xl mx-auto text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Why Use Sahayak for Your Europe-India Travel?</h2>
+        <p class="text-lg text-gray-600 leading-relaxed">
+          Navigating international flights between Europe and Maharashtra (India) can be stressful, especially for elderly parents or when sending urgent documents. Sahayak connects the trusted Marathi diaspora to provide safe, community-driven travel assistance.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 text-center">
+          <div class="w-12 h-12 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i data-lucide="users" class="w-6 h-6"></i>
+          </div>
+          <h3 class="font-bold text-gray-900 mb-2">Elderly Flight Companions</h3>
+          <p class="text-sm text-gray-500 leading-relaxed">
+            Find a Marathi-speaking travel buddy to help your parents navigate layovers, immigration, and language barriers across European airports.
+          </p>
+        </div>
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 text-center">
+          <div class="w-12 h-12 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i data-lucide="mail" class="w-6 h-6"></i>
+          </div>
+          <h3 class="font-bold text-gray-900 mb-2">Community Courier</h3>
+          <p class="text-sm text-gray-500 leading-relaxed">
+            Need to send urgent letters, medicines, or parcels? Connect with verified community members traveling between India and Europe.
+          </p>
+        </div>
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 text-center">
+          <div class="w-12 h-12 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i data-lucide="shield-check" class="w-6 h-6"></i>
+          </div>
+          <h3 class="font-bold text-gray-900 mb-2">Trusted & Safe</h3>
+          <p class="text-sm text-gray-500 leading-relaxed">
+            Built by and for the Marathi diaspora. While we advise personal verification, the platform relies on strong community bonds and mutual respect.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEO CONTENT: FAQ -->
+    <section class="mt-20 pt-16 border-t border-gray-200">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Frequently Asked Questions</h2>
+        <div class="space-y-4">
+          
+          <details class="group bg-white rounded-xl shadow-sm border border-gray-100 open:border-orange-200">
+            <summary class="flex justify-between items-center font-medium cursor-pointer list-none p-5 text-gray-900 group-open:text-orange-600">
+              <span>How do I find a travel companion for my parents flying to Europe?</span>
+              <span class="transition group-open:rotate-180">
+                <i data-lucide="chevron-down" class="w-5 h-5"></i>
+              </span>
+            </summary>
+            <div class="text-gray-600 mt-2 p-5 pt-0 text-sm leading-relaxed border-t border-gray-50">
+              Using Sahayak, you can submit your parents' flight details or browse our active listings to find other Indian community members traveling on the same route. Connect via WhatsApp to coordinate travel assistance at the airport or during layovers.
+            </div>
+          </details>
+
+          <details class="group bg-white rounded-xl shadow-sm border border-gray-100 open:border-orange-200">
+            <summary class="flex justify-between items-center font-medium cursor-pointer list-none p-5 text-gray-900 group-open:text-orange-600">
+              <span>Can I find someone to carry urgent documents to India?</span>
+              <span class="transition group-open:rotate-180">
+                <i data-lucide="chevron-down" class="w-5 h-5"></i>
+              </span>
+            </summary>
+            <div class="text-gray-600 mt-2 p-5 pt-0 text-sm leading-relaxed border-t border-gray-50">
+              Yes! Many community members offer carrier services. Look for listings tagged with 'Letter / Documents' and contact the traveler directly. Always ensure safety and mutual trust before exchanging documents.
+            </div>
+          </details>
+
+          <details class="group bg-white rounded-xl shadow-sm border border-gray-100 open:border-orange-200">
+            <summary class="flex justify-between items-center font-medium cursor-pointer list-none p-5 text-gray-900 group-open:text-orange-600">
+              <span>Is it safe to use community travel assistance?</span>
+              <span class="transition group-open:rotate-180">
+                <i data-lucide="chevron-down" class="w-5 h-5"></i>
+              </span>
+            </summary>
+            <div class="text-gray-600 mt-2 p-5 pt-0 text-sm leading-relaxed border-t border-gray-50">
+              Sahayak connects members of the Marathi and Indian diaspora in Europe. While it is built on community trust, we advise all users to verify identities and use common sense before handing over documents, money, or goods.
+            </div>
+          </details>
+
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <!-- FOOTER — injected by ../assets/navigation.js -->
@@ -216,6 +356,24 @@
     const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ4VhZY3eQJlzyET99mCG13Rwz41RKSOAaVDS1gfOgUl7DMDNDTf8bQz7EcnLvCUo_LZVSOTcn7D5Pd/pub?gid=1005612043&single=true&output=csv';
     let allData = [];
     let allPaginatedData = [];
+    let currentDirectionFilter = 'All';
+
+    function toggleDirection() {
+        if (currentDirectionFilter === 'All') {
+            currentDirectionFilter = 'India to Europe';
+        } else if (currentDirectionFilter === 'India to Europe') {
+            currentDirectionFilter = 'Europe to India';
+        } else {
+            currentDirectionFilter = 'All';
+        }
+        
+        let text = 'All Routes';
+        if (currentDirectionFilter === 'India to Europe') text = 'India → Europe';
+        if (currentDirectionFilter === 'Europe to India') text = 'Europe → India';
+        
+        document.getElementById('f-direction-text').textContent = text;
+        resetAndRender();
+    }
 
     function resetAndRender() {
       render();
@@ -428,6 +586,12 @@
       const showExpired = document.getElementById('show-expired').checked;
       if(showExpired) url.searchParams.set('past', '1'); else url.searchParams.delete('past');
       
+      if(currentDirectionFilter !== 'All') {
+        url.searchParams.set('route', currentDirectionFilter);
+      } else {
+        url.searchParams.delete('route');
+      }
+
       window.history.replaceState({}, '', url);
     }
 
@@ -506,6 +670,10 @@
       const data = allData.filter(r => {
         if (!showExpired && isExpired(r.travel_date)) return false;
         if (!isWithinDateRange(r.travel_date, df, dt)) return false;
+        
+        const dir = r.direction || 'Europe to India';
+        if (currentDirectionFilter !== 'All' && dir !== currentDirectionFilter) return false;
+        
         return true;
       });
 
@@ -546,6 +714,13 @@
 
         if(url.searchParams.get('past') === '1') {
           document.getElementById('show-expired').checked = true;
+        }
+
+        const routeParam = url.searchParams.get('route');
+        if (routeParam === 'India to Europe' || routeParam === 'Europe to India') {
+            currentDirectionFilter = routeParam;
+            let text = routeParam === 'India to Europe' ? 'India → Europe' : 'Europe → India';
+            document.getElementById('f-direction-text').textContent = text;
         }
         
         updateStats();
