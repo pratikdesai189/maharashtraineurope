@@ -45,6 +45,15 @@
         background-attachment: fixed;
       }
     }
+
+    /* Hide scrollbar for horizontal carousel */
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
   </style>
 </head>
 <body class="bg-gray-50 text-gray-800 antialiased selection:bg-orange-200 selection:text-orange-900">
@@ -183,9 +192,7 @@
           
           <!-- Card 1 -->
           <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 hover:-translate-y-2 transition-transform duration-300 reveal group">
-            <div class="w-14 h-14 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center mb-6 group-hover:bg-orange-600 group-hover:text-white transition-colors">
-              <i data-lucide="crown" class="w-6 h-6"></i>
-            </div>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Shivaji_British_Museum.jpg/500px-Shivaji_British_Museum.jpg" alt="Shivaji Maharaj" class="w-20 h-20 rounded-full object-cover mb-6 border-4 border-orange-100 shadow-md">
             <div class="text-sm font-bold text-orange-600 mb-1 tracking-wide">1630 – 1680</div>
             <h3 class="text-2xl font-bold text-gray-900 mb-3 font-['Mukta']">Chhatrapati Shivaji Maharaj</h3>
             <p class="text-gray-600 text-sm leading-relaxed">The visionary founder of the Maratha Empire. Known for his progressive civil administration, religious tolerance, and pioneering naval forces.</p>
@@ -193,9 +200,7 @@
 
           <!-- Card 2 -->
           <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 hover:-translate-y-2 transition-transform duration-300 reveal group">
-            <div class="w-14 h-14 rounded-full bg-red-100 text-red-600 flex items-center justify-center mb-6 group-hover:bg-red-600 group-hover:text-white transition-colors">
-              <i data-lucide="shield" class="w-6 h-6"></i>
-            </div>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Sambhaji_painting_late_17th_century.png/500px-Sambhaji_painting_late_17th_century.png" alt="Sambhaji Maharaj" class="w-20 h-20 rounded-full object-cover mb-6 border-4 border-red-100 shadow-md">
             <div class="text-sm font-bold text-red-600 mb-1 tracking-wide">1657 – 1689</div>
             <h3 class="text-2xl font-bold text-gray-900 mb-3 font-['Mukta']">Chhatrapati Sambhaji Maharaj</h3>
             <p class="text-gray-600 text-sm leading-relaxed">The eldest son of Shivaji Maharaj, a fierce protector and brilliant tactician who never lost a single battle in his entire life.</p>
@@ -203,9 +208,7 @@
 
           <!-- Card 3 -->
           <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 hover:-translate-y-2 transition-transform duration-300 reveal group">
-            <div class="w-14 h-14 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center mb-6 group-hover:bg-rose-600 group-hover:text-white transition-colors">
-              <i data-lucide="swords" class="w-6 h-6"></i>
-            </div>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Tarabai.jpg/500px-Tarabai.jpg" alt="Maharani Tarabai" class="w-20 h-20 rounded-full object-cover mb-6 border-4 border-rose-100 shadow-md">
             <div class="text-sm font-bold text-rose-600 mb-1 tracking-wide">1675 – 1761</div>
             <h3 class="text-2xl font-bold text-gray-900 mb-3 font-['Mukta']">Maharani Tarabai</h3>
             <p class="text-gray-600 text-sm leading-relaxed">The warrior queen who single-handedly commanded the Maratha forces against the Mughal Empire, saving the Maratha state from total collapse.</p>
@@ -213,9 +216,7 @@
 
           <!-- Card 4 -->
           <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 hover:-translate-y-2 transition-transform duration-300 reveal group">
-            <div class="w-14 h-14 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center mb-6 group-hover:bg-amber-600 group-hover:text-white transition-colors">
-              <i data-lucide="flame" class="w-6 h-6"></i>
-            </div>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Bajirao_I.jpg/500px-Bajirao_I.jpg" alt="Peshwa Bajirao I" class="w-20 h-20 rounded-full object-cover mb-6 border-4 border-amber-100 shadow-md" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Bajirao_I.jpg/500px-Bajirao_I.jpg'">
             <div class="text-sm font-bold text-amber-600 mb-1 tracking-wide">1700 – 1740</div>
             <h3 class="text-2xl font-bold text-gray-900 mb-3 font-['Mukta']">Peshwa Bajirao I</h3>
             <p class="text-gray-600 text-sm leading-relaxed">The undefeated general who rapidly expanded the Maratha Empire across the Indian subcontinent, credited with establishing Maratha supremacy.</p>
@@ -223,9 +224,7 @@
 
           <!-- Card 5 -->
           <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 hover:-translate-y-2 transition-transform duration-300 reveal group">
-            <div class="w-14 h-14 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-              <i data-lucide="pen-tool" class="w-6 h-6"></i>
-            </div>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Bal_Gangadhar_Tilak_%281856-1920%29.webp" alt="Lokmanya Tilak" class="w-20 h-20 rounded-full object-cover object-top mb-6 border-4 border-blue-100 shadow-md">
             <div class="text-sm font-bold text-blue-600 mb-1 tracking-wide">1856 – 1920</div>
             <h3 class="text-2xl font-bold text-gray-900 mb-3 font-['Mukta']">Lokmanya Tilak</h3>
             <p class="text-gray-600 text-sm leading-relaxed">"The Father of the Indian unrest." A brilliant scholar and nationalist who transformed Ganesh Chaturthi into a massive public movement for independence.</p>
@@ -233,9 +232,7 @@
 
           <!-- Card 6 -->
           <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 hover:-translate-y-2 transition-transform duration-300 reveal group">
-            <div class="w-14 h-14 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center mb-6 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
-              <i data-lucide="book-open" class="w-6 h-6"></i>
-            </div>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Swatyantra_Vir_Savarkar.jpg/500px-Swatyantra_Vir_Savarkar.jpg" alt="Vinayak Damodar Savarkar" class="w-20 h-20 rounded-full object-cover object-top mb-6 border-4 border-indigo-100 shadow-md">
             <div class="text-sm font-bold text-indigo-600 mb-1 tracking-wide">1883 – 1966</div>
             <h3 class="text-2xl font-bold text-gray-900 mb-3 font-['Mukta']">Vinayak Damodar Savarkar</h3>
             <p class="text-gray-600 text-sm leading-relaxed">A revolutionary philosopher, poet, and writer. He deeply influenced the Indian independence movement and advocated for social reform and a unified India.</p>
@@ -261,10 +258,123 @@
             <p>
               The Marathi language, with its roots stretching back over a millennium, boasts one of the richest literary traditions in India. From the profound spiritual poetry of saints like Tukaram and Dnyaneshwar to modern theatrical masterpieces, Marathi literature has always been at the forefront of progressive social thought.
             </p>
+            <h3 class="text-xl font-bold text-gray-900 mt-6 mb-2">Festivals of Maharashtra</h3>
+            <p>
+              The cultural heartbeat of the state is vibrantly showcased through its grand festivals. <strong>Ganesh Utsav</strong> is a spectacular ten-day festival that transforms cities into massive hubs of art, music, and community gathering. The Maharashtrian new year begins with <strong>Gudhi Padwa</strong>, marking the arrival of spring. Throughout the year, the state erupts in colors during <strong>Holi</strong>, celebrates the triumph of good over evil on <strong>Dasra</strong>, illuminates the skies during <strong>Diwali</strong>, and flies kites for <strong>Makar Sankranti</strong>.
+            </p>
             <p class="mt-4">
-              The cultural heartbeat of the state is perhaps best witnessed during <strong>Ganesh Chaturthi</strong>, a spectacular ten-day festival that transforms cities into hubs of art, music, and community gathering. Maharashtrian cuisine—from the humble <em>Vada Pav</em> of Mumbai to the complex, fiery spices of Kolhapur and the delicate coastal flavors of the Konkan—is a testament to the region's diverse landscapes.
+              Maharashtrian cuisine—from the humble <em>Vada Pav</em> of Mumbai to the complex, fiery spices of Kolhapur and the delicate coastal flavors of the Konkan—is a testament to the region's diverse landscapes.
             </p>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Chapter 2.5: Spiritual & Religious Heritage -->
+    <section class="relative bg-gray-50 py-24 px-6 border-y border-gray-200 overflow-hidden">
+      <!-- Abstract Background -->
+      <div class="absolute inset-0 opacity-40 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]"></div>
+      
+      <div class="relative z-10 max-w-6xl mx-auto">
+        <div class="text-center mb-16 reveal">
+          <div class="inline-flex w-16 h-16 rounded-full bg-amber-100 items-center justify-center text-amber-600 shadow-sm mb-4">
+            <i data-lucide="flower-2" class="w-8 h-8"></i>
+          </div>
+          <h2 class="text-4xl md:text-5xl font-bold text-gray-900 font-['Mukta']">Spiritual Heritage</h2>
+          <p class="text-gray-500 text-lg mt-4 max-w-2xl mx-auto">Maharashtra is home to some of the most revered ancient temples and spiritual centers in India, drawing millions of devotees worldwide.</p>
+        </div>
+
+        <div class="flex overflow-x-auto pb-8 gap-6 snap-x snap-mandatory hide-scrollbar">
+          
+          <!-- Place 1 -->
+          <div class="flex-none w-72 md:w-80 bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden snap-center reveal hover:-translate-y-2 transition-transform duration-300">
+            <div class="h-48 bg-gray-200 overflow-hidden">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Mahalaxmi_Temple%2C_Kolhapur.jpg/500px-Mahalaxmi_Temple%2C_Kolhapur.jpg" alt="Mahalaxmi Temple Kolhapur" class="w-full h-full object-cover">
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-gray-900 mb-2 font-['Mukta']">Mahalaxmi Temple</h3>
+              <p class="text-amber-600 text-sm font-semibold mb-3">Kolhapur</p>
+              <p class="text-gray-600 text-sm">One of the 18 Maha Shakti Peethas, dedicated to Goddess Ambabai. It is a pinnacle of Chalukya architecture.</p>
+            </div>
+          </div>
+
+          <!-- Place 2 -->
+          <div class="flex-none w-72 md:w-80 bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden snap-center reveal hover:-translate-y-2 transition-transform duration-300" style="transition-delay: 100ms;">
+            <div class="h-48 bg-gray-200 overflow-hidden">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Raje_Shahaji_Mahadwar_of_Tulja_Bhavani_Temple.jpg/500px-Raje_Shahaji_Mahadwar_of_Tulja_Bhavani_Temple.jpg" alt="Tulja Bhavani Temple" class="w-full h-full object-cover">
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-gray-900 mb-2 font-['Mukta']">Tulja Bhavani</h3>
+              <p class="text-amber-600 text-sm font-semibold mb-3">Tuljapur</p>
+              <p class="text-gray-600 text-sm">The family deity of the Bhosale Royal family. Shivaji Maharaj was famously blessed with a divine sword by the Goddess here.</p>
+            </div>
+          </div>
+
+          <!-- Place 3 -->
+          <div class="flex-none w-72 md:w-80 bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden snap-center reveal hover:-translate-y-2 transition-transform duration-300" style="transition-delay: 200ms;">
+            <div class="h-48 bg-gray-200 overflow-hidden">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Vithoba_Pandharpur.jpg/500px-Vithoba_Pandharpur.jpg" alt="Vitthal Rukmini Temple" class="w-full h-full object-cover">
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-gray-900 mb-2 font-['Mukta']">Vitthal Rukmini</h3>
+              <p class="text-amber-600 text-sm font-semibold mb-3">Pandharpur</p>
+              <p class="text-gray-600 text-sm">The spiritual heart of Maharashtra. Millions of Varkaris undertake the annual Wari pilgrimage on foot to reach this ancient temple.</p>
+            </div>
+          </div>
+
+          <!-- Place 4 -->
+          <div class="flex-none w-72 md:w-80 bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden snap-center reveal hover:-translate-y-2 transition-transform duration-300" style="transition-delay: 300ms;">
+            <div class="h-48 bg-gray-200 overflow-hidden">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Shri_Swami_Samarth.jpg/500px-Shri_Swami_Samarth.jpg" alt="Swami Samarth Akkalkot" class="w-full h-full object-cover">
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-gray-900 mb-2 font-['Mukta']">Swami Samarth</h3>
+              <p class="text-amber-600 text-sm font-semibold mb-3">Akkalkot</p>
+              <p class="text-gray-600 text-sm">The 19th-century spiritual master whose teachings of universal love and devotion continue to guide millions across the globe.</p>
+            </div>
+          </div>
+
+          <!-- Place 5 -->
+          <div class="flex-none w-72 md:w-80 bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden snap-center reveal hover:-translate-y-2 transition-transform duration-300" style="transition-delay: 400ms;">
+            <div class="h-48 bg-gray-200 overflow-hidden">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Sai_Baba_of_Shirdi_-_painting.jpg/500px-Sai_Baba_of_Shirdi_-_painting.jpg" alt="Shirdi Saibaba" class="w-full h-full object-cover">
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-gray-900 mb-2 font-['Mukta']">Shirdi Saibaba</h3>
+              <p class="text-amber-600 text-sm font-semibold mb-3">Shirdi</p>
+              <p class="text-gray-600 text-sm">One of the most globally revered spiritual figures. His profound message of 'Shraddha' (Faith) and 'Saburi' (Patience) unites all faiths.</p>
+            </div>
+          </div>
+
+          <!-- Place 6 -->
+          <div class="flex-none w-72 md:w-80 bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden snap-center reveal hover:-translate-y-2 transition-transform duration-300" style="transition-delay: 500ms;">
+            <div class="h-48 bg-gray-200 overflow-hidden">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Khandoba_Temple_Jejuri.jpg/500px-Khandoba_Temple_Jejuri.jpg" alt="Khandoba Temple Jejuri" class="w-full h-full object-cover">
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-gray-900 mb-2 font-['Mukta']">Khandoba Temple</h3>
+              <p class="text-amber-600 text-sm font-semibold mb-3">Jejuri</p>
+              <p class="text-gray-600 text-sm">Known as the 'Golden Town' due to the massive showering of Bhandara (turmeric). Lord Khandoba is widely worshipped by warriors and farmers.</p>
+            </div>
+          </div>
+
+          <!-- Place 7 -->
+          <div class="flex-none w-72 md:w-80 bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden snap-center reveal hover:-translate-y-2 transition-transform duration-300" style="transition-delay: 600ms;">
+            <div class="h-48 bg-gray-200 overflow-hidden">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Jyotiba_Temple%2C_Wadi_Ratnagiri.jpg/500px-Jyotiba_Temple%2C_Wadi_Ratnagiri.jpg" alt="Jotiba Temple Kolhapur" class="w-full h-full object-cover">
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-gray-900 mb-2 font-['Mukta']">Jotiba Temple</h3>
+              <p class="text-amber-600 text-sm font-semibold mb-3">Wadi Ratnagiri</p>
+              <p class="text-gray-600 text-sm">Perched on a mountain at 3100 feet, Lord Jotiba is revered as the incarnate of Brahma, Vishnu, and Shiva, and is a major deity for the Marathas.</p>
+            </div>
+          </div>
+
+        </div>
+        
+        <!-- Mobile Scroll Hint -->
+        <div class="flex justify-center items-center gap-2 mt-4 text-gray-400 text-sm md:hidden reveal">
+          <i data-lucide="arrow-left-right" class="w-4 h-4"></i> Swipe to explore
         </div>
       </div>
     </section>
@@ -283,10 +393,28 @@
           </div>
           <div class="prose prose-lg text-gray-700 leading-relaxed max-w-none">
             <p>
-              While deeply rooted in history, Maharashtra is the economic powerhouse of modern India. <strong>Mumbai</strong> stands as the financial capital and the glittering home of Bollywood, while <strong>Pune</strong> is universally recognized as the "Oxford of the East."
+              While deeply rooted in history, Maharashtra is the economic powerhouse of modern India, driven by major urban centers:
             </p>
-            <p class="mt-4">
-              A strong historical emphasis on education created a massive infrastructure of world-class universities and research institutes. Today, Maharashtra is a global hub for Information Technology, automotive manufacturing, and pharmaceuticals. This intense focus on academic and technical excellence produces hundreds of thousands of highly skilled graduates every year.
+            <ul class="list-none pl-0 space-y-4 my-6">
+              <li class="flex items-start">
+                <span class="text-blue-600 mr-2 mt-1"><i data-lucide="building" class="w-5 h-5"></i></span>
+                <span><strong>Mumbai:</strong> The financial capital of India, home to the Reserve Bank, major corporate headquarters, and the glittering Bollywood film industry.</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-blue-600 mr-2 mt-1"><i data-lucide="book" class="w-5 h-5"></i></span>
+                <span><strong>Pune:</strong> Universally recognized as the "Oxford of the East" and a massive global hub for Information Technology, education, and automotive manufacturing.</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-blue-600 mr-2 mt-1"><i data-lucide="grape" class="w-5 h-5"></i></span>
+                <span><strong>Nashik:</strong> The agricultural powerhouse and undisputed wine capital of India, seamlessly blending ancient pilgrimage sites with modern agribusiness.</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-blue-600 mr-2 mt-1"><i data-lucide="map-pin" class="w-5 h-5"></i></span>
+                <span><strong>Nagpur:</strong> The winter capital of the state, located at the geographic center of India, serving as a critical logistics and industrial hub.</span>
+              </li>
+            </ul>
+            <p>
+              This intense focus on academic and technical excellence produces hundreds of thousands of highly skilled graduates every year, driving innovation both locally and globally.
             </p>
           </div>
         </div>
