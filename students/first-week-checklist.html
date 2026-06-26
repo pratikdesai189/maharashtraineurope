@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>First-Week Checklist | Student Hub</title>
+  <link rel="canonical" href="https://maharashtraineurope.com/students/first-week-checklist.html" />
+  <meta name="description" content="An interactive checklist for Indian students moving to Germany. Track your Anmeldung, Bank Account, and Visa tasks to ensure a smooth transition." />
+
+  <link rel="icon" type="image/x-icon" href="../favicon.ico">
+  <link rel="icon" type="image/png" sizes="192x192" href="../assets/icon-192.png">
+  <link rel="stylesheet" href="../assets/style.css">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Mukta:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    /* Custom checkbox styling for a better feel */
+    .task-checkbox {
+      accent-color: #f97316; /* Tailwind orange-500 */
+      width: 1.25rem;
+      height: 1.25rem;
+      cursor: pointer;
+    }
+    .task-label {
+      transition: all 0.2s ease-in-out;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+  <div class="max-w-7xl mx-auto py-10 px-4 md:px-6 flex flex-col md:flex-row gap-10">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="w-full md:w-1/4">
+      <div class="sticky top-24 bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+        <a href="/students/" class="text-sm font-bold text-gray-400 hover:text-orange-600 uppercase flex items-center gap-2 mb-6">
+          <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Hub
+        </a>
+        <h4 class="font-bold text-lg mb-4 text-gray-800">Survival Guides</h4>
+        <ul class="space-y-3 text-sm font-medium">
+          <li><a href="housing-scams.html" class="flex items-center gap-2 text-gray-500 hover:text-orange-600"><i data-lucide="home" class="w-4 h-4"></i> Housing & Scams</a></li>
+          <li><a href="health-insurance.html" class="flex items-center gap-2 text-gray-500 hover:text-blue-600"><i data-lucide="heart-pulse" class="w-4 h-4"></i> Health & Liability</a></li>
+          <li><a href="winter-survival.html" class="flex items-center gap-2 text-gray-500 hover:text-teal-600"><i data-lucide="snowflake" class="w-4 h-4"></i> Winter Survival</a></li>
+          <li><a href="budget-shopping.html" class="flex items-center gap-2 text-gray-500 hover:text-purple-600"><i data-lucide="shopping-bag" class="w-4 h-4"></i> Budget & Discounts</a></li>
+          <li><a href="banking-blocked-accounts.html" class="flex items-center gap-2 text-gray-500 hover:text-emerald-600"><i data-lucide="landmark" class="w-4 h-4"></i> Banking & Accounts</a></li>
+          <li><a href="first-week-checklist.html" class="flex items-center gap-2 text-rose-600"><i data-lucide="check-square" class="w-4 h-4"></i> First-Week Checklist</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <article class="w-full md:w-3/4 bg-white p-8 md:p-12 rounded-2xl shadow-sm border border-gray-100">
+      <div class="inline-flex items-center justify-center bg-rose-100 text-rose-600 rounded-full w-12 h-12 mb-6">
+        <i data-lucide="check-square" class="w-6 h-6"></i>
+      </div>
+      <h1 class="text-3xl md:text-5xl font-bold mb-4 text-gray-900 leading-tight">Your First-Week Checklist</h1>
+      <p class="text-xl text-gray-500 mb-8 leading-relaxed">German bureaucracy is extremely strict about the sequence of events. Follow this interactive checklist exactly in order. We save your progress automatically!</p>
+      
+      <!-- Progress Bar -->
+      <div class="sticky top-4 bg-white z-10 py-4 border-b border-gray-100 mb-8">
+        <div class="flex justify-between items-center mb-2">
+          <span class="text-sm font-bold text-gray-700 uppercase tracking-wider">Settling In Progress</span>
+          <span id="progress-text" class="text-sm font-bold text-rose-600">0% Complete</span>
+        </div>
+        <div class="w-full bg-gray-200 rounded-full h-3">
+          <div id="progress-bar-fill" class="bg-rose-500 h-3 rounded-full transition-all duration-500 ease-out" style="width: 0%"></div>
+        </div>
+      </div>
+
+      <div class="space-y-10">
+        
+        <!-- Phase 1 -->
+        <div>
+          <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2"><i data-lucide="plane-takeoff" class="text-gray-400"></i> Phase 1: Before Departure (In India)</h2>
+          <div class="space-y-3 bg-gray-50 p-6 rounded-xl border border-gray-100">
+            
+            <label class="flex items-start gap-3 task-label text-gray-700">
+              <input type="checkbox" class="task-checkbox mt-1">
+              <span><strong>Print "The Master Folder":</strong> Print 3 physical copies of: Passport, Visa, Admission Letter, Blocked Account Confirmation, Health Insurance, and Accommodation Proof. German officials love paper.</span>
+            </label>
+            
+            <label class="flex items-start gap-3 task-label text-gray-700">
+              <input type="checkbox" class="task-checkbox mt-1">
+              <span><strong>Get a Forex Card:</strong> Get a card with zero markup (e.g., Niyo Global) for your first few days of expenses before your German bank account is active.</span>
+            </label>
+            
+            <label class="flex items-start gap-3 task-label text-gray-700">
+              <input type="checkbox" class="task-checkbox mt-1">
+              <span><strong>Download Essential Apps:</strong> Install <strong>DB Navigator</strong> (for trains) and download an offline Google Map of your destination city.</span>
+            </label>
+
+            <label class="flex items-start gap-3 task-label text-gray-700">
+              <input type="checkbox" class="task-checkbox mt-1">
+              <span><strong>Pack Essentials:</strong> A universal power adapter and essential spices/a small pressure cooker for your first weeks.</span>
+            </label>
+            
+          </div>
+        </div>
+
+        <!-- Phase 2 -->
+        <div>
+          <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2"><i data-lucide="plane-landing" class="text-gray-400"></i> Phase 2: First 3 Days (Arrival)</h2>
+          <div class="space-y-3 bg-gray-50 p-6 rounded-xl border border-gray-100">
+            
+            <label class="flex items-start gap-3 task-label text-gray-700">
+              <input type="checkbox" class="task-checkbox mt-1">
+              <span><strong>Buy a Prepaid SIM Card:</strong> Pick up an Aldi Talk or Lidl Connect starter pack from a supermarket and activate it (requires a video call verification with your passport).</span>
+            </label>
+            
+            <label class="flex items-start gap-3 task-label text-gray-700">
+              <input type="checkbox" class="task-checkbox mt-1">
+              <span><strong>Navigate Transport:</strong> Figure out the local transport zones and buy a weekly pass (or setup the Deutschlandticket on your DB Navigator app).</span>
+            </label>
+            
+            <label class="flex items-start gap-3 task-label text-gray-700">
+              <input type="checkbox" class="task-checkbox mt-1">
+              <span><strong>Locate your local Discounter:</strong> Find your nearest Aldi, Penny, Lidl, or Netto for affordable groceries.</span>
+            </label>
+
+            <label class="flex items-start gap-3 task-label text-gray-700">
+              <input type="checkbox" class="task-checkbox mt-1">
+              <span><strong>Learn the Trash System:</strong> Understand Paper (Papier), Organic (Bio), Plastic (Gelber Sack), and General Waste (Restmüll) to avoid heavy fines from your landlord.</span>
+            </label>
+            
+          </div>
+        </div>
+
+        <!-- Phase 3 -->
+        <div>
+          <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2"><i data-lucide="file-text" class="text-gray-400"></i> Phase 3: First 2 Weeks (The Bureaucracy)</h2>
+          <div class="space-y-4 bg-orange-50 p-6 rounded-xl border border-orange-200">
+            <p class="text-sm font-semibold text-orange-800 mb-2">Crucial: Do these strictly in order!</p>
+
+            <label class="flex items-start gap-3 task-label text-gray-800 font-medium">
+              <input type="checkbox" class="task-checkbox mt-1">
+              <span><strong>Step 1: Anmeldung (City Registration).</strong> Go to the <em>Bürgeramt</em> (City Hall) with your <em>Wohnungsgeberbestätigung</em> (landlord confirmation) to register your address. Nothing else works until you have this paper!</span>
+            </label>
+            
+            <label class="flex items-start gap-3 task-label text-gray-800 font-medium">
+              <input type="checkbox" class="task-checkbox mt-1">
+              <span><strong>Step 2: Open a Bank Account.</strong> Open a traditional bank account (e.g., Sparkasse) using your new Anmeldung document and passport. Avoid N26 initially as it requires a physical residence permit.</span>
+            </label>
+            
+            <label class="flex items-start gap-3 task-label text-gray-800 font-medium">
+              <input type="checkbox" class="task-checkbox mt-1">
+              <span><strong>Step 3: Unblock Your Money.</strong> Provide your German bank details and Anmeldung to your blocked account provider (Expatrio, Fintiba) to trigger your monthly payouts.</span>
+            </label>
+
+            <label class="flex items-start gap-3 task-label text-gray-800 font-medium">
+              <input type="checkbox" class="task-checkbox mt-1">
+              <span><strong>Step 4: Activate Health Insurance.</strong> Send your German address to your insurance provider (TK, AOK) so they can mail your physical health insurance card.</span>
+            </label>
+
+            <label class="flex items-start gap-3 task-label text-gray-800 font-medium">
+              <input type="checkbox" class="task-checkbox mt-1">
+              <span><strong>Step 5: Finalize University Enrollment.</strong> Submit your local address and insurance status to the university to complete your matriculation.</span>
+            </label>
+
+            <label class="flex items-start gap-3 task-label text-gray-800 font-medium">
+              <input type="checkbox" class="task-checkbox mt-1">
+              <span><strong>Step 6: Keep your Tax ID safe.</strong> Your <em>Steueridentifikationsnummer</em> will arrive by post 2-3 weeks after your Anmeldung. You need this to get a part-time job.</span>
+            </label>
+            
+          </div>
+        </div>
+
+        <!-- Phase 4 -->
+        <div>
+          <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2"><i data-lucide="home" class="text-gray-400"></i> Phase 4: First Month (Settling In)</h2>
+          <div class="space-y-3 bg-gray-50 p-6 rounded-xl border border-gray-100">
+            
+            <label class="flex items-start gap-3 task-label text-gray-700">
+              <input type="checkbox" class="task-checkbox mt-1">
+              <span><strong>Book Visa Extension Appointment:</strong> Getting an appointment at the <em>Ausländerbehörde</em> takes months. Book an appointment now to convert your entry visa into a residence permit.</span>
+            </label>
+            
+            <label class="flex items-start gap-3 task-label text-gray-700">
+              <input type="checkbox" class="task-checkbox mt-1">
+              <span><strong>Sort out the Radio Tax (Rundfunkbeitrag):</strong> You will receive a letter demanding €18.36/month. Either register to pay it, or link your account to your flatmate who is already paying it. Ignoring this leads to heavy fines.</span>
+            </label>
+            
+            <label class="flex items-start gap-3 task-label text-gray-700">
+              <input type="checkbox" class="task-checkbox mt-1">
+              <span><strong>Setup Liability Insurance (Haftpflichtversicherung):</strong> Highly recommended in Germany. It costs ~€3/month and saves you from paying thousands if you accidentally break someone else's property.</span>
+            </label>
+
+            <label class="flex items-start gap-3 task-label text-gray-700">
+              <input type="checkbox" class="task-checkbox mt-1">
+              <span><strong>Find a Second-Hand Bike:</strong> Search <em>Kleinanzeigen</em> for a cheap bike to cut down on daily commute times.</span>
+            </label>
+            
+          </div>
+        </div>
+
+      </div>
+    </article>
+
+  </div>
+
+  <!-- TRAFFIC TRACKING SCRIPT (GoatCounter) -->
+  <script data-goatcounter="https://maharashtraineurope.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+
+  <!-- Script for Navigation -->
+  <script src="../assets/navigation.js"></script>
+
+  <!-- Checklist Logic -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const checkboxes = document.querySelectorAll('.task-checkbox');
+      const progressBar = document.getElementById('progress-bar-fill');
+      const progressText = document.getElementById('progress-text');
+
+      // Load state from localStorage
+      const storageKey = 'mheu_first_week_checklist';
+      let savedState = JSON.parse(localStorage.getItem(storageKey)) || {};
+      let totalTasks = checkboxes.length;
+      let completedTasks = 0;
+
+      function updateUI() {
+        const percentage = totalTasks === 0 ? 0 : Math.round((completedTasks / totalTasks) * 100);
+        progressBar.style.width = `${percentage}%`;
+        progressText.innerText = `${percentage}% Complete`;
+      }
+
+      checkboxes.forEach((cb, index) => {
+        // Initialize from storage
+        if (savedState[index]) {
+          cb.checked = true;
+          completedTasks++;
+          cb.parentElement.classList.add('line-through', 'text-gray-400');
+          cb.parentElement.classList.remove('text-gray-700', 'text-gray-800');
+        }
+
+        // Handle clicks
+        cb.addEventListener('change', (e) => {
+          if (e.target.checked) {
+            completedTasks++;
+            savedState[index] = true;
+            cb.parentElement.classList.add('line-through', 'text-gray-400');
+            cb.parentElement.classList.remove('text-gray-700', 'text-gray-800');
+          } else {
+            completedTasks--;
+            savedState[index] = false;
+            cb.parentElement.classList.remove('line-through', 'text-gray-400');
+            // Basic reset logic (doesn't perfectly restore original colors if mixed, but good enough)
+            cb.parentElement.classList.add('text-gray-700'); 
+          }
+          localStorage.setItem(storageKey, JSON.stringify(savedState));
+          updateUI();
+        });
+      });
+
+      // Initial progress update
+      updateUI();
+    });
+  </script>
+</body>
+</html>
