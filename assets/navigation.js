@@ -54,6 +54,7 @@
         { href: '/sahayak/',        label: 'Sahayak' },
         { href: '/community/',      label: 'Community' },
         { href: '/students/',       label: 'Student Hub' },
+        { href: '/maharashtra/',    label: 'Maharashtra' },
     ];
 
     const desktopLinks = NAV_LINKS.map(l => navLink(l.href, l.label)).join('\n                ');
@@ -158,6 +159,7 @@
                 <li><a href="/sahayak/" class="hover:text-orange-600">Sahayak</a></li>
                 <li><a href="/community/" class="hover:text-orange-600">Community</a></li>
                 <li><a href="/students/" class="hover:text-orange-600">Student Hub</a></li>
+                <li><a href="/maharashtra/" class="hover:text-orange-600">About Maharashtra</a></li>
             </ul>
         </div>
         <div>
