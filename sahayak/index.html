@@ -498,11 +498,17 @@
         const dir = r.direction || 'Europe to India';
         const from = dir === 'India to Europe' ? (r.city_in_india || 'India') : (r.city_in_europe || 'Europe');
         const to = dir === 'India to Europe' ? (r.city_in_europe || 'Europe') : (r.city_in_india || 'India');
-        const helpType = r.looking_for_or_offering === 'Offering to help' ? '*OFFERING HELP* 🤝' : '*LOOKING FOR HELP* 🙏';
-        const route = `${from} → ${to}${r.flight_number ? ` (${r.flight_number})` : ''}`;
-        const tags = (r.what_kind_of_help || '').split(',').map(s => s.trim()).filter(Boolean).join(', ');
-        const description = r.short_description ? `\n\n${r.short_description}` : '';
-        const msg = `✈️ Sahayak Listing | Community Travel Help | Maharashtra in Europe\n\nI am ${r.name} ${helpType}\n📅 Date: ${r.travel_date || 'Flexible'}\n🛫 ${route}\n🏷️ ${tags}${description}\n\n🔗 maharashtraineurope.com/sahayak`;
+        const helpEmoji = r.looking_for_or_offering === 'Offering to help' ? '\uD83E\uDD1D' : '\uD83D\uDE4F';
+        const helpType = r.looking_for_or_offering === 'Offering to help' ? '*OFFERING HELP* ' + helpEmoji : '*LOOKING FOR HELP* ' + helpEmoji;
+        const route = from + ' \u2192 ' + to + (r.flight_number ? ' (' + r.flight_number + ')' : '');
+        const tags = (r.what_kind_of_help || '').split(',').map(function(s) { return s.trim(); }).filter(Boolean).join(', ');
+        const description = r.short_description ? '\n\n' + r.short_description : '';
+        const plane = '\u2708\uFE0F';
+        const calendar = '\uD83D\uDCC5';
+        const departure = '\uD83D\uDEEB';
+        const label = '\uD83C\uDFF7\uFE0F';
+        const link = '\uD83D\uDD17';
+        const msg = plane + ' Sahayak Listing | Community Travel Help | Maharashtra in Europe\n\nI am ' + r.name + ' ' + helpType + '\n' + calendar + ' Date: ' + (r.travel_date || 'Flexible') + '\n' + departure + ' ' + route + '\n' + label + ' ' + tags + description + '\n\n' + link + ' https://maharashtraineurope.com/sahayak';
         window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
     }
 
