@@ -50,18 +50,18 @@ h1, h2, h3, h4, h5, h6, .playfair {
     );
 }
 
-/* Sahayak page hero — dark premium gradient over a stock plane/travel photo */
+/* Sahayak page hero — dark premium gradient over local hero image */
 .hero-bg-sahayak {
     background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.5)),
-        url('https://images.unsplash.com/photo-1436491865332-7a61a109c05a?auto=format&fit=crop&w=1600&q=80');
+        url('hero.png');
     background-size: cover;
     background-position: center;
 }
 
-/* Community page hero — dark premium gradient over a Europe cityscape photo */
+/* Community page hero — dark premium gradient over local hero image */
 .hero-bg-community {
     background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.5)),
-        url('https://images.unsplash.com/photo-1467269204594-9661b1370767?auto=format&fit=crop&w=1600&q=80');
+        url('hero.png');
     background-size: cover;
     background-position: center;
 }
