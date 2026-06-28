@@ -633,6 +633,8 @@
             const isOfferingHelp = r.looking_for_or_offering === 'Offering to help';
             const stripColor = isOfferingHelp ? 'bg-green-500' : 'bg-rose-500';
             const stripLabel = isOfferingHelp ? 'HELP OFFERED' : 'LOOKING FOR HELP';
+            const badgeBg = isOfferingHelp ? 'background:#dcfce7' : 'background:#ffe4e6';
+            const badgeColor = isOfferingHelp ? 'color:#15803d' : 'color:#be123c';
             const waMsg = encodeURIComponent(`Namaste ${r.name}, I saw your listing on Maharashtra in Europe. I would like to connect!`);
             const waLink = r.whatsapp_number ? `https://wa.me/${r.whatsapp_number.replace(/\D/g, '')}?text=${waMsg}` : '#';
 
@@ -644,18 +646,6 @@
                 return `<img src="https://pics.avs.io/200/200/${iata}.png" class="${classes}" alt="" onerror="this.style.display='none'">`;
             }
 
-            const airlineLogoHTML = r.flight_number
-                ? `<div class="flex items-center justify-center h-8">${getAirlineLogo(r.flight_number, 'h-8 w-auto object-contain')}</div>`
-                : `<div class="h-8"></div>`;
-
-            const flightNumHTML = r.flight_number
-                ? `<span class="text-[9px] font-bold text-orange-700 bg-orange-50 border border-orange-200 px-1.5 py-0.5 rounded whitespace-nowrap">${r.flight_number}</span>`
-                : `<div class="w-10 border-t border-dashed border-orange-300"></div>`;
-
-            const actionButtons = expired
-                ? `<span class="text-[10px] text-gray-400 font-bold uppercase tracking-wide">Completed</span>`
-                : `<div class="flex gap-1.5">
-                    <a href="${waLink}" target="_blank" onclick="event.stopPropagation()" class="bg-orange-600 hover:bg-orange-700 text-white text-[10px] font-bold px-2.5 py-1.5 rounded-lg transition shadow-sm whitespace-nowrap ${!r.whatsapp_number ? 'opacity-40 pointer-events-none' : ''}">CONNECT</a>
                     <button onclick="event.stopPropagation(); shareOnWhatsApp(${globalIndex})" class="bg-[#25D366] hover:bg-[#1ebe5d] text-white text-[10px] font-bold px-2 py-1.5 rounded-lg transition shadow-sm flex items-center gap-1 whitespace-nowrap">${waSvg}<span class="hidden sm:inline">SHARE ON WHATSAPP</span><span class="sm:hidden">SHARE</span></button>
                 </div>`;
 
