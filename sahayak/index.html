@@ -746,24 +746,27 @@
                                 (logoSm ? '<div class="mt-1 flex justify-end">' + logoSm + '</div>' : '') +
                             '</div>' +
                         '</div>' +
-                        /* route: stacked FROM / plane+flight / TO */
-                        '<div class="px-4 py-3 border-b border-orange-100/60" style="background:#fff7ed">' +
-                            '<div class="flex items-baseline gap-2 mb-1">' +
-                                '<span class="text-[9px] uppercase text-orange-500 font-bold tracking-wider w-8 flex-shrink-0">FROM</span>' +
-                                '<span class="text-base font-extrabold text-gray-900 leading-tight">' + from + '</span>' +
+                        /* route + tags side by side */
+                        '<div class="flex border-b border-orange-100/60" style="background:#fff7ed">' +
+                            /* LEFT: stacked FROM / plane+flight / TO */
+                            '<div class="flex-1 min-w-0 px-4 py-3">' +
+                                '<div class="flex items-baseline gap-2 mb-1">' +
+                                    '<span class="text-[9px] uppercase text-orange-500 font-bold tracking-wider w-8 flex-shrink-0">FROM</span>' +
+                                    '<span class="text-sm font-extrabold text-gray-900 leading-tight">' + from + '</span>' +
+                                '</div>' +
+                                '<div class="flex items-center gap-2 my-1.5 pl-8">' +
+                                    '<i data-lucide="plane" class="w-4 h-4 text-orange-400 flex-shrink-0"></i>' +
+                                    (r.flight_number ? '<span class="text-xs font-bold text-orange-700 bg-white border border-orange-200 px-2 py-0.5 rounded-md shadow-sm">' + r.flight_number + '</span>' : '<div class="border-t-2 border-dashed border-orange-300 w-10"></div>') +
+                                '</div>' +
+                                '<div class="flex items-baseline gap-2">' +
+                                    '<span class="text-[9px] uppercase text-orange-500 font-bold tracking-wider w-8 flex-shrink-0">TO</span>' +
+                                    '<span class="text-sm font-extrabold text-gray-900 leading-tight">' + to + '</span>' +
+                                '</div>' +
                             '</div>' +
-                            '<div class="flex items-center gap-2 my-2 pl-8">' +
-                                '<i data-lucide="plane" class="w-5 h-5 text-orange-400 flex-shrink-0"></i>' +
-                                (r.flight_number ? '<span class="text-xs font-bold text-orange-700 bg-white border border-orange-200 px-2 py-0.5 rounded-md shadow-sm">' + r.flight_number + '</span>' : '<div class="flex-1 border-t-2 border-dashed border-orange-300 max-w-[60px]"></div>') +
+                            /* RIGHT: service tag pills */
+                            '<div class="flex flex-col gap-1 justify-center px-3 py-3 border-l border-orange-200/60 flex-shrink-0 max-w-[130px]">' +
+                                tagsVertical +
                             '</div>' +
-                            '<div class="flex items-baseline gap-2">' +
-                                '<span class="text-[9px] uppercase text-orange-500 font-bold tracking-wider w-8 flex-shrink-0">TO</span>' +
-                                '<span class="text-base font-extrabold text-gray-900 leading-tight">' + to + '</span>' +
-                            '</div>' +
-                        '</div>' +
-                        /* tags: vertical stack */
-                        '<div class="px-4 py-3 flex flex-col gap-1.5 border-b border-gray-100">' +
-                            tagsVertical +
                         '</div>' +
                         /* action buttons */
                         '<div class="px-4 py-3">' + mobileActions + '</div>' +
