@@ -1090,7 +1090,7 @@
         <div class="flex gap-2">
           <button class="btn-back-form flex-shrink-0" onclick="goToStep(3, true)">← Back</button>
           <button class="btn-primary-form" id="btn-submit" onclick="submitListing()" disabled>
-            Post Listing 🚀
+            Post Listing <i data-lucide="send" class="w-4 h-4 ml-1"></i>
           </button>
         </div>
         <p class="text-center text-[10px] text-gray-400 mt-3">Your listing appears live within a few minutes. Jai Maharashtra! 🧡</p>
@@ -1325,11 +1325,19 @@
         ? document.getElementById('s3-city-in-other').value.trim()
         : inSel;
 
+      // Date formatting from yyyy-mm-dd to dd/mm/yyyy
+      let rawDate = document.getElementById('s4-date').value;
+      let formattedDate = rawDate;
+      if (rawDate && rawDate.includes('-')) {
+        const [y, m, d] = rawDate.split('-');
+        formattedDate = `${d}/${m}/${y}`;
+      }
+
       const payload = {
         name: document.getElementById('s4-name').value.trim(),
         email: document.getElementById('s4-email').value.trim(),
         whatsapp: document.getElementById('s4-whatsapp').value.trim(),
-        travelDate: document.getElementById('s4-date').value,
+        travelDate: formattedDate,
         description: document.getElementById('s4-description').value.trim(),
         flight: document.getElementById('s3-flight').value.trim(),
         intent: formState.intent,
