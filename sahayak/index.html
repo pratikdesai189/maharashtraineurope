@@ -111,7 +111,7 @@
         Feature</span>
       <h2 class="marathi text-4xl md:text-6xl font-bold mb-2">सहायक (Sahayak)</h2>
       <p class="text-xl opacity-90 mb-8 font-light">"Where the Sahyadri meets the Alps"</p>
-      <div class="flex flex-wrap justify-center gap-4 mb-10">
+      <div class="flex flex-wrap justify-center gap-4 mb-10 relative z-10">
         <button id="btn-post-listing" onclick="openPostForm()"
           class="bg-white text-orange-600 px-8 py-3 rounded-lg font-bold hover:bg-gray-100 transition flex items-center gap-2" style="min-height:52px">
           <i data-lucide="plus-circle" class="w-5 h-5"></i> Post Your Listing
@@ -954,65 +954,46 @@
       <div class="form-step" id="step-3">
         <p class="text-sm text-gray-500 mb-3">Which route are you traveling?</p>
 
-        <!-- Direction toggle -->
-        <div class="mb-4">
-          <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-2 block">Direction</label>
-          <div class="flex gap-2">
-            <button class="flex-1 py-2.5 rounded-xl border-2 text-sm font-bold transition" id="dir-e2i"
-              onclick="selectDirection('Europe to India')"
-              style="border-color:#e5e7eb;color:#6b7280">Europe → India</button>
-            <button class="flex-1 py-2.5 rounded-xl border-2 text-sm font-bold transition" id="dir-i2e"
-              onclick="selectDirection('India to Europe')"
-              style="border-color:#e5e7eb;color:#6b7280">India → Europe</button>
+        <!-- Interactive Route Direction Selection -->
+        <div class="flex items-center justify-between mb-4 bg-orange-50 py-4 px-2 sm:px-4 rounded-xl border border-orange-100 relative overflow-hidden">
+          
+          <!-- Animated Background Dashed Line -->
+          <div class="absolute inset-0 flex items-center justify-center opacity-30 pointer-events-none">
+             <div class="w-full border-t-[2px] border-dashed border-gray-400 mx-8"></div>
+          </div>
+
+          <!-- Europe Side -->
+          <div class="relative z-10 w-1/3 text-center">
+            <div id="side-eu-label" class="text-[10px] font-bold text-orange-600 uppercase tracking-wider mb-2">Europe</div>
+            <div id="side-eu-list" class="text-[10px] sm:text-xs text-gray-800 text-left mx-auto w-fit space-y-1">
+              <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-orange-500"></span>Frankfurt</div>
+              <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-orange-500"></span>Amsterdam</div>
+              <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-orange-500"></span>Zurich</div>
+              <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-orange-500"></span>London</div>
+            </div>
+          </div>
+
+          <!-- Middle Plane (Click to Toggle) -->
+          <div class="relative z-10 flex flex-col items-center justify-center cursor-pointer group px-2" onclick="toggleDirection()">
+            <div class="text-[9px] text-orange-600 font-bold uppercase tracking-wider mb-1 opacity-0 group-hover:opacity-100 transition whitespace-nowrap bg-orange-100 px-2 py-0.5 rounded-full">Click to flip</div>
+            <div class="w-14 h-14 bg-white rounded-full shadow-md border-2 border-orange-200 flex items-center justify-center text-orange-600 hover:bg-orange-50 hover:scale-105 transition-all">
+               <i data-lucide="plane" id="center-plane-icon" class="w-7 h-7 transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] transform rotate-45" style="fill: currentColor"></i>
+            </div>
+            <div class="text-[10px] text-gray-500 font-bold uppercase tracking-wider mt-2 whitespace-nowrap" id="dir-label">Europe → India</div>
+          </div>
+
+          <!-- India Side -->
+          <div class="relative z-10 w-1/3 text-center">
+            <div id="side-in-label" class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-2 transition-colors">India</div>
+            <div id="side-in-list" class="text-[10px] sm:text-xs text-gray-400 text-left mx-auto w-fit space-y-1 transition-colors">
+              <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-gray-300"></span>Mumbai</div>
+              <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-gray-300"></span>Pune</div>
+              <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-gray-300"></span>Delhi</div>
+              <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-gray-300"></span>Others</div>
+            </div>
           </div>
         </div>
 
-        <!-- Visual SVG Route Map -->
-        <div class="bg-orange-50 rounded-xl border border-orange-100 p-3 mb-4">
-          <svg id="route-svg" viewBox="0 0 320 90" xmlns="http://www.w3.org/2000/svg" class="w-full">
-            <!-- City nodes — Europe -->
-            <text x="12" y="16" font-size="7" font-family="Inter,sans-serif" fill="#9ca3af" font-weight="700" letter-spacing="1">EUROPE</text>
-            <g id="node-frankfurt">
-              <circle cx="24" cy="30" r="4.5" fill="#ea580c" class="city-node-eu"/>
-              <text x="32" y="33" font-size="8" fill="#374151" font-family="Inter,sans-serif" font-weight="600">Frankfurt</text>
-            </g>
-            <g id="node-amsterdam">
-              <circle cx="24" cy="46" r="4.5" fill="#ea580c" class="city-node-eu"/>
-              <text x="32" y="49" font-size="8" fill="#374151" font-family="Inter,sans-serif" font-weight="600">Amsterdam</text>
-            </g>
-            <g id="node-zurich">
-              <circle cx="24" cy="62" r="4.5" fill="#ea580c" class="city-node-eu"/>
-              <text x="32" y="65" font-size="8" fill="#374151" font-family="Inter,sans-serif" font-weight="600">Zurich / Geneva</text>
-            </g>
-            <g id="node-london">
-              <circle cx="24" cy="78" r="4.5" fill="#ea580c" class="city-node-eu"/>
-              <text x="32" y="81" font-size="8" fill="#374151" font-family="Inter,sans-serif" font-weight="600">London</text>
-            </g>
-            <!-- Static dashed line -->
-            <line x1="70" y1="50" x2="185" y2="50" stroke="#9ca3af" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.4" />
-            
-            <!-- Animated Plane -->
-            <g id="animated-plane" class="plane-e2i">
-              <svg x="-12" y="-12" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ea580c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.2-1.1.7l-1.4 3 6.6 4.3c.4.3.7.8.8 1.4L9 21.8c-.3.8.3 1.2.7 1.1l3.9-1.9c.5-.2 1.1-.3 1.6-.1l3.6 1.4c.5.2 1.1-.2.9-.7z"/>
-              </svg>
-            </g>
-            <!-- City nodes — India -->
-            <text x="210" y="16" font-size="7" font-family="Inter,sans-serif" fill="#9ca3af" font-weight="700" letter-spacing="1">INDIA</text>
-            <g id="node-mumbai">
-              <circle cx="228" cy="38" r="4.5" fill="#9ca3af" class="city-node-in"/>
-              <text x="236" y="41" font-size="8" fill="#374151" font-family="Inter,sans-serif" font-weight="600">Mumbai</text>
-            </g>
-            <g id="node-pune">
-              <circle cx="228" cy="54" r="4.5" fill="#9ca3af" class="city-node-in"/>
-              <text x="236" y="57" font-size="8" fill="#374151" font-family="Inter,sans-serif" font-weight="600">Pune</text>
-            </g>
-            <g id="node-delhi">
-              <circle cx="228" cy="70" r="4.5" fill="#9ca3af" class="city-node-in"/>
-              <text x="236" y="73" font-size="8" fill="#374151" font-family="Inter,sans-serif" font-weight="600">Delhi / Others</text>
-            </g>
-          </svg>
-        </div>
 
         <!-- City dropdowns -->
         <div class="grid grid-cols-2 gap-3 mb-3">
@@ -1141,7 +1122,7 @@
     const formState = {
       intent: null,          // 'Offering to help' | 'Looking for help'
       categories: new Set(), // values matching Google Form options
-      direction: null,       // 'Europe to India' | 'India to Europe'
+      direction: 'Europe to India', // default
       cityEu: '',
       cityIn: '',
       flight: '',
@@ -1238,24 +1219,41 @@
     }
 
     /* ── Step 3: Direction + Route Map ── */
-    function selectDirection(dir) {
-      formState.direction = dir;
-      const e2i = document.getElementById('dir-e2i');
-      const i2e = document.getElementById('dir-i2e');
-      const plane = document.getElementById('animated-plane');
-      if (dir === 'Europe to India') {
-        e2i.style.borderColor = '#ea580c'; e2i.style.color = '#ea580c'; e2i.style.background = '#fff7ed';
-        i2e.style.borderColor = '#e5e7eb'; i2e.style.color = '#6b7280'; i2e.style.background = '';
-        // Animate map: EU nodes orange, IN nodes gray
-        document.querySelectorAll('.city-node-eu').forEach(n => n.setAttribute('fill', '#ea580c'));
-        document.querySelectorAll('.city-node-in').forEach(n => n.setAttribute('fill', '#9ca3af'));
-        plane.setAttribute('class', 'plane-e2i');
+    function toggleDirection() {
+      formState.direction = (formState.direction === 'Europe to India') ? 'India to Europe' : 'Europe to India';
+      updateDirectionUI();
+    }
+
+    function updateDirectionUI() {
+      const plane = document.getElementById('center-plane-icon');
+      const label = document.getElementById('dir-label');
+      const euLabel = document.getElementById('side-eu-label');
+      const inLabel = document.getElementById('side-in-label');
+      const euList = document.getElementById('side-eu-list');
+      const inList = document.getElementById('side-in-list');
+
+      if (formState.direction === 'Europe to India') {
+        plane.style.transform = 'rotate(45deg)';
+        label.textContent = 'Europe → India';
+        
+        euLabel.className = 'text-[10px] font-bold text-orange-600 uppercase tracking-wider mb-2 transition-colors';
+        euList.className = 'text-[10px] sm:text-xs text-gray-800 text-left mx-auto w-fit space-y-1 transition-colors';
+        euList.querySelectorAll('span').forEach(s => s.className = 'w-1.5 h-1.5 rounded-full bg-orange-500 transition-colors');
+        
+        inLabel.className = 'text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-2 transition-colors';
+        inList.className = 'text-[10px] sm:text-xs text-gray-400 text-left mx-auto w-fit space-y-1 transition-colors';
+        inList.querySelectorAll('span').forEach(s => s.className = 'w-1.5 h-1.5 rounded-full bg-gray-300 transition-colors');
       } else {
-        i2e.style.borderColor = '#ea580c'; i2e.style.color = '#ea580c'; i2e.style.background = '#fff7ed';
-        e2i.style.borderColor = '#e5e7eb'; e2i.style.color = '#6b7280'; e2i.style.background = '';
-        document.querySelectorAll('.city-node-in').forEach(n => n.setAttribute('fill', '#ea580c'));
-        document.querySelectorAll('.city-node-eu').forEach(n => n.setAttribute('fill', '#9ca3af'));
-        plane.setAttribute('class', 'plane-i2e');
+        plane.style.transform = 'rotate(-135deg)';
+        label.textContent = 'India → Europe';
+        
+        inLabel.className = 'text-[10px] font-bold text-orange-600 uppercase tracking-wider mb-2 transition-colors';
+        inList.className = 'text-[10px] sm:text-xs text-gray-800 text-left mx-auto w-fit space-y-1 transition-colors';
+        inList.querySelectorAll('span').forEach(s => s.className = 'w-1.5 h-1.5 rounded-full bg-orange-500 transition-colors');
+        
+        euLabel.className = 'text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-2 transition-colors';
+        euList.className = 'text-[10px] sm:text-xs text-gray-400 text-left mx-auto w-fit space-y-1 transition-colors';
+        euList.querySelectorAll('span').forEach(s => s.className = 'w-1.5 h-1.5 rounded-full bg-gray-300 transition-colors');
       }
       validateStep3();
     }
