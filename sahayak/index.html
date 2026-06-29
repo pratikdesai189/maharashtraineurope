@@ -1050,8 +1050,9 @@
           <div class="grid grid-cols-2 gap-3">
             <div>
               <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5 block">WhatsApp Number <span class="text-red-500">*</span></label>
-              <input type="tel" id="s4-whatsapp" class="sahayak-input" placeholder="+4917600000000" required
+              <input type="tel" id="s4-whatsapp" class="sahayak-input" placeholder="e.g. +49 176..." required
                 oninput="validateStep4()">
+              <div id="wa-error" class="text-[10px] text-red-500 mt-1 hidden">Must include country code (e.g. +49 or +91)</div>
             </div>
             <div>
               <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5 block">Travel Date <span class="text-red-500">*</span></label>
@@ -1303,8 +1304,18 @@
       const date = (document.getElementById('s4-date')?.value || '').trim();
       const desc = (document.getElementById('s4-description')?.value || '').trim();
       const consent = document.getElementById('s4-consent')?.checked;
+      
       const emailOk = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email);
-      document.getElementById('btn-submit').disabled = !(name && emailOk && wa && date && desc && consent);
+      const waOk = wa.startsWith('+') || wa.startsWith('00');
+      
+      const waError = document.getElementById('wa-error');
+      if (wa.length > 0 && !waOk) {
+        waError.classList.remove('hidden');
+      } else {
+        waError.classList.add('hidden');
+      }
+
+      document.getElementById('btn-submit').disabled = !(name && emailOk && wa && waOk && date && desc && consent);
     }
 
     /* ── Submit: send JSON to Web App URL ── */
