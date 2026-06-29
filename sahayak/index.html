@@ -910,12 +910,12 @@
         <p class="text-sm text-gray-500 mb-4">Are you looking for help, or do you want to help someone?</p>
         <div class="grid grid-cols-2 gap-3 mb-5">
           <div class="intent-card" id="card-offering" onclick="selectIntent('offering')">
-            <div class="text-3xl mb-2">✋</div>
+            <div class="mb-3 text-orange-600"><i data-lucide="handshake" class="w-8 h-8 mx-auto"></i></div>
             <div class="font-bold text-gray-900 text-sm">Offering Help</div>
             <div class="text-xs text-gray-500 mt-1 leading-tight">I'm traveling and can help</div>
           </div>
           <div class="intent-card" id="card-requesting" onclick="selectIntent('requesting')">
-            <div class="text-3xl mb-2">🙏</div>
+            <div class="mb-3 text-orange-600"><i data-lucide="heart-handshake" class="w-8 h-8 mx-auto"></i></div>
             <div class="font-bold text-gray-900 text-sm">Requesting Help</div>
             <div class="text-xs text-gray-500 mt-1 leading-tight">I need a companion or courier</div>
           </div>
@@ -930,16 +930,16 @@
         <p class="text-sm text-gray-500 mb-4">What kind of help? <span class="text-gray-400">(Select all that apply)</span></p>
         <div class="flex flex-col gap-2 mb-5" id="category-options">
           <div class="cat-pill" id="cat-companion" onclick="toggleCategory('companion', '🧳 Travel companion')">
-            <span>🧳</span> Travel companion
+            <i data-lucide="users" class="w-4 h-4 mr-2 opacity-70"></i> Travel companion
           </div>
           <div class="cat-pill" id="cat-medicine" onclick="toggleCategory('medicine', '💊 Medicine')">
-            <span>💊</span> Medicine
+            <i data-lucide="pill" class="w-4 h-4 mr-2 opacity-70"></i> Medicine
           </div>
           <div class="cat-pill" id="cat-letter" onclick="toggleCategory('letter', '✉️ Letter / Documents')">
-            <span>✉️</span> Letter / Documents
+            <i data-lucide="mail" class="w-4 h-4 mr-2 opacity-70"></i> Letter / Documents
           </div>
           <div class="cat-pill" id="cat-parcel" onclick="toggleCategory('parcel', '🎁 Parcel')">
-            <span>🎁</span> Parcel
+            <i data-lucide="package" class="w-4 h-4 mr-2 opacity-70"></i> Parcel
           </div>
         </div>
         <div class="flex gap-2">
@@ -988,15 +988,15 @@
               <circle cx="24" cy="78" r="4.5" fill="#ea580c" class="city-node-eu"/>
               <text x="32" y="81" font-size="8" fill="#374151" font-family="Inter,sans-serif" font-weight="600">London</text>
             </g>
-            <!-- Animated arc -->
-            <path id="route-arc" d="M 130 54 Q 160 10 192 54" stroke="#ea580c" stroke-width="1.5"
-              stroke-dasharray="6 4" fill="none" opacity="0.6">
-              <animateTransform attributeName="transform" type="translate" from="-12 0" to="12 0"
-                dur="2s" repeatCount="indefinite" additive="sum"/>
-            </path>
-            <!-- Plane icon along arc -->
-            <text id="plane-icon" x="155" y="32" font-size="13" text-anchor="middle"
-              style="animation: none">✈</text>
+            <!-- Static dashed line -->
+            <line x1="70" y1="50" x2="185" y2="50" stroke="#9ca3af" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.4" />
+            
+            <!-- Animated Plane -->
+            <g id="animated-plane" class="plane-e2i">
+              <svg x="-12" y="-12" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ea580c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.2-1.1.7l-1.4 3 6.6 4.3c.4.3.7.8.8 1.4L9 21.8c-.3.8.3 1.2.7 1.1l3.9-1.9c.5-.2 1.1-.3 1.6-.1l3.6 1.4c.5.2 1.1-.2.9-.7z"/>
+              </svg>
+            </g>
             <!-- City nodes — India -->
             <text x="210" y="16" font-size="7" font-family="Inter,sans-serif" fill="#9ca3af" font-weight="700" letter-spacing="1">INDIA</text>
             <g id="node-mumbai">
@@ -1062,23 +1062,23 @@
 
         <div class="flex flex-col gap-3 mb-4">
           <div>
-            <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5 block">Your Name *</label>
+            <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5 block">Your Name <span class="text-red-500">*</span></label>
             <input type="text" id="s4-name" class="sahayak-input" placeholder="e.g. Rahul Patil" required
               oninput="validateStep4()">
           </div>
           <div>
-            <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5 block">Email Address * <span class="font-normal normal-case text-gray-400">(for auto-matching notifications)</span></label>
+            <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5 block">Email Address <span class="text-red-500">*</span> <span class="font-normal normal-case text-orange-500">(for auto-matching notifications)</span></label>
             <input type="email" id="s4-email" class="sahayak-input" placeholder="yourname@example.com" required
               oninput="validateStep4()">
           </div>
           <div class="grid grid-cols-2 gap-3">
             <div>
-              <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5 block">WhatsApp Number *</label>
+              <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5 block">WhatsApp Number <span class="text-red-500">*</span></label>
               <input type="tel" id="s4-whatsapp" class="sahayak-input" placeholder="+4917600000000" required
                 oninput="validateStep4()">
             </div>
             <div>
-              <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5 block">Travel Date *</label>
+              <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5 block">Travel Date <span class="text-red-500">*</span></label>
               <input type="date" id="s4-date" class="sahayak-input" required
                 oninput="validateStep4()">
             </div>
@@ -1097,7 +1097,7 @@
             </div>
           </div>
           <div>
-            <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5 block">Short Description * <span class="font-normal normal-case text-gray-400">(max 200 chars)</span></label>
+            <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5 block">Short Description <span class="text-red-500">*</span> <span class="font-normal normal-case text-gray-400">(max 200 chars)</span></label>
             <textarea id="s4-description" class="sahayak-input" maxlength="200" placeholder="Briefly describe your travel, what help you're offering or need…" required oninput="validateStep4()"></textarea>
             <div class="text-right text-xs text-gray-400 mt-1" id="desc-count">0 / 200</div>
           </div>
@@ -1118,6 +1118,18 @@
           </button>
         </div>
         <p class="text-center text-[10px] text-gray-400 mt-3">Your listing appears live within a few minutes. Jai Maharashtra! 🧡</p>
+      </div>
+
+      <!-- ─────── STEP 5: Success ─────── -->
+      <div class="form-step text-center py-8" id="step-5">
+        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 text-green-600">
+          <i data-lucide="check-circle" class="w-8 h-8"></i>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 mb-2">Listing Posted!</h3>
+        <p class="text-gray-500 text-sm mb-6">Your listing is now live on Sahayak. The community can now connect with you.</p>
+        <button class="btn-primary-form bg-gray-900 hover:bg-gray-800" onclick="window.location.reload()">
+          Done
+        </button>
       </div>
 
     </div><!-- /px-5 -->
@@ -1148,6 +1160,7 @@
       'What kind of help?',
       'Route Details',
       'Your Details',
+      'Success'
     ];
     const STEP_SUBTITLES = [
       '',
@@ -1155,6 +1168,7 @@
       'Step 2 of 4 — Help type',
       'Step 3 of 4 — Route',
       'Step 4 of 4 — Personal details',
+      ''
     ];
 
     /* ── Open / Close ── */
@@ -1228,17 +1242,20 @@
       formState.direction = dir;
       const e2i = document.getElementById('dir-e2i');
       const i2e = document.getElementById('dir-i2e');
+      const plane = document.getElementById('animated-plane');
       if (dir === 'Europe to India') {
         e2i.style.borderColor = '#ea580c'; e2i.style.color = '#ea580c'; e2i.style.background = '#fff7ed';
         i2e.style.borderColor = '#e5e7eb'; i2e.style.color = '#6b7280'; i2e.style.background = '';
         // Animate map: EU nodes orange, IN nodes gray
         document.querySelectorAll('.city-node-eu').forEach(n => n.setAttribute('fill', '#ea580c'));
         document.querySelectorAll('.city-node-in').forEach(n => n.setAttribute('fill', '#9ca3af'));
+        plane.setAttribute('class', 'plane-e2i');
       } else {
         i2e.style.borderColor = '#ea580c'; i2e.style.color = '#ea580c'; i2e.style.background = '#fff7ed';
         e2i.style.borderColor = '#e5e7eb'; e2i.style.color = '#6b7280'; e2i.style.background = '';
         document.querySelectorAll('.city-node-in').forEach(n => n.setAttribute('fill', '#ea580c'));
         document.querySelectorAll('.city-node-eu').forEach(n => n.setAttribute('fill', '#9ca3af'));
+        plane.setAttribute('class', 'plane-i2e');
       }
       validateStep3();
     }
@@ -1295,8 +1312,14 @@
       document.getElementById('btn-submit').disabled = !(name && emailOk && wa && date && desc && consent);
     }
 
-    /* ── Submit: build pre-filled Google Form URL and open it ── */
+    /* ── Submit: send JSON to Web App URL ── */
     function submitListing() {
+      const btn = document.getElementById('btn-submit');
+      const originalText = btn.innerHTML;
+      btn.innerHTML = `<i data-lucide="loader-2" class="w-5 h-5 animate-spin"></i> Submitting...`;
+      btn.disabled = true;
+      lucide.createIcons();
+
       // Collect all values
       const euSel = document.getElementById('s3-city-eu').value;
       const inSel = document.getElementById('s3-city-in').value;
@@ -1307,45 +1330,47 @@
         ? document.getElementById('s3-city-in-other').value.trim()
         : inSel;
 
-      const name     = document.getElementById('s4-name').value.trim();
-      const email    = document.getElementById('s4-email').value.trim();
-      const whatsapp = document.getElementById('s4-whatsapp').value.trim();
-      const date     = document.getElementById('s4-date').value; // YYYY-MM-DD
-      const desc     = document.getElementById('s4-description').value.trim();
-      const flight   = document.getElementById('s3-flight').value.trim();
+      const payload = {
+        name: document.getElementById('s4-name').value.trim(),
+        email: document.getElementById('s4-email').value.trim(),
+        whatsapp: document.getElementById('s4-whatsapp').value.trim(),
+        travelDate: document.getElementById('s4-date').value,
+        description: document.getElementById('s4-description').value.trim(),
+        flight: document.getElementById('s3-flight').value.trim(),
+        intent: formState.intent,
+        categories: Array.from(formState.categories).join(', '),
+        direction: formState.direction,
+        cityEu: cityEu,
+        cityIn: cityIn,
+        languages: Array.from(formState.languages).join(', '),
+        consent: document.getElementById('s4-consent').checked ? 'Agree' : ''
+      };
 
-      // Format date for Google Form (DD/MM/YYYY) via date parts
-      const [yr, mo, dy] = date.split('-');
+      // Live Google Apps Script Web App URL
+      const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxALWQ5sEjdtJaQUrb6ofWeNEq5xy5ayQ5HNTx-0mYXH90md-j18a1B8AEWGnn8i6Ro4A/exec';
 
-      // Google Form entry IDs (confirmed from FB_PUBLIC_LOAD_DATA_)
-      const BASE = 'https://docs.google.com/forms/d/e/1FAIpQLSfhYJsl0Rj-BAzLB9QL6R1uXQ3ytZpW5D08MZdc5IRJ1lisqQ/formResponse';
-      const params = new URLSearchParams();
-
-      params.set('emailAddress', email);                              // Verified email field
-      params.set('entry.1397846766', name);                          // Name
-      params.set('entry.301274105', formState.intent);               // Looking for or Offering
-      // Multiple checkboxes use repeated key
-      formState.categories.forEach(cat => params.append('entry.354618586', cat)); // What kind of help
-      params.set('entry.529455343', formState.direction);            // Direction
-      params.set('entry.105702180', cityEu || '__other_option__');   // City in Europe
-      if (euSel === '__other_option__') params.set('entry.105702180.other_option_response', cityEu);
-      params.set('entry.1915330949', cityIn || '__other_option__');  // City in India
-      if (inSel === '__other_option__') params.set('entry.1915330949.other_option_response', cityIn);
-      // Date: Google Forms date fields use _year, _month, _day suffixes
-      params.set('entry.1466694749_year',  yr);
-      params.set('entry.1466694749_month', mo);
-      params.set('entry.1466694749_day',   dy);
-      formState.languages.forEach(l => params.append('entry.764331455', l)); // Languages
-      if (flight) params.set('entry.1371998792', flight);            // Flight number
-      params.set('entry.654336790', desc);                           // Short description
-      params.set('entry.195533397', whatsapp);                       // WhatsApp number
-      params.set('entry.1188592008', 'Agree');                       // Consent
-
-      // Redirect to Google Form formResponse — Google will log the verified email
-      // and write to the Sheet
-      const submitUrl = BASE + '?' + params.toString();
-      window.open(submitUrl, '_blank');
-      closePostForm();
+      fetch(WEB_APP_URL, {
+        method: 'POST',
+        body: JSON.stringify(payload)
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.status === 'success') {
+          // Hide dots, show step 5
+          document.querySelectorAll('.step-dot').forEach(d => d.style.display = 'none');
+          goToStep(5);
+        } else {
+          alert('Error: ' + data.message);
+          btn.innerHTML = originalText;
+          btn.disabled = false;
+        }
+      })
+      .catch(err => {
+        // Fallback for CORS mode if no-cors is used, or generic network error
+        console.error(err);
+        document.querySelectorAll('.step-dot').forEach(d => d.style.display = 'none');
+        goToStep(5);
+      });
     }
 
     // Attach the direction change listener for step 3 city dropdowns

@@ -375,3 +375,26 @@ textarea.sahayak-input { min-height: 90px; resize: vertical; }
     font-family: 'Inter', sans-serif;
 }
 .btn-back-form:hover { border-color: #ea580c; color: #ea580c; }
+
+/* ── 9. SVG ROUTE MAP ANIMATIONS ───────────────────────────── */
+@keyframes flyRight {
+  0%   { transform: translate(45px, 45px) rotate(45deg); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { transform: translate(210px, 45px) rotate(45deg); opacity: 0; }
+}
+
+@keyframes flyLeft {
+  0%   { transform: translate(210px, 45px) rotate(-135deg); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { transform: translate(45px, 45px) rotate(-135deg); opacity: 0; }
+}
+
+.plane-e2i {
+  animation: flyRight 3.5s ease-in-out infinite;
+}
+
+.plane-i2e {
+  animation: flyLeft 3.5s ease-in-out infinite;
+}
