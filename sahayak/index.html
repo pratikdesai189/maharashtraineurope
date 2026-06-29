@@ -112,12 +112,12 @@
       <h2 class="marathi text-4xl md:text-6xl font-bold mb-2">सहायक (Sahayak)</h2>
       <p class="text-xl opacity-90 mb-8 font-light">"Where the Sahyadri meets the Alps"</p>
       <div class="flex flex-wrap justify-center gap-4 mb-10">
-        <a href="https://forms.gle/XUH1CCBFHC5dtASq6" target="_blank"
-          class="bg-white text-orange-600 px-8 py-3 rounded-lg font-bold hover:bg-gray-100 transition flex items-center gap-2">
+        <button id="btn-post-listing" onclick="openPostForm()"
+          class="bg-white text-orange-600 px-8 py-3 rounded-lg font-bold hover:bg-gray-100 transition flex items-center gap-2" style="min-height:52px">
           <i data-lucide="plus-circle" class="w-5 h-5"></i> Post Your Listing
-        </a>
+        </button>
         <button onclick="document.getElementById('listings-offering-section').scrollIntoView({behavior:'smooth'})"
-          class="bg-transparent border border-white px-8 py-3 rounded-lg font-bold hover:bg-white/10 transition">
+          class="bg-transparent border border-white px-8 py-3 rounded-lg font-bold hover:bg-white/10 transition" style="min-height:52px">
           Browse Listings
         </button>
       </div>
@@ -222,10 +222,14 @@
         <div class="flex-1 h-px bg-gray-200"></div>
       </div>
       <div id="listings-offering" class="flex flex-col gap-3">
-        <div class="col-span-full text-center py-10">
-          <div class="animate-spin w-8 h-8 border-4 border-green-500 border-t-transparent rounded-full mx-auto mb-4"></div>
-          <p class="text-gray-500 animate-pulse">Loading listings...</p>
-        </div>
+        <!-- Skeleton loaders — desktop -->
+        <div class="skeleton-card hidden sm:block"><div class="flex" style="height:80px"><div class="skeleton w-7 h-full rounded-none" style="border-radius:0"></div><div class="flex items-center gap-3 px-3 py-3 border-r border-dashed border-gray-200" style="width:95px"><div class="skeleton w-8 h-8 rounded-full flex-shrink-0"></div><div class="flex-1 flex flex-col gap-2"><div class="skeleton h-3" style="width:60px"></div><div class="skeleton h-2" style="width:44px"></div></div></div><div class="flex-1 flex items-center gap-3 px-4"><div class="flex-1 flex flex-col gap-2"><div class="skeleton h-2 w-12"></div><div class="skeleton h-4 w-28"></div></div><div class="skeleton w-4 h-4"></div><div class="flex-1 flex flex-col gap-2 items-end"><div class="skeleton h-2 w-10"></div><div class="skeleton h-4 w-24"></div></div></div><div class="flex flex-col items-end justify-between gap-2 px-3 py-3 border-l border-gray-100" style="width:180px"><div class="flex gap-1"><div class="skeleton h-5 w-20 rounded-full"></div><div class="skeleton h-5 w-16 rounded-full"></div></div><div class="flex gap-1"><div class="skeleton h-7 w-20 rounded-lg"></div><div class="skeleton h-7 w-24 rounded-lg"></div></div></div></div></div>
+        <div class="skeleton-card hidden sm:block"><div class="flex" style="height:80px"><div class="skeleton w-7 h-full rounded-none" style="border-radius:0"></div><div class="flex items-center gap-3 px-3 py-3 border-r border-dashed border-gray-200" style="width:95px"><div class="skeleton w-8 h-8 rounded-full flex-shrink-0"></div><div class="flex-1 flex flex-col gap-2"><div class="skeleton h-3" style="width:60px"></div><div class="skeleton h-2" style="width:44px"></div></div></div><div class="flex-1 flex items-center gap-3 px-4"><div class="flex-1 flex flex-col gap-2"><div class="skeleton h-2 w-12"></div><div class="skeleton h-4 w-28"></div></div><div class="skeleton w-4 h-4"></div><div class="flex-1 flex flex-col gap-2 items-end"><div class="skeleton h-2 w-10"></div><div class="skeleton h-4 w-24"></div></div></div><div class="flex flex-col items-end justify-between gap-2 px-3 py-3 border-l border-gray-100" style="width:180px"><div class="flex gap-1"><div class="skeleton h-5 w-20 rounded-full"></div><div class="skeleton h-5 w-16 rounded-full"></div></div><div class="flex gap-1"><div class="skeleton h-7 w-20 rounded-lg"></div><div class="skeleton h-7 w-24 rounded-lg"></div></div></div></div></div>
+        <div class="skeleton-card hidden sm:block"><div class="flex" style="height:80px"><div class="skeleton w-7 h-full rounded-none" style="border-radius:0"></div><div class="flex items-center gap-3 px-3 py-3 border-r border-dashed border-gray-200" style="width:95px"><div class="skeleton w-8 h-8 rounded-full flex-shrink-0"></div><div class="flex-1 flex flex-col gap-2"><div class="skeleton h-3" style="width:60px"></div><div class="skeleton h-2" style="width:44px"></div></div></div><div class="flex-1 flex items-center gap-3 px-4"><div class="flex-1 flex flex-col gap-2"><div class="skeleton h-2 w-12"></div><div class="skeleton h-4 w-28"></div></div><div class="skeleton w-4 h-4"></div><div class="flex-1 flex flex-col gap-2 items-end"><div class="skeleton h-2 w-10"></div><div class="skeleton h-4 w-24"></div></div></div><div class="flex flex-col items-end justify-between gap-2 px-3 py-3 border-l border-gray-100" style="width:180px"><div class="flex gap-1"><div class="skeleton h-5 w-20 rounded-full"></div><div class="skeleton h-5 w-16 rounded-full"></div></div><div class="flex gap-1"><div class="skeleton h-7 w-20 rounded-lg"></div><div class="skeleton h-7 w-24 rounded-lg"></div></div></div></div></div>
+        <!-- Skeleton loaders — mobile -->
+        <div class="skeleton-card sm:hidden"><div class="flex"><div class="skeleton w-2.5 flex-shrink-0 rounded-none" style="border-radius:0;min-height:120px"></div><div class="flex-1 flex flex-col"><div class="flex items-center justify-between px-4 pt-4 pb-3 border-b border-gray-100"><div class="flex items-center gap-2"><div class="skeleton w-10 h-10 rounded-full"></div><div class="flex flex-col gap-1.5"><div class="skeleton h-4 w-20 rounded-full"></div><div class="skeleton h-3 w-16"></div></div></div><div class="flex flex-col items-end gap-1"><div class="skeleton h-3 w-8"></div><div class="skeleton h-3 w-16"></div></div></div><div class="px-4 py-3 flex gap-2" style="background:#fff7ed"><div class="flex-1 flex flex-col gap-2"><div class="skeleton h-2 w-8"></div><div class="skeleton h-4 w-28"></div><div class="skeleton h-3 w-16"></div><div class="skeleton h-4 w-24"></div></div><div class="flex flex-col gap-1 border-l border-orange-200 pl-3"><div class="skeleton h-6 w-20 rounded-lg"></div><div class="skeleton h-6 w-16 rounded-lg"></div></div></div><div class="px-4 py-3 flex gap-3"><div class="skeleton flex-1 h-10 rounded-xl"></div><div class="skeleton flex-1 h-10 rounded-xl"></div></div></div></div></div>
+        <div class="skeleton-card sm:hidden"><div class="flex"><div class="skeleton w-2.5 flex-shrink-0 rounded-none" style="border-radius:0;min-height:120px"></div><div class="flex-1 flex flex-col"><div class="flex items-center justify-between px-4 pt-4 pb-3 border-b border-gray-100"><div class="flex items-center gap-2"><div class="skeleton w-10 h-10 rounded-full"></div><div class="flex flex-col gap-1.5"><div class="skeleton h-4 w-20 rounded-full"></div><div class="skeleton h-3 w-16"></div></div></div><div class="flex flex-col items-end gap-1"><div class="skeleton h-3 w-8"></div><div class="skeleton h-3 w-16"></div></div></div><div class="px-4 py-3 flex gap-2" style="background:#fff7ed"><div class="flex-1 flex flex-col gap-2"><div class="skeleton h-2 w-8"></div><div class="skeleton h-4 w-28"></div><div class="skeleton h-3 w-16"></div><div class="skeleton h-4 w-24"></div></div><div class="flex flex-col gap-1 border-l border-orange-200 pl-3"><div class="skeleton h-6 w-20 rounded-lg"></div><div class="skeleton h-6 w-16 rounded-lg"></div></div></div><div class="px-4 py-3 flex gap-3"><div class="skeleton flex-1 h-10 rounded-xl"></div><div class="skeleton flex-1 h-10 rounded-xl"></div></div></div></div></div>
+        <div class="skeleton-card sm:hidden"><div class="flex"><div class="skeleton w-2.5 flex-shrink-0 rounded-none" style="border-radius:0;min-height:120px"></div><div class="flex-1 flex flex-col"><div class="flex items-center justify-between px-4 pt-4 pb-3 border-b border-gray-100"><div class="flex items-center gap-2"><div class="skeleton w-10 h-10 rounded-full"></div><div class="flex flex-col gap-1.5"><div class="skeleton h-4 w-20 rounded-full"></div><div class="skeleton h-3 w-16"></div></div></div><div class="flex flex-col items-end gap-1"><div class="skeleton h-3 w-8"></div><div class="skeleton h-3 w-16"></div></div></div><div class="px-4 py-3 flex gap-2" style="background:#fff7ed"><div class="flex-1 flex flex-col gap-2"><div class="skeleton h-2 w-8"></div><div class="skeleton h-4 w-28"></div><div class="skeleton h-3 w-16"></div><div class="skeleton h-4 w-24"></div></div><div class="flex flex-col gap-1 border-l border-orange-200 pl-3"><div class="skeleton h-6 w-20 rounded-lg"></div><div class="skeleton h-6 w-16 rounded-lg"></div></div></div><div class="px-4 py-3 flex gap-3"><div class="skeleton flex-1 h-10 rounded-xl"></div><div class="skeleton flex-1 h-10 rounded-xl"></div></div></div></div></div>
       </div>
     </div>
 
@@ -237,10 +241,14 @@
         <div class="flex-1 h-px bg-gray-200"></div>
       </div>
       <div id="listings-looking" class="flex flex-col gap-3">
-        <div class="col-span-full text-center py-10">
-          <div class="animate-spin w-8 h-8 border-4 border-rose-500 border-t-transparent rounded-full mx-auto mb-4"></div>
-          <p class="text-gray-500 animate-pulse">Loading listings...</p>
-        </div>
+        <!-- Skeleton loaders — desktop -->
+        <div class="skeleton-card hidden sm:block"><div class="flex" style="height:80px"><div class="skeleton w-7 h-full rounded-none" style="border-radius:0"></div><div class="flex items-center gap-3 px-3 py-3 border-r border-dashed border-gray-200" style="width:95px"><div class="skeleton w-8 h-8 rounded-full flex-shrink-0"></div><div class="flex-1 flex flex-col gap-2"><div class="skeleton h-3" style="width:60px"></div><div class="skeleton h-2" style="width:44px"></div></div></div><div class="flex-1 flex items-center gap-3 px-4"><div class="flex-1 flex flex-col gap-2"><div class="skeleton h-2 w-12"></div><div class="skeleton h-4 w-28"></div></div><div class="skeleton w-4 h-4"></div><div class="flex-1 flex flex-col gap-2 items-end"><div class="skeleton h-2 w-10"></div><div class="skeleton h-4 w-24"></div></div></div><div class="flex flex-col items-end justify-between gap-2 px-3 py-3 border-l border-gray-100" style="width:180px"><div class="flex gap-1"><div class="skeleton h-5 w-20 rounded-full"></div><div class="skeleton h-5 w-16 rounded-full"></div></div><div class="flex gap-1"><div class="skeleton h-7 w-20 rounded-lg"></div><div class="skeleton h-7 w-24 rounded-lg"></div></div></div></div></div>
+        <div class="skeleton-card hidden sm:block"><div class="flex" style="height:80px"><div class="skeleton w-7 h-full rounded-none" style="border-radius:0"></div><div class="flex items-center gap-3 px-3 py-3 border-r border-dashed border-gray-200" style="width:95px"><div class="skeleton w-8 h-8 rounded-full flex-shrink-0"></div><div class="flex-1 flex flex-col gap-2"><div class="skeleton h-3" style="width:60px"></div><div class="skeleton h-2" style="width:44px"></div></div></div><div class="flex-1 flex items-center gap-3 px-4"><div class="flex-1 flex flex-col gap-2"><div class="skeleton h-2 w-12"></div><div class="skeleton h-4 w-28"></div></div><div class="skeleton w-4 h-4"></div><div class="flex-1 flex flex-col gap-2 items-end"><div class="skeleton h-2 w-10"></div><div class="skeleton h-4 w-24"></div></div></div><div class="flex flex-col items-end justify-between gap-2 px-3 py-3 border-l border-gray-100" style="width:180px"><div class="flex gap-1"><div class="skeleton h-5 w-20 rounded-full"></div><div class="skeleton h-5 w-16 rounded-full"></div></div><div class="flex gap-1"><div class="skeleton h-7 w-20 rounded-lg"></div><div class="skeleton h-7 w-24 rounded-lg"></div></div></div></div></div>
+        <div class="skeleton-card hidden sm:block"><div class="flex" style="height:80px"><div class="skeleton w-7 h-full rounded-none" style="border-radius:0"></div><div class="flex items-center gap-3 px-3 py-3 border-r border-dashed border-gray-200" style="width:95px"><div class="skeleton w-8 h-8 rounded-full flex-shrink-0"></div><div class="flex-1 flex flex-col gap-2"><div class="skeleton h-3" style="width:60px"></div><div class="skeleton h-2" style="width:44px"></div></div></div><div class="flex-1 flex items-center gap-3 px-4"><div class="flex-1 flex flex-col gap-2"><div class="skeleton h-2 w-12"></div><div class="skeleton h-4 w-28"></div></div><div class="skeleton w-4 h-4"></div><div class="flex-1 flex flex-col gap-2 items-end"><div class="skeleton h-2 w-10"></div><div class="skeleton h-4 w-24"></div></div></div><div class="flex flex-col items-end justify-between gap-2 px-3 py-3 border-l border-gray-100" style="width:180px"><div class="flex gap-1"><div class="skeleton h-5 w-20 rounded-full"></div><div class="skeleton h-5 w-16 rounded-full"></div></div><div class="flex gap-1"><div class="skeleton h-7 w-20 rounded-lg"></div><div class="skeleton h-7 w-24 rounded-lg"></div></div></div></div></div>
+        <!-- Skeleton loaders — mobile -->
+        <div class="skeleton-card sm:hidden"><div class="flex"><div class="skeleton w-2.5 flex-shrink-0 rounded-none" style="border-radius:0;min-height:120px"></div><div class="flex-1 flex flex-col"><div class="flex items-center justify-between px-4 pt-4 pb-3 border-b border-gray-100"><div class="flex items-center gap-2"><div class="skeleton w-10 h-10 rounded-full"></div><div class="flex flex-col gap-1.5"><div class="skeleton h-4 w-20 rounded-full"></div><div class="skeleton h-3 w-16"></div></div></div><div class="flex flex-col items-end gap-1"><div class="skeleton h-3 w-8"></div><div class="skeleton h-3 w-16"></div></div></div><div class="px-4 py-3 flex gap-2" style="background:#fff7ed"><div class="flex-1 flex flex-col gap-2"><div class="skeleton h-2 w-8"></div><div class="skeleton h-4 w-28"></div><div class="skeleton h-3 w-16"></div><div class="skeleton h-4 w-24"></div></div><div class="flex flex-col gap-1 border-l border-orange-200 pl-3"><div class="skeleton h-6 w-20 rounded-lg"></div><div class="skeleton h-6 w-16 rounded-lg"></div></div></div><div class="px-4 py-3 flex gap-3"><div class="skeleton flex-1 h-10 rounded-xl"></div><div class="skeleton flex-1 h-10 rounded-xl"></div></div></div></div></div>
+        <div class="skeleton-card sm:hidden"><div class="flex"><div class="skeleton w-2.5 flex-shrink-0 rounded-none" style="border-radius:0;min-height:120px"></div><div class="flex-1 flex flex-col"><div class="flex items-center justify-between px-4 pt-4 pb-3 border-b border-gray-100"><div class="flex items-center gap-2"><div class="skeleton w-10 h-10 rounded-full"></div><div class="flex flex-col gap-1.5"><div class="skeleton h-4 w-20 rounded-full"></div><div class="skeleton h-3 w-16"></div></div></div><div class="flex flex-col items-end gap-1"><div class="skeleton h-3 w-8"></div><div class="skeleton h-3 w-16"></div></div></div><div class="px-4 py-3 flex gap-2" style="background:#fff7ed"><div class="flex-1 flex flex-col gap-2"><div class="skeleton h-2 w-8"></div><div class="skeleton h-4 w-28"></div><div class="skeleton h-3 w-16"></div><div class="skeleton h-4 w-24"></div></div><div class="flex flex-col gap-1 border-l border-orange-200 pl-3"><div class="skeleton h-6 w-20 rounded-lg"></div><div class="skeleton h-6 w-16 rounded-lg"></div></div></div><div class="px-4 py-3 flex gap-3"><div class="skeleton flex-1 h-10 rounded-xl"></div><div class="skeleton flex-1 h-10 rounded-xl"></div></div></div></div></div>
+        <div class="skeleton-card sm:hidden"><div class="flex"><div class="skeleton w-2.5 flex-shrink-0 rounded-none" style="border-radius:0;min-height:120px"></div><div class="flex-1 flex flex-col"><div class="flex items-center justify-between px-4 pt-4 pb-3 border-b border-gray-100"><div class="flex items-center gap-2"><div class="skeleton w-10 h-10 rounded-full"></div><div class="flex flex-col gap-1.5"><div class="skeleton h-4 w-20 rounded-full"></div><div class="skeleton h-3 w-16"></div></div></div><div class="flex flex-col items-end gap-1"><div class="skeleton h-3 w-8"></div><div class="skeleton h-3 w-16"></div></div></div><div class="px-4 py-3 flex gap-2" style="background:#fff7ed"><div class="flex-1 flex flex-col gap-2"><div class="skeleton h-2 w-8"></div><div class="skeleton h-4 w-28"></div><div class="skeleton h-3 w-16"></div><div class="skeleton h-4 w-24"></div></div><div class="flex flex-col gap-1 border-l border-orange-200 pl-3"><div class="skeleton h-6 w-20 rounded-lg"></div><div class="skeleton h-6 w-16 rounded-lg"></div></div></div><div class="px-4 py-3 flex gap-3"><div class="skeleton flex-1 h-10 rounded-xl"></div><div class="skeleton flex-1 h-10 rounded-xl"></div></div></div></div></div>
       </div>
     </div>
     
@@ -859,6 +867,495 @@
       lucide.createIcons();
     };
   </script>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SAHAYAK — NATIVE PROGRESSIVE FORM (Bottom Sheet on mobile,
+       centered modal on desktop)
+  ════════════════════════════════════════════════════════════ -->
+
+  <!-- Backdrop -->
+  <div id="post-backdrop" class="sahayak-backdrop" onclick="closePostForm()"></div>
+
+  <!-- Sheet / Modal -->
+  <div id="post-sheet" class="sahayak-sheet" role="dialog" aria-modal="true" aria-label="Post a Sahayak listing">
+
+    <!-- Drag handle (mobile only) -->
+    <div class="flex justify-center pt-3 pb-1">
+      <div class="w-10 h-1 rounded-full bg-gray-300"></div>
+    </div>
+
+    <!-- Header -->
+    <div class="flex items-center justify-between px-5 pt-2 pb-1">
+      <div>
+        <h2 class="text-lg font-bold text-gray-900" id="form-sheet-title">Post a Listing</h2>
+        <p class="text-xs text-gray-500 mt-0.5" id="form-sheet-subtitle">Step 1 of 4 — Your intent</p>
+      </div>
+      <button onclick="closePostForm()" class="p-2 text-gray-400 hover:text-gray-700 rounded-full hover:bg-gray-100 transition" aria-label="Close form">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+    </div>
+
+    <!-- Step indicator -->
+    <div class="flex items-center gap-2 px-5 py-2">
+      <div class="step-dot active" id="dot-1"></div>
+      <div class="step-dot" id="dot-2"></div>
+      <div class="step-dot" id="dot-3"></div>
+      <div class="step-dot" id="dot-4"></div>
+    </div>
+
+    <div class="px-5 pb-6">
+
+      <!-- ─────── STEP 1: Intent ─────── -->
+      <div class="form-step active" id="step-1">
+        <p class="text-sm text-gray-500 mb-4">Are you looking for help, or do you want to help someone?</p>
+        <div class="grid grid-cols-2 gap-3 mb-5">
+          <div class="intent-card" id="card-offering" onclick="selectIntent('offering')">
+            <div class="text-3xl mb-2">✋</div>
+            <div class="font-bold text-gray-900 text-sm">Offering Help</div>
+            <div class="text-xs text-gray-500 mt-1 leading-tight">I'm traveling and can help</div>
+          </div>
+          <div class="intent-card" id="card-requesting" onclick="selectIntent('requesting')">
+            <div class="text-3xl mb-2">🙏</div>
+            <div class="font-bold text-gray-900 text-sm">Requesting Help</div>
+            <div class="text-xs text-gray-500 mt-1 leading-tight">I need a companion or courier</div>
+          </div>
+        </div>
+        <button class="btn-primary-form" id="btn-step1-next" onclick="goToStep(2)" disabled>
+          Continue <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <!-- ─────── STEP 2: Category ─────── -->
+      <div class="form-step" id="step-2">
+        <p class="text-sm text-gray-500 mb-4">What kind of help? <span class="text-gray-400">(Select all that apply)</span></p>
+        <div class="flex flex-col gap-2 mb-5" id="category-options">
+          <div class="cat-pill" id="cat-companion" onclick="toggleCategory('companion', '🧳 Travel companion')">
+            <span>🧳</span> Travel companion
+          </div>
+          <div class="cat-pill" id="cat-medicine" onclick="toggleCategory('medicine', '💊 Medicine')">
+            <span>💊</span> Medicine
+          </div>
+          <div class="cat-pill" id="cat-letter" onclick="toggleCategory('letter', '✉️ Letter / Documents')">
+            <span>✉️</span> Letter / Documents
+          </div>
+          <div class="cat-pill" id="cat-parcel" onclick="toggleCategory('parcel', '🎁 Parcel')">
+            <span>🎁</span> Parcel
+          </div>
+        </div>
+        <div class="flex gap-2">
+          <button class="btn-back-form flex-shrink-0" onclick="goToStep(1, true)">← Back</button>
+          <button class="btn-primary-form" id="btn-step2-next" onclick="goToStep(3)" disabled>
+            Continue <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- ─────── STEP 3: Route Details ─────── -->
+      <div class="form-step" id="step-3">
+        <p class="text-sm text-gray-500 mb-3">Which route are you traveling?</p>
+
+        <!-- Direction toggle -->
+        <div class="mb-4">
+          <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-2 block">Direction</label>
+          <div class="flex gap-2">
+            <button class="flex-1 py-2.5 rounded-xl border-2 text-sm font-bold transition" id="dir-e2i"
+              onclick="selectDirection('Europe to India')"
+              style="border-color:#e5e7eb;color:#6b7280">Europe → India</button>
+            <button class="flex-1 py-2.5 rounded-xl border-2 text-sm font-bold transition" id="dir-i2e"
+              onclick="selectDirection('India to Europe')"
+              style="border-color:#e5e7eb;color:#6b7280">India → Europe</button>
+          </div>
+        </div>
+
+        <!-- Visual SVG Route Map -->
+        <div class="bg-orange-50 rounded-xl border border-orange-100 p-3 mb-4">
+          <svg id="route-svg" viewBox="0 0 320 90" xmlns="http://www.w3.org/2000/svg" class="w-full">
+            <!-- City nodes — Europe -->
+            <text x="12" y="16" font-size="7" font-family="Inter,sans-serif" fill="#9ca3af" font-weight="700" letter-spacing="1">EUROPE</text>
+            <g id="node-frankfurt">
+              <circle cx="24" cy="30" r="4.5" fill="#ea580c" class="city-node-eu"/>
+              <text x="32" y="33" font-size="8" fill="#374151" font-family="Inter,sans-serif" font-weight="600">Frankfurt</text>
+            </g>
+            <g id="node-amsterdam">
+              <circle cx="24" cy="46" r="4.5" fill="#ea580c" class="city-node-eu"/>
+              <text x="32" y="49" font-size="8" fill="#374151" font-family="Inter,sans-serif" font-weight="600">Amsterdam</text>
+            </g>
+            <g id="node-zurich">
+              <circle cx="24" cy="62" r="4.5" fill="#ea580c" class="city-node-eu"/>
+              <text x="32" y="65" font-size="8" fill="#374151" font-family="Inter,sans-serif" font-weight="600">Zurich / Geneva</text>
+            </g>
+            <g id="node-london">
+              <circle cx="24" cy="78" r="4.5" fill="#ea580c" class="city-node-eu"/>
+              <text x="32" y="81" font-size="8" fill="#374151" font-family="Inter,sans-serif" font-weight="600">London</text>
+            </g>
+            <!-- Animated arc -->
+            <path id="route-arc" d="M 130 54 Q 160 10 192 54" stroke="#ea580c" stroke-width="1.5"
+              stroke-dasharray="6 4" fill="none" opacity="0.6">
+              <animateTransform attributeName="transform" type="translate" from="-12 0" to="12 0"
+                dur="2s" repeatCount="indefinite" additive="sum"/>
+            </path>
+            <!-- Plane icon along arc -->
+            <text id="plane-icon" x="155" y="32" font-size="13" text-anchor="middle"
+              style="animation: none">✈</text>
+            <!-- City nodes — India -->
+            <text x="210" y="16" font-size="7" font-family="Inter,sans-serif" fill="#9ca3af" font-weight="700" letter-spacing="1">INDIA</text>
+            <g id="node-mumbai">
+              <circle cx="228" cy="38" r="4.5" fill="#9ca3af" class="city-node-in"/>
+              <text x="236" y="41" font-size="8" fill="#374151" font-family="Inter,sans-serif" font-weight="600">Mumbai</text>
+            </g>
+            <g id="node-pune">
+              <circle cx="228" cy="54" r="4.5" fill="#9ca3af" class="city-node-in"/>
+              <text x="236" y="57" font-size="8" fill="#374151" font-family="Inter,sans-serif" font-weight="600">Pune</text>
+            </g>
+            <g id="node-delhi">
+              <circle cx="228" cy="70" r="4.5" fill="#9ca3af" class="city-node-in"/>
+              <text x="236" y="73" font-size="8" fill="#374151" font-family="Inter,sans-serif" font-weight="600">Delhi / Others</text>
+            </g>
+          </svg>
+        </div>
+
+        <!-- City dropdowns -->
+        <div class="grid grid-cols-2 gap-3 mb-3">
+          <div>
+            <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5 block">City in Europe</label>
+            <select id="s3-city-eu" class="sahayak-input" onchange="updateRouteMap()">
+              <option value="">Select…</option>
+              <option>Frankfurt</option>
+              <option>Munich</option>
+              <option>Berlin</option>
+              <option>Amsterdam</option>
+              <option>Paris</option>
+              <option value="__other_option__">Other city</option>
+            </select>
+            <input type="text" id="s3-city-eu-other" class="sahayak-input mt-2 hidden" placeholder="Enter city name">
+          </div>
+          <div>
+            <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5 block">City in India</label>
+            <select id="s3-city-in" class="sahayak-input" onchange="updateRouteMap()">
+              <option value="">Select…</option>
+              <option>Mumbai</option>
+              <option>Pune</option>
+              <option>Delhi</option>
+              <option>Chennai</option>
+              <option>Banglore</option>
+              <option>Hyderabad</option>
+              <option value="__other_option__">Other city</option>
+            </select>
+            <input type="text" id="s3-city-in-other" class="sahayak-input mt-2 hidden" placeholder="Enter city name">
+          </div>
+        </div>
+        <div class="mb-5">
+          <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5 block">Flight Number <span class="font-normal normal-case text-gray-400">(optional, helps auto-matching)</span></label>
+          <input type="text" id="s3-flight" class="sahayak-input" placeholder="e.g. LH 760">
+        </div>
+        <div class="flex gap-2">
+          <button class="btn-back-form flex-shrink-0" onclick="goToStep(2, true)">← Back</button>
+          <button class="btn-primary-form" id="btn-step3-next" onclick="goToStep(4)" disabled>
+            Continue <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- ─────── STEP 4: Personal Details ─────── -->
+      <div class="form-step" id="step-4">
+        <p class="text-sm text-gray-500 mb-4">Almost done! A few personal details so the community can reach you.</p>
+
+        <div class="flex flex-col gap-3 mb-4">
+          <div>
+            <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5 block">Your Name *</label>
+            <input type="text" id="s4-name" class="sahayak-input" placeholder="e.g. Rahul Patil" required
+              oninput="validateStep4()">
+          </div>
+          <div>
+            <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5 block">Email Address * <span class="font-normal normal-case text-gray-400">(for auto-matching notifications)</span></label>
+            <input type="email" id="s4-email" class="sahayak-input" placeholder="yourname@example.com" required
+              oninput="validateStep4()">
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5 block">WhatsApp Number *</label>
+              <input type="tel" id="s4-whatsapp" class="sahayak-input" placeholder="+4917600000000" required
+                oninput="validateStep4()">
+            </div>
+            <div>
+              <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5 block">Travel Date *</label>
+              <input type="date" id="s4-date" class="sahayak-input" required
+                oninput="validateStep4()">
+            </div>
+          </div>
+          <div>
+            <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5 block">Languages Spoken</label>
+            <div class="flex flex-wrap gap-1.5" id="lang-options">
+              <span class="lang-pill" onclick="toggleLang(this, 'Marathi')">Marathi</span>
+              <span class="lang-pill" onclick="toggleLang(this, 'Hindi')">Hindi</span>
+              <span class="lang-pill" onclick="toggleLang(this, 'Gujarati')">Gujarati</span>
+              <span class="lang-pill" onclick="toggleLang(this, 'Punjabi')">Punjabi</span>
+              <span class="lang-pill" onclick="toggleLang(this, 'Tamil')">Tamil</span>
+              <span class="lang-pill" onclick="toggleLang(this, 'Telugu')">Telugu</span>
+              <span class="lang-pill" onclick="toggleLang(this, 'Bengali')">Bengali</span>
+              <span class="lang-pill" onclick="toggleLang(this, 'English')">English</span>
+            </div>
+          </div>
+          <div>
+            <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5 block">Short Description * <span class="font-normal normal-case text-gray-400">(max 200 chars)</span></label>
+            <textarea id="s4-description" class="sahayak-input" maxlength="200" placeholder="Briefly describe your travel, what help you're offering or need…" required oninput="validateStep4()"></textarea>
+            <div class="text-right text-xs text-gray-400 mt-1" id="desc-count">0 / 200</div>
+          </div>
+        </div>
+
+        <!-- Consent checkbox -->
+        <label class="flex items-start gap-3 p-3 bg-orange-50 rounded-xl border border-orange-100 cursor-pointer mb-4">
+          <input type="checkbox" id="s4-consent" class="mt-0.5 w-4 h-4 accent-orange-600 flex-shrink-0" onchange="validateStep4()">
+          <span class="text-xs text-orange-800 leading-relaxed">
+            I confirm this listing is genuine. I consent to my name, city, travel date, and WhatsApp number being publicly displayed on maharashtraineurope.com/sahayak/. I can request removal at any time by emailing contact@maharashtraineurope.com.
+          </span>
+        </label>
+
+        <div class="flex gap-2">
+          <button class="btn-back-form flex-shrink-0" onclick="goToStep(3, true)">← Back</button>
+          <button class="btn-primary-form" id="btn-submit" onclick="submitListing()" disabled>
+            Post Listing 🚀
+          </button>
+        </div>
+        <p class="text-center text-[10px] text-gray-400 mt-3">Your listing appears live within a few minutes. Jai Maharashtra! 🧡</p>
+      </div>
+
+    </div><!-- /px-5 -->
+  </div><!-- /sahayak-sheet -->
+
+  <!-- ═══ FORM JAVASCRIPT ═══════════════════════════════════════ -->
+  <script>
+    /* ── Form State ── */
+    const formState = {
+      intent: null,          // 'Offering to help' | 'Looking for help'
+      categories: new Set(), // values matching Google Form options
+      direction: null,       // 'Europe to India' | 'India to Europe'
+      cityEu: '',
+      cityIn: '',
+      flight: '',
+      name: '',
+      email: '',
+      whatsapp: '',
+      date: '',
+      description: '',
+      languages: new Set(),
+    };
+
+    let currentStep = 1;
+    const STEP_TITLES = [
+      '', // 1-indexed
+      'Post a Listing',
+      'What kind of help?',
+      'Route Details',
+      'Your Details',
+    ];
+    const STEP_SUBTITLES = [
+      '',
+      'Step 1 of 4 — Your intent',
+      'Step 2 of 4 — Help type',
+      'Step 3 of 4 — Route',
+      'Step 4 of 4 — Personal details',
+    ];
+
+    /* ── Open / Close ── */
+    function openPostForm() {
+      document.getElementById('post-backdrop').classList.add('open');
+      document.getElementById('post-sheet').classList.add('open');
+      document.body.style.overflow = 'hidden';
+      lucide.createIcons();
+    }
+
+    function closePostForm() {
+      document.getElementById('post-backdrop').classList.remove('open');
+      document.getElementById('post-sheet').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    /* ── Step Navigation ── */
+    function goToStep(n, isBack) {
+      // Hide current, show next
+      document.getElementById('step-' + currentStep).classList.remove('active', 'step-back');
+      currentStep = n;
+      const stepEl = document.getElementById('step-' + n);
+      stepEl.classList.add('active');
+      if (isBack) {
+        stepEl.classList.add('step-back');
+        setTimeout(() => stepEl.classList.remove('step-back'), 300);
+      }
+      // Update header
+      document.getElementById('form-sheet-title').textContent = STEP_TITLES[n];
+      document.getElementById('form-sheet-subtitle').textContent = STEP_SUBTITLES[n];
+      // Update dots
+      for (let i = 1; i <= 4; i++) {
+        const dot = document.getElementById('dot-' + i);
+        dot.classList.toggle('active', i === n);
+      }
+      // Scroll sheet to top
+      document.getElementById('post-sheet').scrollTop = 0;
+      lucide.createIcons();
+    }
+
+    /* ── Step 1: Intent ── */
+    function selectIntent(type) {
+      formState.intent = type === 'offering' ? 'Offering to help' : 'Looking for help';
+      document.getElementById('card-offering').className = 'intent-card' + (type === 'offering' ? ' selected-offering' : '');
+      document.getElementById('card-requesting').className = 'intent-card' + (type === 'requesting' ? ' selected-requesting' : '');
+      document.getElementById('btn-step1-next').disabled = false;
+    }
+
+    /* ── Step 2: Category ── */
+    const CAT_MAP = {
+      companion: '🧳 Travel companion',
+      medicine:  '💊 Medicine',
+      letter:    '✉️ Letter / Documents',
+      parcel:    '🎁 Parcel',
+    };
+
+    function toggleCategory(id, value) {
+      const el = document.getElementById('cat-' + id);
+      if (formState.categories.has(value)) {
+        formState.categories.delete(value);
+        el.classList.remove('selected');
+      } else {
+        formState.categories.add(value);
+        el.classList.add('selected');
+      }
+      document.getElementById('btn-step2-next').disabled = formState.categories.size === 0;
+    }
+
+    /* ── Step 3: Direction + Route Map ── */
+    function selectDirection(dir) {
+      formState.direction = dir;
+      const e2i = document.getElementById('dir-e2i');
+      const i2e = document.getElementById('dir-i2e');
+      if (dir === 'Europe to India') {
+        e2i.style.borderColor = '#ea580c'; e2i.style.color = '#ea580c'; e2i.style.background = '#fff7ed';
+        i2e.style.borderColor = '#e5e7eb'; i2e.style.color = '#6b7280'; i2e.style.background = '';
+        // Animate map: EU nodes orange, IN nodes gray
+        document.querySelectorAll('.city-node-eu').forEach(n => n.setAttribute('fill', '#ea580c'));
+        document.querySelectorAll('.city-node-in').forEach(n => n.setAttribute('fill', '#9ca3af'));
+      } else {
+        i2e.style.borderColor = '#ea580c'; i2e.style.color = '#ea580c'; i2e.style.background = '#fff7ed';
+        e2i.style.borderColor = '#e5e7eb'; e2i.style.color = '#6b7280'; e2i.style.background = '';
+        document.querySelectorAll('.city-node-in').forEach(n => n.setAttribute('fill', '#ea580c'));
+        document.querySelectorAll('.city-node-eu').forEach(n => n.setAttribute('fill', '#9ca3af'));
+      }
+      validateStep3();
+    }
+
+    function updateRouteMap() {
+      const eu = document.getElementById('s3-city-eu').value;
+      const euOther = document.getElementById('s3-city-eu-other');
+      const inCity = document.getElementById('s3-city-in').value;
+      const inOther = document.getElementById('s3-city-in-other');
+      euOther.classList.toggle('hidden', eu !== '__other_option__');
+      inOther.classList.toggle('hidden', inCity !== '__other_option__');
+      validateStep3();
+    }
+
+    function validateStep3() {
+      const eu = document.getElementById('s3-city-eu').value;
+      const inCity = document.getElementById('s3-city-in').value;
+      const euOtherVal = document.getElementById('s3-city-eu-other').value.trim();
+      const inOtherVal = document.getElementById('s3-city-in-other').value.trim();
+      const euOk = eu && (eu !== '__other_option__' || euOtherVal);
+      const inOk = inCity && (inCity !== '__other_option__' || inOtherVal);
+      document.getElementById('btn-step3-next').disabled = !(formState.direction && euOk && inOk);
+    }
+
+    /* ── Step 4: Languages ── */
+    function toggleLang(el, lang) {
+      if (formState.languages.has(lang)) {
+        formState.languages.delete(lang);
+        el.classList.remove('selected');
+      } else {
+        formState.languages.add(lang);
+        el.classList.add('selected');
+      }
+    }
+
+    /* ── Step 4: Char count + Validation ── */
+    document.addEventListener('DOMContentLoaded', function() {
+      const descEl = document.getElementById('s4-description');
+      if (descEl) {
+        descEl.addEventListener('input', function() {
+          document.getElementById('desc-count').textContent = this.value.length + ' / 200';
+        });
+      }
+    });
+
+    function validateStep4() {
+      const name = (document.getElementById('s4-name')?.value || '').trim();
+      const email = (document.getElementById('s4-email')?.value || '').trim();
+      const wa = (document.getElementById('s4-whatsapp')?.value || '').trim();
+      const date = (document.getElementById('s4-date')?.value || '').trim();
+      const desc = (document.getElementById('s4-description')?.value || '').trim();
+      const consent = document.getElementById('s4-consent')?.checked;
+      const emailOk = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email);
+      document.getElementById('btn-submit').disabled = !(name && emailOk && wa && date && desc && consent);
+    }
+
+    /* ── Submit: build pre-filled Google Form URL and open it ── */
+    function submitListing() {
+      // Collect all values
+      const euSel = document.getElementById('s3-city-eu').value;
+      const inSel = document.getElementById('s3-city-in').value;
+      const cityEu = euSel === '__other_option__'
+        ? document.getElementById('s3-city-eu-other').value.trim()
+        : euSel;
+      const cityIn = inSel === '__other_option__'
+        ? document.getElementById('s3-city-in-other').value.trim()
+        : inSel;
+
+      const name     = document.getElementById('s4-name').value.trim();
+      const email    = document.getElementById('s4-email').value.trim();
+      const whatsapp = document.getElementById('s4-whatsapp').value.trim();
+      const date     = document.getElementById('s4-date').value; // YYYY-MM-DD
+      const desc     = document.getElementById('s4-description').value.trim();
+      const flight   = document.getElementById('s3-flight').value.trim();
+
+      // Format date for Google Form (DD/MM/YYYY) via date parts
+      const [yr, mo, dy] = date.split('-');
+
+      // Google Form entry IDs (confirmed from FB_PUBLIC_LOAD_DATA_)
+      const BASE = 'https://docs.google.com/forms/d/e/1FAIpQLSfhYJsl0Rj-BAzLB9QL6R1uXQ3ytZpW5D08MZdc5IRJ1lisqQ/formResponse';
+      const params = new URLSearchParams();
+
+      params.set('emailAddress', email);                              // Verified email field
+      params.set('entry.1397846766', name);                          // Name
+      params.set('entry.301274105', formState.intent);               // Looking for or Offering
+      // Multiple checkboxes use repeated key
+      formState.categories.forEach(cat => params.append('entry.354618586', cat)); // What kind of help
+      params.set('entry.529455343', formState.direction);            // Direction
+      params.set('entry.105702180', cityEu || '__other_option__');   // City in Europe
+      if (euSel === '__other_option__') params.set('entry.105702180.other_option_response', cityEu);
+      params.set('entry.1915330949', cityIn || '__other_option__');  // City in India
+      if (inSel === '__other_option__') params.set('entry.1915330949.other_option_response', cityIn);
+      // Date: Google Forms date fields use _year, _month, _day suffixes
+      params.set('entry.1466694749_year',  yr);
+      params.set('entry.1466694749_month', mo);
+      params.set('entry.1466694749_day',   dy);
+      formState.languages.forEach(l => params.append('entry.764331455', l)); // Languages
+      if (flight) params.set('entry.1371998792', flight);            // Flight number
+      params.set('entry.654336790', desc);                           // Short description
+      params.set('entry.195533397', whatsapp);                       // WhatsApp number
+      params.set('entry.1188592008', 'Agree');                       // Consent
+
+      // Redirect to Google Form formResponse — Google will log the verified email
+      // and write to the Sheet
+      const submitUrl = BASE + '?' + params.toString();
+      window.open(submitUrl, '_blank');
+      closePostForm();
+    }
+
+    // Attach the direction change listener for step 3 city dropdowns
+    ['s3-city-eu', 's3-city-in'].forEach(id => {
+      document.addEventListener('change', function(e) {
+        if (e.target && e.target.id === id) validateStep3();
+      });
+    });
+  </script>
+
 </body>
 
 </html>

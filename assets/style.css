@@ -139,3 +139,239 @@ h1, h2, h3, h4, h5, h6, .playfair {
     margin-top: 4px;
 }
 
+
+/* ── 7. SAHAYAK — Skeleton Loaders ──────────────────────────── */
+@keyframes shimmer {
+    0%   { background-position: -600px 0; }
+    100% { background-position:  600px 0; }
+}
+
+.skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
+    background-size: 600px 100%;
+    animation: shimmer 1.5s infinite linear;
+    border-radius: 6px;
+}
+
+.skeleton-card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+/* ── 8. SAHAYAK — Bottom Sheet / Form Modal ─────────────────── */
+.sahayak-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    backdrop-filter: blur(4px);
+    z-index: 60;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+.sahayak-backdrop.open {
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* Mobile: bottom sheet */
+.sahayak-sheet {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 61;
+    background: #fff;
+    border-radius: 24px 24px 0 0;
+    padding: 0 0 env(safe-area-inset-bottom, 16px);
+    transform: translateY(100%);
+    transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+    max-height: 92vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+.sahayak-sheet.open {
+    transform: translateY(0);
+}
+
+/* Desktop: centered modal */
+@media (min-width: 640px) {
+    .sahayak-sheet {
+        top: 50%;
+        left: 50%;
+        bottom: auto;
+        right: auto;
+        transform: translate(-50%, -50%) scale(0.94);
+        border-radius: 20px;
+        max-width: 520px;
+        width: 100%;
+        max-height: 90vh;
+        transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1), opacity 0.3s ease;
+        opacity: 0;
+    }
+    .sahayak-sheet.open {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+}
+
+/* Step transitions */
+.form-step { display: none; }
+.form-step.active {
+    display: block;
+    animation: stepFadeIn 0.28s ease forwards;
+}
+@keyframes stepFadeIn {
+    from { opacity: 0; transform: translateX(18px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+.form-step.step-back {
+    animation: stepFadeInBack 0.28s ease forwards;
+}
+@keyframes stepFadeInBack {
+    from { opacity: 0; transform: translateX(-18px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Intent cards */
+.intent-card {
+    border: 2px solid #e5e7eb;
+    border-radius: 14px;
+    padding: 20px 12px;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s, transform 0.15s;
+    text-align: center;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+.intent-card:active { transform: scale(0.97); }
+.intent-card.selected-offering  { border-color: #22c55e; background: #f0fdf4; }
+.intent-card.selected-requesting { border-color: #f43f5e; background: #fff1f3; }
+
+/* Category pills */
+.cat-pill {
+    border: 1.5px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 10px 14px;
+    cursor: pointer;
+    transition: border-color 0.18s, background 0.18s, transform 0.12s;
+    font-size: 13px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    min-height: 48px;
+    color: #374151;
+}
+.cat-pill:active { transform: scale(0.97); }
+.cat-pill.selected { border-color: #ea580c; background: #fff7ed; color: #ea580c; }
+
+/* Form inputs */
+.sahayak-input {
+    width: 100%;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+    color: #1f2937;
+    background: #fff;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    min-height: 48px;
+    box-sizing: border-box;
+}
+.sahayak-input:focus {
+    border-color: #ea580c;
+    box-shadow: 0 0 0 3px rgba(234,88,12,0.12);
+}
+.sahayak-input::placeholder { color: #9ca3af; }
+textarea.sahayak-input { min-height: 90px; resize: vertical; }
+
+/* City / language option rows */
+.city-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: border-color 0.18s, background 0.18s;
+    font-size: 13px;
+    font-weight: 500;
+    min-height: 44px;
+    user-select: none;
+    color: #374151;
+}
+.city-option:active { transform: scale(0.98); }
+.city-option.selected { border-color: #ea580c; background: #fff7ed; color: #c2410c; }
+
+.lang-pill {
+    border: 1.5px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 7px 12px;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+    font-size: 12px;
+    font-weight: 600;
+    user-select: none;
+    min-height: 36px;
+    display: inline-flex;
+    align-items: center;
+    color: #374151;
+}
+.lang-pill.selected { border-color: #ea580c; background: #fff7ed; color: #ea580c; }
+
+/* Step indicator dots */
+.step-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #e5e7eb;
+    transition: background 0.25s, width 0.25s;
+    flex-shrink: 0;
+}
+.step-dot.active { background: #ea580c; width: 24px; border-radius: 4px; }
+
+/* Form CTAs */
+.btn-primary-form {
+    width: 100%;
+    background: #ea580c;
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 16px 24px;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    min-height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+.btn-primary-form:hover  { background: #c2410c; }
+.btn-primary-form:active { transform: scale(0.98); }
+.btn-primary-form:disabled { opacity: 0.55; cursor: not-allowed; }
+
+.btn-back-form {
+    background: transparent;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 14px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #6b7280;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+    min-height: 52px;
+    font-family: 'Inter', sans-serif;
+}
+.btn-back-form:hover { border-color: #ea580c; color: #ea580c; }
