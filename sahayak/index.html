@@ -955,7 +955,7 @@
         <p class="text-sm text-gray-500 mb-3">Which route are you traveling?</p>
 
         <!-- Interactive Route Direction Selection -->
-        <div class="flex items-center justify-between mb-4 bg-orange-50 py-4 px-2 sm:px-4 rounded-xl border border-orange-100 relative overflow-hidden">
+        <div class="flex items-center justify-between mb-4 bg-orange-50 py-6 px-4 rounded-xl border border-orange-100 relative overflow-hidden">
           
           <!-- Animated Background Dashed Line -->
           <div class="absolute inset-0 flex items-center justify-center opacity-30 pointer-events-none">
@@ -963,34 +963,26 @@
           </div>
 
           <!-- Europe Side -->
-          <div class="relative z-10 w-1/3 text-center">
-            <div id="side-eu-label" class="text-[10px] font-bold text-orange-600 uppercase tracking-wider mb-2">Europe</div>
-            <div id="side-eu-list" class="text-[10px] sm:text-xs text-gray-800 text-left mx-auto w-fit space-y-1">
-              <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-orange-500"></span>Frankfurt</div>
-              <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-orange-500"></span>Amsterdam</div>
-              <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-orange-500"></span>Zurich</div>
-              <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-orange-500"></span>London</div>
-            </div>
+          <div class="relative z-10 w-1/3 text-center transition-opacity opacity-50" id="eu-block">
+            <div id="side-eu-role" class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">...</div>
+            <div class="text-xl font-bold text-gray-800">Europe</div>
           </div>
 
           <!-- Middle Plane (Click to Toggle) -->
           <div class="relative z-10 flex flex-col items-center justify-center cursor-pointer group px-2" onclick="toggleDirection()">
-            <div class="text-[9px] text-orange-600 font-bold uppercase tracking-wider mb-1 opacity-0 group-hover:opacity-100 transition whitespace-nowrap bg-orange-100 px-2 py-0.5 rounded-full">Click to flip</div>
+            <!-- Pulse guideline -->
+            <div id="plane-instruction" class="text-[9px] text-white bg-orange-600 font-bold uppercase tracking-wider mb-2 px-2 py-1 rounded-full animate-pulse shadow-sm">Tap to Set Route <span class="text-white">*</span></div>
+            
             <div class="w-14 h-14 bg-white rounded-full shadow-md border-2 border-orange-200 flex items-center justify-center text-orange-600 hover:bg-orange-50 hover:scale-105 transition-all">
-               <i data-lucide="plane" id="center-plane-icon" class="w-7 h-7 transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] transform rotate-45" style="fill: currentColor"></i>
+               <i data-lucide="plane" id="center-plane-icon" class="w-7 h-7 transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] transform -rotate-45 opacity-60" style="fill: currentColor"></i>
             </div>
-            <div class="text-[10px] text-gray-500 font-bold uppercase tracking-wider mt-2 whitespace-nowrap" id="dir-label">Europe → India</div>
+            <div class="text-[10px] text-gray-500 font-bold uppercase tracking-wider mt-2 whitespace-nowrap" id="dir-label">Not Selected</div>
           </div>
 
           <!-- India Side -->
-          <div class="relative z-10 w-1/3 text-center">
-            <div id="side-in-label" class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-2 transition-colors">India</div>
-            <div id="side-in-list" class="text-[10px] sm:text-xs text-gray-400 text-left mx-auto w-fit space-y-1 transition-colors">
-              <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-gray-300"></span>Mumbai</div>
-              <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-gray-300"></span>Pune</div>
-              <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-gray-300"></span>Delhi</div>
-              <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-gray-300"></span>Others</div>
-            </div>
+          <div class="relative z-10 w-1/3 text-center transition-opacity opacity-50" id="in-block">
+            <div id="side-in-role" class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">...</div>
+            <div class="text-xl font-bold text-gray-800">India</div>
           </div>
         </div>
 
@@ -1122,7 +1114,7 @@
     const formState = {
       intent: null,          // 'Offering to help' | 'Looking for help'
       categories: new Set(), // values matching Google Form options
-      direction: 'Europe to India', // default
+      direction: null,       // default
       cityEu: '',
       cityIn: '',
       flight: '',
@@ -1220,40 +1212,50 @@
 
     /* ── Step 3: Direction + Route Map ── */
     function toggleDirection() {
-      formState.direction = (formState.direction === 'Europe to India') ? 'India to Europe' : 'Europe to India';
+      if (!formState.direction || formState.direction === 'India to Europe') {
+        formState.direction = 'Europe to India';
+      } else {
+        formState.direction = 'India to Europe';
+      }
       updateDirectionUI();
     }
 
     function updateDirectionUI() {
       const plane = document.getElementById('center-plane-icon');
       const label = document.getElementById('dir-label');
-      const euLabel = document.getElementById('side-eu-label');
-      const inLabel = document.getElementById('side-in-label');
-      const euList = document.getElementById('side-eu-list');
-      const inList = document.getElementById('side-in-list');
+      const instruction = document.getElementById('plane-instruction');
+      const euRole = document.getElementById('side-eu-role');
+      const inRole = document.getElementById('side-in-role');
+      const euBlock = document.getElementById('eu-block');
+      const inBlock = document.getElementById('in-block');
+
+      // Hide the instruction pulse once interacted
+      if (instruction) instruction.style.display = 'none';
 
       if (formState.direction === 'Europe to India') {
         plane.style.transform = 'rotate(45deg)';
+        plane.style.opacity = '1';
         label.textContent = 'Europe → India';
         
-        euLabel.className = 'text-[10px] font-bold text-orange-600 uppercase tracking-wider mb-2 transition-colors';
-        euList.className = 'text-[10px] sm:text-xs text-gray-800 text-left mx-auto w-fit space-y-1 transition-colors';
-        euList.querySelectorAll('span').forEach(s => s.className = 'w-1.5 h-1.5 rounded-full bg-orange-500 transition-colors');
+        euRole.textContent = 'From';
+        euRole.className = 'text-[10px] font-bold text-orange-600 uppercase tracking-wider mb-1';
+        euBlock.className = 'relative z-10 w-1/3 text-center transition-opacity opacity-100';
         
-        inLabel.className = 'text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-2 transition-colors';
-        inList.className = 'text-[10px] sm:text-xs text-gray-400 text-left mx-auto w-fit space-y-1 transition-colors';
-        inList.querySelectorAll('span').forEach(s => s.className = 'w-1.5 h-1.5 rounded-full bg-gray-300 transition-colors');
-      } else {
+        inRole.textContent = 'To';
+        inRole.className = 'text-[10px] font-bold text-orange-600 uppercase tracking-wider mb-1';
+        inBlock.className = 'relative z-10 w-1/3 text-center transition-opacity opacity-100';
+      } else if (formState.direction === 'India to Europe') {
         plane.style.transform = 'rotate(-135deg)';
+        plane.style.opacity = '1';
         label.textContent = 'India → Europe';
         
-        inLabel.className = 'text-[10px] font-bold text-orange-600 uppercase tracking-wider mb-2 transition-colors';
-        inList.className = 'text-[10px] sm:text-xs text-gray-800 text-left mx-auto w-fit space-y-1 transition-colors';
-        inList.querySelectorAll('span').forEach(s => s.className = 'w-1.5 h-1.5 rounded-full bg-orange-500 transition-colors');
+        inRole.textContent = 'From';
+        inRole.className = 'text-[10px] font-bold text-orange-600 uppercase tracking-wider mb-1';
+        inBlock.className = 'relative z-10 w-1/3 text-center transition-opacity opacity-100';
         
-        euLabel.className = 'text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-2 transition-colors';
-        euList.className = 'text-[10px] sm:text-xs text-gray-400 text-left mx-auto w-fit space-y-1 transition-colors';
-        euList.querySelectorAll('span').forEach(s => s.className = 'w-1.5 h-1.5 rounded-full bg-gray-300 transition-colors');
+        euRole.textContent = 'To';
+        euRole.className = 'text-[10px] font-bold text-orange-600 uppercase tracking-wider mb-1';
+        euBlock.className = 'relative z-10 w-1/3 text-center transition-opacity opacity-100';
       }
       validateStep3();
     }
