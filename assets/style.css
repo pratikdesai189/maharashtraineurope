@@ -377,24 +377,23 @@ textarea.sahayak-input { min-height: 90px; resize: vertical; }
 .btn-back-form:hover { border-color: #ea580c; color: #ea580c; }
 
 /* ── 9. SVG ROUTE MAP ANIMATIONS ───────────────────────────── */
-@keyframes flyRight {
-  0%   { transform: translate(45px, 45px) rotate(45deg); opacity: 0; }
-  10%  { opacity: 1; }
-  90%  { opacity: 1; }
-  100% { transform: translate(210px, 45px) rotate(45deg); opacity: 0; }
+@keyframes driftCloud {
+  0%   { transform: translateX(-50px); opacity: 0; }
+  10%  { opacity: 0.6; }
+  90%  { opacity: 0.6; }
+  100% { transform: translateX(800px); opacity: 0; }
 }
 
-@keyframes flyLeft {
-  0%   { transform: translate(210px, 45px) rotate(-135deg); opacity: 0; }
-  10%  { opacity: 1; }
-  90%  { opacity: 1; }
-  100% { transform: translate(45px, 45px) rotate(-135deg); opacity: 0; }
+.animate-cloud-1 {
+  animation: driftCloud 18s linear infinite;
 }
 
-.plane-e2i {
-  animation: flyRight 3.5s ease-in-out infinite;
+.animate-cloud-2 {
+  animation: driftCloud 25s linear infinite;
+  animation-delay: 7s;
 }
 
-.plane-i2e {
-  animation: flyLeft 3.5s ease-in-out infinite;
+.animate-cloud-3 {
+  animation: driftCloud 22s linear infinite;
+  animation-delay: 14s;
 }
