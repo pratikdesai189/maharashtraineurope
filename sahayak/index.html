@@ -61,11 +61,11 @@
   <style>
     /* Flip Text Animation */
     .flip-container {
-      height: 1.2em;
+      height: 1.8em;
       overflow: hidden;
       display: inline-flex;
       align-items: center;
-      vertical-align: bottom;
+      vertical-align: middle;
       position: relative;
     }
     .flip-track {
@@ -74,21 +74,22 @@
       animation: flipText 14s cubic-bezier(0.23, 1, 0.32, 1) infinite;
     }
     .flip-item {
-      height: 1.2em;
-      line-height: 1.2em;
+      height: 1.8em;
+      line-height: 1.8em;
       display: flex;
       align-items: center;
       justify-content: center;
+      padding-bottom: 0.1em;
     }
     @keyframes flipText {
       0%, 10% { transform: translateY(0); }
-      14.28%, 24.28% { transform: translateY(-1.2em); }
-      28.57%, 38.57% { transform: translateY(-2.4em); }
-      42.85%, 52.85% { transform: translateY(-3.6em); }
-      57.14%, 67.14% { transform: translateY(-4.8em); }
-      71.42%, 81.42% { transform: translateY(-6.0em); }
-      85.71%, 95.71% { transform: translateY(-7.2em); }
-      100% { transform: translateY(-8.4em); }
+      14.28%, 24.28% { transform: translateY(-1.8em); }
+      28.57%, 38.57% { transform: translateY(-3.6em); }
+      42.85%, 52.85% { transform: translateY(-5.4em); }
+      57.14%, 67.14% { transform: translateY(-7.2em); }
+      71.42%, 81.42% { transform: translateY(-9.0em); }
+      85.71%, 95.71% { transform: translateY(-10.8em); }
+      100% { transform: translateY(-12.6em); }
     }
 
     /* 3D Board Flip Animation */
@@ -154,7 +155,7 @@
       <span
         class="bg-white/20 border border-white/30 px-3 py-1 rounded-full text-xs font-medium tracking-widest uppercase mb-4 inline-block">Community
         Feature</span>
-      <h2 class="text-4xl md:text-6xl font-bold mb-2 flex items-center justify-center flex-wrap gap-x-2 md:gap-x-3">
+      <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-2 flex flex-row items-center justify-center flex-nowrap whitespace-nowrap gap-x-2 md:gap-x-3 overflow-visible">
         <div class="flip-container text-white">
           <div class="flip-track">
             <span class="flip-item marathi">सहायक</span>
