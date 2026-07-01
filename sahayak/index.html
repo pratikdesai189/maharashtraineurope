@@ -1106,6 +1106,19 @@
       const headers = rows[0].map(h => h.trim().toLowerCase().replace(/\s+/g, '_').replace(/[^\w]/g, ''));
       return rows.slice(1).map(cols => {
         const obj = {}; headers.forEach((h, i) => obj[h] = (cols[i] || '').trim());
+        
+        // Use the 'Profile Picture URL' header if present
+        if (obj.profile_picture_url && !obj.picture) {
+          obj.picture = obj.profile_picture_url;
+        }
+        
+        // Fallback for missing header
+        if (!obj.picture && cols.length > headers.length - 2) {
+          const lastCol = (cols[cols.length - 1] || '').trim();
+          if (lastCol.startsWith('http')) {
+            obj.picture = lastCol;
+          }
+        }
         return obj;
       }).filter(r => r.name && r.name.length > 0);
     }
