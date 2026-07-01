@@ -1116,6 +1116,7 @@
         var logo8 = r.flight_number ? '<div class="flex items-center justify-center h-8">' + getAirlineLogo(r.flight_number, 'h-8 w-auto object-contain') + '</div>' : '<div class="h-8"></div>';
         var avatarDiv = '<div class="w-9 h-9 rounded-full flex items-center justify-center font-bold text-sm" style="background:' + av.bg + ';color:' + av.color + '">' + initials(r.name) + '</div>';
         var firstName = r.name.split(' ')[0];
+        var verifiedBadge = '<span class="inline-flex items-center ml-1" title="Verified via LinkedIn"><i data-lucide="linkedin" class="w-3 h-3 text-[#0A66C2] fill-current"></i><i data-lucide="badge-check" class="w-3.5 h-3.5 text-[#0A66C2] ml-0.5"></i></span>';
 
         /* flight badge for desktop centre */
         var flightBadge = r.flight_number
@@ -1139,18 +1140,18 @@
         }
 
         /* action buttons */
-        var btnConnect = '<a href="#" onclick="event.preventDefault(); event.stopPropagation(); openVerificationModal(this)" data-phone="' + (r.whatsapp_number || '') + '" class="auth-connect-btn flex-1 bg-[#0A66C2] hover:bg-[#084e96] text-white text-xs font-extrabold py-2.5 rounded-xl transition shadow flex items-center justify-center gap-1.5' + noWa + '"><i data-lucide="linkedin" class="w-3.5 h-3.5"></i> Connect via LinkedIn</a>';
-        var btnShare = '<button onclick="event.stopPropagation(); shareOnWhatsApp(' + globalIndex + ')" class="flex-1 bg-[#25D366] hover:bg-[#1ebe5d] text-white text-xs font-extrabold py-2.5 rounded-xl transition shadow flex items-center justify-center gap-1.5">' + waSvgSmall + 'SHARE</button>';
-        var btnDesktopConnect = '<a href="#" onclick="event.preventDefault(); event.stopPropagation(); openVerificationModal(this)" data-phone="' + (r.whatsapp_number || '') + '" class="auth-connect-btn bg-[#0A66C2] hover:bg-[#084e96] text-white text-[10px] font-bold px-2.5 py-1.5 rounded-lg transition shadow-sm whitespace-nowrap flex items-center justify-center gap-1' + noWa + '"><i data-lucide="linkedin" class="w-3 h-3"></i> Connect via LinkedIn</a>';
-        var btnDesktopShare = '<button onclick="event.stopPropagation(); shareOnWhatsApp(' + globalIndex + ')" class="bg-[#25D366] hover:bg-[#1ebe5d] text-white text-[10px] font-bold px-2 py-1.5 rounded-lg transition shadow-sm flex items-center gap-1 whitespace-nowrap">' + waSvgSmall + 'SHARE ON WHATSAPP</button>';
+        var btnChat = '<button onclick="event.preventDefault(); event.stopPropagation(); handleChatAction(\\'' + (r.whatsapp_number || '') + '\\')" class="flex-1 bg-[#25D366] hover:bg-[#1ebe5d] text-white text-xs font-extrabold py-2.5 rounded-xl transition shadow flex items-center justify-center gap-1.5' + noWa + '">' + waSvgSmall + 'Chat</button>';
+        var btnShare = '<button onclick="event.stopPropagation(); shareOnWhatsApp(' + globalIndex + ')" class="flex-1 bg-white hover:bg-gray-50 text-green-600 border border-green-600 text-xs font-extrabold py-2.5 rounded-xl transition shadow-sm flex items-center justify-center gap-1.5"><i data-lucide="share-2" class="w-3.5 h-3.5"></i> Share</button>';
+        var btnDesktopChat = '<button onclick="event.preventDefault(); event.stopPropagation(); handleChatAction(\\'' + (r.whatsapp_number || '') + '\\')" class="bg-[#25D366] hover:bg-[#1ebe5d] text-white text-[10px] font-bold px-4 py-1.5 rounded-lg transition shadow-sm whitespace-nowrap flex items-center justify-center gap-1' + noWa + '">' + waSvgSmall + 'Chat</button>';
+        var btnDesktopShare = '<button onclick="event.stopPropagation(); shareOnWhatsApp(' + globalIndex + ')" class="bg-white hover:bg-gray-50 text-green-600 border border-green-600 text-[10px] font-bold px-3 py-1.5 rounded-lg transition shadow-sm flex items-center gap-1 whitespace-nowrap"><i data-lucide="share-2" class="w-3 h-3"></i> Share</button>';
 
         var mobileActions = expired
           ? '<span class="text-xs text-gray-400 font-bold uppercase tracking-wide block text-center py-2">Listing Completed</span>'
-          : '<div class="flex gap-4">' + btnConnect + btnShare + '</div>';
+          : '<div class="flex gap-3">' + btnChat + btnShare + '</div>';
 
         var desktopActions = expired
           ? '<span class="text-[10px] text-gray-400 font-bold uppercase tracking-wide">Completed</span>'
-          : '<div class="flex gap-1.5">' + btnDesktopConnect + btnDesktopShare + '</div>';
+          : '<div class="flex gap-2">' + btnDesktopChat + btnDesktopShare + '</div>';
 
         /* ======== DESKTOP layout (sm and above) ======== */
         var desktopHTML =
@@ -1164,7 +1165,7 @@
           '<span class="text-[11px] font-bold text-gray-800 whitespace-nowrap">' + (r.travel_date || 'Flexible') + '</span>' +
           logo8 +
           avatarDiv +
-          '<span class="text-[9px] text-gray-500 font-medium text-center leading-tight w-full truncate">' + firstName + '</span>' +
+          '<span class="text-[9px] text-gray-500 font-medium text-center leading-tight w-full truncate flex items-center justify-center">' + firstName + verifiedBadge + '</span>' +
           '</div>' +
           /* route */
           '<div class="flex-1 flex items-center gap-2 px-3 py-4 min-w-0">' +
@@ -1201,7 +1202,7 @@
           '<div class="w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center font-bold text-sm" style="background:' + av.bg + ';color:' + av.color + '">' + initials(r.name) + '</div>' +
           '<div>' +
           '<span class="text-[10px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-full" style="background:' + badgeBg + ';color:' + badgeCol + '">' + stripLabel + '</span>' +
-          '<p class="text-[11px] text-gray-500 font-medium mt-0.5">' + firstName + '</p>' +
+          '<p class="text-[11px] text-gray-500 font-medium mt-0.5 flex items-center">' + firstName + verifiedBadge + '</p>' +
           '</div>' +
           '</div>' +
           '<div class="text-right flex-shrink-0">' +
@@ -1280,7 +1281,6 @@
       document.getElementById('listings-looking').innerHTML = htmlLooking;
 
       lucide.createIcons();
-      renderVerifiedState();
     }
 
     async function loadListings() {
@@ -1648,6 +1648,10 @@
 
     /* ── Open / Close ── */
     function openPostForm() {
+      if (localStorage.getItem('sahayak_verified_status') !== 'true') {
+        openVerificationModal();
+        return;
+      }
       document.getElementById('post-backdrop').classList.add('open');
       document.getElementById('post-sheet').classList.add('open');
       document.body.style.overflow = 'hidden';
@@ -1924,35 +1928,7 @@
       window.location.reload();
     }
 
-    function renderVerifiedState() {
-      if (localStorage.getItem('sahayak_verified_status') === 'true') {
-        const connectBtns = document.querySelectorAll('.auth-connect-btn');
-        connectBtns.forEach(btn => {
-          btn.classList.remove('bg-[#0A66C2]', 'hover:bg-[#084e96]');
-          btn.classList.add('bg-[#25D366]', 'hover:bg-[#1ebe5d]');
-
-          const phone = btn.getAttribute('data-phone');
-          if (phone) {
-            btn.href = 'https://wa.me/' + phone.replace(/[^0-9]/g, '');
-            btn.setAttribute('onclick', 'event.stopPropagation()');
-          } else {
-            btn.href = '#';
-            btn.setAttribute('onclick', 'event.preventDefault(); event.stopPropagation();');
-          }
-          btn.innerHTML = '<i data-lucide="message-circle" class="w-4 h-4"></i> Chat on WhatsApp';
-        });
-        if (window.lucide) window.lucide.createIcons();
-      }
-    }
-
-    function openVerificationModal(btnElement) {
-      if (localStorage.getItem('sahayak_verified_status') === 'true') {
-        const phone = btnElement.getAttribute('data-phone');
-        if (phone) {
-          window.open('https://wa.me/' + phone.replace(/[^0-9]/g, ''), '_blank');
-        }
-        return;
-      }
+    function openVerificationModal() {
       const modal = document.getElementById('verification-modal');
       modal.classList.remove('hidden');
       modal.classList.add('flex');
@@ -1960,6 +1936,16 @@
         modal.classList.remove('opacity-0');
         document.getElementById('verification-modal-content').classList.remove('scale-95');
       }, 10);
+    }
+
+    function handleChatAction(phone) {
+      if (localStorage.getItem('sahayak_verified_status') === 'true') {
+        if (phone) {
+          window.open('https://wa.me/' + phone.replace(/[^0-9]/g, ''), '_blank');
+        }
+      } else {
+        openVerificationModal();
+      }
     }
 
     function closeVerificationModal() {
