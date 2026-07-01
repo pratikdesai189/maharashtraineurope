@@ -1322,6 +1322,18 @@
           '</div>' +
           '</div>';
 
+        var mobileFallbackHTML = '<div class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm shadow-sm' + blurCls + '" style="background:' + av.bg + ';color:' + av.color + '">' + initials(trueFirstName) + '</div>';
+        var mobileAvatarDiv = '';
+        if (r.picture) {
+           mobileAvatarDiv = 
+             '<div class="relative w-10 h-10 flex-shrink-0">' +
+               '<img src="' + r.picture + '" referrerpolicy="no-referrer" class="absolute inset-0 w-10 h-10 rounded-full object-cover shadow-sm border border-gray-100' + blurCls + '" onerror="this.style.display=\'none\'; this.nextElementSibling.style.display=\'flex\';">' +
+               '<div style="display:none; background:' + av.bg + ';color:' + av.color + '" class="w-10 h-10 rounded-full items-center justify-center font-bold text-sm shadow-sm' + blurCls + '">' + initials(trueFirstName) + '</div>' +
+             '</div>';
+        } else {
+           mobileAvatarDiv = mobileFallbackHTML;
+        }
+
         /* ======== MOBILE layout (below sm) ======== */
         var mobileHTML =
           '<div class="flex sm:hidden">' +
@@ -1332,7 +1344,7 @@
           /* header: avatar + status + date */
           '<div class="flex items-center justify-between px-4 pt-4 pb-3 border-b border-gray-100">' +
           '<div class="flex items-center gap-2.5">' +
-          '<div class="w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center font-bold text-sm" style="background:' + av.bg + ';color:' + av.color + '">' + initials(r.name) + '</div>' +
+          mobileAvatarDiv +
           '<div>' +
           '<span class="text-[10px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-full" style="background:' + badgeBg + ';color:' + badgeCol + '">' + stripLabel + '</span>' +
           '<p class="text-[11px] ' + nameColorCls + ' font-medium mt-0.5 flex items-center">' + firstName + badgeToUse + '</p>' +
