@@ -1430,7 +1430,7 @@
 
     async function loadListings() {
       try {
-        const res = await fetch(SHEET_CSV_URL);
+        const res = await fetch(SHEET_CSV_URL + '&t=' + new Date().getTime(), { cache: 'no-store' });
         const text = await res.text();
         allData = parseCSV(text);
 
