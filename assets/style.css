@@ -191,9 +191,11 @@ h1, h2, h3, h4, h5, h6, .playfair {
     max-height: 92vh;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+    pointer-events: none;
 }
 .sahayak-sheet.open {
     transform: translateY(0);
+    pointer-events: auto;
 }
 
 /* Desktop: centered modal */
@@ -210,10 +212,12 @@ h1, h2, h3, h4, h5, h6, .playfair {
         max-height: 90vh;
         transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1), opacity 0.3s ease;
         opacity: 0;
+        pointer-events: none;
     }
     .sahayak-sheet.open {
         transform: translate(-50%, -50%) scale(1);
         opacity: 1;
+        pointer-events: auto;
     }
 }
 
