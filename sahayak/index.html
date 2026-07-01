@@ -1414,8 +1414,8 @@
         updateStats();
         render();
       } catch (err) {
-        document.getElementById('listings-offering').innerHTML = `<div class="col-span-full text-center py-20 text-red-500">Failed to load data.</div>`;
-        document.getElementById('listings-looking').innerHTML = `<div class="col-span-full text-center py-20 text-red-500">Failed to load data.</div>`;
+        document.getElementById('listings-offering').innerHTML = `<div class="col-span-full text-center py-20 text-red-500">Failed to load data: ${err.message || err.toString()}</div>`;
+        document.getElementById('listings-looking').innerHTML = `<div class="col-span-full text-center py-20 text-red-500">Failed to load data: ${err.message || err.toString()}</div>`;
       }
     }
 
