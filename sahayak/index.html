@@ -941,7 +941,7 @@
       const postDate = parseDate(r.timestamp);
       const isPosterVerified = postDate && postDate >= new Date(2026, 6, 1);
 
-      const displayName = r.name;
+      const displayName = isPosterVerified ? r.name : r.name.split(' ')[0];
       const displayBadge = isPosterVerified ? verifiedBadge : '';
       const nameColor = 'text-gray-900';
 
@@ -950,7 +950,7 @@
         const match = flightNum.match(/^[a-zA-Z]{2}/);
         if (!match) return '';
         const iata = match[0].toUpperCase();
-        return `<img src="https://pics.avs.io/200/200/${iata}.png" class="${classes}" alt="${iata} Logo" onerror="this.style.display='none'">`;
+        return `<img src="https://pics.avs.io/200/200/${iata}.png" class="${classes} drop-shadow-md mix-blend-multiply" alt="${iata} Logo" onerror="this.style.display='none'">`;
       }
 
       const cardHTML = `
@@ -958,7 +958,7 @@
                 <div class="flex justify-between items-start mb-4">
                     <div class="flex items-center gap-4">
                         <div class="w-14 h-14 rounded-full flex-shrink-0 flex items-center justify-center font-bold text-lg border-2 border-white shadow-sm" style="background:${av.bg}; color:${av.color}">
-                            ${initials(r.name)}
+                            ${initials(displayName)}
                         </div>
                         <div>
                             <h4 class="font-bold text-lg flex items-center ${nameColor}">${displayName}${displayBadge}</h4>
@@ -1205,12 +1205,12 @@
         /* ---------- shared pieces ---------- */
         var logoSm = r.flight_number ? getAirlineLogo(r.flight_number, 'w-20 max-h-12 object-contain') : '';
         var logo8 = r.flight_number ? '<div class="flex items-center justify-center h-12 mb-1.5">' + getAirlineLogo(r.flight_number, 'w-28 max-h-16 object-contain scale-110') + '</div>' : '<div class="h-12 mb-1.5"></div>';
-        var avatarDiv = '<div class="w-11 h-11 rounded-full flex items-center justify-center font-bold text-base shadow-sm" style="background:' + av.bg + ';color:' + av.color + '">' + initials(r.name) + '</div>';
-        var trueFirstName = r.name;
-        var verifiedBadge = '<span class="inline-flex items-center ml-1.5 px-2 py-0.5 bg-blue-50 text-[#0A66C2] rounded-full border border-blue-200 shadow-sm" title="Verified via LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 fill-current mr-1" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg><svg class="w-4 h-4 text-[#0A66C2]" viewBox="0 0 24 24" fill="currentColor"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>';
-
         var postDate = parseDate(r.timestamp);
         var isPosterVerified = postDate && postDate >= new Date(2026, 6, 1);
+
+        var avatarDiv = '<div class="w-11 h-11 rounded-full flex items-center justify-center font-bold text-base shadow-sm" style="background:' + av.bg + ';color:' + av.color + '">' + initials(isPosterVerified ? r.name : r.name.split(' ')[0]) + '</div>';
+        var trueFirstName = isPosterVerified ? r.name : r.name.split(' ')[0];
+        var verifiedBadge = '<span class="inline-flex items-center ml-1.5 px-2 py-0.5 bg-blue-50 text-[#0A66C2] rounded-full border border-blue-200 shadow-sm" title="Verified via LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 fill-current mr-1" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg><svg class="w-4 h-4 text-[#0A66C2]" viewBox="0 0 24 24" fill="currentColor"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>';
 
         var firstName = trueFirstName;
         var badgeToUse = isPosterVerified ? verifiedBadge : '';
