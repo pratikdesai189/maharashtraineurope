@@ -243,7 +243,7 @@
   </section>
 
   <!-- 4. MAIN CONTENT -->
-  <main class="max-w-6xl mx-auto py-12 px-4 md:px-6">
+  <main class="max-w-4xl mx-auto py-12 px-4 md:px-6">
 
     <!-- HOW IT WORKS -->
     <div class="mb-16">
@@ -1198,8 +1198,8 @@
 
         /* ---------- shared pieces ---------- */
         var logoSm = r.flight_number ? getAirlineLogo(r.flight_number, 'h-6 w-auto object-contain') : '';
-        var logo8 = r.flight_number ? '<div class="flex items-center justify-center h-8">' + getAirlineLogo(r.flight_number, 'h-8 w-auto object-contain') + '</div>' : '<div class="h-8"></div>';
-        var avatarDiv = '<div class="w-9 h-9 rounded-full flex items-center justify-center font-bold text-sm" style="background:' + av.bg + ';color:' + av.color + '">' + initials(r.name) + '</div>';
+        var logo8 = r.flight_number ? '<div class="flex items-center justify-center h-8 mb-1.5">' + getAirlineLogo(r.flight_number, 'h-8 w-auto object-contain') + '</div>' : '<div class="h-8 mb-1.5"></div>';
+        var avatarDiv = '<div class="w-11 h-11 rounded-full flex items-center justify-center font-bold text-base shadow-sm" style="background:' + av.bg + ';color:' + av.color + '">' + initials(r.name) + '</div>';
         var trueFirstName = r.name.split(' ')[0];
         var verifiedBadge = '<span class="inline-flex items-center ml-1" title="Verified via LinkedIn"><i data-lucide="linkedin" class="w-3 h-3 text-[#0A66C2] fill-current"></i><svg class="w-3.5 h-3.5 ml-0.5 text-[#0A66C2]" viewBox="0 0 24 24" fill="currentColor"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>';
 
@@ -1234,16 +1234,16 @@
         /* action buttons */
         var btnChat = '<button onclick="event.preventDefault(); event.stopPropagation(); handleChatAction(\'' + (r.whatsapp_number || '') + '\')" class="flex-1 bg-[#25D366] hover:bg-[#1ebe5d] text-white text-xs font-extrabold py-2.5 rounded-xl transition shadow flex items-center justify-center gap-1.5' + noWa + '">' + waSvgSmall + 'Chat</button>';
         var btnShare = '<button onclick="event.stopPropagation(); shareOnWhatsApp(' + globalIndex + ')" class="flex-1 bg-white hover:bg-gray-50 text-green-600 border border-green-600 text-xs font-extrabold py-2.5 rounded-xl transition shadow-sm flex items-center justify-center gap-1.5"><i data-lucide="share-2" class="w-3.5 h-3.5"></i> Share</button>';
-        var btnDesktopChat = '<button onclick="event.preventDefault(); event.stopPropagation(); handleChatAction(\'' + (r.whatsapp_number || '') + '\')" class="bg-[#25D366] hover:bg-[#1ebe5d] text-white text-[10px] font-bold px-4 py-1.5 rounded-lg transition shadow-sm whitespace-nowrap flex items-center justify-center gap-1' + noWa + '">' + waSvgSmall + 'Chat</button>';
-        var btnDesktopShare = '<button onclick="event.stopPropagation(); shareOnWhatsApp(' + globalIndex + ')" class="bg-white hover:bg-gray-50 text-green-600 border border-green-600 text-[10px] font-bold px-3 py-1.5 rounded-lg transition shadow-sm flex items-center gap-1 whitespace-nowrap"><i data-lucide="share-2" class="w-3 h-3"></i> Share</button>';
+        var btnDesktopChat = '<button onclick="event.preventDefault(); event.stopPropagation(); handleChatAction(\'' + (r.whatsapp_number || '') + '\')" class="flex-1 bg-[#25D366] hover:bg-[#1ebe5d] text-white text-xs font-bold py-2 rounded-lg transition shadow-sm whitespace-nowrap flex items-center justify-center gap-1.5' + noWa + '">' + waSvgSmall + 'Chat</button>';
+        var btnDesktopShare = '<button onclick="event.stopPropagation(); shareOnWhatsApp(' + globalIndex + ')" class="flex-1 bg-white hover:bg-gray-50 text-green-600 border border-green-600 text-xs font-bold py-2 rounded-lg transition shadow-sm flex items-center justify-center gap-1.5 whitespace-nowrap"><i data-lucide="share-2" class="w-3.5 h-3.5"></i> Share</button>';
+
+        var desktopActions = expired
+          ? '<span class="text-xs text-gray-400 font-bold uppercase tracking-wide text-center w-full block mt-1">Completed</span>'
+          : '<div class="flex w-full gap-2 mt-1">' + btnDesktopChat + btnDesktopShare + '</div>';
 
         var mobileActions = expired
           ? '<span class="text-xs text-gray-400 font-bold uppercase tracking-wide block text-center py-2">Listing Completed</span>'
           : '<div class="flex gap-3">' + btnChat + btnShare + '</div>';
-
-        var desktopActions = expired
-          ? '<span class="text-[10px] text-gray-400 font-bold uppercase tracking-wide">Completed</span>'
-          : '<div class="flex gap-2">' + btnDesktopChat + btnDesktopShare + '</div>';
 
         /* ======== DESKTOP layout (sm and above) ======== */
         var desktopHTML =
@@ -1252,21 +1252,21 @@
           '<div class="' + stripCls + ' flex-shrink-0 w-7 flex items-center justify-center">' +
           '<span class="text-white text-[8px] font-bold uppercase tracking-widest" style="writing-mode:vertical-rl;transform:rotate(180deg)">' + stripLabel + '</span>' +
           '</div>' +
-          /* date + logo + avatar */
-          '<div class="flex flex-col items-center justify-center gap-1.5 px-4 py-4 border-r border-dashed border-gray-200 w-[140px] flex-shrink-0">' +
-          '<span class="text-xs font-bold text-gray-800 whitespace-nowrap">' + (r.travel_date || 'Flexible') + '</span>' +
+          /* logo + avatar + name */
+          '<div class="flex flex-col items-center justify-center gap-2 px-4 py-3 border-r border-dashed border-gray-200 w-[140px] flex-shrink-0">' +
           logo8 +
           avatarDiv +
-          '<span class="text-[10px] ' + nameColorCls + ' font-medium text-center leading-tight w-full truncate flex items-center justify-center">' + firstName + badgeToUse + '</span>' +
+          '<span class="text-[11px] ' + nameColorCls + ' font-bold text-center leading-tight w-full truncate flex items-center justify-center">' + firstName + badgeToUse + '</span>' +
           '</div>' +
           /* route */
-          '<div class="flex-1 flex items-center gap-4 px-6 py-4 min-w-0">' +
+          '<div class="flex-1 flex items-center gap-4 px-6 py-3 min-w-0">' +
           '<div class="flex-1 min-w-0">' +
           '<p class="text-[10px] uppercase text-orange-600 font-bold mb-0.5 tracking-wider">From</p>' +
           '<p class="text-base font-extrabold text-gray-900 truncate" title="' + from + '">' + from + '</p>' +
           '</div>' +
-          '<div class="flex flex-col items-center px-4 flex-shrink-0">' +
-          '<i data-lucide="plane" class="w-5 h-5 text-orange-400 mb-1"></i>' +
+          '<div class="flex flex-col items-center px-4 flex-shrink-0 relative">' +
+          '<span class="absolute bottom-full mb-1.5 text-[11px] font-extrabold text-gray-800 whitespace-nowrap">' + (r.travel_date || 'Flexible') + '</span>' +
+          '<i data-lucide="plane" class="w-5 h-5 text-orange-400 mb-1 mt-3"></i>' +
           flightBadge +
           '</div>' +
           '<div class="flex-1 min-w-0 text-right">' +
@@ -1274,9 +1274,10 @@
           '<p class="text-base font-extrabold text-gray-900 truncate" title="' + to + '">' + to + '</p>' +
           '</div>' +
           '</div>' +
-          /* tags + buttons */
-          '<div class="flex flex-col items-end justify-between gap-3 px-5 py-4 border-l border-gray-100 flex-shrink-0 w-[260px]">' +
-          '<div class="flex flex-wrap gap-1.5 justify-end">' + getHelpItemsHTML(r) + '</div>' +
+          /* tags + buttons + scissors */
+          '<div class="relative flex flex-col items-end justify-between gap-3 px-5 py-3 border-l-2 border-dashed border-gray-200 flex-shrink-0 w-[260px]">' +
+          '<div class="absolute -left-2.5 top-1/2 -translate-y-1/2 bg-white py-2 text-gray-300"><i data-lucide="scissors" class="w-4 h-4 transform rotate-90"></i></div>' +
+          '<div class="flex flex-wrap gap-1.5 justify-end w-full">' + getHelpItemsHTML(r) + '</div>' +
           desktopActions +
           '</div>' +
           '</div>';
