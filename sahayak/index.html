@@ -1686,7 +1686,7 @@
 
       <!-- ─────── STEP 5: Success ─────── -->
       <div class="form-step text-center py-8" id="step-5">
-        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 text-green-600">
+        <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4 text-orange-600">
           <i data-lucide="check-circle" class="w-8 h-8"></i>
         </div>
         <h3 class="text-xl font-bold text-gray-900 mb-2">Listing Posted!</h3>
@@ -1709,7 +1709,7 @@
           </div>
         </div>
 
-        <button class="btn-primary-form bg-gray-900 hover:bg-gray-800" onclick="window.location.reload()">
+        <button class="btn-primary-form bg-orange-600 hover:bg-orange-700" onclick="window.location.reload()">
           Done
         </button>
       </div>
@@ -1982,7 +1982,8 @@
         cityEu: cityEu,
         cityIn: cityIn,
         languages: Array.from(formState.languages).join(', '),
-        consent: document.getElementById('s4-consent').checked ? 'Agree' : ''
+        consent: document.getElementById('s4-consent').checked ? 'Agree' : '',
+        picture: localStorage.getItem('sahayak_user_picture') || ''
       };
 
       // Live Google Apps Script Web App URL
