@@ -5,8 +5,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sahayak | Find a Travel Companion between Europe & India</title>
-  <meta name="description" content="Travel together, help each other. Find a travel companion, flight buddy for elderly parents, or a community courier between Maharashtra (India) and Europe." />
-  <meta name="keywords" content="travel companion Europe India, elderly parents flight assistance, luggage sharing, Indian community courier, Marathi travel help" />
+  <meta name="description"
+    content="Travel together, help each other. Find a travel companion, flight buddy for elderly parents, or a community courier between Maharashtra (India) and Europe." />
+  <meta name="keywords"
+    content="travel companion Europe India, elderly parents flight assistance, luggage sharing, Indian community courier, Marathi travel help" />
   <link rel="canonical" href="https://maharashtraineurope.com/sahayak/" />
 
   <!-- Structured Data (JSON-LD) -->
@@ -59,24 +61,28 @@
   <style>
     /* 3D Board Flip Animation */
     @keyframes boardFlipIn {
-        0% {
-            transform: perspective(1200px) rotateX(-90deg);
-            transform-origin: top;
-            opacity: 0;
-        }
-        100% {
-            transform: perspective(1200px) rotateX(0deg);
-            opacity: var(--final-opacity, 1);
-        }
+      0% {
+        transform: perspective(1200px) rotateX(-90deg);
+        transform-origin: top;
+        opacity: 0;
+      }
+
+      100% {
+        transform: perspective(1200px) rotateX(0deg);
+        opacity: var(--final-opacity, 1);
+      }
     }
+
     .board-row-animate {
-        --final-opacity: 1;
-        animation: boardFlipIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-        opacity: 0; /* hidden before animation runs */
-        will-change: transform, opacity;
+      --final-opacity: 1;
+      animation: boardFlipIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+      opacity: 0;
+      /* hidden before animation runs */
+      will-change: transform, opacity;
     }
+
     .board-row-animate.expired-row {
-        --final-opacity: 0.6;
+      --final-opacity: 0.6;
     }
   </style>
 
@@ -95,13 +101,20 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Mukta:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Mukta:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
 <body class="bg-gray-50 text-gray-800">
 
   <!-- 1. NAVIGATION — injected by ../assets/navigation.js -->
+  <div id="auth-header" class="max-w-6xl mx-auto px-4 py-2 flex justify-end absolute top-0 right-0 z-50">
+    <button onclick="clearSession()"
+      class="text-[10px] bg-white/20 hover:bg-white/40 text-white border border-white/30 px-3 py-1.5 rounded-full font-bold transition shadow-sm backdrop-blur-sm mt-2 mr-2">Clear
+      Session (Test)</button>
+  </div>
 
   <!-- 2. HERO SECTION -->
   <section class="bg-orange-600 py-16 px-6 text-white text-center">
@@ -113,29 +126,31 @@
       <p class="text-xl opacity-90 mb-8 font-light">"Where the Sahyadri meets the Alps"</p>
       <div class="flex flex-wrap justify-center gap-4 mb-10 relative z-10">
         <button id="btn-post-listing" onclick="openPostForm()"
-          class="bg-white text-orange-600 px-8 py-3 rounded-lg font-bold hover:bg-gray-100 transition flex items-center gap-2" style="min-height:52px">
+          class="bg-white text-orange-600 px-8 py-3 rounded-lg font-bold hover:bg-gray-100 transition flex items-center gap-2"
+          style="min-height:52px">
           <i data-lucide="plus-circle" class="w-5 h-5"></i> Post Your Listing
         </button>
         <button onclick="document.getElementById('listings-offering-section').scrollIntoView({behavior:'smooth'})"
-          class="bg-transparent border border-white px-8 py-3 rounded-lg font-bold hover:bg-white/10 transition" style="min-height:52px">
+          class="bg-transparent border border-white px-8 py-3 rounded-lg font-bold hover:bg-white/10 transition"
+          style="min-height:52px">
           Browse Listings
         </button>
       </div>
-      
+
       <!-- INLINE STATS -->
       <div class="pt-8 border-t border-white/20 grid grid-cols-3 gap-4 text-center max-w-3xl mx-auto">
-          <div>
-              <p id="s-total" class="text-3xl font-bold">—</p>
-              <p class="text-[10px] uppercase tracking-wider opacity-80 mt-1">Active Listings</p>
-          </div>
-          <div>
-              <p id="s-travel" class="text-3xl font-bold">—</p>
-              <p class="text-[10px] uppercase tracking-wider opacity-80 mt-1">Travel Companions</p>
-          </div>
-          <div>
-              <p id="s-letter" class="text-3xl font-bold">—</p>
-              <p class="text-[10px] uppercase tracking-wider opacity-80 mt-1">Carrier Services</p>
-          </div>
+        <div>
+          <p id="s-total" class="text-3xl font-bold">—</p>
+          <p class="text-[10px] uppercase tracking-wider opacity-80 mt-1">Active Listings</p>
+        </div>
+        <div>
+          <p id="s-travel" class="text-3xl font-bold">—</p>
+          <p class="text-[10px] uppercase tracking-wider opacity-80 mt-1">Travel Companions</p>
+        </div>
+        <div>
+          <p id="s-letter" class="text-3xl font-bold">—</p>
+          <p class="text-[10px] uppercase tracking-wider opacity-80 mt-1">Carrier Services</p>
+        </div>
 
       </div>
       <div class="mt-8 md:mt-12 animate-bounce opacity-80">
@@ -149,30 +164,39 @@
 
     <!-- HOW IT WORKS -->
     <div class="mb-16">
-        <div class="text-center mb-10">
-            <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2">How It Works</h2>
-            <p class="text-gray-500">Your Travel Buddy or Courier in 3 Simple Steps</p>
+      <div class="text-center mb-10">
+        <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2">How It Works</h2>
+        <p class="text-gray-500">Your Travel Buddy or Courier in 3 Simple Steps</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 text-center max-w-4xl mx-auto">
+        <!-- Step 1 -->
+        <div class="flex flex-col items-center">
+          <div
+            class="w-14 h-14 rounded-full bg-orange-50 text-orange-600 flex items-center justify-center text-xl font-bold mb-4 shadow-sm border border-orange-200/60">
+            1</div>
+          <h3 class="font-bold text-gray-900 mb-2">Submit Your Trip</h3>
+          <p class="text-sm text-gray-500 leading-relaxed">Input your flight details and whether you are offering help
+            or need it.</p>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 text-center max-w-4xl mx-auto">
-            <!-- Step 1 -->
-            <div class="flex flex-col items-center">
-                <div class="w-14 h-14 rounded-full bg-orange-50 text-orange-600 flex items-center justify-center text-xl font-bold mb-4 shadow-sm border border-orange-200/60">1</div>
-                <h3 class="font-bold text-gray-900 mb-2">Submit Your Trip</h3>
-                <p class="text-sm text-gray-500 leading-relaxed">Input your flight details and whether you are offering help or need it.</p>
-            </div>
-            <!-- Step 2 -->
-            <div class="flex flex-col items-center">
-                <div class="w-14 h-14 rounded-full bg-orange-50 text-orange-600 flex items-center justify-center text-xl font-bold mb-4 shadow-sm border border-orange-200/60">2</div>
-                <h3 class="font-bold text-gray-900 mb-2">Smart Matching</h3>
-                <p class="text-sm text-gray-500 leading-relaxed">Our system automatically finds travelers on your exact route.</p>
-            </div>
-            <!-- Step 3 -->
-            <div class="flex flex-col items-center">
-                <div class="w-14 h-14 rounded-full bg-orange-50 text-orange-600 flex items-center justify-center text-xl font-bold mb-4 shadow-sm border border-orange-200/60">3</div>
-                <h3 class="font-bold text-gray-900 mb-2">Connect Safely</h3>
-                <p class="text-sm text-gray-500 leading-relaxed">Receive an email introduction to coordinate details directly.</p>
-            </div>
+        <!-- Step 2 -->
+        <div class="flex flex-col items-center">
+          <div
+            class="w-14 h-14 rounded-full bg-orange-50 text-orange-600 flex items-center justify-center text-xl font-bold mb-4 shadow-sm border border-orange-200/60">
+            2</div>
+          <h3 class="font-bold text-gray-900 mb-2">Smart Matching</h3>
+          <p class="text-sm text-gray-500 leading-relaxed">Our system automatically finds travelers on your exact route.
+          </p>
         </div>
+        <!-- Step 3 -->
+        <div class="flex flex-col items-center">
+          <div
+            class="w-14 h-14 rounded-full bg-orange-50 text-orange-600 flex items-center justify-center text-xl font-bold mb-4 shadow-sm border border-orange-200/60">
+            3</div>
+          <h3 class="font-bold text-gray-900 mb-2">Connect Safely</h3>
+          <p class="text-sm text-gray-500 leading-relaxed">Receive an email introduction to coordinate details directly.
+          </p>
+        </div>
+      </div>
     </div>
 
     <!-- DISCLAIMER -->
@@ -185,7 +209,8 @@
     </div>
 
     <!-- FILTERS -->
-    <div class="bg-white p-4 md:p-6 rounded-2xl shadow-sm border border-gray-200 mb-8 flex flex-col md:flex-row gap-4 items-center justify-between">
+    <div
+      class="bg-white p-4 md:p-6 rounded-2xl shadow-sm border border-gray-200 mb-8 flex flex-col md:flex-row gap-4 items-center justify-between">
       <div class="flex items-center gap-3 w-full md:w-auto overflow-x-auto pb-2 md:pb-0">
         <div class="flex flex-col min-w-max">
           <label class="text-[10px] uppercase text-gray-500 font-bold mb-1">From Date</label>
@@ -201,16 +226,18 @@
 
         <div class="ml-2 md:ml-4 pl-2 md:pl-4 border-l border-gray-200 flex flex-col min-w-max">
           <label class="text-[10px] uppercase text-gray-500 font-bold mb-1">Route</label>
-          <button id="f-direction" onclick="toggleDirection()" class="flex items-center justify-between gap-2 text-xs border border-gray-300 rounded-lg px-3 py-2 outline-none bg-white text-gray-700 hover:bg-orange-50 hover:border-orange-200 transition-colors shadow-sm w-36">
+          <button id="f-direction" onclick="toggleDirection()"
+            class="flex items-center justify-between gap-2 text-xs border border-gray-300 rounded-lg px-3 py-2 outline-none bg-white text-gray-700 hover:bg-orange-50 hover:border-orange-200 transition-colors shadow-sm w-36">
             <span id="f-direction-text" class="font-bold text-center flex-1">All Routes</span>
             <i data-lucide="arrow-left-right" class="w-4 h-4 text-orange-500"></i>
           </button>
         </div>
       </div>
-      
+
       <div class="flex items-center gap-2 mt-2 md:mt-0 w-full md:w-auto justify-end">
         <input type="checkbox" id="show-expired" onchange="resetAndRender()" class="w-4 h-4 accent-orange-600">
-        <label for="show-expired" class="text-xs text-gray-500 cursor-pointer font-medium whitespace-nowrap">Show past listings</label>
+        <label for="show-expired" class="text-xs text-gray-500 cursor-pointer font-medium whitespace-nowrap">Show past
+          listings</label>
       </div>
     </div>
 
@@ -223,13 +250,217 @@
       </div>
       <div id="listings-offering" class="flex flex-col gap-3">
         <!-- Skeleton loaders — desktop -->
-        <div class="skeleton-card hidden sm:block"><div class="flex" style="height:80px"><div class="skeleton w-7 h-full rounded-none" style="border-radius:0"></div><div class="flex items-center gap-3 px-3 py-3 border-r border-dashed border-gray-200" style="width:95px"><div class="skeleton w-8 h-8 rounded-full flex-shrink-0"></div><div class="flex-1 flex flex-col gap-2"><div class="skeleton h-3" style="width:60px"></div><div class="skeleton h-2" style="width:44px"></div></div></div><div class="flex-1 flex items-center gap-3 px-4"><div class="flex-1 flex flex-col gap-2"><div class="skeleton h-2 w-12"></div><div class="skeleton h-4 w-28"></div></div><div class="skeleton w-4 h-4"></div><div class="flex-1 flex flex-col gap-2 items-end"><div class="skeleton h-2 w-10"></div><div class="skeleton h-4 w-24"></div></div></div><div class="flex flex-col items-end justify-between gap-2 px-3 py-3 border-l border-gray-100" style="width:180px"><div class="flex gap-1"><div class="skeleton h-5 w-20 rounded-full"></div><div class="skeleton h-5 w-16 rounded-full"></div></div><div class="flex gap-1"><div class="skeleton h-7 w-20 rounded-lg"></div><div class="skeleton h-7 w-24 rounded-lg"></div></div></div></div></div>
-        <div class="skeleton-card hidden sm:block"><div class="flex" style="height:80px"><div class="skeleton w-7 h-full rounded-none" style="border-radius:0"></div><div class="flex items-center gap-3 px-3 py-3 border-r border-dashed border-gray-200" style="width:95px"><div class="skeleton w-8 h-8 rounded-full flex-shrink-0"></div><div class="flex-1 flex flex-col gap-2"><div class="skeleton h-3" style="width:60px"></div><div class="skeleton h-2" style="width:44px"></div></div></div><div class="flex-1 flex items-center gap-3 px-4"><div class="flex-1 flex flex-col gap-2"><div class="skeleton h-2 w-12"></div><div class="skeleton h-4 w-28"></div></div><div class="skeleton w-4 h-4"></div><div class="flex-1 flex flex-col gap-2 items-end"><div class="skeleton h-2 w-10"></div><div class="skeleton h-4 w-24"></div></div></div><div class="flex flex-col items-end justify-between gap-2 px-3 py-3 border-l border-gray-100" style="width:180px"><div class="flex gap-1"><div class="skeleton h-5 w-20 rounded-full"></div><div class="skeleton h-5 w-16 rounded-full"></div></div><div class="flex gap-1"><div class="skeleton h-7 w-20 rounded-lg"></div><div class="skeleton h-7 w-24 rounded-lg"></div></div></div></div></div>
-        <div class="skeleton-card hidden sm:block"><div class="flex" style="height:80px"><div class="skeleton w-7 h-full rounded-none" style="border-radius:0"></div><div class="flex items-center gap-3 px-3 py-3 border-r border-dashed border-gray-200" style="width:95px"><div class="skeleton w-8 h-8 rounded-full flex-shrink-0"></div><div class="flex-1 flex flex-col gap-2"><div class="skeleton h-3" style="width:60px"></div><div class="skeleton h-2" style="width:44px"></div></div></div><div class="flex-1 flex items-center gap-3 px-4"><div class="flex-1 flex flex-col gap-2"><div class="skeleton h-2 w-12"></div><div class="skeleton h-4 w-28"></div></div><div class="skeleton w-4 h-4"></div><div class="flex-1 flex flex-col gap-2 items-end"><div class="skeleton h-2 w-10"></div><div class="skeleton h-4 w-24"></div></div></div><div class="flex flex-col items-end justify-between gap-2 px-3 py-3 border-l border-gray-100" style="width:180px"><div class="flex gap-1"><div class="skeleton h-5 w-20 rounded-full"></div><div class="skeleton h-5 w-16 rounded-full"></div></div><div class="flex gap-1"><div class="skeleton h-7 w-20 rounded-lg"></div><div class="skeleton h-7 w-24 rounded-lg"></div></div></div></div></div>
+        <div class="skeleton-card hidden sm:block">
+          <div class="flex" style="height:80px">
+            <div class="skeleton w-7 h-full rounded-none" style="border-radius:0"></div>
+            <div class="flex items-center gap-3 px-3 py-3 border-r border-dashed border-gray-200" style="width:95px">
+              <div class="skeleton w-8 h-8 rounded-full flex-shrink-0"></div>
+              <div class="flex-1 flex flex-col gap-2">
+                <div class="skeleton h-3" style="width:60px"></div>
+                <div class="skeleton h-2" style="width:44px"></div>
+              </div>
+            </div>
+            <div class="flex-1 flex items-center gap-3 px-4">
+              <div class="flex-1 flex flex-col gap-2">
+                <div class="skeleton h-2 w-12"></div>
+                <div class="skeleton h-4 w-28"></div>
+              </div>
+              <div class="skeleton w-4 h-4"></div>
+              <div class="flex-1 flex flex-col gap-2 items-end">
+                <div class="skeleton h-2 w-10"></div>
+                <div class="skeleton h-4 w-24"></div>
+              </div>
+            </div>
+            <div class="flex flex-col items-end justify-between gap-2 px-3 py-3 border-l border-gray-100"
+              style="width:180px">
+              <div class="flex gap-1">
+                <div class="skeleton h-5 w-20 rounded-full"></div>
+                <div class="skeleton h-5 w-16 rounded-full"></div>
+              </div>
+              <div class="flex gap-1">
+                <div class="skeleton h-7 w-20 rounded-lg"></div>
+                <div class="skeleton h-7 w-24 rounded-lg"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="skeleton-card hidden sm:block">
+          <div class="flex" style="height:80px">
+            <div class="skeleton w-7 h-full rounded-none" style="border-radius:0"></div>
+            <div class="flex items-center gap-3 px-3 py-3 border-r border-dashed border-gray-200" style="width:95px">
+              <div class="skeleton w-8 h-8 rounded-full flex-shrink-0"></div>
+              <div class="flex-1 flex flex-col gap-2">
+                <div class="skeleton h-3" style="width:60px"></div>
+                <div class="skeleton h-2" style="width:44px"></div>
+              </div>
+            </div>
+            <div class="flex-1 flex items-center gap-3 px-4">
+              <div class="flex-1 flex flex-col gap-2">
+                <div class="skeleton h-2 w-12"></div>
+                <div class="skeleton h-4 w-28"></div>
+              </div>
+              <div class="skeleton w-4 h-4"></div>
+              <div class="flex-1 flex flex-col gap-2 items-end">
+                <div class="skeleton h-2 w-10"></div>
+                <div class="skeleton h-4 w-24"></div>
+              </div>
+            </div>
+            <div class="flex flex-col items-end justify-between gap-2 px-3 py-3 border-l border-gray-100"
+              style="width:180px">
+              <div class="flex gap-1">
+                <div class="skeleton h-5 w-20 rounded-full"></div>
+                <div class="skeleton h-5 w-16 rounded-full"></div>
+              </div>
+              <div class="flex gap-1">
+                <div class="skeleton h-7 w-20 rounded-lg"></div>
+                <div class="skeleton h-7 w-24 rounded-lg"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="skeleton-card hidden sm:block">
+          <div class="flex" style="height:80px">
+            <div class="skeleton w-7 h-full rounded-none" style="border-radius:0"></div>
+            <div class="flex items-center gap-3 px-3 py-3 border-r border-dashed border-gray-200" style="width:95px">
+              <div class="skeleton w-8 h-8 rounded-full flex-shrink-0"></div>
+              <div class="flex-1 flex flex-col gap-2">
+                <div class="skeleton h-3" style="width:60px"></div>
+                <div class="skeleton h-2" style="width:44px"></div>
+              </div>
+            </div>
+            <div class="flex-1 flex items-center gap-3 px-4">
+              <div class="flex-1 flex flex-col gap-2">
+                <div class="skeleton h-2 w-12"></div>
+                <div class="skeleton h-4 w-28"></div>
+              </div>
+              <div class="skeleton w-4 h-4"></div>
+              <div class="flex-1 flex flex-col gap-2 items-end">
+                <div class="skeleton h-2 w-10"></div>
+                <div class="skeleton h-4 w-24"></div>
+              </div>
+            </div>
+            <div class="flex flex-col items-end justify-between gap-2 px-3 py-3 border-l border-gray-100"
+              style="width:180px">
+              <div class="flex gap-1">
+                <div class="skeleton h-5 w-20 rounded-full"></div>
+                <div class="skeleton h-5 w-16 rounded-full"></div>
+              </div>
+              <div class="flex gap-1">
+                <div class="skeleton h-7 w-20 rounded-lg"></div>
+                <div class="skeleton h-7 w-24 rounded-lg"></div>
+              </div>
+            </div>
+          </div>
+        </div>
         <!-- Skeleton loaders — mobile -->
-        <div class="skeleton-card sm:hidden"><div class="flex"><div class="skeleton w-2.5 flex-shrink-0 rounded-none" style="border-radius:0;min-height:120px"></div><div class="flex-1 flex flex-col"><div class="flex items-center justify-between px-4 pt-4 pb-3 border-b border-gray-100"><div class="flex items-center gap-2"><div class="skeleton w-10 h-10 rounded-full"></div><div class="flex flex-col gap-1.5"><div class="skeleton h-4 w-20 rounded-full"></div><div class="skeleton h-3 w-16"></div></div></div><div class="flex flex-col items-end gap-1"><div class="skeleton h-3 w-8"></div><div class="skeleton h-3 w-16"></div></div></div><div class="px-4 py-3 flex gap-2" style="background:#fff7ed"><div class="flex-1 flex flex-col gap-2"><div class="skeleton h-2 w-8"></div><div class="skeleton h-4 w-28"></div><div class="skeleton h-3 w-16"></div><div class="skeleton h-4 w-24"></div></div><div class="flex flex-col gap-1 border-l border-orange-200 pl-3"><div class="skeleton h-6 w-20 rounded-lg"></div><div class="skeleton h-6 w-16 rounded-lg"></div></div></div><div class="px-4 py-3 flex gap-3"><div class="skeleton flex-1 h-10 rounded-xl"></div><div class="skeleton flex-1 h-10 rounded-xl"></div></div></div></div></div>
-        <div class="skeleton-card sm:hidden"><div class="flex"><div class="skeleton w-2.5 flex-shrink-0 rounded-none" style="border-radius:0;min-height:120px"></div><div class="flex-1 flex flex-col"><div class="flex items-center justify-between px-4 pt-4 pb-3 border-b border-gray-100"><div class="flex items-center gap-2"><div class="skeleton w-10 h-10 rounded-full"></div><div class="flex flex-col gap-1.5"><div class="skeleton h-4 w-20 rounded-full"></div><div class="skeleton h-3 w-16"></div></div></div><div class="flex flex-col items-end gap-1"><div class="skeleton h-3 w-8"></div><div class="skeleton h-3 w-16"></div></div></div><div class="px-4 py-3 flex gap-2" style="background:#fff7ed"><div class="flex-1 flex flex-col gap-2"><div class="skeleton h-2 w-8"></div><div class="skeleton h-4 w-28"></div><div class="skeleton h-3 w-16"></div><div class="skeleton h-4 w-24"></div></div><div class="flex flex-col gap-1 border-l border-orange-200 pl-3"><div class="skeleton h-6 w-20 rounded-lg"></div><div class="skeleton h-6 w-16 rounded-lg"></div></div></div><div class="px-4 py-3 flex gap-3"><div class="skeleton flex-1 h-10 rounded-xl"></div><div class="skeleton flex-1 h-10 rounded-xl"></div></div></div></div></div>
-        <div class="skeleton-card sm:hidden"><div class="flex"><div class="skeleton w-2.5 flex-shrink-0 rounded-none" style="border-radius:0;min-height:120px"></div><div class="flex-1 flex flex-col"><div class="flex items-center justify-between px-4 pt-4 pb-3 border-b border-gray-100"><div class="flex items-center gap-2"><div class="skeleton w-10 h-10 rounded-full"></div><div class="flex flex-col gap-1.5"><div class="skeleton h-4 w-20 rounded-full"></div><div class="skeleton h-3 w-16"></div></div></div><div class="flex flex-col items-end gap-1"><div class="skeleton h-3 w-8"></div><div class="skeleton h-3 w-16"></div></div></div><div class="px-4 py-3 flex gap-2" style="background:#fff7ed"><div class="flex-1 flex flex-col gap-2"><div class="skeleton h-2 w-8"></div><div class="skeleton h-4 w-28"></div><div class="skeleton h-3 w-16"></div><div class="skeleton h-4 w-24"></div></div><div class="flex flex-col gap-1 border-l border-orange-200 pl-3"><div class="skeleton h-6 w-20 rounded-lg"></div><div class="skeleton h-6 w-16 rounded-lg"></div></div></div><div class="px-4 py-3 flex gap-3"><div class="skeleton flex-1 h-10 rounded-xl"></div><div class="skeleton flex-1 h-10 rounded-xl"></div></div></div></div></div>
+        <div class="skeleton-card sm:hidden">
+          <div class="flex">
+            <div class="skeleton w-2.5 flex-shrink-0 rounded-none" style="border-radius:0;min-height:120px"></div>
+            <div class="flex-1 flex flex-col">
+              <div class="flex items-center justify-between px-4 pt-4 pb-3 border-b border-gray-100">
+                <div class="flex items-center gap-2">
+                  <div class="skeleton w-10 h-10 rounded-full"></div>
+                  <div class="flex flex-col gap-1.5">
+                    <div class="skeleton h-4 w-20 rounded-full"></div>
+                    <div class="skeleton h-3 w-16"></div>
+                  </div>
+                </div>
+                <div class="flex flex-col items-end gap-1">
+                  <div class="skeleton h-3 w-8"></div>
+                  <div class="skeleton h-3 w-16"></div>
+                </div>
+              </div>
+              <div class="px-4 py-3 flex gap-2" style="background:#fff7ed">
+                <div class="flex-1 flex flex-col gap-2">
+                  <div class="skeleton h-2 w-8"></div>
+                  <div class="skeleton h-4 w-28"></div>
+                  <div class="skeleton h-3 w-16"></div>
+                  <div class="skeleton h-4 w-24"></div>
+                </div>
+                <div class="flex flex-col gap-1 border-l border-orange-200 pl-3">
+                  <div class="skeleton h-6 w-20 rounded-lg"></div>
+                  <div class="skeleton h-6 w-16 rounded-lg"></div>
+                </div>
+              </div>
+              <div class="px-4 py-3 flex gap-3">
+                <div class="skeleton flex-1 h-10 rounded-xl"></div>
+                <div class="skeleton flex-1 h-10 rounded-xl"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="skeleton-card sm:hidden">
+          <div class="flex">
+            <div class="skeleton w-2.5 flex-shrink-0 rounded-none" style="border-radius:0;min-height:120px"></div>
+            <div class="flex-1 flex flex-col">
+              <div class="flex items-center justify-between px-4 pt-4 pb-3 border-b border-gray-100">
+                <div class="flex items-center gap-2">
+                  <div class="skeleton w-10 h-10 rounded-full"></div>
+                  <div class="flex flex-col gap-1.5">
+                    <div class="skeleton h-4 w-20 rounded-full"></div>
+                    <div class="skeleton h-3 w-16"></div>
+                  </div>
+                </div>
+                <div class="flex flex-col items-end gap-1">
+                  <div class="skeleton h-3 w-8"></div>
+                  <div class="skeleton h-3 w-16"></div>
+                </div>
+              </div>
+              <div class="px-4 py-3 flex gap-2" style="background:#fff7ed">
+                <div class="flex-1 flex flex-col gap-2">
+                  <div class="skeleton h-2 w-8"></div>
+                  <div class="skeleton h-4 w-28"></div>
+                  <div class="skeleton h-3 w-16"></div>
+                  <div class="skeleton h-4 w-24"></div>
+                </div>
+                <div class="flex flex-col gap-1 border-l border-orange-200 pl-3">
+                  <div class="skeleton h-6 w-20 rounded-lg"></div>
+                  <div class="skeleton h-6 w-16 rounded-lg"></div>
+                </div>
+              </div>
+              <div class="px-4 py-3 flex gap-3">
+                <div class="skeleton flex-1 h-10 rounded-xl"></div>
+                <div class="skeleton flex-1 h-10 rounded-xl"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="skeleton-card sm:hidden">
+          <div class="flex">
+            <div class="skeleton w-2.5 flex-shrink-0 rounded-none" style="border-radius:0;min-height:120px"></div>
+            <div class="flex-1 flex flex-col">
+              <div class="flex items-center justify-between px-4 pt-4 pb-3 border-b border-gray-100">
+                <div class="flex items-center gap-2">
+                  <div class="skeleton w-10 h-10 rounded-full"></div>
+                  <div class="flex flex-col gap-1.5">
+                    <div class="skeleton h-4 w-20 rounded-full"></div>
+                    <div class="skeleton h-3 w-16"></div>
+                  </div>
+                </div>
+                <div class="flex flex-col items-end gap-1">
+                  <div class="skeleton h-3 w-8"></div>
+                  <div class="skeleton h-3 w-16"></div>
+                </div>
+              </div>
+              <div class="px-4 py-3 flex gap-2" style="background:#fff7ed">
+                <div class="flex-1 flex flex-col gap-2">
+                  <div class="skeleton h-2 w-8"></div>
+                  <div class="skeleton h-4 w-28"></div>
+                  <div class="skeleton h-3 w-16"></div>
+                  <div class="skeleton h-4 w-24"></div>
+                </div>
+                <div class="flex flex-col gap-1 border-l border-orange-200 pl-3">
+                  <div class="skeleton h-6 w-20 rounded-lg"></div>
+                  <div class="skeleton h-6 w-16 rounded-lg"></div>
+                </div>
+              </div>
+              <div class="px-4 py-3 flex gap-3">
+                <div class="skeleton flex-1 h-10 rounded-xl"></div>
+                <div class="skeleton flex-1 h-10 rounded-xl"></div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -242,20 +473,226 @@
       </div>
       <div id="listings-looking" class="flex flex-col gap-3">
         <!-- Skeleton loaders — desktop -->
-        <div class="skeleton-card hidden sm:block"><div class="flex" style="height:80px"><div class="skeleton w-7 h-full rounded-none" style="border-radius:0"></div><div class="flex items-center gap-3 px-3 py-3 border-r border-dashed border-gray-200" style="width:95px"><div class="skeleton w-8 h-8 rounded-full flex-shrink-0"></div><div class="flex-1 flex flex-col gap-2"><div class="skeleton h-3" style="width:60px"></div><div class="skeleton h-2" style="width:44px"></div></div></div><div class="flex-1 flex items-center gap-3 px-4"><div class="flex-1 flex flex-col gap-2"><div class="skeleton h-2 w-12"></div><div class="skeleton h-4 w-28"></div></div><div class="skeleton w-4 h-4"></div><div class="flex-1 flex flex-col gap-2 items-end"><div class="skeleton h-2 w-10"></div><div class="skeleton h-4 w-24"></div></div></div><div class="flex flex-col items-end justify-between gap-2 px-3 py-3 border-l border-gray-100" style="width:180px"><div class="flex gap-1"><div class="skeleton h-5 w-20 rounded-full"></div><div class="skeleton h-5 w-16 rounded-full"></div></div><div class="flex gap-1"><div class="skeleton h-7 w-20 rounded-lg"></div><div class="skeleton h-7 w-24 rounded-lg"></div></div></div></div></div>
-        <div class="skeleton-card hidden sm:block"><div class="flex" style="height:80px"><div class="skeleton w-7 h-full rounded-none" style="border-radius:0"></div><div class="flex items-center gap-3 px-3 py-3 border-r border-dashed border-gray-200" style="width:95px"><div class="skeleton w-8 h-8 rounded-full flex-shrink-0"></div><div class="flex-1 flex flex-col gap-2"><div class="skeleton h-3" style="width:60px"></div><div class="skeleton h-2" style="width:44px"></div></div></div><div class="flex-1 flex items-center gap-3 px-4"><div class="flex-1 flex flex-col gap-2"><div class="skeleton h-2 w-12"></div><div class="skeleton h-4 w-28"></div></div><div class="skeleton w-4 h-4"></div><div class="flex-1 flex flex-col gap-2 items-end"><div class="skeleton h-2 w-10"></div><div class="skeleton h-4 w-24"></div></div></div><div class="flex flex-col items-end justify-between gap-2 px-3 py-3 border-l border-gray-100" style="width:180px"><div class="flex gap-1"><div class="skeleton h-5 w-20 rounded-full"></div><div class="skeleton h-5 w-16 rounded-full"></div></div><div class="flex gap-1"><div class="skeleton h-7 w-20 rounded-lg"></div><div class="skeleton h-7 w-24 rounded-lg"></div></div></div></div></div>
-        <div class="skeleton-card hidden sm:block"><div class="flex" style="height:80px"><div class="skeleton w-7 h-full rounded-none" style="border-radius:0"></div><div class="flex items-center gap-3 px-3 py-3 border-r border-dashed border-gray-200" style="width:95px"><div class="skeleton w-8 h-8 rounded-full flex-shrink-0"></div><div class="flex-1 flex flex-col gap-2"><div class="skeleton h-3" style="width:60px"></div><div class="skeleton h-2" style="width:44px"></div></div></div><div class="flex-1 flex items-center gap-3 px-4"><div class="flex-1 flex flex-col gap-2"><div class="skeleton h-2 w-12"></div><div class="skeleton h-4 w-28"></div></div><div class="skeleton w-4 h-4"></div><div class="flex-1 flex flex-col gap-2 items-end"><div class="skeleton h-2 w-10"></div><div class="skeleton h-4 w-24"></div></div></div><div class="flex flex-col items-end justify-between gap-2 px-3 py-3 border-l border-gray-100" style="width:180px"><div class="flex gap-1"><div class="skeleton h-5 w-20 rounded-full"></div><div class="skeleton h-5 w-16 rounded-full"></div></div><div class="flex gap-1"><div class="skeleton h-7 w-20 rounded-lg"></div><div class="skeleton h-7 w-24 rounded-lg"></div></div></div></div></div>
+        <div class="skeleton-card hidden sm:block">
+          <div class="flex" style="height:80px">
+            <div class="skeleton w-7 h-full rounded-none" style="border-radius:0"></div>
+            <div class="flex items-center gap-3 px-3 py-3 border-r border-dashed border-gray-200" style="width:95px">
+              <div class="skeleton w-8 h-8 rounded-full flex-shrink-0"></div>
+              <div class="flex-1 flex flex-col gap-2">
+                <div class="skeleton h-3" style="width:60px"></div>
+                <div class="skeleton h-2" style="width:44px"></div>
+              </div>
+            </div>
+            <div class="flex-1 flex items-center gap-3 px-4">
+              <div class="flex-1 flex flex-col gap-2">
+                <div class="skeleton h-2 w-12"></div>
+                <div class="skeleton h-4 w-28"></div>
+              </div>
+              <div class="skeleton w-4 h-4"></div>
+              <div class="flex-1 flex flex-col gap-2 items-end">
+                <div class="skeleton h-2 w-10"></div>
+                <div class="skeleton h-4 w-24"></div>
+              </div>
+            </div>
+            <div class="flex flex-col items-end justify-between gap-2 px-3 py-3 border-l border-gray-100"
+              style="width:180px">
+              <div class="flex gap-1">
+                <div class="skeleton h-5 w-20 rounded-full"></div>
+                <div class="skeleton h-5 w-16 rounded-full"></div>
+              </div>
+              <div class="flex gap-1">
+                <div class="skeleton h-7 w-20 rounded-lg"></div>
+                <div class="skeleton h-7 w-24 rounded-lg"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="skeleton-card hidden sm:block">
+          <div class="flex" style="height:80px">
+            <div class="skeleton w-7 h-full rounded-none" style="border-radius:0"></div>
+            <div class="flex items-center gap-3 px-3 py-3 border-r border-dashed border-gray-200" style="width:95px">
+              <div class="skeleton w-8 h-8 rounded-full flex-shrink-0"></div>
+              <div class="flex-1 flex flex-col gap-2">
+                <div class="skeleton h-3" style="width:60px"></div>
+                <div class="skeleton h-2" style="width:44px"></div>
+              </div>
+            </div>
+            <div class="flex-1 flex items-center gap-3 px-4">
+              <div class="flex-1 flex flex-col gap-2">
+                <div class="skeleton h-2 w-12"></div>
+                <div class="skeleton h-4 w-28"></div>
+              </div>
+              <div class="skeleton w-4 h-4"></div>
+              <div class="flex-1 flex flex-col gap-2 items-end">
+                <div class="skeleton h-2 w-10"></div>
+                <div class="skeleton h-4 w-24"></div>
+              </div>
+            </div>
+            <div class="flex flex-col items-end justify-between gap-2 px-3 py-3 border-l border-gray-100"
+              style="width:180px">
+              <div class="flex gap-1">
+                <div class="skeleton h-5 w-20 rounded-full"></div>
+                <div class="skeleton h-5 w-16 rounded-full"></div>
+              </div>
+              <div class="flex gap-1">
+                <div class="skeleton h-7 w-20 rounded-lg"></div>
+                <div class="skeleton h-7 w-24 rounded-lg"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="skeleton-card hidden sm:block">
+          <div class="flex" style="height:80px">
+            <div class="skeleton w-7 h-full rounded-none" style="border-radius:0"></div>
+            <div class="flex items-center gap-3 px-3 py-3 border-r border-dashed border-gray-200" style="width:95px">
+              <div class="skeleton w-8 h-8 rounded-full flex-shrink-0"></div>
+              <div class="flex-1 flex flex-col gap-2">
+                <div class="skeleton h-3" style="width:60px"></div>
+                <div class="skeleton h-2" style="width:44px"></div>
+              </div>
+            </div>
+            <div class="flex-1 flex items-center gap-3 px-4">
+              <div class="flex-1 flex flex-col gap-2">
+                <div class="skeleton h-2 w-12"></div>
+                <div class="skeleton h-4 w-28"></div>
+              </div>
+              <div class="skeleton w-4 h-4"></div>
+              <div class="flex-1 flex flex-col gap-2 items-end">
+                <div class="skeleton h-2 w-10"></div>
+                <div class="skeleton h-4 w-24"></div>
+              </div>
+            </div>
+            <div class="flex flex-col items-end justify-between gap-2 px-3 py-3 border-l border-gray-100"
+              style="width:180px">
+              <div class="flex gap-1">
+                <div class="skeleton h-5 w-20 rounded-full"></div>
+                <div class="skeleton h-5 w-16 rounded-full"></div>
+              </div>
+              <div class="flex gap-1">
+                <div class="skeleton h-7 w-20 rounded-lg"></div>
+                <div class="skeleton h-7 w-24 rounded-lg"></div>
+              </div>
+            </div>
+          </div>
+        </div>
         <!-- Skeleton loaders — mobile -->
-        <div class="skeleton-card sm:hidden"><div class="flex"><div class="skeleton w-2.5 flex-shrink-0 rounded-none" style="border-radius:0;min-height:120px"></div><div class="flex-1 flex flex-col"><div class="flex items-center justify-between px-4 pt-4 pb-3 border-b border-gray-100"><div class="flex items-center gap-2"><div class="skeleton w-10 h-10 rounded-full"></div><div class="flex flex-col gap-1.5"><div class="skeleton h-4 w-20 rounded-full"></div><div class="skeleton h-3 w-16"></div></div></div><div class="flex flex-col items-end gap-1"><div class="skeleton h-3 w-8"></div><div class="skeleton h-3 w-16"></div></div></div><div class="px-4 py-3 flex gap-2" style="background:#fff7ed"><div class="flex-1 flex flex-col gap-2"><div class="skeleton h-2 w-8"></div><div class="skeleton h-4 w-28"></div><div class="skeleton h-3 w-16"></div><div class="skeleton h-4 w-24"></div></div><div class="flex flex-col gap-1 border-l border-orange-200 pl-3"><div class="skeleton h-6 w-20 rounded-lg"></div><div class="skeleton h-6 w-16 rounded-lg"></div></div></div><div class="px-4 py-3 flex gap-3"><div class="skeleton flex-1 h-10 rounded-xl"></div><div class="skeleton flex-1 h-10 rounded-xl"></div></div></div></div></div>
-        <div class="skeleton-card sm:hidden"><div class="flex"><div class="skeleton w-2.5 flex-shrink-0 rounded-none" style="border-radius:0;min-height:120px"></div><div class="flex-1 flex flex-col"><div class="flex items-center justify-between px-4 pt-4 pb-3 border-b border-gray-100"><div class="flex items-center gap-2"><div class="skeleton w-10 h-10 rounded-full"></div><div class="flex flex-col gap-1.5"><div class="skeleton h-4 w-20 rounded-full"></div><div class="skeleton h-3 w-16"></div></div></div><div class="flex flex-col items-end gap-1"><div class="skeleton h-3 w-8"></div><div class="skeleton h-3 w-16"></div></div></div><div class="px-4 py-3 flex gap-2" style="background:#fff7ed"><div class="flex-1 flex flex-col gap-2"><div class="skeleton h-2 w-8"></div><div class="skeleton h-4 w-28"></div><div class="skeleton h-3 w-16"></div><div class="skeleton h-4 w-24"></div></div><div class="flex flex-col gap-1 border-l border-orange-200 pl-3"><div class="skeleton h-6 w-20 rounded-lg"></div><div class="skeleton h-6 w-16 rounded-lg"></div></div></div><div class="px-4 py-3 flex gap-3"><div class="skeleton flex-1 h-10 rounded-xl"></div><div class="skeleton flex-1 h-10 rounded-xl"></div></div></div></div></div>
-        <div class="skeleton-card sm:hidden"><div class="flex"><div class="skeleton w-2.5 flex-shrink-0 rounded-none" style="border-radius:0;min-height:120px"></div><div class="flex-1 flex flex-col"><div class="flex items-center justify-between px-4 pt-4 pb-3 border-b border-gray-100"><div class="flex items-center gap-2"><div class="skeleton w-10 h-10 rounded-full"></div><div class="flex flex-col gap-1.5"><div class="skeleton h-4 w-20 rounded-full"></div><div class="skeleton h-3 w-16"></div></div></div><div class="flex flex-col items-end gap-1"><div class="skeleton h-3 w-8"></div><div class="skeleton h-3 w-16"></div></div></div><div class="px-4 py-3 flex gap-2" style="background:#fff7ed"><div class="flex-1 flex flex-col gap-2"><div class="skeleton h-2 w-8"></div><div class="skeleton h-4 w-28"></div><div class="skeleton h-3 w-16"></div><div class="skeleton h-4 w-24"></div></div><div class="flex flex-col gap-1 border-l border-orange-200 pl-3"><div class="skeleton h-6 w-20 rounded-lg"></div><div class="skeleton h-6 w-16 rounded-lg"></div></div></div><div class="px-4 py-3 flex gap-3"><div class="skeleton flex-1 h-10 rounded-xl"></div><div class="skeleton flex-1 h-10 rounded-xl"></div></div></div></div></div>
+        <div class="skeleton-card sm:hidden">
+          <div class="flex">
+            <div class="skeleton w-2.5 flex-shrink-0 rounded-none" style="border-radius:0;min-height:120px"></div>
+            <div class="flex-1 flex flex-col">
+              <div class="flex items-center justify-between px-4 pt-4 pb-3 border-b border-gray-100">
+                <div class="flex items-center gap-2">
+                  <div class="skeleton w-10 h-10 rounded-full"></div>
+                  <div class="flex flex-col gap-1.5">
+                    <div class="skeleton h-4 w-20 rounded-full"></div>
+                    <div class="skeleton h-3 w-16"></div>
+                  </div>
+                </div>
+                <div class="flex flex-col items-end gap-1">
+                  <div class="skeleton h-3 w-8"></div>
+                  <div class="skeleton h-3 w-16"></div>
+                </div>
+              </div>
+              <div class="px-4 py-3 flex gap-2" style="background:#fff7ed">
+                <div class="flex-1 flex flex-col gap-2">
+                  <div class="skeleton h-2 w-8"></div>
+                  <div class="skeleton h-4 w-28"></div>
+                  <div class="skeleton h-3 w-16"></div>
+                  <div class="skeleton h-4 w-24"></div>
+                </div>
+                <div class="flex flex-col gap-1 border-l border-orange-200 pl-3">
+                  <div class="skeleton h-6 w-20 rounded-lg"></div>
+                  <div class="skeleton h-6 w-16 rounded-lg"></div>
+                </div>
+              </div>
+              <div class="px-4 py-3 flex gap-3">
+                <div class="skeleton flex-1 h-10 rounded-xl"></div>
+                <div class="skeleton flex-1 h-10 rounded-xl"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="skeleton-card sm:hidden">
+          <div class="flex">
+            <div class="skeleton w-2.5 flex-shrink-0 rounded-none" style="border-radius:0;min-height:120px"></div>
+            <div class="flex-1 flex flex-col">
+              <div class="flex items-center justify-between px-4 pt-4 pb-3 border-b border-gray-100">
+                <div class="flex items-center gap-2">
+                  <div class="skeleton w-10 h-10 rounded-full"></div>
+                  <div class="flex flex-col gap-1.5">
+                    <div class="skeleton h-4 w-20 rounded-full"></div>
+                    <div class="skeleton h-3 w-16"></div>
+                  </div>
+                </div>
+                <div class="flex flex-col items-end gap-1">
+                  <div class="skeleton h-3 w-8"></div>
+                  <div class="skeleton h-3 w-16"></div>
+                </div>
+              </div>
+              <div class="px-4 py-3 flex gap-2" style="background:#fff7ed">
+                <div class="flex-1 flex flex-col gap-2">
+                  <div class="skeleton h-2 w-8"></div>
+                  <div class="skeleton h-4 w-28"></div>
+                  <div class="skeleton h-3 w-16"></div>
+                  <div class="skeleton h-4 w-24"></div>
+                </div>
+                <div class="flex flex-col gap-1 border-l border-orange-200 pl-3">
+                  <div class="skeleton h-6 w-20 rounded-lg"></div>
+                  <div class="skeleton h-6 w-16 rounded-lg"></div>
+                </div>
+              </div>
+              <div class="px-4 py-3 flex gap-3">
+                <div class="skeleton flex-1 h-10 rounded-xl"></div>
+                <div class="skeleton flex-1 h-10 rounded-xl"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="skeleton-card sm:hidden">
+          <div class="flex">
+            <div class="skeleton w-2.5 flex-shrink-0 rounded-none" style="border-radius:0;min-height:120px"></div>
+            <div class="flex-1 flex flex-col">
+              <div class="flex items-center justify-between px-4 pt-4 pb-3 border-b border-gray-100">
+                <div class="flex items-center gap-2">
+                  <div class="skeleton w-10 h-10 rounded-full"></div>
+                  <div class="flex flex-col gap-1.5">
+                    <div class="skeleton h-4 w-20 rounded-full"></div>
+                    <div class="skeleton h-3 w-16"></div>
+                  </div>
+                </div>
+                <div class="flex flex-col items-end gap-1">
+                  <div class="skeleton h-3 w-8"></div>
+                  <div class="skeleton h-3 w-16"></div>
+                </div>
+              </div>
+              <div class="px-4 py-3 flex gap-2" style="background:#fff7ed">
+                <div class="flex-1 flex flex-col gap-2">
+                  <div class="skeleton h-2 w-8"></div>
+                  <div class="skeleton h-4 w-28"></div>
+                  <div class="skeleton h-3 w-16"></div>
+                  <div class="skeleton h-4 w-24"></div>
+                </div>
+                <div class="flex flex-col gap-1 border-l border-orange-200 pl-3">
+                  <div class="skeleton h-6 w-20 rounded-lg"></div>
+                  <div class="skeleton h-6 w-16 rounded-lg"></div>
+                </div>
+              </div>
+              <div class="px-4 py-3 flex gap-3">
+                <div class="skeleton flex-1 h-10 rounded-xl"></div>
+                <div class="skeleton flex-1 h-10 rounded-xl"></div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    
+
     <!-- LISTING MODAL -->
-    <div id="listing-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 sm:p-6 opacity-0 transition-opacity duration-300">
+    <div id="listing-modal"
+      class="fixed inset-0 z-50 hidden items-center justify-center p-4 sm:p-6 opacity-0 transition-opacity duration-300">
       <div class="absolute inset-0 bg-black/60 backdrop-blur-sm cursor-pointer" onclick="closeModal()"></div>
-      <div id="modal-content" class="relative bg-white rounded-2xl shadow-xl w-full max-w-lg max-h-[90vh] overflow-y-auto transform scale-95 transition-transform duration-300">
+      <div id="modal-content"
+        class="relative bg-white rounded-2xl shadow-xl w-full max-w-lg max-h-[90vh] overflow-y-auto transform scale-95 transition-transform duration-300">
         <!-- Injected Card -->
       </div>
     </div>
@@ -265,36 +702,44 @@
       <div class="max-w-3xl mx-auto text-center mb-12">
         <h2 class="text-3xl font-bold text-gray-900 mb-4">Why Use Sahayak for Your Europe-India Travel?</h2>
         <p class="text-lg text-gray-600 leading-relaxed">
-          Navigating international flights between Europe and Maharashtra (India) can be stressful, especially for elderly parents or when sending urgent documents. Sahayak connects the trusted Marathi diaspora to provide safe, community-driven travel assistance.
+          Navigating international flights between Europe and Maharashtra (India) can be stressful, especially for
+          elderly parents or when sending urgent documents. Sahayak connects the trusted Marathi diaspora to provide
+          safe, community-driven travel assistance.
         </p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 text-center">
-          <div class="w-12 h-12 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center mx-auto mb-4">
+          <div
+            class="w-12 h-12 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center mx-auto mb-4">
             <i data-lucide="users" class="w-6 h-6"></i>
           </div>
           <h3 class="font-bold text-gray-900 mb-2">Elderly Flight Companions</h3>
           <p class="text-sm text-gray-500 leading-relaxed">
-            Find a Marathi-speaking travel buddy to help your parents navigate layovers, immigration, and language barriers across European airports.
+            Find a Marathi-speaking travel buddy to help your parents navigate layovers, immigration, and language
+            barriers across European airports.
           </p>
         </div>
         <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 text-center">
-          <div class="w-12 h-12 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center mx-auto mb-4">
+          <div
+            class="w-12 h-12 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center mx-auto mb-4">
             <i data-lucide="mail" class="w-6 h-6"></i>
           </div>
           <h3 class="font-bold text-gray-900 mb-2">Community Courier</h3>
           <p class="text-sm text-gray-500 leading-relaxed">
-            Need to send urgent letters, medicines, or parcels? Connect with verified community members traveling between India and Europe.
+            Need to send urgent letters, medicines, or parcels? Connect with verified community members traveling
+            between India and Europe.
           </p>
         </div>
         <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 text-center">
-          <div class="w-12 h-12 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center mx-auto mb-4">
+          <div
+            class="w-12 h-12 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center mx-auto mb-4">
             <i data-lucide="shield-check" class="w-6 h-6"></i>
           </div>
           <h3 class="font-bold text-gray-900 mb-2">Trusted & Safe</h3>
           <p class="text-sm text-gray-500 leading-relaxed">
-            Built by and for the Marathi diaspora. While we advise personal verification, the platform relies on strong community bonds and mutual respect.
+            Built by and for the Marathi diaspora. While we advise personal verification, the platform relies on strong
+            community bonds and mutual respect.
           </p>
         </div>
       </div>
@@ -305,40 +750,48 @@
       <div class="max-w-3xl mx-auto">
         <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Frequently Asked Questions</h2>
         <div class="space-y-4">
-          
+
           <details class="group bg-white rounded-xl shadow-sm border border-gray-100 open:border-orange-200">
-            <summary class="flex justify-between items-center font-medium cursor-pointer list-none p-5 text-gray-900 group-open:text-orange-600">
+            <summary
+              class="flex justify-between items-center font-medium cursor-pointer list-none p-5 text-gray-900 group-open:text-orange-600">
               <span>How do I find a travel companion for my parents flying to Europe?</span>
               <span class="transition group-open:rotate-180">
                 <i data-lucide="chevron-down" class="w-5 h-5"></i>
               </span>
             </summary>
             <div class="text-gray-600 mt-2 p-5 pt-0 text-sm leading-relaxed border-t border-gray-50">
-              Using Sahayak, you can submit your parents' flight details or browse our active listings to find other Indian community members traveling on the same route. Connect via WhatsApp to coordinate travel assistance at the airport or during layovers.
+              Using Sahayak, you can submit your parents' flight details or browse our active listings to find other
+              Indian community members traveling on the same route. Connect via WhatsApp to coordinate travel assistance
+              at the airport or during layovers.
             </div>
           </details>
 
           <details class="group bg-white rounded-xl shadow-sm border border-gray-100 open:border-orange-200">
-            <summary class="flex justify-between items-center font-medium cursor-pointer list-none p-5 text-gray-900 group-open:text-orange-600">
+            <summary
+              class="flex justify-between items-center font-medium cursor-pointer list-none p-5 text-gray-900 group-open:text-orange-600">
               <span>Can I find someone to carry urgent documents to India?</span>
               <span class="transition group-open:rotate-180">
                 <i data-lucide="chevron-down" class="w-5 h-5"></i>
               </span>
             </summary>
             <div class="text-gray-600 mt-2 p-5 pt-0 text-sm leading-relaxed border-t border-gray-50">
-              Yes! Many community members offer carrier services. Look for listings tagged with 'Letter / Documents' and contact the traveler directly. Always ensure safety and mutual trust before exchanging documents.
+              Yes! Many community members offer carrier services. Look for listings tagged with 'Letter / Documents' and
+              contact the traveler directly. Always ensure safety and mutual trust before exchanging documents.
             </div>
           </details>
 
           <details class="group bg-white rounded-xl shadow-sm border border-gray-100 open:border-orange-200">
-            <summary class="flex justify-between items-center font-medium cursor-pointer list-none p-5 text-gray-900 group-open:text-orange-600">
+            <summary
+              class="flex justify-between items-center font-medium cursor-pointer list-none p-5 text-gray-900 group-open:text-orange-600">
               <span>Is it safe to use community travel assistance?</span>
               <span class="transition group-open:rotate-180">
                 <i data-lucide="chevron-down" class="w-5 h-5"></i>
               </span>
             </summary>
             <div class="text-gray-600 mt-2 p-5 pt-0 text-sm leading-relaxed border-t border-gray-50">
-              Sahayak connects members of the Marathi and Indian diaspora in Europe. While it is built on community trust, we advise all users to verify identities and use common sense before handing over documents, money, or goods.
+              Sahayak connects members of the Marathi and Indian diaspora in Europe. While it is built on community
+              trust, we advise all users to verify identities and use common sense before handing over documents, money,
+              or goods.
             </div>
           </details>
 
@@ -368,20 +821,20 @@
     let currentModalIndex = -1;
 
     function toggleDirection() {
-        if (currentDirectionFilter === 'All') {
-            currentDirectionFilter = 'India to Europe';
-        } else if (currentDirectionFilter === 'India to Europe') {
-            currentDirectionFilter = 'Europe to India';
-        } else {
-            currentDirectionFilter = 'All';
-        }
-        
-        let text = 'All Routes';
-        if (currentDirectionFilter === 'India to Europe') text = 'India → Europe';
-        if (currentDirectionFilter === 'Europe to India') text = 'Europe → India';
-        
-        document.getElementById('f-direction-text').textContent = text;
-        resetAndRender();
+      if (currentDirectionFilter === 'All') {
+        currentDirectionFilter = 'India to Europe';
+      } else if (currentDirectionFilter === 'India to Europe') {
+        currentDirectionFilter = 'Europe to India';
+      } else {
+        currentDirectionFilter = 'All';
+      }
+
+      let text = 'All Routes';
+      if (currentDirectionFilter === 'India to Europe') text = 'India → Europe';
+      if (currentDirectionFilter === 'Europe to India') text = 'Europe → India';
+
+      document.getElementById('f-direction-text').textContent = text;
+      resetAndRender();
     }
 
     function resetAndRender() {
@@ -389,27 +842,27 @@
     }
 
     function openListing(index) {
-        const r = allPaginatedData[index];
-        if(!r) return;
-        currentModalIndex = index;
-        
-        const av = avatarColor(r.name);
-        const expired = isExpired(r.travel_date);
-        const waMsg = encodeURIComponent(`Namaste ${r.name}, I saw your listing on Maharashtra in Europe. I would like to connect!`);
-        const waLink = r.whatsapp_number ? `https://wa.me/${r.whatsapp_number.replace(/\D/g, '')}?text=${waMsg}` : '#';
-        const dir = r.direction || 'Europe to India';
-        const from = dir === 'India to Europe' ? (r.city_in_india || 'India') : (r.city_in_europe || 'Europe');
-        const to = dir === 'India to Europe' ? (r.city_in_europe || 'Europe') : (r.city_in_india || 'India');
-        
-        function getAirlineLogo(flightNum, classes) {
-            if (!flightNum) return '';
-            const match = flightNum.match(/^[a-zA-Z]{2}/);
-            if (!match) return '';
-            const iata = match[0].toUpperCase();
-            return `<img src="https://pics.avs.io/200/200/${iata}.png" class="${classes}" alt="${iata} Logo" onerror="this.style.display='none'">`;
-        }
+      const r = allPaginatedData[index];
+      if (!r) return;
+      currentModalIndex = index;
 
-        const cardHTML = `
+      const av = avatarColor(r.name);
+      const expired = isExpired(r.travel_date);
+      const waMsg = encodeURIComponent(`Namaste ${r.name}, I saw your listing on Maharashtra in Europe. I would like to connect!`);
+      const waLink = r.whatsapp_number ? `https://wa.me/${r.whatsapp_number.replace(/\D/g, '')}?text=${waMsg}` : '#';
+      const dir = r.direction || 'Europe to India';
+      const from = dir === 'India to Europe' ? (r.city_in_india || 'India') : (r.city_in_europe || 'Europe');
+      const to = dir === 'India to Europe' ? (r.city_in_europe || 'Europe') : (r.city_in_india || 'India');
+
+      function getAirlineLogo(flightNum, classes) {
+        if (!flightNum) return '';
+        const match = flightNum.match(/^[a-zA-Z]{2}/);
+        if (!match) return '';
+        const iata = match[0].toUpperCase();
+        return `<img src="https://pics.avs.io/200/200/${iata}.png" class="${classes}" alt="${iata} Logo" onerror="this.style.display='none'">`;
+      }
+
+      const cardHTML = `
             <div class="p-6">
                 <div class="flex justify-between items-start mb-4">
                     <div class="flex items-center gap-4">
@@ -468,59 +921,59 @@
 
                 <div class="flex flex-col justify-center border-t border-gray-100 pt-5">
                     ${expired
-                        ? `<span class="text-xs font-bold text-gray-400 uppercase py-3 px-4 border rounded-xl bg-gray-50 text-center block">Listing Completed</span>`
-                        : `<div class="flex gap-3">
-                            <a href="${waLink}" target="_blank" class="flex-1 bg-orange-600 text-white px-4 py-3 rounded-xl text-sm font-bold hover:bg-orange-700 transition shadow-md text-center flex justify-center items-center gap-2 ${!r.whatsapp_number ? 'opacity-50 cursor-not-allowed pointer-events-none' : ''}"><i data-lucide="message-circle" class="w-4 h-4"></i> Connect</a>
+          ? `<span class="text-xs font-bold text-gray-400 uppercase py-3 px-4 border rounded-xl bg-gray-50 text-center block">Listing Completed</span>`
+          : `<div class="flex gap-3">
+                            <a href="#" onclick="event.preventDefault(); openVerificationModal(this)" data-phone="${r.whatsapp_number || ''}" class="auth-connect-btn flex-1 bg-[#0A66C2] text-white px-4 py-3 rounded-xl text-sm font-bold hover:bg-[#084e96] transition shadow-md text-center flex justify-center items-center gap-2 ${!r.whatsapp_number ? 'opacity-50 cursor-not-allowed pointer-events-none' : ''}"><i data-lucide="linkedin" class="w-4 h-4"></i> Connect via LinkedIn</a>
                             <button onclick="shareOnWhatsApp(currentModalIndex)" class="flex-1 bg-[#25D366] hover:bg-[#1ebe5d] text-white px-4 py-3 rounded-xl text-sm font-bold transition shadow-md text-center flex justify-center items-center gap-2"><svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg> Share on WhatsApp</button>
                         </div>`
-                    }
+        }
                     <p class="text-[10px] text-center text-gray-400 mt-3">Be safe. Use common sense when exchanging goods or money.</p>
                 </div>
             </div>
         `;
-        
-        document.getElementById('modal-content').innerHTML = cardHTML;
-        lucide.createIcons();
-        
-        const modal = document.getElementById('listing-modal');
-        modal.classList.remove('hidden');
-        modal.classList.add('flex');
-        
-        setTimeout(() => {
-            modal.classList.remove('opacity-0');
-            document.getElementById('modal-content').classList.remove('scale-95');
-        }, 10);
+
+      document.getElementById('modal-content').innerHTML = cardHTML;
+      lucide.createIcons();
+
+      const modal = document.getElementById('listing-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+
+      setTimeout(() => {
+        modal.classList.remove('opacity-0');
+        document.getElementById('modal-content').classList.remove('scale-95');
+      }, 10);
     }
 
     function closeModal() {
-        const modal = document.getElementById('listing-modal');
-        modal.classList.add('opacity-0');
-        document.getElementById('modal-content').classList.add('scale-95');
-        
-        setTimeout(() => {
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        }, 300);
+      const modal = document.getElementById('listing-modal');
+      modal.classList.add('opacity-0');
+      document.getElementById('modal-content').classList.add('scale-95');
+
+      setTimeout(() => {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }, 300);
     }
 
     function shareOnWhatsApp(index) {
-        const r = allPaginatedData[index];
-        if (!r) return;
-        const dir = r.direction || 'Europe to India';
-        const from = dir === 'India to Europe' ? (r.city_in_india || 'India') : (r.city_in_europe || 'Europe');
-        const to = dir === 'India to Europe' ? (r.city_in_europe || 'Europe') : (r.city_in_india || 'India');
-        const helpEmoji = r.looking_for_or_offering === 'Offering to help' ? '\uD83E\uDD1D' : '\uD83D\uDE4F';
-        const helpType = r.looking_for_or_offering === 'Offering to help' ? '*OFFERING HELP* ' + helpEmoji : '*LOOKING FOR HELP* ' + helpEmoji;
-        const route = from + ' \u2192 ' + to + (r.flight_number ? ' (' + r.flight_number + ')' : '');
-        const tags = (r.what_kind_of_help || '').split(',').map(function(s) { return s.trim(); }).filter(Boolean).join(', ');
-        const description = r.short_description ? '\n\n' + r.short_description : '';
-        const plane = '\u2708\uFE0F';
-        const calendar = '\uD83D\uDCC5';
-        const departure = '\uD83D\uDEEB';
-        const label = '\uD83C\uDFF7\uFE0F';
-        const link = '\uD83D\uDD17';
-        const msg = plane + ' Sahayak Listing | Community Travel Help | Maharashtra in Europe\n\nI am ' + r.name + ' ' + helpType + '\n' + calendar + ' Date: ' + (r.travel_date || 'Flexible') + '\n' + departure + ' ' + route + '\n' + label + ' ' + tags + description + '\n\n' + link + ' https://maharashtraineurope.com/sahayak';
-        window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
+      const r = allPaginatedData[index];
+      if (!r) return;
+      const dir = r.direction || 'Europe to India';
+      const from = dir === 'India to Europe' ? (r.city_in_india || 'India') : (r.city_in_europe || 'Europe');
+      const to = dir === 'India to Europe' ? (r.city_in_europe || 'Europe') : (r.city_in_india || 'India');
+      const helpEmoji = r.looking_for_or_offering === 'Offering to help' ? '\uD83E\uDD1D' : '\uD83D\uDE4F';
+      const helpType = r.looking_for_or_offering === 'Offering to help' ? '*OFFERING HELP* ' + helpEmoji : '*LOOKING FOR HELP* ' + helpEmoji;
+      const route = from + ' \u2192 ' + to + (r.flight_number ? ' (' + r.flight_number + ')' : '');
+      const tags = (r.what_kind_of_help || '').split(',').map(function (s) { return s.trim(); }).filter(Boolean).join(', ');
+      const description = r.short_description ? '\n\n' + r.short_description : '';
+      const plane = '\u2708\uFE0F';
+      const calendar = '\uD83D\uDCC5';
+      const departure = '\uD83D\uDEEB';
+      const label = '\uD83C\uDFF7\uFE0F';
+      const link = '\uD83D\uDD17';
+      const msg = plane + ' Sahayak Listing | Community Travel Help | Maharashtra in Europe\n\nI am ' + r.name + ' ' + helpType + '\n' + calendar + ' Date: ' + (r.travel_date || 'Flexible') + '\n' + departure + ' ' + route + '\n' + label + ' ' + tags + description + '\n\n' + link + ' https://maharashtraineurope.com/sahayak';
+      window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
     }
 
     function avatarColor(name) {
@@ -538,14 +991,14 @@
     function getHelpItemsHTML(r) {
       const items = helpItems(r);
       if (!items.length) return `<span class="text-[10px] px-2 py-0.5 rounded-full border font-bold bg-gray-100 text-gray-700 border-gray-200 text-right whitespace-nowrap">Community Help</span>`;
-      
+
       return items.map(item => {
-          let color = 'bg-gray-100 text-gray-700 border-gray-200';
-          if(item.includes('Medicine')) color = 'bg-rose-100 text-rose-700 border-rose-200';
-          if(item.includes('Letter')) color = 'bg-blue-100 text-blue-700 border-blue-200';
-          if(item.includes('Parcel')) color = 'bg-amber-100 text-amber-700 border-amber-200';
-          if(item.includes('companion')) color = 'bg-indigo-100 text-indigo-700 border-indigo-200';
-          return `<span class="text-[10px] px-2 py-0.5 rounded-full border font-bold ${color} text-right whitespace-nowrap">${item}</span>`;
+        let color = 'bg-gray-100 text-gray-700 border-gray-200';
+        if (item.includes('Medicine')) color = 'bg-rose-100 text-rose-700 border-rose-200';
+        if (item.includes('Letter')) color = 'bg-blue-100 text-blue-700 border-blue-200';
+        if (item.includes('Parcel')) color = 'bg-amber-100 text-amber-700 border-amber-200';
+        if (item.includes('companion')) color = 'bg-indigo-100 text-indigo-700 border-indigo-200';
+        return `<span class="text-[10px] px-2 py-0.5 rounded-full border font-bold ${color} text-right whitespace-nowrap">${item}</span>`;
       }).join('');
     }
 
@@ -583,19 +1036,19 @@
       const d = parseDate(dateStr);
       if (!d) return false;
       const t = d.getTime();
-      
+
       let fromT = -Infinity;
       if (fromStr) {
         const fromD = parseDate(fromStr);
         if (fromD) fromT = fromD.getTime();
       }
-      
+
       let toT = Infinity;
       if (toStr) {
         const toD = parseDate(toStr);
         if (toD) toT = toD.getTime();
       }
-      
+
       return t >= fromT && t <= toT;
     }
 
@@ -609,17 +1062,17 @@
 
     function updateURL() {
       const url = new URL(window.location);
-      
+
       const df = document.getElementById('f-date-from').value;
-      if(df) url.searchParams.set('dateFrom', df); else url.searchParams.delete('dateFrom');
-      
+      if (df) url.searchParams.set('dateFrom', df); else url.searchParams.delete('dateFrom');
+
       const dt = document.getElementById('f-date-to').value;
-      if(dt) url.searchParams.set('dateTo', dt); else url.searchParams.delete('dateTo');
+      if (dt) url.searchParams.set('dateTo', dt); else url.searchParams.delete('dateTo');
 
       const showExpired = document.getElementById('show-expired').checked;
-      if(showExpired) url.searchParams.set('past', '1'); else url.searchParams.delete('past');
-      
-      if(currentDirectionFilter !== 'All') {
+      if (showExpired) url.searchParams.set('past', '1'); else url.searchParams.delete('past');
+
+      if (currentDirectionFilter !== 'All') {
         url.searchParams.set('route', currentDirectionFilter);
       } else {
         url.searchParams.delete('route');
@@ -629,167 +1082,167 @@
     }
 
     function generateBoardHTML(paginatedData, offset) {
-        if (!paginatedData.length) return '<div class="col-span-full text-center py-12 text-gray-500 bg-gray-50 rounded-xl border border-dashed border-gray-200">No listings found.</div>';
+      if (!paginatedData.length) return '<div class="col-span-full text-center py-12 text-gray-500 bg-gray-50 rounded-xl border border-dashed border-gray-200">No listings found.</div>';
 
-        const waSvgSmall = '<svg class="w-3 h-3 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>';
+      const waSvgSmall = '<svg class="w-3 h-3 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>';
 
-        function getAirlineLogo(flightNum, cls) {
-            if (!flightNum) return '';
-            var m = flightNum.match(/^[a-zA-Z]{2}/);
-            if (!m) return '';
-            var iata = m[0].toUpperCase();
-            return '<img src="https://pics.avs.io/200/200/' + iata + '.png" class="' + cls + '" alt="" onerror="this.style.display=\'none\'">';
+      function getAirlineLogo(flightNum, cls) {
+        if (!flightNum) return '';
+        var m = flightNum.match(/^[a-zA-Z]{2}/);
+        if (!m) return '';
+        var iata = m[0].toUpperCase();
+        return '<img src="https://pics.avs.io/200/200/' + iata + '.png" class="' + cls + '" alt="" onerror="this.style.display=\'none\'">';
+      }
+
+      return paginatedData.map(function (r, index) {
+        var globalIndex = offset + index;
+        var expired = isExpired(r.travel_date);
+        var dir = r.direction || 'Europe to India';
+        var from = dir === 'India to Europe' ? (r.city_in_india || 'India') : (r.city_in_europe || 'Europe');
+        var to = dir === 'India to Europe' ? (r.city_in_europe || 'Europe') : (r.city_in_india || 'India');
+        var delay = Math.min(index, 20) * 0.08;
+        var av = avatarColor(r.name);
+        var isOffering = r.looking_for_or_offering === 'Offering to help';
+        var stripCls = isOffering ? 'bg-green-500' : 'bg-rose-500';
+        var stripLabel = isOffering ? 'HELP OFFERED' : 'LOOKING FOR HELP';
+        var badgeBg = isOffering ? '#dcfce7' : '#ffe4e6';
+        var badgeCol = isOffering ? '#15803d' : '#be123c';
+        var waMsg = encodeURIComponent('Namaste ' + r.name + ', I saw your listing on Maharashtra in Europe. I would like to connect!');
+        var waLink = r.whatsapp_number ? 'https://wa.me/' + r.whatsapp_number.replace(/\D/g, '') + '?text=' + waMsg : '#';
+        var noWa = !r.whatsapp_number ? ' opacity-40 pointer-events-none' : '';
+
+        /* ---------- shared pieces ---------- */
+        var logoSm = r.flight_number ? getAirlineLogo(r.flight_number, 'h-6 w-auto object-contain') : '';
+        var logo8 = r.flight_number ? '<div class="flex items-center justify-center h-8">' + getAirlineLogo(r.flight_number, 'h-8 w-auto object-contain') + '</div>' : '<div class="h-8"></div>';
+        var avatarDiv = '<div class="w-9 h-9 rounded-full flex items-center justify-center font-bold text-sm" style="background:' + av.bg + ';color:' + av.color + '">' + initials(r.name) + '</div>';
+        var firstName = r.name.split(' ')[0];
+
+        /* flight badge for desktop centre */
+        var flightBadge = r.flight_number
+          ? '<span class="text-[9px] font-bold text-orange-700 bg-orange-50 border border-orange-200 px-1.5 py-0.5 rounded whitespace-nowrap">' + r.flight_number + '</span>'
+          : '<div class="w-10 border-t border-dashed border-orange-300"></div>';
+
+        /* mobile tags: vertical stack */
+        var items = helpItems(r);
+        var tagsVertical = '';
+        if (items.length) {
+          items.forEach(function (item) {
+            var bg = '#f3f4f6', col = '#374151', bdr = '#d1d5db';
+            if (item.includes('Medicine')) { bg = '#fff1f2'; col = '#be123c'; bdr = '#fecdd3'; }
+            if (item.includes('Letter')) { bg = '#eff6ff'; col = '#1d4ed8'; bdr = '#bfdbfe'; }
+            if (item.includes('Parcel')) { bg = '#fffbeb'; col = '#92400e'; bdr = '#fde68a'; }
+            if (item.includes('companion')) { bg = '#eef2ff'; col = '#3730a3'; bdr = '#c7d2fe'; }
+            tagsVertical += '<span style="background:' + bg + ';color:' + col + ';border:1px solid ' + bdr + '" class="text-[11px] font-bold px-3 py-1.5 rounded-lg block">' + item + '</span>';
+          });
+        } else {
+          tagsVertical = '<span class="text-[11px] font-bold px-3 py-1.5 rounded-lg block bg-gray-100 text-gray-700 border border-gray-200">Community Help</span>';
         }
 
-        return paginatedData.map(function(r, index) {
-            var globalIndex = offset + index;
-            var expired = isExpired(r.travel_date);
-            var dir = r.direction || 'Europe to India';
-            var from = dir === 'India to Europe' ? (r.city_in_india || 'India') : (r.city_in_europe || 'Europe');
-            var to   = dir === 'India to Europe' ? (r.city_in_europe || 'Europe') : (r.city_in_india || 'India');
-            var delay = Math.min(index, 20) * 0.08;
-            var av = avatarColor(r.name);
-            var isOffering = r.looking_for_or_offering === 'Offering to help';
-            var stripCls   = isOffering ? 'bg-green-500' : 'bg-rose-500';
-            var stripLabel = isOffering ? 'HELP OFFERED'  : 'LOOKING FOR HELP';
-            var badgeBg    = isOffering ? '#dcfce7' : '#ffe4e6';
-            var badgeCol   = isOffering ? '#15803d' : '#be123c';
-            var waMsg = encodeURIComponent('Namaste ' + r.name + ', I saw your listing on Maharashtra in Europe. I would like to connect!');
-            var waLink = r.whatsapp_number ? 'https://wa.me/' + r.whatsapp_number.replace(/\D/g,'') + '?text=' + waMsg : '#';
-            var noWa   = !r.whatsapp_number ? ' opacity-40 pointer-events-none' : '';
+        /* action buttons */
+        var btnConnect = '<a href="#" onclick="event.preventDefault(); event.stopPropagation(); openVerificationModal(this)" data-phone="' + (r.whatsapp_number || '') + '" class="auth-connect-btn flex-1 bg-[#0A66C2] hover:bg-[#084e96] text-white text-xs font-extrabold py-2.5 rounded-xl transition shadow flex items-center justify-center gap-1.5' + noWa + '"><i data-lucide="linkedin" class="w-3.5 h-3.5"></i> Connect via LinkedIn</a>';
+        var btnShare = '<button onclick="event.stopPropagation(); shareOnWhatsApp(' + globalIndex + ')" class="flex-1 bg-[#25D366] hover:bg-[#1ebe5d] text-white text-xs font-extrabold py-2.5 rounded-xl transition shadow flex items-center justify-center gap-1.5">' + waSvgSmall + 'SHARE</button>';
+        var btnDesktopConnect = '<a href="#" onclick="event.preventDefault(); event.stopPropagation(); openVerificationModal(this)" data-phone="' + (r.whatsapp_number || '') + '" class="auth-connect-btn bg-[#0A66C2] hover:bg-[#084e96] text-white text-[10px] font-bold px-2.5 py-1.5 rounded-lg transition shadow-sm whitespace-nowrap flex items-center justify-center gap-1' + noWa + '"><i data-lucide="linkedin" class="w-3 h-3"></i> Connect via LinkedIn</a>';
+        var btnDesktopShare = '<button onclick="event.stopPropagation(); shareOnWhatsApp(' + globalIndex + ')" class="bg-[#25D366] hover:bg-[#1ebe5d] text-white text-[10px] font-bold px-2 py-1.5 rounded-lg transition shadow-sm flex items-center gap-1 whitespace-nowrap">' + waSvgSmall + 'SHARE ON WHATSAPP</button>';
 
-            /* ---------- shared pieces ---------- */
-            var logoSm  = r.flight_number ? getAirlineLogo(r.flight_number, 'h-6 w-auto object-contain') : '';
-            var logo8   = r.flight_number ? '<div class="flex items-center justify-center h-8">' + getAirlineLogo(r.flight_number, 'h-8 w-auto object-contain') + '</div>' : '<div class="h-8"></div>';
-            var avatarDiv = '<div class="w-9 h-9 rounded-full flex items-center justify-center font-bold text-sm" style="background:' + av.bg + ';color:' + av.color + '">' + initials(r.name) + '</div>';
-            var firstName = r.name.split(' ')[0];
+        var mobileActions = expired
+          ? '<span class="text-xs text-gray-400 font-bold uppercase tracking-wide block text-center py-2">Listing Completed</span>'
+          : '<div class="flex gap-4">' + btnConnect + btnShare + '</div>';
 
-            /* flight badge for desktop centre */
-            var flightBadge = r.flight_number
-                ? '<span class="text-[9px] font-bold text-orange-700 bg-orange-50 border border-orange-200 px-1.5 py-0.5 rounded whitespace-nowrap">' + r.flight_number + '</span>'
-                : '<div class="w-10 border-t border-dashed border-orange-300"></div>';
+        var desktopActions = expired
+          ? '<span class="text-[10px] text-gray-400 font-bold uppercase tracking-wide">Completed</span>'
+          : '<div class="flex gap-1.5">' + btnDesktopConnect + btnDesktopShare + '</div>';
 
-            /* mobile tags: vertical stack */
-            var items = helpItems(r);
-            var tagsVertical = '';
-            if (items.length) {
-                items.forEach(function(item) {
-                    var bg='#f3f4f6', col='#374151', bdr='#d1d5db';
-                    if (item.includes('Medicine'))  { bg='#fff1f2'; col='#be123c'; bdr='#fecdd3'; }
-                    if (item.includes('Letter'))    { bg='#eff6ff'; col='#1d4ed8'; bdr='#bfdbfe'; }
-                    if (item.includes('Parcel'))    { bg='#fffbeb'; col='#92400e'; bdr='#fde68a'; }
-                    if (item.includes('companion')) { bg='#eef2ff'; col='#3730a3'; bdr='#c7d2fe'; }
-                    tagsVertical += '<span style="background:' + bg + ';color:' + col + ';border:1px solid ' + bdr + '" class="text-[11px] font-bold px-3 py-1.5 rounded-lg block">' + item + '</span>';
-                });
-            } else {
-                tagsVertical = '<span class="text-[11px] font-bold px-3 py-1.5 rounded-lg block bg-gray-100 text-gray-700 border border-gray-200">Community Help</span>';
-            }
+        /* ======== DESKTOP layout (sm and above) ======== */
+        var desktopHTML =
+          '<div class="hidden sm:flex">' +
+          /* coloured strip */
+          '<div class="' + stripCls + ' flex-shrink-0 w-7 flex items-center justify-center">' +
+          '<span class="text-white text-[8px] font-bold uppercase tracking-widest" style="writing-mode:vertical-rl;transform:rotate(180deg)">' + stripLabel + '</span>' +
+          '</div>' +
+          /* date + logo + avatar */
+          '<div class="flex flex-col items-center justify-center gap-1.5 px-3 py-4 border-r border-dashed border-gray-200 w-[95px] flex-shrink-0">' +
+          '<span class="text-[11px] font-bold text-gray-800 whitespace-nowrap">' + (r.travel_date || 'Flexible') + '</span>' +
+          logo8 +
+          avatarDiv +
+          '<span class="text-[9px] text-gray-500 font-medium text-center leading-tight w-full truncate">' + firstName + '</span>' +
+          '</div>' +
+          /* route */
+          '<div class="flex-1 flex items-center gap-2 px-3 py-4 min-w-0">' +
+          '<div class="flex-1 min-w-0">' +
+          '<p class="text-[9px] uppercase text-orange-600 font-bold mb-0.5 tracking-wider">From</p>' +
+          '<p class="text-sm font-bold text-gray-900 truncate" title="' + from + '">' + from + '</p>' +
+          '</div>' +
+          '<div class="flex flex-col items-center px-2 flex-shrink-0">' +
+          '<i data-lucide="plane" class="w-4 h-4 text-orange-400 mb-0.5"></i>' +
+          flightBadge +
+          '</div>' +
+          '<div class="flex-1 min-w-0 text-right">' +
+          '<p class="text-[9px] uppercase text-orange-600 font-bold mb-0.5 tracking-wider">To</p>' +
+          '<p class="text-sm font-bold text-gray-900 truncate" title="' + to + '">' + to + '</p>' +
+          '</div>' +
+          '</div>' +
+          /* tags + buttons */
+          '<div class="flex flex-col items-end justify-between gap-2 px-3 py-4 border-l border-gray-100 flex-shrink-0 max-w-[230px]">' +
+          '<div class="flex flex-wrap gap-1 justify-end">' + getHelpItemsHTML(r) + '</div>' +
+          desktopActions +
+          '</div>' +
+          '</div>';
 
-            /* action buttons */
-            var btnConnect = '<a href="' + waLink + '" target="_blank" onclick="event.stopPropagation()" class="flex-1 bg-orange-600 hover:bg-orange-700 text-white text-xs font-extrabold py-2.5 rounded-xl transition shadow text-center' + noWa + '">CONNECT</a>';
-            var btnShare   = '<button onclick="event.stopPropagation(); shareOnWhatsApp(' + globalIndex + ')" class="flex-1 bg-[#25D366] hover:bg-[#1ebe5d] text-white text-xs font-extrabold py-2.5 rounded-xl transition shadow flex items-center justify-center gap-1.5">' + waSvgSmall + 'SHARE</button>';
-            var btnDesktopConnect = '<a href="' + waLink + '" target="_blank" onclick="event.stopPropagation()" class="bg-orange-600 hover:bg-orange-700 text-white text-[10px] font-bold px-2.5 py-1.5 rounded-lg transition shadow-sm whitespace-nowrap' + noWa + '">CONNECT</a>';
-            var btnDesktopShare   = '<button onclick="event.stopPropagation(); shareOnWhatsApp(' + globalIndex + ')" class="bg-[#25D366] hover:bg-[#1ebe5d] text-white text-[10px] font-bold px-2 py-1.5 rounded-lg transition shadow-sm flex items-center gap-1 whitespace-nowrap">' + waSvgSmall + 'SHARE ON WHATSAPP</button>';
+        /* ======== MOBILE layout (below sm) ======== */
+        var mobileHTML =
+          '<div class="flex sm:hidden">' +
+          /* thin coloured strip */
+          '<div class="' + stripCls + ' w-2.5 flex-shrink-0"></div>' +
+          /* stacked content */
+          '<div class="flex-1 flex flex-col">' +
+          /* header: avatar + status + date */
+          '<div class="flex items-center justify-between px-4 pt-4 pb-3 border-b border-gray-100">' +
+          '<div class="flex items-center gap-2.5">' +
+          '<div class="w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center font-bold text-sm" style="background:' + av.bg + ';color:' + av.color + '">' + initials(r.name) + '</div>' +
+          '<div>' +
+          '<span class="text-[10px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-full" style="background:' + badgeBg + ';color:' + badgeCol + '">' + stripLabel + '</span>' +
+          '<p class="text-[11px] text-gray-500 font-medium mt-0.5">' + firstName + '</p>' +
+          '</div>' +
+          '</div>' +
+          '<div class="text-right flex-shrink-0">' +
+          '<p class="text-[10px] text-gray-400 uppercase font-bold tracking-wider">Date</p>' +
+          '<p class="text-xs font-bold text-gray-800 whitespace-nowrap">' + (r.travel_date || 'Flexible') + '</p>' +
+          (logoSm ? '<div class="mt-1 flex justify-end">' + logoSm + '</div>' : '') +
+          '</div>' +
+          '</div>' +
+          /* route + tags side by side */
+          '<div class="flex border-b border-orange-100/60" style="background:#fff7ed">' +
+          /* LEFT: stacked FROM / plane+flight / TO */
+          '<div class="flex-1 min-w-0 px-4 py-3">' +
+          '<div class="flex items-baseline gap-2 mb-1">' +
+          '<span class="text-[9px] uppercase text-orange-500 font-bold tracking-wider w-8 flex-shrink-0">FROM</span>' +
+          '<span class="text-sm font-extrabold text-gray-900 leading-tight">' + from + '</span>' +
+          '</div>' +
+          '<div class="flex items-center gap-2 my-1.5 pl-8">' +
+          '<i data-lucide="plane" class="w-4 h-4 text-orange-400 flex-shrink-0"></i>' +
+          (r.flight_number ? '<span class="text-xs font-bold text-orange-700 bg-white border border-orange-200 px-2 py-0.5 rounded-md shadow-sm">' + r.flight_number + '</span>' : '<div class="border-t-2 border-dashed border-orange-300 w-10"></div>') +
+          '</div>' +
+          '<div class="flex items-baseline gap-2">' +
+          '<span class="text-[9px] uppercase text-orange-500 font-bold tracking-wider w-8 flex-shrink-0">TO</span>' +
+          '<span class="text-sm font-extrabold text-gray-900 leading-tight">' + to + '</span>' +
+          '</div>' +
+          '</div>' +
+          /* RIGHT: service tag pills */
+          '<div class="flex flex-col gap-1 justify-center px-3 py-3 border-l border-orange-200/60 flex-shrink-0 max-w-[130px]">' +
+          tagsVertical +
+          '</div>' +
+          '</div>' +
+          /* action buttons */
+          '<div class="px-4 py-3">' + mobileActions + '</div>' +
+          '</div>' +
+          '</div>';
 
-            var mobileActions = expired
-                ? '<span class="text-xs text-gray-400 font-bold uppercase tracking-wide block text-center py-2">Listing Completed</span>'
-                : '<div class="flex gap-4">' + btnConnect + btnShare + '</div>';
+        return '<div class="board-row-animate ' + (expired ? 'expired-row bg-gray-50' : 'bg-white') + ' border border-gray-200 rounded-xl hover:shadow-lg hover:border-orange-300 transition-all overflow-hidden cursor-pointer" onclick="openListing(' + globalIndex + ')" style="animation-delay:' + delay + 's">' +
+          desktopHTML +
+          mobileHTML +
+          '</div>';
 
-            var desktopActions = expired
-                ? '<span class="text-[10px] text-gray-400 font-bold uppercase tracking-wide">Completed</span>'
-                : '<div class="flex gap-1.5">' + btnDesktopConnect + btnDesktopShare + '</div>';
-
-            /* ======== DESKTOP layout (sm and above) ======== */
-            var desktopHTML =
-                '<div class="hidden sm:flex">' +
-                    /* coloured strip */
-                    '<div class="' + stripCls + ' flex-shrink-0 w-7 flex items-center justify-center">' +
-                        '<span class="text-white text-[8px] font-bold uppercase tracking-widest" style="writing-mode:vertical-rl;transform:rotate(180deg)">' + stripLabel + '</span>' +
-                    '</div>' +
-                    /* date + logo + avatar */
-                    '<div class="flex flex-col items-center justify-center gap-1.5 px-3 py-4 border-r border-dashed border-gray-200 w-[95px] flex-shrink-0">' +
-                        '<span class="text-[11px] font-bold text-gray-800 whitespace-nowrap">' + (r.travel_date || 'Flexible') + '</span>' +
-                        logo8 +
-                        avatarDiv +
-                        '<span class="text-[9px] text-gray-500 font-medium text-center leading-tight w-full truncate">' + firstName + '</span>' +
-                    '</div>' +
-                    /* route */
-                    '<div class="flex-1 flex items-center gap-2 px-3 py-4 min-w-0">' +
-                        '<div class="flex-1 min-w-0">' +
-                            '<p class="text-[9px] uppercase text-orange-600 font-bold mb-0.5 tracking-wider">From</p>' +
-                            '<p class="text-sm font-bold text-gray-900 truncate" title="' + from + '">' + from + '</p>' +
-                        '</div>' +
-                        '<div class="flex flex-col items-center px-2 flex-shrink-0">' +
-                            '<i data-lucide="plane" class="w-4 h-4 text-orange-400 mb-0.5"></i>' +
-                            flightBadge +
-                        '</div>' +
-                        '<div class="flex-1 min-w-0 text-right">' +
-                            '<p class="text-[9px] uppercase text-orange-600 font-bold mb-0.5 tracking-wider">To</p>' +
-                            '<p class="text-sm font-bold text-gray-900 truncate" title="' + to + '">' + to + '</p>' +
-                        '</div>' +
-                    '</div>' +
-                    /* tags + buttons */
-                    '<div class="flex flex-col items-end justify-between gap-2 px-3 py-4 border-l border-gray-100 flex-shrink-0 max-w-[230px]">' +
-                        '<div class="flex flex-wrap gap-1 justify-end">' + getHelpItemsHTML(r) + '</div>' +
-                        desktopActions +
-                    '</div>' +
-                '</div>';
-
-            /* ======== MOBILE layout (below sm) ======== */
-            var mobileHTML =
-                '<div class="flex sm:hidden">' +
-                    /* thin coloured strip */
-                    '<div class="' + stripCls + ' w-2.5 flex-shrink-0"></div>' +
-                    /* stacked content */
-                    '<div class="flex-1 flex flex-col">' +
-                        /* header: avatar + status + date */
-                        '<div class="flex items-center justify-between px-4 pt-4 pb-3 border-b border-gray-100">' +
-                            '<div class="flex items-center gap-2.5">' +
-                                '<div class="w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center font-bold text-sm" style="background:' + av.bg + ';color:' + av.color + '">' + initials(r.name) + '</div>' +
-                                '<div>' +
-                                    '<span class="text-[10px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-full" style="background:' + badgeBg + ';color:' + badgeCol + '">' + stripLabel + '</span>' +
-                                    '<p class="text-[11px] text-gray-500 font-medium mt-0.5">' + firstName + '</p>' +
-                                '</div>' +
-                            '</div>' +
-                            '<div class="text-right flex-shrink-0">' +
-                                '<p class="text-[10px] text-gray-400 uppercase font-bold tracking-wider">Date</p>' +
-                                '<p class="text-xs font-bold text-gray-800 whitespace-nowrap">' + (r.travel_date || 'Flexible') + '</p>' +
-                                (logoSm ? '<div class="mt-1 flex justify-end">' + logoSm + '</div>' : '') +
-                            '</div>' +
-                        '</div>' +
-                        /* route + tags side by side */
-                        '<div class="flex border-b border-orange-100/60" style="background:#fff7ed">' +
-                            /* LEFT: stacked FROM / plane+flight / TO */
-                            '<div class="flex-1 min-w-0 px-4 py-3">' +
-                                '<div class="flex items-baseline gap-2 mb-1">' +
-                                    '<span class="text-[9px] uppercase text-orange-500 font-bold tracking-wider w-8 flex-shrink-0">FROM</span>' +
-                                    '<span class="text-sm font-extrabold text-gray-900 leading-tight">' + from + '</span>' +
-                                '</div>' +
-                                '<div class="flex items-center gap-2 my-1.5 pl-8">' +
-                                    '<i data-lucide="plane" class="w-4 h-4 text-orange-400 flex-shrink-0"></i>' +
-                                    (r.flight_number ? '<span class="text-xs font-bold text-orange-700 bg-white border border-orange-200 px-2 py-0.5 rounded-md shadow-sm">' + r.flight_number + '</span>' : '<div class="border-t-2 border-dashed border-orange-300 w-10"></div>') +
-                                '</div>' +
-                                '<div class="flex items-baseline gap-2">' +
-                                    '<span class="text-[9px] uppercase text-orange-500 font-bold tracking-wider w-8 flex-shrink-0">TO</span>' +
-                                    '<span class="text-sm font-extrabold text-gray-900 leading-tight">' + to + '</span>' +
-                                '</div>' +
-                            '</div>' +
-                            /* RIGHT: service tag pills */
-                            '<div class="flex flex-col gap-1 justify-center px-3 py-3 border-l border-orange-200/60 flex-shrink-0 max-w-[130px]">' +
-                                tagsVertical +
-                            '</div>' +
-                        '</div>' +
-                        /* action buttons */
-                        '<div class="px-4 py-3">' + mobileActions + '</div>' +
-                    '</div>' +
-                '</div>';
-
-            return '<div class="board-row-animate ' + (expired ? 'expired-row bg-gray-50' : 'bg-white') + ' border border-gray-200 rounded-xl hover:shadow-lg hover:border-orange-300 transition-all overflow-hidden cursor-pointer" onclick="openListing(' + globalIndex + ')" style="animation-delay:' + delay + 's">' +
-                desktopHTML +
-                mobileHTML +
-            '</div>';
-
-        }).join('');
+      }).join('');
     }
 
     function render(isLoadMore = false) {
@@ -801,10 +1254,10 @@
       const data = allData.filter(r => {
         if (!showExpired && isExpired(r.travel_date)) return false;
         if (!isWithinDateRange(r.travel_date, df, dt)) return false;
-        
+
         const dir = r.direction || 'Europe to India';
         if (currentDirectionFilter !== 'All' && dir !== currentDirectionFilter) return false;
-        
+
         return true;
       });
 
@@ -827,6 +1280,7 @@
       document.getElementById('listings-looking').innerHTML = htmlLooking;
 
       lucide.createIcons();
+      renderVerifiedState();
     }
 
     async function loadListings() {
@@ -834,26 +1288,26 @@
         const res = await fetch(SHEET_CSV_URL);
         const text = await res.text();
         allData = parseCSV(text);
-        
+
         const url = new URL(window.location);
-        
+
         const dateFromParam = url.searchParams.get('dateFrom');
-        if(dateFromParam) document.getElementById('f-date-from').value = dateFromParam;
+        if (dateFromParam) document.getElementById('f-date-from').value = dateFromParam;
 
         const dateToParam = url.searchParams.get('dateTo');
-        if(dateToParam) document.getElementById('f-date-to').value = dateToParam;
+        if (dateToParam) document.getElementById('f-date-to').value = dateToParam;
 
-        if(url.searchParams.get('past') === '1') {
+        if (url.searchParams.get('past') === '1') {
           document.getElementById('show-expired').checked = true;
         }
 
         const routeParam = url.searchParams.get('route');
         if (routeParam === 'India to Europe' || routeParam === 'Europe to India') {
-            currentDirectionFilter = routeParam;
-            let text = routeParam === 'India to Europe' ? 'India → Europe' : 'Europe → India';
-            document.getElementById('f-direction-text').textContent = text;
+          currentDirectionFilter = routeParam;
+          let text = routeParam === 'India to Europe' ? 'India → Europe' : 'Europe → India';
+          document.getElementById('f-direction-text').textContent = text;
         }
-        
+
         updateStats();
         render();
       } catch (err) {
@@ -890,7 +1344,8 @@
         <h2 class="text-lg font-bold text-gray-900" id="form-sheet-title">Post a Listing</h2>
         <p class="text-xs text-gray-500 mt-0.5" id="form-sheet-subtitle">Step 1 of 4 — Your intent</p>
       </div>
-      <button onclick="closePostForm()" class="p-2 text-gray-400 hover:text-gray-700 rounded-full hover:bg-gray-100 transition" aria-label="Close form">
+      <button onclick="closePostForm()"
+        class="p-2 text-gray-400 hover:text-gray-700 rounded-full hover:bg-gray-100 transition" aria-label="Close form">
         <i data-lucide="x" class="w-5 h-5"></i>
       </button>
     </div>
@@ -910,12 +1365,12 @@
         <p class="text-sm text-gray-500 mb-4">Are you looking for help, or do you want to help someone?</p>
         <div class="grid grid-cols-2 gap-3 mb-5">
           <div class="intent-card" id="card-offering" onclick="selectIntent('offering')">
-            <div class="mb-3 text-orange-600"><i data-lucide="handshake" class="w-8 h-8 mx-auto"></i></div>
+            <div class="mb-3 text-orange-600"><i data-lucide="plane" class="w-8 h-8 mx-auto"></i></div>
             <div class="font-bold text-gray-900 text-sm">Offering Help</div>
             <div class="text-xs text-gray-500 mt-1 leading-tight">I'm traveling and can help</div>
           </div>
           <div class="intent-card" id="card-requesting" onclick="selectIntent('requesting')">
-            <div class="mb-3 text-orange-600"><i data-lucide="heart-handshake" class="w-8 h-8 mx-auto"></i></div>
+            <div class="mb-3 text-orange-600"><i data-lucide="search" class="w-8 h-8 mx-auto"></i></div>
             <div class="font-bold text-gray-900 text-sm">Requesting Help</div>
             <div class="text-xs text-gray-500 mt-1 leading-tight">I need a companion or courier</div>
           </div>
@@ -927,7 +1382,8 @@
 
       <!-- ─────── STEP 2: Category ─────── -->
       <div class="form-step" id="step-2">
-        <p class="text-sm text-gray-500 mb-4">What kind of help? <span class="text-gray-400">(Select all that apply)</span></p>
+        <p class="text-sm text-gray-500 mb-4">What kind of help? <span class="text-gray-400">(Select all that
+            apply)</span></p>
         <div class="flex flex-col gap-2 mb-5" id="category-options">
           <div class="cat-pill" id="cat-companion" onclick="toggleCategory('companion', '🧳 Travel companion')">
             <i data-lucide="users" class="w-4 h-4 mr-2 opacity-70"></i> Travel companion
@@ -955,13 +1411,15 @@
         <p class="text-sm text-gray-500 mb-3">Which route are you traveling?</p>
 
         <!-- Interactive Route Direction Selection -->
-        <div class="flex items-center justify-between mb-4 bg-orange-50 py-6 px-4 rounded-xl border border-orange-100 relative overflow-hidden">
-          
+        <div
+          class="flex items-center justify-between mb-4 bg-orange-50 py-6 px-4 rounded-xl border border-orange-100 relative overflow-hidden">
+
           <!-- Animated Background Clouds -->
           <div class="absolute inset-0 overflow-hidden pointer-events-none flex items-center">
-             <i data-lucide="cloud" class="w-8 h-8 text-orange-200 absolute left-0 animate-cloud-1" style="top: 15%"></i>
-             <i data-lucide="cloud" class="w-12 h-12 text-orange-200 absolute left-0 animate-cloud-2" style="top: 45%"></i>
-             <i data-lucide="cloud" class="w-6 h-6 text-orange-200 absolute left-0 animate-cloud-3" style="top: 75%"></i>
+            <i data-lucide="cloud" class="w-8 h-8 text-orange-200 absolute left-0 animate-cloud-1" style="top: 15%"></i>
+            <i data-lucide="cloud" class="w-12 h-12 text-orange-200 absolute left-0 animate-cloud-2"
+              style="top: 45%"></i>
+            <i data-lucide="cloud" class="w-6 h-6 text-orange-200 absolute left-0 animate-cloud-3" style="top: 75%"></i>
           </div>
 
           <!-- Left Side (FROM) -->
@@ -971,15 +1429,22 @@
           </div>
 
           <!-- Middle Plane (Click to Toggle) -->
-          <div class="relative z-10 flex flex-col items-center justify-center cursor-pointer group px-2" onclick="toggleDirection()">
+          <div class="relative z-10 flex flex-col items-center justify-center cursor-pointer group px-2"
+            onclick="toggleDirection()">
             <!-- Pulse guideline -->
-            <div id="plane-instruction" class="text-[9px] text-white bg-orange-600 font-bold uppercase tracking-wider mb-2 px-2 py-1 rounded-full animate-pulse shadow-sm">Tap to Set Route <span class="text-white">*</span></div>
-            
-            <div class="w-14 h-14 bg-white rounded-full shadow-md border-2 border-orange-200 flex items-center justify-center text-orange-600 hover:bg-orange-50 hover:scale-105 transition-all">
-               <!-- Plane always points right (rotate-45 for lucide plane) -->
-               <i data-lucide="plane" id="center-plane-icon" class="w-7 h-7 transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] transform rotate-45 opacity-60" style="fill: currentColor"></i>
+            <div id="plane-instruction"
+              class="text-[9px] text-white bg-orange-600 font-bold uppercase tracking-wider mb-2 px-2 py-1 rounded-full animate-pulse shadow-sm">
+              Tap to Set Route <span class="text-white">*</span></div>
+
+            <div
+              class="w-14 h-14 bg-white rounded-full shadow-md border-2 border-orange-200 flex items-center justify-center text-orange-600 hover:bg-orange-50 hover:scale-105 transition-all">
+              <!-- Plane always points right (rotate-45 for lucide plane) -->
+              <i data-lucide="plane" id="center-plane-icon"
+                class="w-7 h-7 transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] transform rotate-45 opacity-60"
+                style="fill: currentColor"></i>
             </div>
-            <div class="text-[10px] text-gray-500 font-bold uppercase tracking-wider mt-2 whitespace-nowrap" id="dir-label">Not Selected</div>
+            <div class="text-[10px] text-gray-500 font-bold uppercase tracking-wider mt-2 whitespace-nowrap"
+              id="dir-label">Not Selected</div>
           </div>
 
           <!-- Right Side (TO) -->
@@ -993,7 +1458,8 @@
         <!-- City dropdowns -->
         <div class="grid grid-cols-2 gap-3 mb-3">
           <div>
-            <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5 block">City in Europe</label>
+            <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5 block">City in
+              Europe</label>
             <select id="s3-city-eu" class="sahayak-input" onchange="updateRouteMap()">
               <option value="">Select…</option>
               <option>Frankfurt</option>
@@ -1006,7 +1472,8 @@
             <input type="text" id="s3-city-eu-other" class="sahayak-input mt-2 hidden" placeholder="Enter city name">
           </div>
           <div>
-            <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5 block">City in India</label>
+            <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5 block">City in
+              India</label>
             <select id="s3-city-in" class="sahayak-input" onchange="updateRouteMap()">
               <option value="">Select…</option>
               <option>Mumbai</option>
@@ -1021,7 +1488,8 @@
           </div>
         </div>
         <div class="mb-5">
-          <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5 block">Flight Number <span class="font-normal normal-case text-gray-400">(optional, helps auto-matching)</span></label>
+          <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5 block">Flight Number <span
+              class="font-normal normal-case text-gray-400">(optional, helps auto-matching)</span></label>
           <input type="text" id="s3-flight" class="sahayak-input" placeholder="e.g. LH 760">
         </div>
         <div class="flex gap-2">
@@ -1038,30 +1506,36 @@
 
         <div class="flex flex-col gap-3 mb-4">
           <div>
-            <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5 block">Your Name <span class="text-red-500">*</span></label>
+            <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5 block">Your Name <span
+                class="text-red-500">*</span></label>
             <input type="text" id="s4-name" class="sahayak-input" placeholder="e.g. Rahul Patil" required
               oninput="validateStep4()">
           </div>
           <div>
-            <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5 block">Email Address <span class="text-red-500">*</span> <span class="font-normal normal-case text-orange-500">(for auto-matching notifications)</span></label>
+            <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5 block">Email Address <span
+                class="text-red-500">*</span> <span class="font-normal normal-case text-orange-500">(for auto-matching
+                notifications)</span></label>
             <input type="email" id="s4-email" class="sahayak-input" placeholder="yourname@example.com" required
               oninput="validateStep4()">
           </div>
           <div class="grid grid-cols-2 gap-3">
             <div>
-              <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5 block">WhatsApp Number <span class="text-red-500">*</span></label>
-              <input type="tel" id="s4-whatsapp" class="sahayak-input" placeholder="e.g. +49 176..." required
+              <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5 block">WhatsApp Number
+                <span class="text-red-500">*</span></label>
+              <input type="tel" id="s4-whatsapp" class="sahayak-input" placeholder="e.g. +49176..." required
                 oninput="validateStep4()">
-              <div id="wa-error" class="text-[10px] text-red-500 mt-1 hidden">Must include country code (e.g. +49 or +91)</div>
+              <div id="wa-error" class="text-[10px] text-red-500 mt-1 hidden">Please include a valid country code (e.g.,
+                +49 or +91)</div>
             </div>
             <div>
-              <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5 block">Travel Date <span class="text-red-500">*</span></label>
-              <input type="date" id="s4-date" class="sahayak-input" required
-                oninput="validateStep4()">
+              <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5 block">Travel Date <span
+                  class="text-red-500">*</span></label>
+              <input type="date" id="s4-date" class="sahayak-input" required oninput="validateStep4()">
             </div>
           </div>
           <div>
-            <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5 block">Languages Spoken</label>
+            <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5 block">Languages
+              Spoken</label>
             <div class="flex flex-wrap gap-1.5" id="lang-options">
               <span class="lang-pill" onclick="toggleLang(this, 'Marathi')">Marathi</span>
               <span class="lang-pill" onclick="toggleLang(this, 'Hindi')">Hindi</span>
@@ -1074,17 +1548,24 @@
             </div>
           </div>
           <div>
-            <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5 block">Short Description <span class="text-red-500">*</span> <span class="font-normal normal-case text-gray-400">(max 200 chars)</span></label>
-            <textarea id="s4-description" class="sahayak-input" maxlength="200" placeholder="Briefly describe your travel, what help you're offering or need…" required oninput="validateStep4()"></textarea>
+            <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5 block">Short Description
+              <span class="text-red-500">*</span> <span class="font-normal normal-case text-gray-400">(max 200
+                chars)</span></label>
+            <textarea id="s4-description" class="sahayak-input" maxlength="200"
+              placeholder="Briefly describe your travel, what help you're offering or need…" required
+              oninput="validateStep4()"></textarea>
             <div class="text-right text-xs text-gray-400 mt-1" id="desc-count">0 / 200</div>
           </div>
         </div>
 
         <!-- Consent checkbox -->
         <label class="flex items-start gap-3 p-3 bg-orange-50 rounded-xl border border-orange-100 cursor-pointer mb-4">
-          <input type="checkbox" id="s4-consent" class="mt-0.5 w-4 h-4 accent-orange-600 flex-shrink-0" onchange="validateStep4()">
+          <input type="checkbox" id="s4-consent" class="mt-0.5 w-4 h-4 accent-orange-600 flex-shrink-0"
+            onchange="validateStep4()">
           <span class="text-xs text-orange-800 leading-relaxed">
-            I confirm this listing is genuine. I consent to my name, city, travel date, and WhatsApp number being publicly displayed on maharashtraineurope.com/sahayak/. I can request removal at any time by emailing contact@maharashtraineurope.com.
+            I confirm this listing is genuine. I consent to my name, city, travel date, and WhatsApp number being
+            publicly displayed on maharashtraineurope.com/sahayak/. I can request removal at any time by emailing
+            contact@maharashtraineurope.com.
           </span>
         </label>
 
@@ -1094,7 +1575,8 @@
             Post Listing <i data-lucide="send" class="w-4 h-4 ml-1"></i>
           </button>
         </div>
-        <p class="text-center text-[10px] text-gray-400 mt-3">Your listing appears live within a few minutes. Jai Maharashtra! 🧡</p>
+        <p class="text-center text-[10px] text-gray-400 mt-3">Your listing appears live within a few minutes. Jai
+          Maharashtra! 🧡</p>
       </div>
 
       <!-- ─────── STEP 5: Success ─────── -->
@@ -1103,7 +1585,23 @@
           <i data-lucide="check-circle" class="w-8 h-8"></i>
         </div>
         <h3 class="text-xl font-bold text-gray-900 mb-2">Listing Posted!</h3>
-        <p class="text-gray-500 text-sm mb-6">Your listing is now live on Sahayak. The community can now connect with you.</p>
+        <p class="text-gray-500 text-sm mb-6">Your listing is now live on Sahayak. The community can now connect with
+          you.</p>
+
+        <div
+          class="mt-4 mb-6 bg-orange-50 rounded-xl p-5 border border-orange-100 max-w-sm mx-auto text-left shadow-sm">
+          <p class="text-orange-800 text-sm font-bold mb-4 text-center">Join our growing community online! Follow
+            Maharashtra in Europe to connect with other expats.</p>
+          <div class="flex justify-center gap-4">
+            <a href="https://www.linkedin.com/company/maharashtra-in-europe/" target="_blank"
+              class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-[#0A66C2] shadow-sm hover:shadow hover:scale-105 transition-all border border-gray-100"><i
+                data-lucide="linkedin" class="w-6 h-6"></i></a>
+            <a href="https://www.instagram.com/maharashtra_in_europe/" target="_blank"
+              class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-[#E1306C] shadow-sm hover:shadow hover:scale-105 transition-all border border-gray-100"><i
+                data-lucide="instagram" class="w-6 h-6"></i></a>
+          </div>
+        </div>
+
         <button class="btn-primary-form bg-gray-900 hover:bg-gray-800" onclick="window.location.reload()">
           Done
         </button>
@@ -1197,9 +1695,9 @@
     /* ── Step 2: Category ── */
     const CAT_MAP = {
       companion: '🧳 Travel companion',
-      medicine:  '💊 Medicine',
-      letter:    '✉️ Letter / Documents',
-      parcel:    '🎁 Parcel',
+      medicine: '💊 Medicine',
+      letter: '✉️ Letter / Documents',
+      parcel: '🎁 Parcel',
     };
 
     function toggleCategory(id, value) {
@@ -1252,7 +1750,7 @@
         fromText.textContent = 'India';
         toText.textContent = 'Europe';
       }
-      
+
       validateStep3();
     }
 
@@ -1288,26 +1786,42 @@
     }
 
     /* ── Step 4: Char count + Validation ── */
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       const descEl = document.getElementById('s4-description');
       if (descEl) {
-        descEl.addEventListener('input', function() {
+        descEl.addEventListener('input', function () {
           document.getElementById('desc-count').textContent = this.value.length + ' / 200';
         });
       }
     });
 
     function validateStep4() {
+      const waInput = document.getElementById('s4-whatsapp');
+      if (waInput) {
+        let val = waInput.value;
+        // Remove non-numeric characters except '+'
+        val = val.replace(/[^\d+]/g, '');
+        // Ensure '+' is only at the beginning
+        if (val.indexOf('+') > 0) {
+          val = val.replace(/\+/g, (match, offset) => (offset === 0 ? '+' : ''));
+        }
+        // Force starts with '+' if not empty
+        if (val.length > 0 && !val.startsWith('+')) {
+          val = '+' + val.replace(/\+/g, '');
+        }
+        waInput.value = val;
+      }
+
       const name = (document.getElementById('s4-name')?.value || '').trim();
       const email = (document.getElementById('s4-email')?.value || '').trim();
       const wa = (document.getElementById('s4-whatsapp')?.value || '').trim();
       const date = (document.getElementById('s4-date')?.value || '').trim();
       const desc = (document.getElementById('s4-description')?.value || '').trim();
       const consent = document.getElementById('s4-consent')?.checked;
-      
+
       const emailOk = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email);
-      const waOk = wa.startsWith('+') || wa.startsWith('00');
-      
+      const waOk = /^\+\d{7,15}$/.test(wa); // Strict E.164 validation (roughly)
+
       const waError = document.getElementById('wa-error');
       if (wa.length > 0 && !waOk) {
         waError.classList.remove('hidden');
@@ -1367,33 +1881,127 @@
         method: 'POST',
         body: JSON.stringify(payload)
       })
-      .then(res => res.json())
-      .then(data => {
-        if (data.status === 'success') {
-          // Hide dots, show step 5
+        .then(res => res.json())
+        .then(data => {
+          if (data.status === 'success') {
+            // Hide dots, show step 5
+            document.querySelectorAll('.step-dot').forEach(d => d.style.display = 'none');
+            goToStep(5);
+          } else {
+            alert('Error: ' + data.message);
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+          }
+        })
+        .catch(err => {
+          // Fallback for CORS mode if no-cors is used, or generic network error
+          console.error(err);
           document.querySelectorAll('.step-dot').forEach(d => d.style.display = 'none');
           goToStep(5);
-        } else {
-          alert('Error: ' + data.message);
-          btn.innerHTML = originalText;
-          btn.disabled = false;
-        }
-      })
-      .catch(err => {
-        // Fallback for CORS mode if no-cors is used, or generic network error
-        console.error(err);
-        document.querySelectorAll('.step-dot').forEach(d => d.style.display = 'none');
-        goToStep(5);
-      });
+        });
     }
 
     // Attach the direction change listener for step 3 city dropdowns
     ['s3-city-eu', 's3-city-in'].forEach(id => {
-      document.addEventListener('change', function(e) {
+      document.addEventListener('change', function (e) {
         if (e.target && e.target.id === id) validateStep3();
       });
     });
+
+    // --- Authentication & Verification ---
+    document.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('verified') === 'true') {
+        localStorage.setItem('sahayak_verified_status', 'true');
+        const url = new URL(window.location);
+        url.searchParams.delete('verified');
+        window.history.replaceState({}, '', url);
+      }
+    });
+
+    function clearSession() {
+      localStorage.removeItem('sahayak_verified_status');
+      window.location.reload();
+    }
+
+    function renderVerifiedState() {
+      if (localStorage.getItem('sahayak_verified_status') === 'true') {
+        const connectBtns = document.querySelectorAll('.auth-connect-btn');
+        connectBtns.forEach(btn => {
+          btn.classList.remove('bg-[#0A66C2]', 'hover:bg-[#084e96]');
+          btn.classList.add('bg-[#25D366]', 'hover:bg-[#1ebe5d]');
+
+          const phone = btn.getAttribute('data-phone');
+          if (phone) {
+            btn.href = 'https://wa.me/' + phone.replace(/[^0-9]/g, '');
+            btn.setAttribute('onclick', 'event.stopPropagation()');
+          } else {
+            btn.href = '#';
+            btn.setAttribute('onclick', 'event.preventDefault(); event.stopPropagation();');
+          }
+          btn.innerHTML = '<i data-lucide="message-circle" class="w-4 h-4"></i> Chat on WhatsApp';
+        });
+        if (window.lucide) window.lucide.createIcons();
+      }
+    }
+
+    function openVerificationModal(btnElement) {
+      if (localStorage.getItem('sahayak_verified_status') === 'true') {
+        const phone = btnElement.getAttribute('data-phone');
+        if (phone) {
+          window.open('https://wa.me/' + phone.replace(/[^0-9]/g, ''), '_blank');
+        }
+        return;
+      }
+      const modal = document.getElementById('verification-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      setTimeout(() => {
+        modal.classList.remove('opacity-0');
+        document.getElementById('verification-modal-content').classList.remove('scale-95');
+      }, 10);
+    }
+
+    function closeVerificationModal() {
+      const modal = document.getElementById('verification-modal');
+      modal.classList.add('opacity-0');
+      document.getElementById('verification-modal-content').classList.add('scale-95');
+      setTimeout(() => {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }, 300);
+    }
   </script>
+
+  <!-- VERIFICATION MODAL -->
+  <div id="verification-modal"
+    class="fixed inset-0 z-[60] hidden items-center justify-center p-4 sm:p-6 opacity-0 transition-opacity duration-300">
+    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm cursor-pointer" onclick="closeVerificationModal()"></div>
+    <div
+      class="relative bg-white rounded-2xl shadow-xl w-full max-w-md p-8 transform scale-95 transition-transform duration-300"
+      id="verification-modal-content">
+      <h3 class="text-2xl font-bold text-orange-600 mb-3">Verification for Community Safety</h3>
+      <p class="text-gray-700 mb-6">To maintain the highest level of safety on Sahayak and protect our community from
+        scammers, we require a quick identity verification.</p>
+
+      <ul class="text-sm text-gray-600 space-y-3 mb-8">
+        <li class="flex items-start gap-3"><span class="text-green-500 font-bold text-lg leading-none">✓</span> Builds
+          trust before sharing sensitive details</li>
+        <li class="flex items-start gap-3"><span class="text-green-500 font-bold text-lg leading-none">✓</span> Ensures
+          you are connecting with verified professionals</li>
+        <li class="flex items-start gap-3"><span class="text-green-500 font-bold text-lg leading-none">✓</span> Blocks
+          automated bots and anonymous accounts</li>
+      </ul>
+
+      <a href="https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=781q2owdz9kuti&redirect_uri=https://script.google.com/macros/s/AKfycbzCBEBMorgu116fR1qYcZeSXxtvAYTWOWWd601FPYAqJGuhYjM1EApMu3YANmSJhcFb7Q/exec&state=sahayak_secure&scope=openid%20profile%20email"
+        class="w-full bg-[#0A66C2] hover:bg-[#084e96] text-white font-bold py-3.5 px-4 rounded-xl text-center flex items-center justify-center transition shadow-md mb-4 gap-2">
+        <i data-lucide="linkedin" class="w-5 h-5"></i> Sign in with LinkedIn
+      </a>
+
+      <p class="text-xs text-gray-500 text-center leading-relaxed">Privacy First: We access only your basic public
+        profile (Name, Photo) to confirm your identity. We never post to your feed or message your connections.</p>
+    </div>
+  </div>
 
 </body>
 
