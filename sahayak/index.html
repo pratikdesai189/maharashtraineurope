@@ -63,8 +63,7 @@
     .flip-container {
       height: 1.8em;
       overflow: hidden;
-      display: inline-flex;
-      align-items: center;
+      display: inline-block;
       vertical-align: middle;
       position: relative;
     }
@@ -79,7 +78,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding-bottom: 0.1em;
     }
     @keyframes flipText {
       0%, 10% { transform: translateY(0); }
@@ -168,7 +166,7 @@
             <span class="flip-item marathi">सहायक</span>
           </div>
         </div>
-        <span class="text-white">(Sahayak)</span>
+        <span class="text-white">- Sahayak</span>
       </h2>
       <p class="text-xl opacity-90 mb-8 font-light">"Where the Sahyadri meets the Alps"</p>
       <div class="flex flex-wrap justify-center gap-4 mb-10 relative z-10">
