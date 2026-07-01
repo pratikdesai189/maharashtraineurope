@@ -1330,7 +1330,7 @@
           '</div>' +
           '</div>';
 
-        return '<div class="board-row-animate ' + (expired ? 'expired-row bg-gray-50' : 'bg-white') + ' border border-gray-200 rounded-xl hover:shadow-lg hover:border-orange-300 transition-all overflow-hidden cursor-pointer select-none" onclick="openListing(' + globalIndex + ')" style="animation-delay:' + delay + 's">' +
+        return '<div class="board-row-animate ' + (expired ? 'expired-row bg-gray-50' : 'bg-white') + ' border border-gray-200 rounded-xl hover:shadow-lg hover:border-orange-300 transition-all overflow-hidden cursor-pointer select-none relative z-10 block w-full" onclick="openListing(' + globalIndex + ')" style="animation-delay:' + delay + 's">' +
           desktopHTML +
           mobileHTML +
           '</div>';
