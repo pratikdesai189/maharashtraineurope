@@ -954,7 +954,7 @@
         return `<img src="https://pics.avs.io/200/200/${iata}.png" class="${classes} drop-shadow-md mix-blend-multiply" alt="${iata} Logo" onerror="this.style.display='none'">`;
       }
 
-      const blurCls = isVerified ? '' : ' blur-[3px] scale-[1.05]';
+      const blurCls = isVisitorVerified ? '' : ' blur-[3px] scale-[1.05]';
       const cardHTML = `
             <div class="p-6">
                 <div class="flex justify-between items-start mb-4">
