@@ -1111,7 +1111,8 @@
 
     function parseDate(dateStr) {
       if (!dateStr) return null;
-      const m = dateStr.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+      // Match DD/MM/YYYY optionally followed by time
+      const m = dateStr.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})(?:\s.*)?$/);
       if (m) { const d = new Date(+m[3], +m[2] - 1, +m[1]); return isNaN(d) ? null : d; }
       const d = new Date(dateStr); return isNaN(d) ? null : d;
     }
@@ -1976,7 +1977,7 @@
       };
 
       // Live Google Apps Script Web App URL
-      const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzCBEBMorgu116fR1qYcZeSXxtvAYTWOWWd601FPYAqJGuhYjM1EApMu3YANmSJhcFb7Q/exec';
+      const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwMH5UcZu2tWH2X1yLdPLKbgd-EC2_JG3VX_3P2M3DZfzbWYymd4205mg4CAn2VsOv16w/exec';
 
       fetch(WEB_APP_URL, {
         method: 'POST',
@@ -1987,6 +1988,7 @@
           if (data.status === 'success') {
             // Hide dots, show step 5
             document.querySelectorAll('.step-dot').forEach(d => d.style.display = 'none');
+            if (window.lucide) lucide.createIcons();
             goToStep(5);
           } else {
             alert('Error: ' + data.message);
@@ -2014,14 +2016,43 @@
       const urlParams = new URLSearchParams(window.location.search);
       if (urlParams.get('verified') === 'true') {
         localStorage.setItem('sahayak_verified_status', 'true');
+        
+        // Capture name and email if passed from Apps Script
+        const pName = urlParams.get('name');
+        const pEmail = urlParams.get('email');
+        if (pName) localStorage.setItem('sahayak_user_name', pName);
+        if (pEmail) localStorage.setItem('sahayak_user_email', pEmail);
+
         const url = new URL(window.location);
         url.searchParams.delete('verified');
+        url.searchParams.delete('name');
+        url.searchParams.delete('email');
         window.history.replaceState({}, '', url);
+      }
+
+      // Auto-fill form if data exists and make them uneditable
+      if (localStorage.getItem('sahayak_user_name')) {
+        const nameInput = document.getElementById('s4-name');
+        if (nameInput) {
+          nameInput.value = localStorage.getItem('sahayak_user_name');
+          nameInput.readOnly = true;
+          nameInput.classList.add('bg-gray-100', 'text-gray-500', 'cursor-not-allowed');
+        }
+      }
+      if (localStorage.getItem('sahayak_user_email')) {
+        const emailInput = document.getElementById('s4-email');
+        if (emailInput) {
+          emailInput.value = localStorage.getItem('sahayak_user_email');
+          emailInput.readOnly = true;
+          emailInput.classList.add('bg-gray-100', 'text-gray-500', 'cursor-not-allowed');
+        }
       }
     });
 
     function clearSession() {
       localStorage.removeItem('sahayak_verified_status');
+      localStorage.removeItem('sahayak_user_name');
+      localStorage.removeItem('sahayak_user_email');
       window.location.reload();
     }
 
